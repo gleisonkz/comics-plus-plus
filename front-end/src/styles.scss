@@ -1,1 +1,52 @@
-/* You can add global styles to this file, and also import other style files */
+@import "./sass/variables";
+
+:root {
+  @each $name, $color in $project-colors {
+    --color-#{$name}: #{$color};
+  }
+}
+
+:root.dark-mode {
+  @each $name, $color in $project-colors-theme-dark {
+    --color-#{$name}: #{$color};
+  }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  box-sizing: border-box;
+}
+
+body,
+html {
+  height: 100%;
+  background: #222;
+}
+
+html,
+body {
+  height: 100%;
+  background-color: var(--background-color);
+}
+
+ul {
+  li {
+    list-style-type: none;
+  }
+}
+
+a {
+  text-decoration: none;
+  outline: none;
+}
+
+b,
+strong {
+  font-weight: 700;
+}
+body {
+  margin: 0;
+  font-family: $font-primary;
+}

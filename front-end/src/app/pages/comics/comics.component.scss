@@ -1,0 +1,22 @@
+@import "../../../sass/functions";
+@import "../../../sass/variables";
+@import "../../../sass/mixins";
+
+.comics {
+  @include flex-center(column);
+
+  &__title {
+    margin-top: rem(20);
+    color: $color-text;
+  }
+
+  &__list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+
+    gap: 20px 40px;
+
+    margin: 20px;
+  }
+}

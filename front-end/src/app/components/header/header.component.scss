@@ -1,0 +1,48 @@
+@import "../../../sass/variables";
+@import "../../../sass/mixins";
+@import "../../../sass/functions";
+
+.header {
+  background-color: $color-primary;
+  height: 50px;
+  @include flex-center;
+  padding: 0 50px;
+}
+
+.menu {
+  display: flex;
+  height: 100%;
+  width: 100%;
+
+  max-width: $global-max-width;
+
+  &__list {
+    @include flex-center;
+    border: 0;
+    height: 100%;
+    color: white;
+
+    .list__item {
+      padding: 10px;
+      @include flex-center;
+      height: 100%;
+      transition: background-color 0.2s;
+      cursor: pointer;
+
+      &--active,
+      &:hover {
+        background-color: $color-hover-bg-menu;
+      }
+
+      &__link {
+        font-size: 14px;
+        padding: 15px 5px;
+        color: white;
+
+        strong {
+          font-size: 18px;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,101 @@
+@mixin flex-center($direction: "row") {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin size($width, $height: $width) {
+  width: rem($width) !important;
+  height: rem($height);
+}
+
+@mixin base-button-style {
+  @include flex-center;
+  width: rem(180);
+  height: rem(40);
+
+  padding: 15px;
+  border-radius: 5px;
+
+  user-select: none;
+
+  color: $color-panel-button-text;
+  background-color: $color-panel-button-bg;
+  transition: background-color 0.2s;
+
+  @include button-pressed;
+}
+
+@mixin base-border-bottom() {
+  border-bottom: 0.1px solid $color-tab-panel-border-top;
+}
+
+@mixin form-title() {
+  font-size: 18px;
+  margin-bottom: rem(15);
+  font-weight: 300;
+  line-height: 1.4;
+  color: $color-text;
+}
+
+@mixin button-pressed() {
+  & {
+    outline: none;
+  }
+
+  &:hover {
+    opacity: 0.9;
+    cursor: pointer;
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+@mixin button-disabled {
+  &[disabled] {
+    cursor: not-allowed;
+    background-color: rgb(229, 229, 229) !important;
+    pointer-events: none;
+  }
+}
+
+@mixin button-bg($bg) {
+  background: $bg;
+  &:hover {
+    background: darken($bg, 8%);
+    transition: all 0.3s ease;
+  }
+  &:active {
+    background: darken($bg, 25%);
+  }
+}
+
+@mixin base-bold {
+  font-weight: bold;
+  color: $color-text;
+}
+
+$desktop: 1200;
+$tablet: 768;
+$mobile: $tablet - 1;
+
+@mixin mobile {
+  @media screen and (max-width: $mobile * 1px) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media screen and (min-width: $tablet * 1px) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media screen and (min-width: $desktop * 1px) {
+    @content;
+  }
+}

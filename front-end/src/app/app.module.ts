@@ -8,6 +8,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { ToggleThemeComponent } from './components/toggle-theme/toggle-theme.component';
 import { ComicsComponent } from './pages/comics/comics.component';
 import { ComicComponent } from './components/comic/comic.component';
+import { ComicItemComponent } from './components/comic-item/comic-item.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { ComicComponent } from './components/comic/comic.component';
     HeaderComponent,
     ToggleThemeComponent,
     ComicsComponent,
-    ComicComponent
+    ComicComponent,
+    ComicItemComponent
   ],
   imports: [
     BrowserModule,

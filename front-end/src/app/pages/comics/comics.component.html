@@ -1,11 +1,10 @@
 <section class="comics">
   <section class="comics__list">
-    <!-- <div *ngFor="let comic of comics"> -->
-    <div>
-      <!-- <cms-comic [comic]="comic"></cms-comic> -->
+    <div *ngFor="let comic of comics">
+      <cms-comic-item [comic]="comic"></cms-comic-item>
     </div>
-    <!-- <div *ngIf="restaurants?.length === 0">
+    <div *ngIf="comics?.length === 0">
       <p class="lead text-center">Desculpe, nenhum quadrinho encontrado.</p>
-    </div> -->
+    </div>
   </section>
 </section>

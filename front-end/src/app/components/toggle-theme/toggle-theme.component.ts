@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ToggleThemeService } from 'src/app/services/toggle-theme.service';
 
 @Component({
-  selector: 'mt-toggle-theme',
+  selector: 'cms-toggle-theme',
   templateUrl: './toggle-theme.component.html',
   styleUrls: ['./toggle-theme.component.scss'],
 })

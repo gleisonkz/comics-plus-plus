@@ -1,0 +1,20 @@
+@import "../../../sass/variables";
+@import "../../../sass/mixins";
+@import "../../../sass/functions";
+
+.about {
+  padding: 20px 40px;
+
+  &__title {
+    color: $color-panel-text;
+  }
+
+  &__text {
+    margin-top: 20px;
+    color: $color-panel-text;
+  }
+
+  &__link {
+    color: $color-link;
+  }
+}

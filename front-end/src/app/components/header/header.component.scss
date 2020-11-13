@@ -1,6 +1,8 @@
 @import "../../../sass/variables";
 @import "../../../sass/mixins";
 @import "../../../sass/functions";
+@import "../../../sass/media";
+
 :host {
   background: var(--color-primary);
   height: 50px;
@@ -18,6 +20,10 @@
   max-width: $global-max-width;
   padding: rem(0 40);
   width: 100%;
+
+  @include medias($tiny-mobile, $mobile, $small-tablet, $tablet) {
+    padding: rem(0 10);
+  }
 
   &__tools {
     height: 100%;
@@ -68,5 +74,11 @@
     .list__item + .list__item {
       margin-left: rem(25);
     }
+  }
+}
+
+.logo {
+  @include medias($tiny-mobile, $mobile) {
+    display: none !important;
   }
 }

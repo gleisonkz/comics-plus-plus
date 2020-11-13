@@ -1,8 +1,13 @@
 @import "../../../sass/variables";
 @import "../../../sass/mixins";
 @import "../../../sass/functions";
+@import "../../../sass/media";
 
 .about {
+  @include medias($tiny-mobile, $mobile, $small-tablet, $tablet) {
+    padding-left: rem(20);
+  }
+
   &__title {
     color: $color-panel-text;
   }

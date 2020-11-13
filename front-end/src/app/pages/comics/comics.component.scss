@@ -1,10 +1,15 @@
 @import "../../../sass/functions";
 @import "../../../sass/variables";
 @import "../../../sass/mixins";
+@import "../../../sass/media";
 
 .comics {
   @include flex-center(column);
-  padding: rem(40);
+  // padding: rem(40);
+
+  @include medias($tiny-mobile, $mobile, $small-tablet, $tablet) {
+    padding: rem(0);
+  }
 
   &__title {
     margin-top: rem(20);
@@ -13,11 +18,39 @@
 
   &__list {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    grid-template-columns: repeat(auto-fit, minmax(rem(390), 1fr));
+
     grid-template-rows: auto;
 
     gap: 40px 40px;
 
     margin: 20px;
+
+    @include medias($tiny-mobile, $mobile) {
+      grid-template-columns: 1fr;
+      width: initial;
+    }
+
+    @include medias($tablet, $large-tablet, $small-tablet) {
+      grid-template-columns: 1fr 1fr;
+      width: initial;
+    }
+
+    @include small-tablet {
+      grid-template-columns: 1fr;
+      width: 100%;
+    }
+
+    @include tiny-mobile {
+    }
+
+    @include mobile {
+    }
+
+    @include tablet {
+    }
+    @include large-tablet {
+    }
   }
 }

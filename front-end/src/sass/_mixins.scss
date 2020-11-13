@@ -15,6 +15,11 @@
   height: rem($height);
 }
 
+@mixin max-size($width, $height: $width) {
+  max-width: rem($width) !important;
+  max-height: rem($height);
+}
+
 @mixin base-button-style {
   @include flex-center;
   width: rem(180);
@@ -85,26 +90,4 @@
 @mixin base-bold {
   font-weight: 500;
   color: $color-text;
-}
-
-$desktop: 1200;
-$tablet: 768;
-$mobile: $tablet - 1;
-
-@mixin mobile {
-  @media screen and (max-width: $mobile * 1px) {
-    @content;
-  }
-}
-
-@mixin tablet {
-  @media screen and (min-width: $tablet * 1px) {
-    @content;
-  }
-}
-
-@mixin desktop {
-  @media screen and (min-width: $desktop * 1px) {
-    @content;
-  }
 }

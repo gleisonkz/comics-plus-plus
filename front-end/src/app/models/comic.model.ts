@@ -6,4 +6,6 @@ export interface Comic {
   imagePath: string;
   description: string;
   price: number;
+  year: number;
+  pages: number;
 }

@@ -10,6 +10,8 @@ export const COMICS: Comic[] = [
     description:
       'Superman possui poderes extraordinários e é tradicionalmente descrito como "mais rápido que uma bala, mais poderoso do que uma locomotiva, capaz de saltar prédios altos em um único salto".',
     price: 30.0,
+    year: 2000,
+    pages: 500,
   },
   {
     id: 2,
@@ -21,6 +23,8 @@ export const COMICS: Comic[] = [
     description:
       'A identidade secreta de Batman é Bruce Wayne, um bilionário americano, playboy, magnata de negócios, filantropo e dono da corporação Wayne Enterprises.',
     price: 120.0,
+    year: 2012,
+    pages: 700,
   },
   {
     id: 3,
@@ -32,6 +36,8 @@ export const COMICS: Comic[] = [
     description:
       'LJA: Ano Um é uma história que olha para o passado da DC, para os diversos grupos heroicos que já passaram pela editora e honra o que eles deixaram para as equipes futuras, dando a oportunidade de lutarem ao lado dos recém-chegados e de perceberem que estão sendo substituídos por gente muito boa.',
     price: 90.0,
+    year: 2015,
+    pages: 180,
   },
   {
     id: 3,
@@ -43,6 +49,8 @@ export const COMICS: Comic[] = [
     description:
       'LJA: Ano Um é uma história que olha para o passado da DC, para os diversos grupos heroicos que já passaram pela editora e honra o que eles deixaram para as equipes futuras, dando a oportunidade de lutarem ao lado dos recém-chegados e de perceberem que estão sendo substituídos por gente muito boa.',
     price: 134.5,
+    year: 2000,
+    pages: 500,
   },
   {
     id: 3,
@@ -54,6 +62,8 @@ export const COMICS: Comic[] = [
     description:
       'LJA: Ano Um é uma história que olha para o passado da DC, para os diversos grupos heroicos que já passaram pela editora e honra o que eles deixaram para as equipes futuras, dando a oportunidade de lutarem ao lado dos recém-chegados e de perceberem que estão sendo substituídos por gente muito boa.',
     price: 75.0,
+    year: 2000,
+    pages: 500,
   },
   {
     id: 3,
@@ -65,5 +75,7 @@ export const COMICS: Comic[] = [
     description:
       'LJA: Ano Um é uma história que olha para o passado da DC, para os diversos grupos heroicos que já passaram pela editora e honra o que eles deixaram para as equipes futuras, dando a oportunidade de lutarem ao lado dos recém-chegados e de perceberem que estão sendo substituídos por gente muito boa.',
     price: 29.9,
+    year: 2000,
+    pages: 500,
   },
 ];

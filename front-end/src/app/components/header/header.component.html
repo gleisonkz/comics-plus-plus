@@ -1,24 +1,24 @@
 <header class="header">
   <nav class="menu">
-    <ul class="menu__list">
-      <li class="list__item">
-        <a class="list__item__link" routerLink="/"
-          ><strong>Comics ++</strong></a
-        >
+    <ul class="menu-list">
+      <li class="menu-list__item">
+        <a class="menu-list__link" routerLink="/"><strong>Comics ++</strong></a>
       </li>
-      <li class="list__item" routerLinkActive="list__item--active">
-        <a class="list__item__link" routerLink="/livros">Livros</a>
+      <li class="menu-list__item" routerLinkActive="menu-list__item--active">
+        <a class="menu-list__link" routerLink="/livros">Livros</a>
       </li>
-      <li class="list__item" routerLinkActive="list__item--active">
-        <a class="list__item__link" routerLink="/sobre">Sobre</a>
+      <li class="menu-list__item" routerLinkActive="menu-list__item--active">
+        <a class="menu-list__link" routerLink="/sobre">Sobre</a>
       </li>
-      <li class="list__item" routerLinkActive="list__item--active">
-        <a class="list__item__link" routerLink="/admin">Admin</a>
+      <li class="menu-list__item" routerLinkActive="menu-list__item--active">
+        <a class="menu-list__link" routerLink="/admin">Admin</a>
       </li>
     </ul>
   </nav>
-  <div class="cart">
-    <i matBadge="1" class="fas fa-shopping-cart" style="font-size: 20px"></i>
+  <div class="header__tools">
+    <div class="header__cart">
+      <i matBadge="1" class="fas fa-shopping-cart" style="font-size: 20px"></i>
+    </div>
+    <cms-toggle-theme></cms-toggle-theme>
   </div>
-  <cms-toggle-theme></cms-toggle-theme>
 </header>

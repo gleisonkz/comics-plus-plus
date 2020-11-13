@@ -1,1 +1,56 @@
-<p>comic-detail works!</p>
+<div class="comic">
+  <div class="comic__container-image">
+    <img class="comic__image" [src]="comic.imagePath" alt="Image" />
+  </div>
+  <div class="comic__info">
+    <h1 class="comic__title">{{ comic.title }}</h1>
+    <span class="comic__author">{{ comic.author }}</span>
+    <span class="comic__title">{{ comic.genre }}</span>
+    <p class="comic__description truncate-overflow">{{ comic.description }}</p>
+  </div>
+  <form class="comic__form">
+    <span class="comic__price">R$ {{ comic.price | number: "2.2" }}</span>
+    <span class="comic__price">Disponibilidade: Em estoque</span>
+    <div class="comic__form-group">
+      <label for="">Quantidade</label>
+      <input type="text" name="" id="" />
+    </div>
+    <div class="comic__btn-container">
+      <button class="comic__btn">
+        <i class="fas fa-shopping-cart"></i>
+        Adicionar ao carrinho
+      </button>
+      <button [routerLink]="['/livros', comic.id]" class="comic__btn">
+        <i class="fas fa-credit-card"></i>
+        Finalizar pedido
+      </button>
+    </div>
+  </form>
+</div>
+<section class="comic-details">
+  <h2 class="comic-details__title">Detalhes do produto</h2>
+  <ul class="comic-details__info">
+    <li class="comic-details__item">
+      <label class="comic-details__item__label">Nº páginas</label>
+      <span class="comic-details__item__value">128 pages</span>
+    </li>
+  </ul>
+  <ul class="comic-details__info">
+    <li class="comic-details__item">
+      <label class="comic-details__item__label">Editora</label>
+      <span class="comic-details__item__value">Penguin Books Ltd</span>
+    </li>
+  </ul>
+  <ul class="comic-details__info">
+    <li class="comic-details__item">
+      <label class="comic-details__item__label">Data de publicação</label>
+      <span class="comic-details__item__value">03 Nov 2011</span>
+    </li>
+  </ul>
+  <ul class="comic-details__info">
+    <li class="comic-details__item">
+      <label class="comic-details__item__label">Idioma</label>
+      <span class="comic-details__item__value">Inglês</span>
+    </li>
+  </ul>
+</section>

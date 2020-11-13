@@ -1,50 +1,71 @@
 @import "../../../sass/variables";
 @import "../../../sass/mixins";
 @import "../../../sass/functions";
+:host {
+  background: var(--color-primary);
+  height: 50px;
+  position: absolute;
+
+  width: 100%;
+}
 
 .header {
   background-color: $color-primary;
   height: 50px;
   @include flex-center;
-  padding: 0 50px;
-  position: absolute;
+  justify-content: space-between;
+  margin: 0 auto;
+  max-width: $global-max-width;
   width: 100%;
+
+  &__tools {
+    height: 100%;
+    @include flex-center;
+  }
+
+  &__cart {
+    margin-right: rem(20);
+  }
 }
 
 .menu {
   display: flex;
   height: 100%;
-  width: 100%;
 
-  max-width: $global-max-width;
-
-  &__list {
+  .menu-list {
     @include flex-center;
     border: 0;
     height: 100%;
     color: white;
 
-    .list__item {
-      padding: 10px;
+    .menu-list__item + .menu-list__item {
+      margin-left: rem(20);
+    }
+
+    &__item {
       @include flex-center;
       height: 100%;
       transition: background-color 0.2s;
       cursor: pointer;
+    }
 
-      &--active,
-      &:hover {
-        background-color: $color-hover-bg-menu;
+    &__item--active .menu-list__link,
+    &__item:hover .menu-list__link {
+      color: rgb(0, 247, 255);
+    }
+
+    &__link {
+      font-size: 14px;
+      transition: color 0.2s;
+      color: white;
+
+      strong {
+        font-size: 18px;
       }
+    }
 
-      &__link {
-        font-size: 14px;
-        padding: 15px 5px;
-        color: white;
-
-        strong {
-          font-size: 18px;
-        }
-      }
+    .list__item + .list__item {
+      margin-left: rem(25);
     }
   }
 }

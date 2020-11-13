@@ -127,5 +127,8 @@
       }
     }
   },
-  "defaultProject": "comics-plus-plus"
+  "defaultProject": "comics-plus-plus",
+  "cli": {
+    "analytics": "7c9d5574-c40d-45b7-bd9f-072770712086"
+  }
 }

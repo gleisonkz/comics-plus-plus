@@ -25,6 +25,7 @@
       position: absolute;
       width: 100%;
       max-width: $global-max-width;
+      padding: rem(20 40);
 
       // @include flex-center;
     }

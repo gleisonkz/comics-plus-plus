@@ -15,6 +15,7 @@ import { ComicDetailComponent } from './pages/comic-detail/comic-detail.componen
 
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatInputModule } from '@angular/material/input';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { MatInputModule } from '@angular/material/input';
     HttpClientModule,
     MatBadgeModule,
     MatInputModule,
+    MatMenuModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

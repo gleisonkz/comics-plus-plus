@@ -5,7 +5,7 @@
 
 .comics {
   @include flex-center(column);
-  // padding: rem(40);
+  color: $color-text;
 
   @include medias($tiny-mobile, $mobile, $small-tablet, $tablet) {
     padding: rem(0);
@@ -40,17 +40,6 @@
     @include small-tablet {
       grid-template-columns: 1fr;
       width: 100%;
-    }
-
-    @include tiny-mobile {
-    }
-
-    @include mobile {
-    }
-
-    @include tablet {
-    }
-    @include large-tablet {
     }
   }
 }

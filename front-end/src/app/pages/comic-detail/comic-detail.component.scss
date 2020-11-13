@@ -1,11 +1,21 @@
+@import "../../../sass/functions";
 @import "../../../sass/variables";
 @import "../../../sass/mixins";
-@import "../../../sass/functions";
+@import "../../../sass/media";
 
 .comic {
   display: grid;
   grid-template-columns: max-content rem(360);
   grid-gap: rem(10);
+  color: $color-text;
+
+  @include medias($tiny-mobile, $mobile, $small-tablet) {
+    grid-template-columns: 1fr;
+  }
+
+  @include medias($tablet, $large-tablet) {
+    grid-template-columns: 1fr;
+  }
 
   &__container-info {
     display: grid;
@@ -14,10 +24,20 @@
     column-gap: rem(10);
     background-color: $color-panel-bg;
     border-radius: $global-radius;
+
+    @include medias($tiny-mobile, $mobile, $small-tablet) {
+      grid-template-columns: 1fr;
+      grid-row: 1;
+    }
   }
 
   &__image {
     max-width: rem(240);
+    @include medias($tiny-mobile, $mobile, $small-tablet) {
+      max-width: rem(200);
+      margin-top: rem(5);
+      grid-row: 2;
+    }
   }
 
   &__info {

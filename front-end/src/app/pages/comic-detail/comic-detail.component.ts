@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Comic } from 'src/app/models/comic.model';
+import { ComicService } from '../../services/comic.service';
 
 @Component({
   selector: 'cms-comic-detail',
@@ -7,9 +9,21 @@ import { Comic } from 'src/app/models/comic.model';
   styleUrls: ['./comic-detail.component.scss'],
 })
 export class ComicDetailComponent implements OnInit {
-  @Input() comic: Comic;
+  comic: Comic;
 
-  constructor() {}
+  constructor(
+    private route: ActivatedRoute,
+    private comicService: ComicService
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    const comicID = +this.route.snapshot.params.id;
+    console.log(comicID);
+
+    this.comicService.getComicByID(comicID).subscribe((comic) => {
+      console.log(comic);
+
+      this.comic = comic;
+    });
+  }
 }

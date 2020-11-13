@@ -39,43 +39,4 @@ export const COMICS: Comic[] = [
     year: 2015,
     pages: 180,
   },
-  {
-    id: 3,
-    title: 'LJA Ano Um',
-    author: '',
-    genre: 'Ciência,Ficção',
-    imagePath:
-      'https://excelsiorcomics.com.br/loja/wp-content/uploads/2017/04/xeaglemoss-10-360x541.jpg.pagespeed.ic.OpCkzNGTpS.webp',
-    description:
-      'LJA: Ano Um é uma história que olha para o passado da DC, para os diversos grupos heroicos que já passaram pela editora e honra o que eles deixaram para as equipes futuras, dando a oportunidade de lutarem ao lado dos recém-chegados e de perceberem que estão sendo substituídos por gente muito boa.',
-    price: 134.5,
-    year: 2000,
-    pages: 500,
-  },
-  {
-    id: 3,
-    title: 'LJA Ano Um',
-    author: '',
-    genre: 'Ciência,Ficção',
-    imagePath:
-      'https://excelsiorcomics.com.br/loja/wp-content/uploads/2017/04/xeaglemoss-10-360x541.jpg.pagespeed.ic.OpCkzNGTpS.webp',
-    description:
-      'LJA: Ano Um é uma história que olha para o passado da DC, para os diversos grupos heroicos que já passaram pela editora e honra o que eles deixaram para as equipes futuras, dando a oportunidade de lutarem ao lado dos recém-chegados e de perceberem que estão sendo substituídos por gente muito boa.',
-    price: 75.0,
-    year: 2000,
-    pages: 500,
-  },
-  {
-    id: 3,
-    title: 'LJA Ano Um',
-    author: '',
-    genre: 'Ciência,Ficção',
-    imagePath:
-      'https://excelsiorcomics.com.br/loja/wp-content/uploads/2017/04/xeaglemoss-10-360x541.jpg.pagespeed.ic.OpCkzNGTpS.webp',
-    description:
-      'LJA: Ano Um é uma história que olha para o passado da DC, para os diversos grupos heroicos que já passaram pela editora e honra o que eles deixaram para as equipes futuras, dando a oportunidade de lutarem ao lado dos recém-chegados e de perceberem que estão sendo substituídos por gente muito boa.',
-    price: 29.9,
-    year: 2000,
-    pages: 500,
-  },
 ];

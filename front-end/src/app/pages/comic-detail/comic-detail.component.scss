@@ -1,0 +1,21 @@
+@import "../../../sass/variables";
+@import "../../../sass/mixins";
+@import "../../../sass/functions";
+
+.comic {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+
+  &__container-image {
+    background-color: $color-panel-bg;
+    border: 1px solid #000;
+  }
+
+  &__info {
+    background-color: $color-panel-bg;
+  }
+
+  &__form {
+    background-color: $color-panel-bg;
+  }
+}

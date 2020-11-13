@@ -5,6 +5,11 @@
   align-items: center;
 }
 
+@mixin flex-column() {
+  display: flex;
+  flex-direction: column;
+}
+
 @mixin size($width, $height: $width) {
   width: rem($width) !important;
   height: rem($height);
@@ -23,6 +28,10 @@
   color: $color-panel-button-text;
   background-color: $color-panel-button-bg;
   transition: background-color 0.2s;
+
+  i {
+    margin-right: rem(5);
+  }
 
   @include button-pressed;
 }
@@ -74,7 +83,7 @@
 }
 
 @mixin base-bold {
-  font-weight: bold;
+  font-weight: 500;
   color: $color-text;
 }
 

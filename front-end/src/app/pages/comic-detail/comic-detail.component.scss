@@ -4,18 +4,81 @@
 
 .comic {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: max-content rem(360);
+  grid-gap: rem(10);
 
-  &__container-image {
+  &__container-info {
+    display: grid;
+    padding: rem(20);
+    grid-template-columns: max-content rem(380);
+    column-gap: rem(10);
     background-color: $color-panel-bg;
-    border: 1px solid #000;
+    border-radius: $global-radius;
+  }
+
+  &__image {
+    max-width: rem(240);
   }
 
   &__info {
     background-color: $color-panel-bg;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__genre,
+  &__title {
+    @include base-bold;
+  }
+
+  &__description {
+    margin-top: rem(10);
+    color: $color-panel-text;
+    flex: 1;
   }
 
   &__form {
+    @include flex-center(column);
+    align-items: stretch;
+    padding: rem(20);
+    height: rem(240);
     background-color: $color-panel-bg;
+    border-radius: $global-radius;
+  }
+
+  &__price {
+    font-size: rem(32);
+  }
+
+  &__inventory {
+    margin-top: rem(20);
+  }
+
+  mat-form-field {
+    margin-top: rem(15);
+  }
+
+  &__btn-container {
+    margin-top: rem(15);
+    display: flex;
+
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  &__btn {
+    @include base-button-style;
+    width: rem(150);
+  }
+}
+
+.comic-details {
+  color: $color-text;
+
+  &__item {
+    &__label {
+      margin-right: rem(5);
+      @include base-bold;
+    }
   }
 }

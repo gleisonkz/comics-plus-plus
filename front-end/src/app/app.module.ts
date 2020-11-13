@@ -12,7 +12,9 @@ import { ComicsComponent } from './pages/comics/comics.component';
 import { AboutComponent } from './pages/about/about.component';
 import { ComicComponent } from './components/comic/comic.component';
 import { ComicDetailComponent } from './pages/comic-detail/comic-detail.component';
+
 import { MatBadgeModule } from '@angular/material/badge';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,7 @@ import { MatBadgeModule } from '@angular/material/badge';
     BrowserAnimationsModule,
     HttpClientModule,
     MatBadgeModule,
+    MatInputModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -21,6 +21,22 @@
   box-sizing: border-box;
 }
 
+.mat-h1,
+.mat-headline,
+.mat-typography h1 {
+  font: 400 24px/32px Roboto, "Helvetica Neue", sans-serif;
+  letter-spacing: normal;
+  margin: 0 0 10px;
+}
+
+.mat-h2,
+.mat-title,
+.mat-typography h2 {
+  font: 500 20px/32px Roboto, "Helvetica Neue", sans-serif;
+  letter-spacing: normal;
+  margin: 0 0 10px;
+}
+
 body,
 html {
   height: 100%;
@@ -53,5 +69,11 @@ body {
   font-family: $font-primary;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}

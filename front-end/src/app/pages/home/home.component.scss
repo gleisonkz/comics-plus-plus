@@ -1,0 +1,29 @@
+@import "../../../sass/variables";
+@import "../../../sass/mixins";
+@import "../../../sass/functions";
+
+.panel {
+  @include flex-center;
+  justify-content: space-around;
+  flex-direction: column;
+  width: rem(800);
+  height: rem(400);
+
+  margin: 20px auto;
+
+  color: $color-panel-text;
+  background-color: $color-panel-bg;
+  border-radius: 10px;
+
+  &__title {
+    font-size: rem(55);
+  }
+
+  &__subtitle {
+    font-size: rem(25);
+  }
+
+  &__button {
+    @include base-button-style;
+  }
+}

@@ -1,3 +1,4 @@
+import { fadeAnimation } from './animations/fade.animations';
 import { ToggleThemeService } from './services/toggle-theme.service';
 import { DOCUMENT } from '@angular/common';
 import { Component, Inject } from '@angular/core';
@@ -8,6 +9,7 @@ import { Subscription } from 'rxjs';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
+  animations: [fadeAnimation],
 })
 export class AppComponent {
   title = 'comics-plus-plus';

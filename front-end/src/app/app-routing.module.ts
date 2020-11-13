@@ -6,8 +6,8 @@ import { AboutComponent } from './pages/about/about.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'comics', component: ComicsComponent },
-  { path: 'about', component: AboutComponent },
+  { path: 'livros', component: ComicsComponent },
+  { path: 'sobre', component: AboutComponent },
 ];
 
 @NgModule({

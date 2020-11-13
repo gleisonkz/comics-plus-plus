@@ -7,6 +7,8 @@
   height: 50px;
   @include flex-center;
   padding: 0 50px;
+  position: absolute;
+  width: 100%;
 }
 
 .menu {

@@ -9,8 +9,9 @@ import { HomeComponent } from './pages/home/home.component';
 import { HeaderComponent } from './components/header/header.component';
 import { ToggleThemeComponent } from './components/toggle-theme/toggle-theme.component';
 import { ComicsComponent } from './pages/comics/comics.component';
-import { ComicItemComponent } from './components/comic-item/comic-item.component';
 import { AboutComponent } from './pages/about/about.component';
+import { ComicComponent } from './components/comic/comic.component';
+import { ComicDetailComponent } from './pages/comic-detail/comic-detail.component';
 
 @NgModule({
   declarations: [
@@ -19,8 +20,9 @@ import { AboutComponent } from './pages/about/about.component';
     HeaderComponent,
     ToggleThemeComponent,
     ComicsComponent,
-    ComicItemComponent,
     AboutComponent,
+    ComicComponent,
+    ComicDetailComponent,
   ],
   imports: [
     BrowserModule,

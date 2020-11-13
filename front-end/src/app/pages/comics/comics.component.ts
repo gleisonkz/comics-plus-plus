@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ComicItem } from '../../models/comic-item.model';
+import { Comic } from '../../models/comic.model';
+import { COMICS } from '../../mock/comics.mock';
 
 @Component({
   selector: 'cms-comics',
@@ -9,7 +10,9 @@ import { ComicItem } from '../../models/comic-item.model';
 export class ComicsComponent implements OnInit {
   constructor() {}
 
-  comics: ComicItem[];
+  comics: Comic[];
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.comics = COMICS;
+  }
 }

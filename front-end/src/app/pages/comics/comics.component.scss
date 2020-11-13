@@ -4,6 +4,7 @@
 
 .comics {
   @include flex-center(column);
+  padding: rem(40);
 
   &__title {
     margin-top: rem(20);
@@ -15,7 +16,7 @@
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto;
 
-    gap: 20px 40px;
+    gap: 40px 40px;
 
     margin: 20px;
   }

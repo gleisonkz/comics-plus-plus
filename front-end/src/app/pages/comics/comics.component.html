@@ -1,7 +1,7 @@
 <section class="comics">
   <section class="comics__list">
     <div *ngFor="let comic of comics">
-      <cms-comic-item [comic]="comic"></cms-comic-item>
+      <cms-comic [comic]="comic"></cms-comic>
     </div>
     <div *ngIf="comics?.length === 0">
       <p class="lead text-center">Desculpe, nenhum quadrinho encontrado.</p>

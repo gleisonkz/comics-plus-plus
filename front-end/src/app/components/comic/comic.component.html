@@ -1,0 +1,19 @@
+<div class="comic">
+  <img class="comic__image" [src]="comic.imagePath" alt="Image" />
+  <span class="comic__price">R$ {{ comic.price | number: "2.2" }}</span>
+  <h2 class="comic__title">{{ comic.title }}</h2>
+  <span class="comic__title">{{ comic.genre }}</span>
+  <!-- <h3 class="comic__author">{{ comic.author }}</h3> -->
+  <p class="comic__description truncate-overflow">{{ comic.description }}</p>
+
+  <div class="comic__btn-container">
+    <button class="comic__btn">
+      <i class="fas fa-shopping-cart"></i>
+      Adicionar
+    </button>
+    <button [routerLink]="['/livros', comic.id]" class="comic__btn">
+      <i class="fas fa-search"></i>
+      Visualizar
+    </button>
+  </div>
+</div>

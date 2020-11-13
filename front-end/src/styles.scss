@@ -1,6 +1,8 @@
 @import "./sass/variables";
 
 :root {
+  --lh: 1.4rem;
+  line-height: var(--lh);
   @each $name, $color in $project-colors {
     --color-#{$name}: #{$color};
   }

@@ -1,0 +1,54 @@
+<div class="cart" (click)="$event.stopPropagation()">
+  <div class="cart__content">
+    <div class="cart__item">
+      <div>
+        <!-- <i
+          (click)="quantityDown(item)"
+          class="fas fa-minus cart__item__quantity-icon"
+        > -->
+        <i class="fas fa-minus cart__item__quantity-icon"> </i>
+        <span class="cart__item__quantity">( {{ 05 }}x )</span>
+        <!-- <i
+          (click)="quantityUp(item)"
+          class="fas fa-plus cart__item__quantity-icon"
+        ></i> -->
+        <i class="fas fa-plus cart__item__quantity-icon"></i>
+        <span class="cart__item__text">{{ "Teste" }}</span>
+      </div>
+      <div>
+        <span class="cart__item__value"> R$ {{ 45.5 | number: "2.2" }}</span>
+        <!-- <i
+          (click)="removeItem(item)"
+          class="fa fa-remove cart__item__icon"
+        ></i> -->
+        <i class="fa fa-remove cart__item__icon"></i>
+      </div>
+    </div>
+    <div class="cart__total">
+      <span class="cart__total__text">Total</span>
+      <!-- <span class="cart__total__value"
+        >R$ {{ getTotal() | number: "2.2" }}</span
+      > -->
+      <span class="cart__total__value">R$ {{ 200 | number: "2.2" }}</span>
+    </div>
+  </div>
+  <!-- <p class="cart__empty-message" *ngIf="!existingCartItem">
+    Your cart is empty!
+  </p> -->
+  <div class="cart__buttons">
+    <!-- <button
+      (click)="clearCart()"
+      type="button"
+      class="cart__buttons__button"
+    >
+      <i class="fa fa-trash"></i> Clear
+    </button> -->
+    <button type="button" class="cart__buttons__button">
+      <i class="fa fa-trash"></i> Clear
+    </button>
+    <a class="cart__buttons__button" [routerLink]="['/order']">
+      <i class="fa fa-credit-card"></i>
+      Submit Order
+    </a>
+  </div>
+</div>

@@ -16,6 +16,7 @@ import { ComicDetailComponent } from './pages/comic-detail/comic-detail.componen
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
+import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { MatMenuModule } from '@angular/material/menu';
     AboutComponent,
     ComicComponent,
     ComicDetailComponent,
+    ShoppingCartComponent,
   ],
   imports: [
     BrowserModule,

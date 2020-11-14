@@ -1,7 +1,14 @@
+@import "../../../sass/variables";
+@import "../../../sass/mixins";
+@import "../../../sass/functions";
+@import "../../../sass/media";
+
 :host {
   height: 29px;
   width: 65px;
 }
+
+$size: rem(20);
 
 .toggle {
   position: relative;
@@ -19,7 +26,7 @@
 
   &__input:checked + &__switch::before {
     background-image: url(../../../assets/img/icons/dark-mode.svg);
-    transform: translateX(-29px);
+    transform: translateX(-21px);
   }
 
   &__switch {
@@ -32,8 +39,8 @@
     right: 0;
     bottom: 0;
 
-    height: 29px;
-    width: 60px;
+    height: rem(23);
+    width: rem(48);
 
     border-radius: 34px;
     border: white solid 0.5px;
@@ -43,13 +50,13 @@
       position: absolute;
 
       background-image: url("../../../assets/img/icons/light-mode.svg");
-      background-size: 25px 25px;
+      background-size: $size $size;
 
-      height: 25px;
-      width: 25px;
+      height: $size;
+      width: $size;
 
       right: 4px;
-      bottom: 1px;
+      bottom: 0;
 
       transition: background-image 0.4s, transform 0.4s;
     }

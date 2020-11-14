@@ -33,6 +33,12 @@
 
   &__cart {
     margin-right: rem(20);
+    @include base-button-style;
+    width: auto;
+    height: auto;
+    display: block;
+    padding: 0;
+    background-color: transparent;
   }
 }
 
@@ -84,171 +90,6 @@
   }
 }
 
-.cart {
-  display: flex;
-  flex-direction: column;
-  align-items: baseline;
-  // min-width: rem(320);
-  // width: rem(200);
-
-  padding: rem(20);
-  margin-left: 10px;
-  border-radius: $global-radius;
-  background-color: $color-panel-bg;
-
-  &__empty-message {
-    margin-top: rem(20);
-    align-self: center;
-    color: $color-text;
-    font-size: rem(13);
-  }
-
-  &__title {
-    color: $color-text;
-
-    i {
-      margin-right: rem(5);
-    }
-  }
-
-  &__content {
-    margin-top: rem(20);
-    width: 100%;
-
-    .cart__item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      width: 100%;
-
-      div {
-        @include flex-center;
-      }
-
-      &__quantity-icon {
-        font-size: rem(10);
-        margin-right: rem(5);
-        cursor: pointer;
-        color: $color-text;
-      }
-
-      &__quantity-icon:last-of-type {
-        margin-right: rem(10);
-      }
-
-      &__text,
-      &__quantity {
-        font-size: rem(12);
-        color: $color-text;
-      }
-      &__value {
-        font-size: rem(13);
-      }
-
-      &__quantity {
-        margin-right: rem(5);
-      }
-
-      &__text {
-        @include base-bold;
-        // text-transform: lowercase;
-      }
-
-      &__text:first-letter {
-        text-transform: uppercase;
-      }
-
-      &__text::after {
-        content: ":";
-        @include base-bold;
-      }
-
-      &__value {
-        color: $color-text;
-        margin-right: rem(5);
-      }
-
-      &__icon {
-        color: $color-danger;
-        cursor: pointer;
-      }
-    }
-
-    .cart__item:not(:last-child) {
-      padding: rem(10 0);
-      border: solid 1px $color-tab-panel-border-top;
-      border-width: 1px 0 1px 0px;
-    }
-
-    .cart__item:last-child {
-      margin-top: rem(20);
-    }
-
-    .cart__total {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      width: 100%;
-
-      margin-top: rem(20);
-
-      &__text,
-      &__value {
-        font-size: rem(13);
-      }
-
-      &__text {
-        @include base-bold;
-      }
-
-      &__text::after {
-        content: ":";
-        @include base-bold;
-      }
-
-      &__value {
-        color: $color-text;
-        margin-right: rem(14.5);
-        font-weight: bold;
-      }
-    }
-  }
-
-  &__buttons {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    margin-top: rem(20);
-
-    &__button {
-      font-size: rem(13);
-      @include flex-center;
-      width: 100%;
-      padding: rem(8 10);
-      border-radius: rem(5);
-      color: white;
-      @include button-pressed;
-
-      &__link {
-        color: white;
-      }
-
-      i {
-        margin-right: rem(5);
-      }
-    }
-
-    &__button:first-child {
-      background-color: $color-danger;
-      margin-right: rem(5);
-    }
-
-    &__button:last-child {
-      background-color: $color-success;
-    }
-  }
-}
-
 button {
   .mat-menu-trigger {
     position: absolute;
@@ -256,4 +97,8 @@ button {
     left: 0;
     width: rem(600);
   }
+}
+
+::ng-deep.mat-menu-panel {
+  max-width: none !important;
 }

@@ -30,16 +30,6 @@
     @include flex-center;
     color: $color-text;
   }
-
-  &__cart {
-    margin-right: rem(20);
-    @include base-button-style;
-    width: auto;
-    height: auto;
-    display: block;
-    padding: 0;
-    background-color: transparent;
-  }
 }
 
 .menu {

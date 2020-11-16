@@ -15,6 +15,26 @@
   border-radius: $global-radius;
   background-color: $color-panel-bg;
 
+  &__icon {
+    margin-right: rem(20);
+    @include base-button-style;
+    width: auto;
+    height: auto;
+    display: block;
+    padding: 0;
+    background-color: transparent;
+
+    i {
+      @include base-button-style;
+      width: inherit;
+      height: inherit;
+      display: inherit;
+      padding: inherit;
+      background-color: inherit;
+      font-size: 20px;
+    }
+  }
+
   &__empty-message {
     margin-top: rem(20);
     align-self: center;
@@ -42,6 +62,10 @@
 
       div {
         @include flex-center;
+      }
+
+      &__image {
+        height: 50px;
       }
 
       &__quantity-icon {
@@ -142,7 +166,7 @@
     &__button {
       font-size: rem(13);
       @include flex-center;
-      width: 100%;
+      width: rem(150);
       padding: rem(8 10);
       border-radius: rem(5);
       color: white;

@@ -12,8 +12,13 @@ export class ShoppingCartService {
 
   private itemsSource$ = new BehaviorSubject<CartItem[]>([]);
   items$: Observable<CartItem[]> = this.itemsSource$.asObservable();
-  get hasItems() {
+
+  get hasItems(): boolean {
     return !!this.itemsSource$.value.length;
+  }
+
+  get totalItems(): number {
+    return this.itemsSource$.value.reduce((acc, cur) => acc + cur.quantity, 0);
   }
 
   public quantityUp(item: CartItem): void {
@@ -30,8 +35,6 @@ export class ShoppingCartService {
     const foundItem = this.itemsSource$.value.find(
       (c) => c.comic.id === item.id
     );
-
-    console.log(item);
 
     const expectations = [
       {

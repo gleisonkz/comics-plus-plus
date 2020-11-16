@@ -15,6 +15,13 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
   get hasItems(): boolean {
     return this.shoppingCartService.hasItems;
   }
+
+  get totalItems(): number {
+    const quantity = this.shoppingCartService.totalItems;
+    console.log(quantity);
+    return quantity;
+  }
+
   constructor(private shoppingCartService: ShoppingCartService) {}
 
   ngOnInit(): void {

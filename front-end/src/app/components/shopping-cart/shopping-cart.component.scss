@@ -3,6 +3,10 @@
 @import "../../../sass/functions";
 @import "../../../sass/media";
 
+::ng-deep.mat-menu-content {
+  background-color: $color-panel-bg !important;
+}
+
 .cart {
   display: flex;
   flex-direction: column;

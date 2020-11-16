@@ -15,6 +15,14 @@
   border-radius: $global-radius;
   background-color: $color-panel-bg;
 
+  &__group {
+    display: flex;
+    flex-direction: column;
+    height: rem(40);
+    justify-content: space-around;
+    align-items: center;
+  }
+
   &__icon {
     margin-right: rem(20);
     @include base-button-style;
@@ -60,9 +68,9 @@
       align-items: center;
       width: 100%;
 
-      div {
-        @include flex-center;
-      }
+      // div {
+      //   @include flex-center;
+      // }
 
       &__image {
         height: 50px;
@@ -86,6 +94,7 @@
       }
       &__value {
         font-size: rem(13);
+        width: rem(60);
       }
 
       &__quantity {

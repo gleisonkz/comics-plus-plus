@@ -14,20 +14,24 @@
         <div *ngFor="let item of items$ | async" class="cart__item">
           <img [src]="item.comic.imagePath" alt="" class="cart__item__image" />
 
-          <div>
-            <i
-              (click)="quantityDown(item)"
-              class="fas fa-minus cart__item__quantity-icon"
-            >
-            </i>
-            <span class="cart__item__quantity">( {{ item.quantity }}x )</span>
-            <i
-              (click)="quantityUp(item)"
-              class="fas fa-plus cart__item__quantity-icon"
-            ></i>
-            <span class="cart__item__text">{{ item.comic.title }}</span>
+          <div class="cart__group">
+            <div>
+              <span class="cart__item__text">{{ item.comic.title }}</span>
+            </div>
+            <div>
+              <i
+                (click)="quantityDown(item)"
+                class="fas fa-minus cart__item__quantity-icon"
+              >
+              </i>
+              <span class="cart__item__quantity">( {{ item.quantity }}x )</span>
+              <i
+                (click)="quantityUp(item)"
+                class="fas fa-plus cart__item__quantity-icon"
+              ></i>
+            </div>
           </div>
-          <div>
+          <div class="cart__group">
             <span class="cart__item__value">
               R$ {{ item.getTotalValue() | number: "2.2" }}</span
             >
@@ -53,11 +57,11 @@
           type="button"
           class="cart__buttons__button"
         >
-          <i class="fa fa-trash"></i> Clear
+          <i class="fa fa-trash"></i> Limpar
         </button>
         <a class="cart__buttons__button" [routerLink]="['/order']">
           <i class="fa fa-credit-card"></i>
-          Submit Order
+          Finalizar Compra
         </a>
       </div>
     </div>

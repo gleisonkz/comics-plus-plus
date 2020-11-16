@@ -7,7 +7,7 @@
   <p class="comic__description truncate-overflow">{{ comic.description }}</p>
 
   <div class="comic__btn-container">
-    <button class="comic__btn">
+    <button (click)="addToCart(comic)" class="comic__btn">
       <i class="fas fa-shopping-cart"></i>
       Adicionar
     </button>

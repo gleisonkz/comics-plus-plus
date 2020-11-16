@@ -31,6 +31,8 @@ export class ShoppingCartService {
       (c) => c.comic.id === item.id
     );
 
+    console.log(item);
+
     const expectations = [
       {
         expect: () => foundItem !== undefined,

@@ -3,13 +3,42 @@ import { Comic } from '../../models/comic.model';
 import { Observable, Subscription } from 'rxjs';
 import { ShoppingCartService } from '../../services/shopping-cart.service';
 import { CartItem } from 'src/app/models/cart-item.model';
+import {
+  animate,
+  keyframes,
+  state,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations';
 
 @Component({
   selector: 'cms-shopping-cart',
   templateUrl: './shopping-cart.component.html',
   styleUrls: ['./shopping-cart.component.scss'],
+  // animations: [
+  //   trigger('row', [
+  //     state('ready', style({ opacity: 1 })),
+  //     transition(
+  //       'ready => void',
+  //       animate(
+  //         '300ms 0s ease-out',
+  //         keyframes([
+  //           style({ opacity: 1, transform: 'translateX(0px)', offset: 0 }),
+  //           style({
+  //             opacity: 0.8,
+  //             transform: 'translateX(-10px)',
+  //             offset: 0.2,
+  //           }),
+  //           style({ opacity: 0, transform: 'translateX(30px)', offset: 1 }),
+  //         ])
+  //       )
+  //     ),
+  //   ]),
+  // ],
 })
 export class ShoppingCartComponent implements OnInit, OnDestroy {
+  itemState = 'ready';
   items$: Observable<CartItem[]>;
   subscriptions: Subscription[] = [];
   get hasItems(): boolean {

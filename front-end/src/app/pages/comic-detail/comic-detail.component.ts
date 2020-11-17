@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Comic } from 'src/app/models/comic.model';
 import { ComicService } from '../../services/comic.service';
 import { ShoppingCartService } from '../../services/shopping-cart.service';
@@ -20,7 +20,8 @@ export class ComicDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private comicService: ComicService,
-    private shoppingCartService: ShoppingCartService
+    private shoppingCartService: ShoppingCartService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -44,5 +45,9 @@ export class ComicDetailComponent implements OnInit {
       comic,
       +this.comicForm.controls.quantity.value
     );
+  }
+
+  navigateToOrder(): void {
+    this.router.navigate(['/order']);
   }
 }

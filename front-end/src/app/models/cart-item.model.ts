@@ -7,8 +7,9 @@ export class CartItem {
     return this.comic.price * this.quantity;
   }
 
-  quantityUp() {
-    this.quantity++;
+  quantityUp(quantity: number) {
+    this.quantity += quantity;
+    console.log(quantity);
   }
 
   quantityDown() {

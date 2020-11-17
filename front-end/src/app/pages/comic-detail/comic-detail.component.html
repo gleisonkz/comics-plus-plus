@@ -40,19 +40,33 @@
       </section>
     </div>
   </div>
-  <form class="comic__form">
+  <form [formGroup]="comicForm" class="comic__form">
     <span class="comic__price">R$ {{ comic.price | number: "2.2" }}</span>
     <span class="comic__inventory">Disponibilidade: Em estoque</span>
     <mat-form-field>
       <mat-label>Quantidade</mat-label>
-      <input min="1" value="1" type="number" matInput />
+      <input
+        formControlName="quantity"
+        min="1"
+        value="1"
+        type="number"
+        matInput
+      />
     </mat-form-field>
     <div class="comic__btn-container">
-      <button class="comic__btn">
+      <button
+        (click)="addMultipleItemsToCart(comic)"
+        [disabled]="comicForm.invalid"
+        class="comic__btn"
+      >
         <i class="fas fa-shopping-cart"></i>
         Adicionar
       </button>
-      <button [routerLink]="['/livros', comic.id]" class="comic__btn">
+      <button
+        [disabled]="!hasCartItems"
+        [routerLink]="['/livros', comic.id]"
+        class="comic__btn"
+      >
         <i class="fas fa-credit-card"></i>
         Finalizar pedido
       </button>

@@ -21,8 +21,8 @@ export class ShoppingCartService {
     return this.itemsSource$.value.reduce((acc, cur) => acc + cur.quantity, 0);
   }
 
-  public quantityUp(item: CartItem): void {
-    item.quantityUp();
+  public quantityUp(item: CartItem, quantity: number): void {
+    item.quantityUp(quantity);
     this.itemsSource$.next([...this.itemsSource$.value]);
   }
 
@@ -31,7 +31,7 @@ export class ShoppingCartService {
     this.itemsSource$.next([...this.itemsSource$.value]);
   }
 
-  public addItem(item: Comic) {
+  public addItem(item: Comic, quantity: number = 1) {
     const foundItem = this.itemsSource$.value.find(
       (c) => c.comic.id === item.id
     );
@@ -39,20 +39,29 @@ export class ShoppingCartService {
     const expectations = [
       {
         expect: () => foundItem !== undefined,
-        action: () => this.quantityUp(foundItem),
+        action: () => {
+          this.quantityUp(foundItem, quantity);
+          // this.itemsSource$.next(this.itemsSource$.value);
+        },
       },
       {
         expect: () => true,
         action: () =>
           this.itemsSource$.next([
             ...this.itemsSource$.value,
-            new CartItem(item),
+            new CartItem(item, quantity),
           ]),
       },
     ];
     const currentExpect = expectations.find((c) => c.expect());
     currentExpect.action();
   }
+
+  // public addMultipleItemsToCart(item: Comic, quantity: number) {
+  //   for (let index = 0; index < quantity; index++) {
+  //     this.addItem(item);
+  //   }
+  // }
 
   public removeItem(item: CartItem) {
     const items = this.itemsSource$.value;

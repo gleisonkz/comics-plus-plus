@@ -110,11 +110,12 @@
       }
       &__value {
         font-size: rem(13);
-        width: rem(60);
+        width: rem(70);
       }
 
       &__quantity {
         margin-right: rem(5);
+        user-select: none;
       }
 
       &__text {

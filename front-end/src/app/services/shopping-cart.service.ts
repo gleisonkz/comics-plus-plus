@@ -21,7 +21,7 @@ export class ShoppingCartService {
     return this.itemsSource$.value.reduce((acc, cur) => acc + cur.quantity, 0);
   }
 
-  public quantityUp(item: CartItem, quantity: number): void {
+  public quantityUp(item: CartItem, quantity: number = 1): void {
     item.quantityUp(quantity);
     this.itemsSource$.next([...this.itemsSource$.value]);
   }

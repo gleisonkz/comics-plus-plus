@@ -1,0 +1,170 @@
+<h1 class="order__title">
+  <i class="fa fa-shopping-cart"></i>
+  Finalize sua compra
+</h1>
+
+<form
+  #orderFormRef
+  action=""
+  class="order__form"
+  novalidate
+  [formGroup]="orderForm"
+  (submit)="submitOrder(orderForm.value)"
+>
+  <fieldset class="client-information">
+    <legend class="form-legend">Informações do Cliente:</legend>
+    <div class="client-information__controls">
+      <mat-form-field appearance="outline">
+        <mat-label>Nome</mat-label>
+        <input
+          type="text"
+          formControlName="name"
+          matInput
+          placeholder="Ex: Richard"
+        />
+        <mat-error>
+          <span mtShowValidation="name"></span>
+        </mat-error>
+
+        <i *ngIf="orderForm.controls['name'].valid" class="fa fa-check"> OK</i>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input
+          type="text"
+          formControlName="email"
+          matInput
+          placeholder="pat@example.com"
+        />
+        <mat-error>
+          <span mtShowValidation="email"></span>
+        </mat-error>
+
+        <i *ngIf="orderForm.controls['email'].valid" class="fa fa-check"> OK</i>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Verificação Email</mat-label>
+        <input
+          type="text"
+          formControlName="emailCheck"
+          matInput
+          placeholder="pat@example.com"
+        />
+        <mat-error>
+          <span mtShowValidation="emailCheck"></span>
+        </mat-error>
+
+        <i *ngIf="orderForm.controls['emailCheck'].valid" class="fa fa-check">
+          OK</i
+        >
+      </mat-form-field>
+    </div>
+  </fieldset>
+  <fieldset class="delivery-address">
+    <legend class="form-legend">Endereço de entrega:</legend>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Endereço</mat-label>
+      <input
+        type="text"
+        formControlName="address"
+        matInput
+        placeholder="Main Street, New York, NY 10030"
+      />
+      <mat-error>
+        <span mtShowValidation="address"></span>
+      </mat-error>
+
+      <i *ngIf="orderForm.controls['address'].valid" class="fa fa-check"> OK</i>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Número</mat-label>
+      <input type="text" formControlName="number" matInput placeholder="123" />
+      <mat-error>
+        <span mtShowValidation="number"></span>
+      </mat-error>
+      <i *ngIf="orderForm.controls['number'].valid" class="fa fa-check"> OK</i>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Complemento</mat-label>
+      <input
+        type="text"
+        formControlName="address2"
+        matInput
+        placeholder="Main Street, New York, NY 10030"
+      />
+      <mat-error>
+        <span mtShowValidation="address2"></span>
+      </mat-error>
+
+      <i *ngIf="orderForm.controls['address'].valid" class="fa fa-check">OK</i>
+    </mat-form-field>
+  </fieldset>
+  <div class="order__items">
+    <h2 class="order__items__title">Itens do Pedido</h2>
+    <div class="order__items__table" *ngIf="hasItems">
+      <div class="order__items__table__header">
+        <span class="order__items__table__header__item">Quantidade</span>
+        <span class="order__items__table__header__item">Item</span>
+        <span class="order__items__table__header__item">Descrição</span>
+        <span class="order__items__table__header__item">Subtotal</span>
+      </div>
+      <div class="order__items__table__body">
+        <cms-order-item
+          *ngFor="let item of orderItems$ | async"
+          [item]="item"
+        ></cms-order-item>
+      </div>
+    </div>
+    <p class="empty-message" *ngIf="!hasItems">
+      Seu carrinho está vazio, que tal começar dando uma olhada
+      <a class="empty-message__link" [routerLink]="['/livros']">aqui</a>
+      ?
+    </p>
+  </div>
+
+  <div class="order__form__payment-and-total">
+    <fieldset class="order__form__payment-and-total__payment-method">
+      <legend>Método de Pagamento:</legend>
+      <mat-radio-group formControlName="paymentMethod">
+        <mat-radio-button value="1">Dinheiro</mat-radio-button>
+        <mat-radio-button value="2">Cartão de Crédito Card</mat-radio-button>
+        <mat-radio-button value="3">Boleto</mat-radio-button>
+      </mat-radio-group>
+    </fieldset>
+
+    <div class="total-order">
+      <h2 class="total-order__title">Total:</h2>
+      <div class="items-container">
+        <div class="item">
+          <span class="item__text">Items: </span>
+          <span class="item__value"
+            >R$ {{ getTotalItems() | number: "2.2" }}</span
+          >
+        </div>
+        <div class="item">
+          <span class="item__text">Total: </span>
+          <span class="item__value"
+            >R$ {{ getTotalItems() | number: "2.2" }}</span
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <button
+    [disabled]="!orderForm.valid || !existingCartItem"
+    class="order-button"
+    (click)="submitOrder(orderForm.value)"
+  >
+    <i class="fa fa-credit-card"></i>
+    Submit Order
+  </button> -->
+  <button [disabled]="!orderForm.valid || !hasItems" class="order-button">
+    <i class="fa fa-credit-card"></i>
+    Finalizar Compra
+  </button>
+</form>

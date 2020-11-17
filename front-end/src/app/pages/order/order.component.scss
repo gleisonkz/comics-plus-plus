@@ -1,0 +1,183 @@
+@import "../../../sass/variables";
+@import "../../../sass/mixins";
+@import "../../../sass/functions";
+
+:host {
+  width: rem(1060) !important;
+
+  padding: rem(30 30 20 30);
+  margin-top: rem(20);
+
+  display: flex;
+  flex-direction: column;
+
+  background-color: $color-panel-bg;
+  border-radius: $global-radius;
+}
+
+.order {
+  &__title {
+    color: $color-text;
+    font-size: rem(22);
+    font-weight: 500;
+    line-height: 1.1;
+    padding-bottom: rem(10);
+    margin-bottom: rem(20);
+    @include base-border-bottom;
+  }
+
+  &__form {
+    font-size: rem(12.5);
+
+    mat-form-field {
+      margin-right: rem(15);
+
+      i {
+        position: absolute;
+        right: 0px;
+        top: 45px;
+        bottom: 0;
+        left: -6px;
+        font-size: rem(10);
+        color: $color-success;
+      }
+    }
+
+    .form-legend {
+      @include form-title;
+    }
+
+    .client-information {
+      &__controls {
+        display: flex;
+      }
+    }
+
+    .delivery-address {
+      mat-form-field {
+        margin-right: rem(15);
+      }
+    }
+
+    &__input {
+      box-shadow: none;
+      height: 34px;
+      padding: 6px 12px;
+
+      font-size: 14px;
+      line-height: 1.42857143;
+      color: #555;
+      background-color: #fff;
+      background-image: none;
+      border: 1px solid #ccc;
+      outline: none;
+
+      &:focus {
+        border-color: #3c8dbc;
+        box-shadow: none;
+      }
+    }
+
+    .order__items {
+      &__title {
+        @include form-title;
+      }
+
+      &__table {
+        &__header,
+        &__body {
+          display: grid;
+          grid-template-columns: rem(100) 1fr 2fr rem(100) rem(15);
+        }
+
+        &__header {
+          padding: rem(20);
+
+          &__item {
+            @include base-bold;
+          }
+        }
+
+        &__body {
+          cms-order-item:nth-child(odd) {
+            background-color: $color-tab-panel-border-top;
+          }
+        }
+      }
+
+      .empty-message {
+        color: $color-text;
+
+        &__link {
+          color: $color-link;
+        }
+      }
+    }
+
+    &__payment-and-total {
+      display: flex;
+      margin-top: rem(20);
+      justify-content: space-between;
+
+      &__payment-method {
+        width: 50%;
+
+        legend {
+          @include form-title;
+        }
+
+        mat-radio-group {
+          display: flex;
+          flex-direction: column;
+
+          mat-radio-button {
+            color: $color-text;
+          }
+
+          mat-radio-button + mat-radio-button {
+            margin-top: rem(3);
+          }
+        }
+      }
+    }
+
+    .order-button {
+      i {
+        margin-right: rem(10);
+      }
+
+      @include base-button-style;
+      background-color: $color-success;
+      font-size: rem(15);
+      width: initial;
+      margin: 10px 0 0 auto;
+
+      @include button-disabled;
+    }
+  }
+}
+
+.total-order {
+  width: rem(500);
+
+  &__title {
+    @include form-title;
+  }
+
+  .items-container {
+    .item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: rem(500);
+      font-size: rem(12);
+      color: $color-text;
+      padding: rem(10 0);
+      border-top: solid 1px $color-tab-panel-border-top;
+
+      &__text {
+        @include base-bold;
+      }
+    }
+  }
+}

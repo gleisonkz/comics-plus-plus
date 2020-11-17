@@ -1,0 +1,40 @@
+@import "../../../sass/variables";
+@import "../../../sass/mixins";
+@import "../../../sass/functions";
+
+:host {
+  grid-template-columns: inherit;
+  display: inherit;
+  grid-column: 1/-1;
+  padding: rem(20);
+
+  .order__item {
+    grid-template-columns: inherit;
+    display: inherit;
+    grid-column: inherit;
+
+    &__quantity {
+      span {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        width: rem(20);
+        user-select: none;
+      }
+    }
+
+    span {
+      color: $color-text;
+    }
+
+    i {
+      color: $color-icon;
+      margin: rem(0 5);
+      cursor: pointer;
+    }
+
+    i.fa-remove {
+      color: $color-danger;
+    }
+  }
+}

@@ -1,0 +1,13 @@
+<div class="order__item">
+  <span class="order__item__quantity">
+    <i (click)="quantityDown(item)" class="fas fa-minus"></i>
+    <span>{{ item.quantity }}</span>
+    <i (click)="quantityUp(item)" class="fas fa-plus"></i>
+  </span>
+  <span class="order__item__name">{{ item.comic.title }}</span>
+  <span class="order__item__description">{{ item.comic.description }}</span>
+  <span class="order__item__price"
+    >R$ {{ item.getTotalValue() | number: "2.2" }}</span
+  >
+  <i (click)="removeItem(item)" class="fa fa-remove cart__item__icon"></i>
+</div>

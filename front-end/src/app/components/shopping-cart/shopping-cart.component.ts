@@ -1,16 +1,8 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Comic } from '../../models/comic.model';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { ShoppingCartService } from '../../services/shopping-cart.service';
 import { CartItem } from 'src/app/models/cart-item.model';
-import {
-  animate,
-  keyframes,
-  state,
-  style,
-  transition,
-  trigger,
-} from '@angular/animations';
+import { MatMenuTrigger } from '@angular/material/menu';
 
 @Component({
   selector: 'cms-shopping-cart',
@@ -51,6 +43,8 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
     return quantity;
   }
 
+  @ViewChild(MatMenuTrigger) notificationMenuBtn: MatMenuTrigger;
+
   constructor(private shoppingCartService: ShoppingCartService) {}
 
   ngOnInit(): void {
@@ -83,5 +77,9 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
 
   removeItem(item: CartItem): void {
     this.shoppingCartService.removeItem(item);
+  }
+
+  closeMenu(): void {
+    this.notificationMenuBtn.closeMenu();
   }
 }

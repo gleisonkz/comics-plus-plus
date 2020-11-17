@@ -11,14 +11,10 @@
   <div (click)="$event.stopPropagation()" (keydown)="$event.stopPropagation()">
     <div class="cart" (click)="$event.stopPropagation()">
       <div *ngIf="hasItems" class="cart__content">
-        <div
-          *ngFor="let item of items$ | async"
-          class="cart__item"
-          [@row]="itemState"
-        >
+        <div *ngFor="let item of items$ | async" class="cart__item">
           <img [src]="item.comic.imagePath" alt="" class="cart__item__image" />
 
-          <div class="cart__group">
+          <div class="cart__group cart__group--title">
             <div>
               <span class="cart__item__text">{{ item.comic.title }}</span>
             </div>
@@ -63,7 +59,11 @@
         >
           <i class="fa fa-trash"></i> Limpar
         </button>
-        <a class="cart__buttons__button" [routerLink]="['/order']">
+        <a
+          (click)="closeMenu()"
+          class="cart__buttons__button"
+          [routerLink]="['/order']"
+        >
           <i class="fa fa-credit-card"></i>
           Finalizar Compra
         </a>

@@ -37,6 +37,10 @@
     height: rem(40);
     justify-content: space-around;
     align-items: center;
+
+    &--title {
+      padding: rem(0 20);
+    }
   }
 
   &__icon {

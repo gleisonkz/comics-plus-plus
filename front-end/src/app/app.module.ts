@@ -18,6 +18,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { OrderComponent } from './pages/order/order.component';
+import { OrderItemComponent } from './components/order-item/order-item.component';
+import { MaterialModule } from './modules/material/material/material.module';
 
 @NgModule({
   declarations: [
@@ -30,16 +33,16 @@ import { ReactiveFormsModule } from '@angular/forms';
     ComicComponent,
     ComicDetailComponent,
     ShoppingCartComponent,
+    OrderComponent,
+    OrderItemComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    MatBadgeModule,
-    MatInputModule,
-    MatMenuModule,
     ReactiveFormsModule,
+    MaterialModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

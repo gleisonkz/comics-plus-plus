@@ -1,0 +1,21 @@
+@import "../../../sass/variables";
+@import "../../../sass/mixins";
+@import "../../../sass/functions";
+
+.rating {
+  .rating-title {
+    font-size: rem(21);
+  }
+  margin-top: rem(20);
+  @include flex-center;
+  flex-direction: column;
+
+  .rating-indicator {
+    font-size: rem(25);
+    margin-top: rem(20);
+
+    i {
+      cursor: pointer;
+    }
+  }
+}

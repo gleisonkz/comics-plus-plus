@@ -1,0 +1,13 @@
+<div class="rating">
+  <span class="rating-title"><strong>Avalie</strong> a sua experiência</span>
+  <div class="rating-indicator">
+    <i
+      [class.disabled]="isRated"
+      *ngFor="let star of rates"
+      [class]="star > rate ? 'far fa-star' : 'fas fa-star'"
+      (click)="setRate(star)"
+      (mouseover)="setTemporaryRate(star)"
+      (mouseout)="clearTemporaryRate()"
+    ></i>
+  </div>
+</div>

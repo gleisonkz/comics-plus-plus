@@ -34,4 +34,8 @@ export class OrderService {
   removeItem(item: CartItem): void {
     this.shoppingCartService.removeItem(item);
   }
+
+  clear(): void {
+    this.shoppingCartService.clear();
+  }
 }

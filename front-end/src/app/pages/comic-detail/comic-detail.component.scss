@@ -19,8 +19,8 @@
   &__container-info {
     display: grid;
     padding: rem(20);
-    // grid-template-columns: max-content rem(380);
     grid-template-columns: auto 1fr rem(370);
+    grid-row: auto auto;
     column-gap: rem(10);
     background-color: $color-panel-bg;
     border-radius: $global-radius;
@@ -40,11 +40,11 @@
     }
   }
 
-  &__info {
-    background-color: $color-panel-bg;
-    display: flex;
-    flex-direction: column;
-  }
+  // &__info {
+  //   background-color: $color-panel-bg;
+  //   display: flex;
+  //   flex-direction: column;
+  // }
 
   &__genre,
   &__title {
@@ -57,14 +57,29 @@
     flex: 1;
   }
 
+  mat-tab-group {
+    grid-column: 2;
+    min-height: rem(160) !important;
+  }
+
   &__form {
+    grid-column: 3;
+    grid-row: 1;
     display: flex;
     flex-direction: column;
     align-items: stretch;
     padding: rem(0 20);
-    height: rem(240);
+    // height: rem(240);
+
     background-color: $color-panel-bg;
     border-radius: $global-radius;
+    @include medias($tiny-mobile, $mobile, $small-tablet) {
+      grid-column: auto;
+      grid-row: auto;
+      height: auto;
+      padding: none;
+      margin-top: rem(20);
+    }
   }
 
   &__price {
@@ -90,6 +105,10 @@
   &__btn {
     @include base-button-style;
     width: rem(150);
+
+    @include medias($tiny-mobile, $mobile, $small-tablet) {
+      width: rem(130);
+    }
 
     &:disabled {
       border: 1px solid #999999;

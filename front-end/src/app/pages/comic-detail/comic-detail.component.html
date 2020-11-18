@@ -1,12 +1,12 @@
 <div class="comic">
   <div class="comic__container-info">
     <img class="comic__image" [src]="comic.imagePath" alt="Image" />
-
-    <div class="comic__info">
-      <h1 class="comic__title">{{ comic.title }}</h1>
-      <span class="comic__author">{{ comic.author }}</span>
-      <span class="comic__genre">{{ comic.genre }}</span>
-
+    <div>
+      <header>
+        <h1 class="comic__title">{{ comic.title }}</h1>
+        <span class="comic__author">{{ comic.author }}</span>
+        <span class="comic__genre">{{ comic.genre }}</span>
+      </header>
       <mat-tab-group>
         <mat-tab label="Descrição">
           <p class="comic__description">
@@ -47,6 +47,7 @@
         </mat-tab>
       </mat-tab-group>
     </div>
+
     <form [formGroup]="comicForm" class="comic__form">
       <span class="comic__price">R$ {{ comic.price | number: "2.2" }}</span>
       <span class="comic__inventory">Disponibilidade: Em estoque</span>

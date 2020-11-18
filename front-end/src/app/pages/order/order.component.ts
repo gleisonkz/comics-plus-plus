@@ -70,11 +70,17 @@ export class OrderComponent implements OnInit {
   }
 
   submitOrder(order: Order): void {
-    order.orderItems = this.getOrderItems();
-    this.orderService
-      .postOrder(order)
-      .subscribe((c) => console.log('request: ', c));
+    // order.orderItems = this.getOrderItems();
+    // this.orderService.postOrder(order).subscribe((c) => {
+    //   order.orderID = c.orderID;
+    //   sessionStorage.setItem('orderID', `${c.orderID}`);
+    //   this.router.navigate(['/order-finished'], {
+    //     state: { order: order },
+    //   });
 
+    //   this.orderService.clear();
+    // });
+    this.orderService.clear();
     this.router.navigate(['/order-finished']);
   }
 }

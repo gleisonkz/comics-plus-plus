@@ -33,7 +33,6 @@ export class ComicDetailComponent implements OnInit {
     });
 
     const comicID = +this.route.snapshot.params.id;
-    console.log(comicID);
 
     this.comicService.getComicByID(comicID).subscribe((comic) => {
       this.comic = comic;

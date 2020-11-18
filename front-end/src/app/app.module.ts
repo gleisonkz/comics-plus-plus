@@ -21,6 +21,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { OrderComponent } from './pages/order/order.component';
 import { OrderItemComponent } from './components/order-item/order-item.component';
 import { MaterialModule } from './modules/material/material/material.module';
+import { OrderFinishedComponent } from './pages/order-finished/order-finished.component';
+import { RatingComponent } from './components/rating/rating.component';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { AdminComponent } from './pages/admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +39,10 @@ import { MaterialModule } from './modules/material/material/material.module';
     ShoppingCartComponent,
     OrderComponent,
     OrderItemComponent,
+    OrderFinishedComponent,
+    RatingComponent,
+    NotFoundComponent,
+    AdminComponent,
   ],
   imports: [
     BrowserModule,

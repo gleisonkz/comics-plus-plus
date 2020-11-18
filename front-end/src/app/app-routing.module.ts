@@ -5,14 +5,24 @@ import { ComicsComponent } from './pages/comics/comics.component';
 import { AboutComponent } from './pages/about/about.component';
 import { ComicDetailComponent } from './pages/comic-detail/comic-detail.component';
 import { OrderComponent } from './pages/order/order.component';
+import { OrderFinishedComponent } from './pages/order-finished/order-finished.component';
+import { OrderGuard } from './guards/order.guard';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { AdminComponent } from './pages/admin/admin.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'livros', component: ComicsComponent },
   { path: 'livros/:id', component: ComicDetailComponent },
   { path: 'sobre', component: AboutComponent },
-  { path: 'admin', component: AboutComponent },
+  { path: 'admin', component: AdminComponent },
   { path: 'order', component: OrderComponent },
+  {
+    path: 'order-finished',
+    component: OrderFinishedComponent,
+    canActivate: [OrderGuard],
+  },
+  { path: '**', component: NotFoundComponent },
 ];
 
 @NgModule({

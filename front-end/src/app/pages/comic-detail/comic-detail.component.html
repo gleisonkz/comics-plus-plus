@@ -6,76 +6,76 @@
       <h1 class="comic__title">{{ comic.title }}</h1>
       <span class="comic__author">{{ comic.author }}</span>
       <span class="comic__genre">{{ comic.genre }}</span>
-      <p class="comic__description">
-        {{ comic.description }}
-      </p>
-      <section class="comic-details">
-        <h2 class="comic-details__title">Detalhes do produto</h2>
-        <ul class="comic-details__info">
-          <li class="comic-details__item">
-            <strong class="comic-details__item__label">Nº páginas:</strong>
-            <span class="comic-details__item__value">128 pages</span>
-          </li>
-        </ul>
-        <ul class="comic-details__info">
-          <li class="comic-details__item">
-            <strong class="comic-details__item__label">Editora:</strong>
-            <span class="comic-details__item__value">Penguin Books Ltd</span>
-          </li>
-        </ul>
-        <ul class="comic-details__info">
-          <li class="comic-details__item">
-            <strong class="comic-details__item__label"
-              >Data de publicação:</strong
-            >
-            <span class="comic-details__item__value">03 Nov 2011</span>
-          </li>
-        </ul>
-        <ul class="comic-details__info">
-          <li class="comic-details__item">
-            <strong class="comic-details__item__label">Idioma:</strong>
-            <span class="comic-details__item__value">Inglês</span>
-          </li>
-        </ul>
-      </section>
+
+      <mat-tab-group>
+        <mat-tab label="Descrição">
+          <p class="comic__description">
+            {{ comic.description }}
+          </p>
+        </mat-tab>
+        <mat-tab label="Detalhes do Produto">
+          <section class="comic-details">
+            <ul class="comic-details__info">
+              <li class="comic-details__item">
+                <strong class="comic-details__item__label">Nº páginas:</strong>
+                <span class="comic-details__item__value">128 pages</span>
+              </li>
+            </ul>
+            <ul class="comic-details__info">
+              <li class="comic-details__item">
+                <strong class="comic-details__item__label">Editora:</strong>
+                <span class="comic-details__item__value"
+                  >Penguin Books Ltd</span
+                >
+              </li>
+            </ul>
+            <ul class="comic-details__info">
+              <li class="comic-details__item">
+                <strong class="comic-details__item__label"
+                  >Data de publicação:</strong
+                >
+                <span class="comic-details__item__value">03 Nov 2011</span>
+              </li>
+            </ul>
+            <ul class="comic-details__info">
+              <li class="comic-details__item">
+                <strong class="comic-details__item__label">Idioma:</strong>
+                <span class="comic-details__item__value">Inglês</span>
+              </li>
+            </ul>
+          </section>
+        </mat-tab>
+      </mat-tab-group>
     </div>
-  </div>
-  <form [formGroup]="comicForm" class="comic__form">
-    <span class="comic__price">R$ {{ comic.price | number: "2.2" }}</span>
-    <span class="comic__inventory">Disponibilidade: Em estoque</span>
-    <mat-form-field>
-      <mat-label>Quantidade</mat-label>
-      <input
-        formControlName="quantity"
-        min="1"
-        value="1"
-        type="number"
-        matInput
-      />
-    </mat-form-field>
-    <div class="comic__btn-container">
-      <button
-        (click)="addMultipleItemsToCart(comic)"
-        [disabled]="comicForm.invalid"
-        class="comic__btn"
-      >
-        <i class="fas fa-shopping-cart"></i>
-        Adicionar
-      </button>
-      <!-- <button
-        [disabled]="!hasCartItems"
-        (click)="navigateToOrder()"
-        class="comic__btn"
-      >
-        <i class="fas fa-credit-card"></i>
-        Finalizar pedido
-      </button> -->
-      <a [class.disabled]="!hasCartItems ? true : false" routerLink="/order">
-        <button [disabled]="!hasCartItems" class="comic__btn">
-          <i class="fas fa-credit-card"></i>
-          Finalizar pedido
+    <form [formGroup]="comicForm" class="comic__form">
+      <span class="comic__price">R$ {{ comic.price | number: "2.2" }}</span>
+      <span class="comic__inventory">Disponibilidade: Em estoque</span>
+      <mat-form-field>
+        <mat-label>Quantidade</mat-label>
+        <input
+          formControlName="quantity"
+          min="1"
+          value="1"
+          type="number"
+          matInput
+        />
+      </mat-form-field>
+      <div class="comic__btn-container">
+        <button
+          (click)="addMultipleItemsToCart(comic)"
+          [disabled]="comicForm.invalid"
+          class="comic__btn"
+        >
+          <i class="fas fa-shopping-cart"></i>
+          Adicionar
         </button>
-      </a>
-    </div>
-  </form>
+        <a [class.disabled]="!hasCartItems ? true : false" routerLink="/order">
+          <button [disabled]="!hasCartItems" class="comic__btn">
+            <i class="fas fa-credit-card"></i>
+            Finalizar pedido
+          </button>
+        </a>
+      </div>
+    </form>
+  </div>
 </div>

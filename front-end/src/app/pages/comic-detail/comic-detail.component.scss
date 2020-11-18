@@ -5,7 +5,6 @@
 
 .comic {
   display: grid;
-  grid-template-columns: max-content rem(360);
   grid-gap: rem(10);
   color: $color-text;
 
@@ -20,7 +19,8 @@
   &__container-info {
     display: grid;
     padding: rem(20);
-    grid-template-columns: max-content rem(380);
+    // grid-template-columns: max-content rem(380);
+    grid-template-columns: auto 1fr rem(370);
     column-gap: rem(10);
     background-color: $color-panel-bg;
     border-radius: $global-radius;
@@ -58,16 +58,17 @@
   }
 
   &__form {
-    @include flex-center(column);
+    display: flex;
+    flex-direction: column;
     align-items: stretch;
-    padding: rem(20);
+    padding: rem(0 20);
     height: rem(240);
     background-color: $color-panel-bg;
     border-radius: $global-radius;
   }
 
   &__price {
-    font-size: rem(32);
+    font-size: rem(30);
   }
 
   &__inventory {
@@ -100,6 +101,7 @@
 }
 
 .comic-details {
+  margin-top: rem(10);
   color: $color-text;
 
   &__item {

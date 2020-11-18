@@ -12,6 +12,8 @@
     grid-template-columns: inherit;
     display: inherit;
     grid-column: inherit;
+    justify-content: center;
+    align-items: center;
 
     &__quantity {
       span {
@@ -21,6 +23,14 @@
         width: rem(20);
         user-select: none;
       }
+    }
+
+    &__description {
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      padding-right: rem(26);
     }
 
     span {

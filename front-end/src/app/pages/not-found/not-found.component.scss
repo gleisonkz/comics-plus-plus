@@ -1,0 +1,31 @@
+@import "../../../sass/variables";
+@import "../../../sass/mixins";
+@import "../../../sass/functions";
+
+.not-found {
+  margin-top: rem(20);
+  background-color: $color-panel-bg;
+  width: 100%;
+  padding: rem(20);
+  border-radius: $global-radius;
+  @include flex-center(column);
+
+  &__image {
+    background: transparent;
+  }
+  &__title {
+    color: $color-text;
+  }
+  &__text {
+    margin-top: rem(20);
+    color: $color-text;
+
+    a {
+      color: $color-link;
+      transition: opacity 0.2s;
+      &:hover {
+        opacity: 0.5;
+      }
+    }
+  }
+}

@@ -39,7 +39,6 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
 
   get totalItems(): number {
     const quantity = this.shoppingCartService.totalItems;
-    console.log(quantity);
     return quantity;
   }
 

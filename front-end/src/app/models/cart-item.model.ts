@@ -9,7 +9,6 @@ export class CartItem {
 
   quantityUp(quantity: number) {
     this.quantity += quantity;
-    console.log(quantity);
   }
 
   quantityDown() {

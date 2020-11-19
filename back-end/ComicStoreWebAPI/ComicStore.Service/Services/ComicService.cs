@@ -2,24 +2,37 @@
 using ComicStore.Domain.POCO;
 using ComicStore.Infra.BaseRepository.Interfaces;
 using ComicStore.Service.Interfaces;
+using System.Linq;
 
 namespace ComicStore.Service.Services
 {
     public class ComicService : ServiceFacadeBase, IComicService
     {
         private readonly IRepository<Comic> repoComic;
-        public ComicService(Interfaces.IFactoryRepository factoryRepository, IUnityOfWork unityOfWork) : base(factoryRepository, unityOfWork)
+        public ComicService(Interfaces.IFactoryRepository factoryRepository, IUnityOfWork unityOfWork, IRepository<Comic> repoComic) : base(factoryRepository, unityOfWork)
         {
+            this.repoComic = repoComic;
         }
 
-        public Comic CreateComic(IComicDTO comicDTO)
+        public Comic CreateGenre(IComicDTO comicDTO)
         {
-            throw new System.NotImplementedException();
+            Comic comic = new Comic
+            {
+                Description = comicDTO.Description,
+                Pages = comicDTO.Pages,
+                Title = comicDTO.Title,
+                Price = comicDTO.Price,
+                Year = comicDTO.Year,                
+                GenreID = comicDTO.GenreID
+            };
+
+            repoComic.Add(comic);
+            return comic;
         }
 
-        public int GetComics()
+        public IQueryable<Comic> GetGenre()
         {
-            throw new System.NotImplementedException();
+            return repoComic.GetQuery();
         }
     }
 }

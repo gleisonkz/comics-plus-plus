@@ -1,6 +1,6 @@
 ﻿namespace ComicStore.Service.Interfaces
 {
-    public interface IServiceFacade
+    public interface IServiceFacadeBase
     {
         int Commit();
         void Rollback();

@@ -1,6 +1,6 @@
-﻿using ComicStore.Domain.Interfaces;
-using ComicStore.Infra.BaseRepository.Interfaces;
+﻿using ComicStore.Infra.BaseRepository.Interfaces;
 using ComicStore.Infra.EFRepository.Context;
+using ComicStore.Service.Interfaces;
 
 namespace ComicStore.Infra.EFRepository.Repository
 {

@@ -1,17 +1,15 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
+using ComicStore.Infra.BaseRepository.Interfaces;
 using ComicStore.Infra.EFRepository.Context;
+using ComicStore.Infra.EFRepository.Repository;
+using ComicStore.Service.Interfaces;
+using ComicStore.Service.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 
 namespace ComicStoreWebAPI
 {
@@ -33,6 +31,17 @@ namespace ComicStoreWebAPI
             {
                 options.UseSqlServer(@"Data Source=.\sqlexpress;Initial Catalog=ComicStore;Integrated Security=True");
             });
+
+            services.AddCors(c => c.AddPolicy("ComicStorePolicy", builder =>
+            {
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            }));
+
+            services.AddScoped<IFactoryRepository, FactoryEFCoreRepository>();
+            services.AddScoped<IUnityOfWork, UnityOfWork>();
+            services.AddScoped<IGenreService, GenreService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,6 +57,8 @@ namespace ComicStoreWebAPI
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseCors("ComicStorePolicy");
 
             app.UseEndpoints(endpoints =>
             {

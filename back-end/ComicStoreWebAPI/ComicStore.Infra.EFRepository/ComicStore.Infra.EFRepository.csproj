@@ -24,6 +24,7 @@
   <ItemGroup>
     <ProjectReference Include="..\ComicStore.Domain\ComicStore.Domain.csproj" />
     <ProjectReference Include="..\ComicStore.Infra.BaseRepository\ComicStore.Infra.BaseRepository.csproj" />
+    <ProjectReference Include="..\ComicStore.Service\ComicStore.Service.csproj" />
   </ItemGroup>
 
 </Project>

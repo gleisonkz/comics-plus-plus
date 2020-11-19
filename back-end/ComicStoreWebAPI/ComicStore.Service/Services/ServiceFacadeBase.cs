@@ -1,9 +1,10 @@
-﻿using ComicStore.Infra.BaseRepository.Interfaces;
+﻿using ComicStore.Domain.Interfaces;
+using ComicStore.Infra.BaseRepository.Interfaces;
 using ComicStore.Service.Interfaces;
 
 namespace ComicStore.Service.Services
 {
-    public abstract class ServiceFacadeBase : IServiceFacade
+    public abstract class ServiceFacadeBase : IServiceFacadeBase
     {
 
         private readonly IUnityOfWork unityOfWork;

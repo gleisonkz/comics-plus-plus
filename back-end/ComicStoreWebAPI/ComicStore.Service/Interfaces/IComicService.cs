@@ -3,7 +3,7 @@ using ComicStore.Domain.POCO;
 
 namespace ComicStore.Service.Interfaces
 {
-    public interface IComicService : IServiceFacade
+    public interface IComicService : IServiceFacadeBase
     {
         int GetComics();
         Comic CreateComic(IComicDTO comicDTO);

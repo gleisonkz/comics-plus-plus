@@ -11,8 +11,9 @@
 node_modules/
 obj/
 bin/
-.suo/
-.dtbcache.v2/
+*.suo
+*.dtbcache.v2
+
 
 # profiling files
 chrome-profiler-events*.json

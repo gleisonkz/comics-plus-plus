@@ -1,9 +1,6 @@
-﻿using ComicStore.Domain.POCO;
-using ComicStore.Infra.EFRepository.Context;
-using ComicStore.Service.Interfaces;
+﻿using ComicStore.Service.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -22,9 +19,16 @@ namespace ComicStore.Application.Controllers
 
         // GET: api/Genre
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Genre>>> GetGenre()
+        public async Task<IActionResult> GetGenre()
         {
-            ICollection<Genre> genres = await svcGenre.GetGenre().ToListAsync();
+            var genres =
+               await svcGenre.GetGenre()
+               .Select(c => new
+               {
+                   c.Description,
+                   c.GenreID
+               })
+               .ToListAsync();
             return Ok(genres);
         }
     }

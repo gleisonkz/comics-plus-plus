@@ -6,7 +6,7 @@ namespace ComicStore.Service.Interfaces
 {
     public interface IComicService : IServiceFacadeBase
     {
-        Comic CreateGenre(IComicDTO comicDTO);
-        IQueryable<Comic> GetGenre();
+        Comic CreateComic(IComicDTO comicDTO);
+        IQueryable<Comic> GetComic();
     }
 }

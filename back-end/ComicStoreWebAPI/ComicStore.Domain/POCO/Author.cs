@@ -6,6 +6,6 @@ namespace ComicStore.Domain.POCO
     {
         public int AuthorID { get; set; }
         public string Name { get; set; }
-        public virtual ICollection<Comic> Comic { get; set; }
+        public virtual ICollection<Comic> Comics { get; set; }
     }
 }

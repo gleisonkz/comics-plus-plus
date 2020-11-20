@@ -41,7 +41,9 @@ namespace ComicStoreWebAPI
 
             services.AddScoped<IFactoryRepository, FactoryEFCoreRepository>();
             services.AddScoped<IUnityOfWork, UnityOfWork>();
+            services.AddScoped<IComicService, ComicService>();
             services.AddScoped<IGenreService, GenreService>();
+            services.AddScoped<IAuthorService, AuthorService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

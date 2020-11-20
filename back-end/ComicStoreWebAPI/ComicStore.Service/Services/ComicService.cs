@@ -9,12 +9,12 @@ namespace ComicStore.Service.Services
     public class ComicService : ServiceFacadeBase, IComicService
     {
         private readonly IRepository<Comic> repoComic;
-        public ComicService(Interfaces.IFactoryRepository factoryRepository, IUnityOfWork unityOfWork, IRepository<Comic> repoComic) : base(factoryRepository, unityOfWork)
+        public ComicService(IFactoryRepository factoryRepository, IUnityOfWork unityOfWork) : base(factoryRepository, unityOfWork)
         {
-            this.repoComic = repoComic;
+            repoComic = factoryRepository.CreateRepository<Comic>();
         }
 
-        public Comic CreateGenre(IComicDTO comicDTO)
+        public Comic CreateComic(IComicDTO comicDTO)
         {
             Comic comic = new Comic
             {
@@ -29,7 +29,7 @@ namespace ComicStore.Service.Services
             return comic;
         }
 
-        public IQueryable<Comic> GetGenre()
+        public IQueryable<Comic> GetComic()
         {
             return repoComic.GetQuery();
         }

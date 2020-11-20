@@ -1,0 +1,9 @@
+@import "../../../sass/functions";
+@import "../../../sass/variables";
+@import "../../../sass/mixins";
+@import "../../../sass/media";
+
+mat-sidenav {
+  top: rem(50) !important;
+  left: 0;
+}

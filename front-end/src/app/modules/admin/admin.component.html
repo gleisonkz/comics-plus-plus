@@ -1,0 +1,21 @@
+<mat-sidenav-container>
+  <!-- Sidenav -->
+  <mat-sidenav #sidenav opened [fixedInViewport]="true" [fixedTopGap]>
+    <mat-nav-list>
+      <a mat-list-item routerLinkActive="active" routerLink="/add-student">
+        <i>+</i> Quadrinhos
+      </a>
+      <a mat-list-item routerLinkActive="active" routerLink="/students-list">
+        <i>+</i> Autores
+      </a>
+      <a mat-list-item routerLinkActive="active" routerLink="/students-list">
+        <i>+</i> Categorias
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <!-- Main content -->
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

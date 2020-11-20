@@ -8,19 +8,22 @@ import { OrderComponent } from './pages/order/order.component';
 import { OrderFinishedComponent } from './pages/order-finished/order-finished.component';
 import { OrderGuard } from './guards/order.guard';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
-import { AdminComponent } from './pages/admin/admin.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'livros', component: ComicsComponent },
   { path: 'livros/:id', component: ComicDetailComponent },
   { path: 'sobre', component: AboutComponent },
-  { path: 'admin', component: AdminComponent },
   { path: 'order', component: OrderComponent },
   {
     path: 'order-finished',
     component: OrderFinishedComponent,
     canActivate: [OrderGuard],
+  },
+  {
+    path: 'admin',
+    loadChildren: () =>
+      import('./modules/admin/admin.module').then((m) => m.AdminModule),
   },
   { path: '**', component: NotFoundComponent },
 ];

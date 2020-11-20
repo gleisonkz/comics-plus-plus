@@ -31,8 +31,6 @@
       @include medias($tiny-mobile, $mobile, $small-tablet, $tablet) {
         padding: rem(10);
       }
-
-      // @include flex-center;
     }
   }
 }

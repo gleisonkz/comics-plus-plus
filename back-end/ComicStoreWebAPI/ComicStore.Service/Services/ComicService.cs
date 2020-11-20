@@ -22,8 +22,7 @@ namespace ComicStore.Service.Services
                 Pages = comicDTO.Pages,
                 Title = comicDTO.Title,
                 Price = comicDTO.Price,
-                Year = comicDTO.Year,                
-                GenreID = comicDTO.GenreID
+                Year = comicDTO.Year,                                
             };
 
             repoComic.Add(comic);

@@ -1,5 +1,4 @@
-﻿using ComicStore.Domain.Interfaces;
-using ComicStore.Infra.BaseRepository.Interfaces;
+﻿using ComicStore.Infra.BaseRepository.Interfaces;
 using ComicStore.Service.Interfaces;
 
 namespace ComicStore.Service.Services

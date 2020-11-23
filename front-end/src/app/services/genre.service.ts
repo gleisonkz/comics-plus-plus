@@ -1,5 +1,5 @@
 import { Injectable, OnInit } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { Genre } from '../modules/admin/components/genre-crud/genre-crud.component';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
@@ -14,6 +14,27 @@ export class GenreService {
     pageNumber = 0,
     pageSize = 3
   ): Observable<Genre[]> {
+    console.log(filter, sortOrder, pageNumber, pageSize);
+
+    return of([
+      { genreID: 1, name: 'Drama' },
+      { genreID: 2, name: 'Action' },
+      { genreID: 3, name: 'Romance' },
+      { genreID: 4, name: 'Terror' },
+      { genreID: 1, name: 'Drama' },
+      { genreID: 2, name: 'Action' },
+      { genreID: 3, name: 'Romance' },
+      { genreID: 4, name: 'Terror' },
+      { genreID: 1, name: 'Drama' },
+      { genreID: 2, name: 'Action' },
+      { genreID: 3, name: 'Romance' },
+      { genreID: 4, name: 'Terror' },
+      { genreID: 1, name: 'Drama' },
+      { genreID: 2, name: 'Action' },
+      { genreID: 3, name: 'Romance' },
+      { genreID: 4, name: 'Terror' },
+    ]);
+
     return this.http.get<Genre[]>(`${environment.apiURL}/genre`, {
       params: new HttpParams()
         .set('filter', filter)

@@ -66,12 +66,14 @@ export class GenreCrudComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.dataSource.loadGenres(
-      '',
-      'asc',
-      this.paginator.pageIndex,
-      this.paginator.pageSize
-    );
+    this.paginator.page.subscribe(() => {
+      this.dataSource.loadGenres(
+        '',
+        'asc',
+        this.paginator.pageIndex,
+        this.paginator.pageSize
+      );
+    });
 
     this.paginator._intl.firstPageLabel = 'Primeira Página';
     this.paginator._intl.lastPageLabel = 'Última Página';

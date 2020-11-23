@@ -1,0 +1,36 @@
+<div class="title-group">
+  <h1 class="mat-h1">
+    <i class="fa fa-list-alt" aria-hidden="true"></i>
+    Categorias
+  </h1>
+  <button mat-button><i class="fas fa-plus"></i> Nova Categoria</button>
+</div>
+<mat-divider fxFlex="1 0"></mat-divider>
+
+<div class="inner-wrapper">
+  <form novalidate>
+    <mat-card>
+      <div class="controlers-wrapper">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Nome" formControlName="student_name" />
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <input
+            matInput
+            placeholder="Descrição"
+            formControlName="student_name"
+          />
+        </mat-form-field>
+      </div>
+    </mat-card>
+
+    <mat-card>
+      <div class="full-wrapper button-wrapper">
+        <div class="button-wrapper">
+          <button mat-flat-button color="warn">Pesquisar</button>
+        </div>
+      </div>
+    </mat-card>
+  </form>
+</div>

@@ -5,6 +5,13 @@
   align-items: center;
 }
 
+@mixin flex-center-important($direction: row) {
+  display: flex !important;
+  flex-direction: $direction !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
 @mixin flex-column() {
   display: flex;
   flex-direction: column;

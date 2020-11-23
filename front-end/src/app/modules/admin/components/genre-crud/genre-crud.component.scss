@@ -1,0 +1,26 @@
+@import "../../../../../sass/functions";
+@import "../../../../../sass/variables";
+@import "../../../../../sass/mixins";
+@import "../../../../../sass/media";
+
+.title-group {
+  @include flex-center;
+  padding: rem(10);
+  justify-content: space-between;
+
+  ::ng-deep.mat-button-wrapper {
+    @include flex-center;
+  }
+
+  button {
+    @include flex-center;
+
+    i {
+      margin-right: rem(5);
+    }
+  }
+
+  mat-card + mat-card {
+    margin-left: rem(5);
+  }
+}

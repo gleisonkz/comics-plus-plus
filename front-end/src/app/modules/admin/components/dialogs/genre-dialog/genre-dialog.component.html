@@ -1,16 +1,16 @@
-<h2 mat-dialog-title>{{ description }}</h2>
+<form [formGroup]="form" novalidate>
+  <h2 mat-dialog-title>Categoria</h2>
 
-<mat-dialog-content [formGroup]="form">
-  <mat-form-field>
-    <input
-      matInput
-      placeholder="Course Description"
-      formControlName="description"
-    />
-  </mat-form-field>
-</mat-dialog-content>
+  <mat-dialog-content>
+    <mat-form-field>
+      <input matInput placeholder="Nome" formControlName="genreName" />
+    </mat-form-field>
+  </mat-dialog-content>
 
-<mat-dialog-actions>
-  <button class="mat-raised-button" (click)="close()">Fechar</button>
-  <button class="mat-raised-button mat-primary" (click)="save()">Salvar</button>
-</mat-dialog-actions>
+  <mat-dialog-actions>
+    <button class="mat-raised-button" (click)="close()">Fechar</button>
+    <button class="mat-raised-button mat-primary" (click)="save(form.value)">
+      Salvar
+    </button>
+  </mat-dialog-actions>
+</form>

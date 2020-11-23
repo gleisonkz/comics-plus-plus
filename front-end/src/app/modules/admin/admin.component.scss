@@ -6,4 +6,10 @@
 mat-sidenav {
   top: rem(50) !important;
   left: 0;
+  width: rem(200);
+}
+
+mat-sidenav-container {
+  margin-left: rem(100);
+  padding: rem(30);
 }

@@ -12,16 +12,7 @@ export class AdminComponent implements OnInit {
   @ViewChild('sidenav') sidenav: MatSidenav;
   constructor() {}
 
-  ngOnInit() {
-    console.log(window.innerWidth);
-    if (window.innerWidth < 768) {
-      this.sidenav.fixedTopGap = 55;
-      this.opened = false;
-    } else {
-      this.sidenav.fixedTopGap = 55;
-      this.opened = true;
-    }
-  }
+  ngOnInit() {}
 
   @HostListener('window:resize', ['$event'])
   onResize(event) {

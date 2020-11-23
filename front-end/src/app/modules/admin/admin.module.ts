@@ -7,6 +7,7 @@ import { MaterialModule } from '../material/material/material.module';
 import { ComicCrudComponent } from './components/comic-crud/comic-crud.component';
 import { GenreCrudComponent } from './components/genre-crud/genre-crud.component';
 import { GenreDialogComponent } from './components/dialogs/genre-dialog/genre-dialog.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -15,8 +16,11 @@ import { GenreDialogComponent } from './components/dialogs/genre-dialog/genre-di
     GenreCrudComponent,
     GenreDialogComponent,
   ],
-  imports: [CommonModule, AdminRoutingModule, MaterialModule],
-  entryComponents: [GenreDialogComponent],
-  schemas: [NO_ERRORS_SCHEMA],
+  imports: [
+    CommonModule,
+    AdminRoutingModule,
+    MaterialModule,
+    ReactiveFormsModule,
+  ],
 })
 export class AdminModule {}

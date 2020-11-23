@@ -3,10 +3,37 @@
 @import "../../../../../sass/mixins";
 @import "../../../../../sass/media";
 
+.filter {
+  margin-top: rem(10);
+  font-size: rem(15);
+  color: $color-panel-text;
+}
+
+.genre-form {
+  display: flex;
+  align-items: center;
+
+  .mat-form-field-wrapper {
+    padding: 0;
+  }
+
+  .search-button {
+    @include flex-center;
+    height: rem(29);
+    margin-bottom: rem(6);
+  }
+}
+
 .title-group {
   @include flex-center;
-  padding: rem(10);
+
   justify-content: space-between;
+  margin-top: rem(30);
+
+  h1 {
+    font-size: rem(14);
+    margin: 0;
+  }
 
   ::ng-deep.mat-button-wrapper {
     @include flex-center;
@@ -23,4 +50,30 @@
 
 mat-form-field {
   margin-right: rem(20);
+}
+
+table {
+  width: 100%;
+  background-color: $color-panel-bg;
+
+  .btn {
+    @include flex-center;
+    height: rem(29);
+    display: inline-flex;
+  }
+
+  .btn-edit {
+    margin-right: rem(10);
+  }
+}
+.no-data {
+  margin-top: rem(20);
+}
+
+mat-paginator {
+  background-color: $color-panel-bg;
+}
+
+.container {
+  background-color: $color-panel-bg;
 }

@@ -15,3 +15,16 @@ mat-sidenav-container {
   padding: rem(30);
   background-color: $color-panel-bg;
 }
+
+mat-sidenav-content {
+  margin-left: 0 !important;
+}
+
+a[mat-list-item] {
+  color: $color-text;
+
+  i {
+    font-size: 18px;
+    width: rem(20);
+  }
+}

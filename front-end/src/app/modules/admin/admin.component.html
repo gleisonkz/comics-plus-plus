@@ -1,5 +1,4 @@
 <mat-sidenav-container>
-  <!-- Sidenav -->
   <mat-sidenav
     #sidenav
     [mode]="isBiggerScreen() ? 'over' : 'side'"
@@ -8,18 +7,20 @@
   >
     <mat-nav-list>
       <a mat-list-item routerLinkActive="active" [routerLink]="['comic']">
-        <i>+</i> Quadrinhos
+        <i class="fas fa-book icon"></i>
+        <span>Quadrinhos</span>
       </a>
       <a mat-list-item routerLinkActive="active" [routerLink]="['author']">
-        <i>+</i> Autores
+        <i class="fas fa-user-edit icon"></i>
+        <span>Autores</span>
       </a>
       <a mat-list-item routerLinkActive="active" [routerLink]="['genre']">
-        <i>+</i> Categorias
+        <i class="fad fa-tasks icon"></i>
+        <span>Categorias</span>
       </a>
     </mat-nav-list>
   </mat-sidenav>
 
-  <!-- Main content -->
   <mat-sidenav-content>
     <router-outlet></router-outlet>
   </mat-sidenav-content>

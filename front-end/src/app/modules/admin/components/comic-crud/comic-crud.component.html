@@ -6,7 +6,7 @@
 
 <!-- Form -->
 <div class="inner-wrapper">
-  <form (ngSubmit)="submitStudentForm()" novalidate>
+  <form [formGroup]="studentForm" (ngSubmit)="submitStudentForm()" novalidate>
     <!-- Left block -->
     <mat-card>
       <div class="controlers-wrapper">

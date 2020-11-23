@@ -3,10 +3,16 @@
         "Boleto",
         "Datepicker",
         "Quadrinhos",
+        "autosize",
+        "checkmark",
         "keycodes",
         "minmax",
+        "mixedmark",
         "mixins",
+        "noopable",
         "quadrinho",
-        "sidenav"
+        "scrollblock",
+        "sidenav",
+        "submenu"
     ]
 }

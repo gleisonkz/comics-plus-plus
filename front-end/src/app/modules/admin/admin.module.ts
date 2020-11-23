@@ -8,6 +8,7 @@ import { ComicCrudComponent } from './components/comic-crud/comic-crud.component
 import { GenreCrudComponent } from './components/genre-crud/genre-crud.component';
 import { GenreDialogComponent } from './components/dialogs/genre-dialog/genre-dialog.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { GenreService } from '../../services/genre.service';
 
 @NgModule({
   declarations: [
@@ -22,5 +23,6 @@ import { ReactiveFormsModule } from '@angular/forms';
     MaterialModule,
     ReactiveFormsModule,
   ],
+  providers: [GenreService],
 })
 export class AdminModule {}

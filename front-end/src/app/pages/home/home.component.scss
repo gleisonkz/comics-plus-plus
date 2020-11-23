@@ -10,6 +10,7 @@
   height: rem(400);
 
   margin: 20px auto;
+  padding: rem(20);
 
   color: $color-panel-text;
   background-color: $color-panel-bg;
@@ -20,7 +21,10 @@
   }
 
   &__subtitle {
+    text-align: center;
     font-size: rem(25);
+    width: rem(500);
+    line-height: rem(25);
   }
 
   &__button {

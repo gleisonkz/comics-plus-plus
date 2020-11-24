@@ -1,8 +1,11 @@
-﻿using ComicStore.Domain.Interfaces;
+﻿using System.Reflection.Metadata;
+using ComicStore.Domain.Interfaces;
 using ComicStore.Domain.POCO;
 using ComicStore.Infra.BaseRepository.Interfaces;
 using ComicStore.Service.Interfaces;
 using System.Linq;
+using System.Collections.Generic;
+using ComicStore.Service.Classes;
 
 namespace ComicStore.Service.Services
 {
@@ -28,6 +31,17 @@ namespace ComicStore.Service.Services
         public IQueryable<Genre> GetGenre()
         {
             return repoGenre.GetQuery();
+        }
+
+        public Paginator<IGenreDTO> GetGenres(
+            IFilter<Genre> genreFilter, System.Func<Genre, IGenreDTO> projection
+            )
+        {
+            return Paginator<IGenreDTO>.Paginate(
+                repoGenre.GetQuery().OrderBy(c => c.Description),
+                genreFilter,
+                projection
+                );
         }
     }
 }

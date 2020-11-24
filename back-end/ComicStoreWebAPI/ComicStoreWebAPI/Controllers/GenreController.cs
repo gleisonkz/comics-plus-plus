@@ -1,6 +1,10 @@
-﻿using ComicStore.Service.Interfaces;
+﻿using ComicStore.Application.DTO;
+using ComicStore.Application.Filters;
+using ComicStore.Service.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -17,18 +21,30 @@ namespace ComicStore.Application.Controllers
             this.svcGenre = svcGenre;
         }
 
-        // GET: api/Genre
         [HttpGet]
-        public async Task<IActionResult> GetGenre()
+        [Route("")]
+        public IActionResult GetGenre([FromQuery] GenreFilter filter)
         {
-            var genres =
-               await svcGenre.GetGenre()
-               .Select(c => new
-               {
-                   c.Description,
-                   c.GenreID
-               })
-               .ToListAsync();
+            var genres = svcGenre.GetGenres(
+                filter,
+                c => new GenreDTO
+                {
+                    GenreID = c.GenreID,
+                    Description = c.Description
+                });
+
+            var result = genres.ToList();
+
+            Response.Headers.Add(
+                "X-Pagination",
+                 JsonConvert.SerializeObject(genres.GetPaginatorMetadata(), new JsonSerializerSettings
+                 {
+                     ContractResolver = new DefaultContractResolver
+                     {
+                         NamingStrategy = new CamelCaseNamingStrategy()
+                     }
+                 })
+                 );
             return Ok(genres);
         }
     }

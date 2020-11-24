@@ -12,6 +12,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { GenreDialogComponent } from '../dialogs/genre-dialog/genre-dialog.component';
 import { GenreService } from '../../../../services/genre.service';
 import { GenresDataSource } from './genres-data-source';
+import { finalize } from 'rxjs/operators';
 
 export interface Genre {
   genreID: number;
@@ -23,8 +24,8 @@ export interface Genre {
   styleUrls: ['./genre-crud.component.scss'],
 })
 export class GenreCrudComponent implements OnInit, AfterViewInit {
+  loadingComplete: boolean = false;
   form: FormGroup;
-  genres: Genre[];
   dataSource: GenresDataSource;
   @ViewChild(MatPaginator)
   paginator: MatPaginator;
@@ -36,43 +37,44 @@ export class GenreCrudComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit(): void {
-    // this.genreService.getGenres.subscribe((c) => (this.genres = c));
     this.form = new FormGroup({
       genreID: new FormControl(''),
       name: new FormControl(''),
     });
 
     this.dataSource = new GenresDataSource(this.genreService);
-    this.dataSource.loadGenres('', 'asc', 0, 3);
+    // this.dataSource.loading$
+    //   .pipe(
+    //     finalize(() => {
+    //       console.log('complete');
 
-    this.genres = [
-      { genreID: 1, name: 'Drama' },
-      { genreID: 2, name: 'Action' },
-      { genreID: 3, name: 'Romance' },
-      { genreID: 4, name: 'Terror' },
-      { genreID: 1, name: 'Drama' },
-      { genreID: 2, name: 'Action' },
-      { genreID: 3, name: 'Romance' },
-      { genreID: 4, name: 'Terror' },
-      { genreID: 1, name: 'Drama' },
-      { genreID: 2, name: 'Action' },
-      { genreID: 3, name: 'Romance' },
-      { genreID: 4, name: 'Terror' },
-      { genreID: 1, name: 'Drama' },
-      { genreID: 2, name: 'Action' },
-      { genreID: 3, name: 'Romance' },
-      { genreID: 4, name: 'Terror' },
-    ];
+    //       this.loadingComplete = true;
+    //     })
+    //   )
+    //   .subscribe((c) => {
+    //     console.log('log', c);
+    //     this.loadingComplete = !c;
+    //   });
+
+    // this.dataSource.loadGenres('', 'asc', 1, 2).subscribe((pagination: any) => {
+    //   this.paginator.length = pagination.totalCount;
+    //   console.log('total count:', pagination);
+    // });
   }
 
   ngAfterViewInit(): void {
     this.paginator.page.subscribe(() => {
-      this.dataSource.loadGenres(
-        '',
-        'asc',
-        this.paginator.pageIndex,
-        this.paginator.pageSize
-      );
+      this.dataSource
+        .loadGenres(
+          '',
+          'asc',
+          this.paginator.pageIndex + 1,
+          this.paginator.pageSize
+        )
+        .subscribe((pagination: any) => {
+          this.paginator.length = pagination.totalCount;
+          console.log('total count:', pagination);
+        });
     });
 
     this.paginator._intl.firstPageLabel = 'Primeira Página';
@@ -82,7 +84,7 @@ export class GenreCrudComponent implements OnInit, AfterViewInit {
     this.paginator._intl.itemsPerPageLabel = 'Itens por página';
     this.paginator._intl.getRangeLabel = function (page, pageSize, length) {
       if (length === 0 || pageSize === 0) {
-        return '0 od ' + length;
+        return '1 de ' + length;
       }
       length = Math.max(length, 0);
       const startIndex = page * pageSize;
@@ -110,6 +112,26 @@ export class GenreCrudComponent implements OnInit, AfterViewInit {
     };
 
     this.dialogService.open(GenreDialogComponent, dialogConfig);
+  }
+
+  loadGenres(): void {
+    this.dataSource.loading$
+      .pipe(
+        finalize(() => {
+          console.log('complete');
+
+          this.loadingComplete = true;
+        })
+      )
+      .subscribe((c) => {
+        console.log('log', c);
+        this.loadingComplete = !c;
+      });
+
+    this.dataSource.loadGenres('', 'asc', 1, 2).subscribe((pagination: any) => {
+      this.paginator.length = pagination.totalCount;
+      console.log('total count:', pagination);
+    });
   }
 
   deleteGenre(item: Genre) {

@@ -36,7 +36,10 @@ namespace ComicStoreWebAPI
             {
                 builder.AllowAnyOrigin()
                        .AllowAnyMethod()
-                       .AllowAnyHeader();
+                       .AllowAnyHeader()
+                       .WithExposedHeaders("X-Pagination");
+
+
             }));
 
             services.AddScoped<IFactoryRepository, FactoryEFCoreRepository>();

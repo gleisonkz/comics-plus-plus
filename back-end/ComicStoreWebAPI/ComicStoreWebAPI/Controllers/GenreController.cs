@@ -45,6 +45,7 @@ namespace ComicStore.Application.Controllers
                      }
                  })
                  );
+
             return Ok(genres);
         }
     }

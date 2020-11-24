@@ -1,9 +1,11 @@
-import { Injectable, OnInit } from '@angular/core';
-import { BehaviorSubject, Observable, of } from 'rxjs';
-import { Genre } from '../modules/admin/components/genre-crud/genre-crud.component';
-import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpParams } from '@angular/common/http';
+
+import { Observable } from 'rxjs';
+import { delay } from 'rxjs/operators';
+
 import { environment } from 'src/environments/environment';
-import { map, tap, delay } from 'rxjs/operators';
+import { Genre } from '../models/genre.model';
 
 @Injectable()
 export class GenreService {

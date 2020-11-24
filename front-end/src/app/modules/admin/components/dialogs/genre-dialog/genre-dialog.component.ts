@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { GenreService } from '../../../../../services/genre.service';
-import { Genre } from '../../genre-crud/genre-crud.component';
+import { NotificationService } from '../../../../../services/notification.service';
 
 @Component({
   templateUrl: './genre-dialog.component.html',
@@ -15,6 +15,7 @@ export class GenreDialogComponent implements OnInit {
   constructor(
     private dialogRef: MatDialogRef<GenreDialogComponent>,
     private genreService: GenreService,
+    private notificationService: NotificationService,
     @Inject(MAT_DIALOG_DATA) data
   ) {
     // console.log(data);
@@ -32,9 +33,7 @@ export class GenreDialogComponent implements OnInit {
   save() {
     this.genreService
       .postGenre(this.form.value)
-      .subscribe((c) => console.log(c));
-
-    this.dialogRef.close(this.form.value);
+      .subscribe((genre) => this.dialogRef.close(genre));
   }
 
   close() {

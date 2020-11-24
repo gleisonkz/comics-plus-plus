@@ -1,3 +1,4 @@
+import { Genre } from './../../../../models/genre.model';
 import {
   AfterViewInit,
   ChangeDetectorRef,
@@ -12,11 +13,7 @@ import { GenreDialogComponent } from '../dialogs/genre-dialog/genre-dialog.compo
 import { GenreService } from '../../../../services/genre.service';
 import { GenresDataSource } from './genres-data-source';
 import { finalize } from 'rxjs/operators';
-
-export interface Genre {
-  genreID: number;
-  description: string;
-}
+import { NotificationService } from '../../../../services/notification.service';
 
 @Component({
   templateUrl: './genre-crud.component.html',
@@ -32,7 +29,8 @@ export class GenreCrudComponent implements OnInit, AfterViewInit {
   constructor(
     private dialogService: MatDialog,
     private genreService: GenreService,
-    private changeDetector: ChangeDetectorRef
+    private changeDetector: ChangeDetectorRef,
+    private notificationService: NotificationService
   ) {}
 
   ngOnInit(): void {
@@ -80,7 +78,7 @@ export class GenreCrudComponent implements OnInit, AfterViewInit {
     this.changeDetector.detectChanges();
   }
 
-  openDialog(genre?: Genre) {
+  openDialog() {
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.disableClose = true;
@@ -92,7 +90,17 @@ export class GenreCrudComponent implements OnInit, AfterViewInit {
       name: 'Drama',
     };
 
-    this.dialogService.open(GenreDialogComponent, dialogConfig);
+    const dialogRef = this.dialogService.open(
+      GenreDialogComponent,
+      dialogConfig
+    );
+
+    dialogRef.afterClosed().subscribe((genre) => {
+      this.notificationService.showMessage(
+        `Você cadastrou a categoria ${genre.description}`
+      );
+      this.loadGenres();
+    });
   }
 
   loadGenres(): void {
@@ -107,7 +115,12 @@ export class GenreCrudComponent implements OnInit, AfterViewInit {
       });
 
     this.dataSource
-      .loadGenres('', 'asc', 1, this.paginator.pageSize)
+      .loadGenres(
+        '',
+        'asc',
+        this.paginator.pageIndex + 1,
+        this.paginator.pageSize
+      )
       .subscribe((pagination: any) => {
         this.paginator.length = pagination.totalCount;
       });

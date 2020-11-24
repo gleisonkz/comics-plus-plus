@@ -1,7 +1,7 @@
 import { CollectionViewer, DataSource } from '@angular/cdk/collections';
 import { Observable, BehaviorSubject, of } from 'rxjs';
 import { debounceTime, finalize } from 'rxjs/operators';
-import { Genre } from './genre-crud.component';
+import { Genre } from 'src/app/models/genre.model';
 import { GenreService } from '../../../../services/genre.service';
 
 export class GenresDataSource implements DataSource<Genre> {

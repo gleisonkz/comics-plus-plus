@@ -1,14 +1,12 @@
-﻿using ComicStore.Domain.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
+using ComicStore.Domain.Interfaces;
 
 namespace ComicStore.Application.DTO
 {
     public class GenreDTO : IGenreDTO
     {
-        public int GenreID { get ; set ; }
-        public string Description { get ; set ; }
+        public int GenreID { get; set; }
+        [Required]
+        public string Description { get; set; }
     }
 }

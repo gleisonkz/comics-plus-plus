@@ -1,6 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { GenreService } from '../../../../../services/genre.service';
+import { Genre } from '../../genre-crud/genre-crud.component';
 
 @Component({
   templateUrl: './genre-dialog.component.html',
@@ -12,20 +14,27 @@ export class GenreDialogComponent implements OnInit {
 
   constructor(
     private dialogRef: MatDialogRef<GenreDialogComponent>,
+    private genreService: GenreService,
     @Inject(MAT_DIALOG_DATA) data
   ) {
-    // (this.id = data.id), (this.genreName = data.name);
+    // console.log(data);
   }
 
   ngOnInit(): void {
     this.form = new FormGroup({
-      genreName: new FormControl('Teste'),
+      description: new FormControl('', [
+        Validators.required,
+        Validators.minLength(3),
+      ]),
     });
   }
 
-  save(value: string) {
+  save() {
+    this.genreService
+      .postGenre(this.form.value)
+      .subscribe((c) => console.log(c));
+
     this.dialogRef.close(this.form.value);
-    console.log(value);
   }
 
   close() {

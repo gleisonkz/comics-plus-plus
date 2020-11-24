@@ -1,15 +1,8 @@
 import { CollectionViewer, DataSource } from '@angular/cdk/collections';
 import { Observable, BehaviorSubject, of } from 'rxjs';
-import {
-  catchError,
-  debounceTime,
-  delay,
-  finalize,
-  switchMap,
-} from 'rxjs/operators';
+import { debounceTime, finalize } from 'rxjs/operators';
 import { Genre } from './genre-crud.component';
 import { GenreService } from '../../../../services/genre.service';
-import { JsonPipe } from '@angular/common';
 
 export class GenresDataSource implements DataSource<Genre> {
   private genresSubject = new BehaviorSubject<Genre[]>([]);
@@ -27,7 +20,6 @@ export class GenresDataSource implements DataSource<Genre> {
     pageSize: number
   ) {
     return new Observable<number>((publisher) => {
-      console.log('init');
       this.loadingGenres.next(true);
 
       this.genreService
@@ -47,7 +39,6 @@ export class GenresDataSource implements DataSource<Genre> {
   }
 
   connect(collectionViewer: CollectionViewer): Observable<Genre[]> {
-    console.log('Connecting data source');
     return this.genresSubject.asObservable();
   }
 

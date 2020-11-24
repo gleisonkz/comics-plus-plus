@@ -88,8 +88,10 @@ table {
 
 mat-paginator {
   background-color: $color-panel-bg;
+  align-self: flex-end;
 }
 
 .container {
+  @include flex-center(column);
   background-color: $color-panel-bg;
 }

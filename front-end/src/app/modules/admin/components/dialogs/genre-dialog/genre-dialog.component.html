@@ -3,13 +3,18 @@
 
   <mat-dialog-content>
     <mat-form-field>
-      <input matInput placeholder="Nome" formControlName="genreName" />
+      <input matInput placeholder="Nome" formControlName="description" />
     </mat-form-field>
   </mat-dialog-content>
 
   <mat-dialog-actions>
     <button class="mat-raised-button" (click)="close()">Fechar</button>
-    <button class="mat-raised-button mat-primary" (click)="save(form.value)">
+    <button
+      [disabled]="form.invalid"
+      [class.disabled]="form.invalid"
+      class="mat-raised-button mat-primary"
+      (click)="save(form.value)"
+    >
       Salvar
     </button>
   </mat-dialog-actions>

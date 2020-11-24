@@ -38,7 +38,7 @@ namespace ComicStore.Service.Services
             )
         {
             return Paginator<IGenreDTO>.Paginate(
-                repoGenre.GetQuery().OrderBy(c => c.Description),
+                repoGenre.GetQuery().OrderBy(c => c.GenreID),
                 genreFilter,
                 projection
                 );

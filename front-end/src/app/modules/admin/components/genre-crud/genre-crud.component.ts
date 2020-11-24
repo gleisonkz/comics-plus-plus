@@ -8,7 +8,6 @@ import {
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
 import { GenreDialogComponent } from '../dialogs/genre-dialog/genre-dialog.component';
 import { GenreService } from '../../../../services/genre.service';
 import { GenresDataSource } from './genres-data-source';
@@ -16,7 +15,7 @@ import { finalize } from 'rxjs/operators';
 
 export interface Genre {
   genreID: number;
-  name: string;
+  description: string;
 }
 
 @Component({
@@ -43,23 +42,6 @@ export class GenreCrudComponent implements OnInit, AfterViewInit {
     });
 
     this.dataSource = new GenresDataSource(this.genreService);
-    // this.dataSource.loading$
-    //   .pipe(
-    //     finalize(() => {
-    //       console.log('complete');
-
-    //       this.loadingComplete = true;
-    //     })
-    //   )
-    //   .subscribe((c) => {
-    //     console.log('log', c);
-    //     this.loadingComplete = !c;
-    //   });
-
-    // this.dataSource.loadGenres('', 'asc', 1, 2).subscribe((pagination: any) => {
-    //   this.paginator.length = pagination.totalCount;
-    //   console.log('total count:', pagination);
-    // });
   }
 
   ngAfterViewInit(): void {
@@ -73,7 +55,6 @@ export class GenreCrudComponent implements OnInit, AfterViewInit {
         )
         .subscribe((pagination: any) => {
           this.paginator.length = pagination.totalCount;
-          console.log('total count:', pagination);
         });
     });
 
@@ -99,7 +80,7 @@ export class GenreCrudComponent implements OnInit, AfterViewInit {
     this.changeDetector.detectChanges();
   }
 
-  openDialog() {
+  openDialog(genre?: Genre) {
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.disableClose = true;
@@ -118,20 +99,18 @@ export class GenreCrudComponent implements OnInit, AfterViewInit {
     this.dataSource.loading$
       .pipe(
         finalize(() => {
-          console.log('complete');
-
           this.loadingComplete = true;
         })
       )
       .subscribe((c) => {
-        console.log('log', c);
         this.loadingComplete = !c;
       });
 
-    this.dataSource.loadGenres('', 'asc', 1, 2).subscribe((pagination: any) => {
-      this.paginator.length = pagination.totalCount;
-      console.log('total count:', pagination);
-    });
+    this.dataSource
+      .loadGenres('', 'asc', 1, this.paginator.pageSize)
+      .subscribe((pagination: any) => {
+        this.paginator.length = pagination.totalCount;
+      });
   }
 
   deleteGenre(item: Genre) {

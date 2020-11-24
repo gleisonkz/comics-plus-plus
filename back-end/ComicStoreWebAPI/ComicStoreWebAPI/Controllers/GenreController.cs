@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -47,6 +48,27 @@ namespace ComicStore.Application.Controllers
                  );
 
             return Ok(genres);
+        }
+
+        [HttpPost]
+        public IActionResult Post([FromBody] GenreDTO genreDTO)
+        {
+            try
+            {
+                var genre = svcGenre.CreateGenre(genreDTO);
+                svcGenre.Commit();
+                var result = new
+                {
+                    genreID = genre.GenreID,
+                    description = genre.Description
+                };
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                svcGenre.Rollback();
+                return BadRequest($"Erro: {ex.Message}");
+            }
         }
     }
 }

@@ -10,8 +10,6 @@ export class GenreService {
   constructor(private http: HttpClient) {}
 
   getGenres(filter = '', sortOrder = 'asc', pageNumber = 1, pageSize = 2): any {
-    console.log(filter, sortOrder, pageNumber, pageSize);
-
     return this.http
       .get<Genre[]>(`${environment.apiURL}/genre`, {
         observe: 'response',
@@ -22,39 +20,13 @@ export class GenreService {
           .set('pageNumber', pageNumber.toString())
           .set('pageSize', pageSize.toString()),
       })
-      .pipe(
-        delay(200),
-        tap((res) => {
-          console.log('pagination', res.headers.get('x-pagination'));
-        })
-      );
+      .pipe(delay(200));
+  }
 
-    return of([
-      { genreID: 1, name: 'Drama' },
-      { genreID: 2, name: 'Action' },
-      { genreID: 3, name: 'Romance' },
-      { genreID: 4, name: 'Terror' },
-      { genreID: 1, name: 'Drama' },
-      { genreID: 2, name: 'Action' },
-      { genreID: 3, name: 'Romance' },
-      { genreID: 4, name: 'Terror' },
-      { genreID: 1, name: 'Drama' },
-      { genreID: 2, name: 'Action' },
-      { genreID: 3, name: 'Romance' },
-      { genreID: 4, name: 'Terror' },
-      { genreID: 1, name: 'Drama' },
-      { genreID: 2, name: 'Action' },
-      { genreID: 3, name: 'Romance' },
-      { genreID: 4, name: 'Terror' },
-    ]);
+  postGenre(genre: Genre): Observable<Genre> {
+    console.log('service:', genre);
 
-    // return this.http.get<Genre[]>(`${environment.apiURL}/genre`, {
-    //   params: new HttpParams()
-    //     .set('filter', filter)
-    //     .set('sortOrder', sortOrder)
-    //     .set('pageNumber', pageNumber.toString())
-    //     .set('pageSize', pageSize.toString()),
-    // });
+    return this.http.post<Genre>(`${environment.apiURL}/genre`, genre);
   }
 
   // get hasItems(): boolean {

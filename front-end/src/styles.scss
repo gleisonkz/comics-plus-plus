@@ -1,5 +1,6 @@
 @import "./sass/variables";
 @import "./sass/responsive-helpers";
+@import "./sass/mixins";
 // @import "./theme.scss";
 
 :root {
@@ -87,4 +88,5 @@ body {
 .disabled {
   pointer-events: none;
   cursor: default;
+  @include button-disabled;
 }

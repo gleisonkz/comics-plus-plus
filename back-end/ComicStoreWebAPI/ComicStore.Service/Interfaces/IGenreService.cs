@@ -8,6 +8,7 @@ namespace ComicStore.Service.Interfaces
     public interface IGenreService : IServiceFacadeBase
     {
         Genre CreateGenre(IGenreDTO genreDTO);
+        Genre UpdateGenre(IGenreDTO genreDTO);
         IQueryable<Genre> GetGenre();
         Paginator<IGenreDTO> GetGenres(IFilter<Genre> genreFilter, System.Func<Genre, IGenreDTO> projection);
     }

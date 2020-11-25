@@ -1,5 +1,6 @@
 ﻿using ComicStore.Application.DTO;
 using ComicStore.Application.Filters;
+using ComicStore.Domain.POCO;
 using ComicStore.Service.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -56,6 +57,27 @@ namespace ComicStore.Application.Controllers
             try
             {
                 var genre = svcGenre.CreateGenre(genreDTO);
+                svcGenre.Commit();
+                var result = new
+                {
+                    genreID = genre.GenreID,
+                    description = genre.Description
+                };
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                svcGenre.Rollback();
+                return BadRequest($"Erro: {ex.Message}");
+            }
+        } 
+        [HttpPut("{genreID}")]
+        public IActionResult PutGenre(int genreID,[FromBody] GenreDTO genreDTO)
+        {
+            try
+            {
+                genreDTO.GenreID = genreID;
+                Genre genre = svcGenre.UpdateGenre(genreDTO);                                          
                 svcGenre.Commit();
                 var result = new
                 {

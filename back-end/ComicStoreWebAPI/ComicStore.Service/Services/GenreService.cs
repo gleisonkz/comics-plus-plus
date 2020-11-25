@@ -28,6 +28,15 @@ namespace ComicStore.Service.Services
             return objGenre;
         }
 
+        public Genre UpdateGenre(IGenreDTO genreDTO)
+        {
+            Genre objGenre = GetGenre().Where(c => c.GenreID == genreDTO.GenreID)
+                                     .SingleOrDefault();
+            objGenre.Description = genreDTO.Description;
+            repoGenre.Update(objGenre);
+            return objGenre;
+        }
+
         public IQueryable<Genre> GetGenre()
         {
             return repoGenre.GetQuery();
@@ -43,5 +52,7 @@ namespace ComicStore.Service.Services
                 projection
                 );
         }
+
+
     }
 }

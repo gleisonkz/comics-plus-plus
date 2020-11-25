@@ -14,6 +14,7 @@ import { GenreService } from '../../../../services/genre.service';
 import { GenresDataSource } from './genres-data-source';
 import { finalize } from 'rxjs/operators';
 import { NotificationService } from '../../../../services/notification.service';
+import { ConfirmationDialogComponent } from '../dialogs/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   templateUrl: './genre-crud.component.html',
@@ -123,9 +124,16 @@ export class GenreCrudComponent implements OnInit, AfterViewInit {
   }
 
   deleteGenre(item: Genre) {
-    console.log(item);
-  }
-  editGenre(item: Genre) {
-    console.log(item);
+    const dialogRef = this.dialogService.open(ConfirmationDialogComponent);
+    dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+      if (confirmed) {
+        this.genreService.deleteGenre(item.genreID).subscribe((c) => {
+          this.notificationService.showMessage(
+            `Você deletou a categoria ${item.description} ID:${item.genreID}`
+          );
+          this.loadGenres();
+        });
+      }
+    });
   }
 }

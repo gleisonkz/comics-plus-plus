@@ -35,6 +35,9 @@ export class GenreService {
       genre
     );
   }
+  deleteGenre(genreID: number): Observable<Genre> {
+    return this.http.delete<Genre>(`${environment.apiURL}/genre/${genreID}`);
+  }
 
   // get hasItems(): boolean {
   //   return !!this.itemsSource$.value.length;

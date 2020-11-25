@@ -7,7 +7,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./confirmation-dialog.component.scss'],
 })
 export class ConfirmationDialogComponent {
-  message: string = 'Você tem certeza?';
+  message: string = 'Você tem certeza que deseja excluir o registro?';
   confirmButtonText = 'Sim';
   cancelButtonText = 'Cancelar';
 

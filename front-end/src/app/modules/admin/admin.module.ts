@@ -9,6 +9,7 @@ import { GenreCrudComponent } from './components/genre-crud/genre-crud.component
 import { GenreDialogComponent } from './components/dialogs/genre-dialog/genre-dialog.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { GenreService } from '../../services/genre.service';
+import { ConfirmationDialogComponent } from './components/dialogs/confirmation-dialog/confirmation-dialog.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { GenreService } from '../../services/genre.service';
     ComicCrudComponent,
     GenreCrudComponent,
     GenreDialogComponent,
+    ConfirmationDialogComponent,
   ],
   imports: [
     CommonModule,

@@ -35,14 +35,17 @@ Technologies, Design and Patterns that I used to develop this application.
   - Patterns Applied
     - Repository
     - Generic Repository
+    - Generic Pagination
     - Unity Of Work
     - Facade
     - Factory
+    - Command
+    - Adapter
 
 ## ✨ Main Features
 
 - Toggle Theme
-- JTW Autenthication
+- JTW Authentication
 - CRUD operations
-- ...
+- Pagination
 - ...

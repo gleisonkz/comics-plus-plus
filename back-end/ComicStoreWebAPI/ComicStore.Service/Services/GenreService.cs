@@ -11,46 +11,63 @@ namespace ComicStore.Service.Services
 {
     public class GenreService : ServiceFacadeBase, IGenreService
     {
-        private readonly IRepository<Genre> repoGenre;
+        
         public GenreService(IFactoryRepository factoryRepository, IUnityOfWork unityOfWork) : base(factoryRepository, unityOfWork)
         {
-            repoGenre = factoryRepository.CreateRepository<Genre>();
+
+        }
+
+        public override int Commit()
+        {
+            int result =  base.Commit();
+            commands.ForEach(c => c.Execute());
+            return result;
         }
 
         public Genre CreateGenre(IGenreDTO genreDTO)
         {
-            var objGenre = new Genre
-            {
-                Description = genreDTO.Description
-            };
+            var repoGenre = factoryRepository.CreateRepository<Genre>();
+            var objGenre = new Genre();
+            genreDTO.AssignPoco(objGenre);
 
+            commands.Add(new CommandAssignGenre(objGenre, genreDTO));
             repoGenre.Add(objGenre);
             return objGenre;
         }
 
         public Genre UpdateGenre(IGenreDTO genreDTO)
         {
-            Genre objGenre = GetGenre().Where(c => c.GenreID == genreDTO.GenreID)
-                                     .SingleOrDefault();
-            objGenre.Description = genreDTO.Description;
+            var repoGenre = factoryRepository.CreateRepository<Genre>();
+            Genre objGenre = repoGenre.GetQuery()
+                                      .Where(c => c.GenreID == genreDTO.GenreID)
+                                      .SingleOrDefault();
+            genreDTO.AssignPoco(objGenre);
             repoGenre.Update(objGenre);
+            return objGenre;
+        }
+
+        public Genre DeleteGenre(int genreID)
+        {
+            var repoGenre = factoryRepository.CreateRepository<Genre>();
+            Genre objGenre = repoGenre.GetQuery()
+                                      .Where(c => c.GenreID == genreID)
+                                      .SingleOrDefault();            
+            repoGenre.Delete(objGenre);
             return objGenre;
         }
 
         public IQueryable<Genre> GetGenre()
         {
+            var repoGenre = factoryRepository.CreateRepository<Genre>();
             return repoGenre.GetQuery();
         }
 
-        public Paginator<IGenreDTO> GetGenres(
-            IFilter<Genre> genreFilter, System.Func<Genre, IGenreDTO> projection
-            )
+        public Paginator<IGenreDTO> GetGenres(IFilter<Genre> genreFilter, System.Func<Genre, IGenreDTO> projection)
         {
-            return Paginator<IGenreDTO>.Paginate(
-                repoGenre.GetQuery().OrderBy(c => c.GenreID),
-                genreFilter,
-                projection
-                );
+            var repoGenre = factoryRepository.CreateRepository<Genre>();
+            return Paginator<IGenreDTO>
+                .Paginate(repoGenre.GetQuery()
+                                   .OrderBy(c => c.GenreID), genreFilter, projection);
         }
 
 

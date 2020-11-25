@@ -57,13 +57,8 @@ namespace ComicStore.Application.Controllers
             try
             {
                 var genre = svcGenre.CreateGenre(genreDTO);
-                svcGenre.Commit();
-                var result = new
-                {
-                    genreID = genre.GenreID,
-                    description = genre.Description
-                };
-                return Ok(result);
+                svcGenre.Commit();    
+                return Ok(genreDTO);
             }
             catch (Exception ex)
             {
@@ -77,14 +72,25 @@ namespace ComicStore.Application.Controllers
             try
             {
                 genreDTO.GenreID = genreID;
-                Genre genre = svcGenre.UpdateGenre(genreDTO);                                          
+                svcGenre.UpdateGenre(genreDTO);
                 svcGenre.Commit();
-                var result = new
-                {
-                    genreID = genre.GenreID,
-                    description = genre.Description
-                };
-                return Ok(result);
+                return Ok(genreDTO);
+            }
+            catch (Exception ex)
+            {
+                svcGenre.Rollback();
+                return BadRequest($"Erro: {ex.Message}");
+            }
+        }
+
+        [HttpDelete("{genreID}")]
+        public IActionResult DeleteGenre(int genreID)
+        {
+            try
+            {                
+                svcGenre.DeleteGenre(genreID);
+                svcGenre.Commit();
+                return Ok();
             }
             catch (Exception ex)
             {

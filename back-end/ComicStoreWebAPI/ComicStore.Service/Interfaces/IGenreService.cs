@@ -9,6 +9,7 @@ namespace ComicStore.Service.Interfaces
     {
         Genre CreateGenre(IGenreDTO genreDTO);
         Genre UpdateGenre(IGenreDTO genreDTO);
+        Genre DeleteGenre(int genreID);
         IQueryable<Genre> GetGenre();
         Paginator<IGenreDTO> GetGenres(IFilter<Genre> genreFilter, System.Func<Genre, IGenreDTO> projection);
     }

@@ -23,14 +23,14 @@
       </mat-form-field>
 
       <mat-form-field>
-        <input matInput placeholder="Nome" formControlName="name" />
+        <input matInput placeholder="Nome" formControlName="description" />
       </mat-form-field>
     </div>
 
     <div class="full-wrapper button-wrapper">
       <div class="button-wrapper">
         <button
-          (click)="loadGenres()"
+          (click)="loadGenres(form.value)"
           class="search-button"
           mat-flat-button
           color="primary"

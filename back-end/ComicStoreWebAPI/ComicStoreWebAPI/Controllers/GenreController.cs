@@ -1,14 +1,11 @@
 ﻿using ComicStore.Application.DTO;
 using ComicStore.Application.Filters;
-using ComicStore.Domain.POCO;
 using ComicStore.Service.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace ComicStore.Application.Controllers
 {

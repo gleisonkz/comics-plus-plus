@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Comic.Shared\ComicStore.Shared.csproj" />
     <ProjectReference Include="..\ComicStore.Domain\ComicStore.Domain.csproj" />
     <ProjectReference Include="..\ComicStore.Infra.BaseRepository\ComicStore.Infra.BaseRepository.csproj" />
   </ItemGroup>

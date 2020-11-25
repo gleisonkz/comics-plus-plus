@@ -24,6 +24,8 @@ Technologies, Design and Patterns that I used to develop this application.
   - [C#](https://docs.microsoft.com/en-us/dotnet/csharp/)
   - [Entity Framework Core 5](https://docs.microsoft.com/en-us/ef/core/)
   - [SQL Server](https://docs.microsoft.com/en-us/sql/sql-server/?view=sql-server-ver15)
+  - [Nuget Librarys]()
+    - Predicate Builder
   - Development Approach
     - DDD - Domain Drive Design
     - SOLID Principles

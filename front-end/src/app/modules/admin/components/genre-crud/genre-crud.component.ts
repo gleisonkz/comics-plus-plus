@@ -15,6 +15,7 @@ import { GenresDataSource } from './genres-data-source';
 import { finalize } from 'rxjs/operators';
 import { NotificationService } from '../../../../services/notification.service';
 import { ConfirmationDialogComponent } from '../dialogs/confirmation-dialog/confirmation-dialog.component';
+import { Filter } from '../../../../models/filter.model';
 
 @Component({
   templateUrl: './genre-crud.component.html',
@@ -26,6 +27,7 @@ export class GenreCrudComponent implements OnInit, AfterViewInit {
   dataSource: GenresDataSource;
   @ViewChild(MatPaginator)
   paginator: MatPaginator;
+  genreFilter: Filter;
   displayedColumns: string[] = ['GenreID', 'Nome', 'Ações'];
   constructor(
     private dialogService: MatDialog,
@@ -37,21 +39,21 @@ export class GenreCrudComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.form = new FormGroup({
       genreID: new FormControl(''),
-      name: new FormControl(''),
+      description: new FormControl(''),
     });
 
     this.dataSource = new GenresDataSource(this.genreService);
   }
 
+  defaultPaginateValues() {
+    this.genreFilter.pageNumber = this.paginator.pageIndex + 1;
+    this.genreFilter.pageSize = this.paginator.pageSize;
+  }
+
   ngAfterViewInit(): void {
     this.paginator.page.subscribe(() => {
       this.dataSource
-        .loadGenres(
-          '',
-          'asc',
-          this.paginator.pageIndex + 1,
-          this.paginator.pageSize
-        )
+        .loadGenres(this.genreFilter)
         .subscribe((pagination: any) => {
           this.paginator.length = pagination.totalCount;
         });
@@ -100,7 +102,7 @@ export class GenreCrudComponent implements OnInit, AfterViewInit {
     });
   }
 
-  loadGenres(): void {
+  loadGenres(genre?: Genre): void {
     this.dataSource.loading$
       .pipe(
         finalize(() => {
@@ -111,13 +113,17 @@ export class GenreCrudComponent implements OnInit, AfterViewInit {
         this.loadingComplete = !c;
       });
 
+    this.genreFilter = Object.assign(
+      {
+        pageNumber: this.paginator.pageIndex + 1,
+        pageSize: this.paginator.pageSize,
+        sortOrder: 'asc',
+      },
+      genre
+    );
+
     this.dataSource
-      .loadGenres(
-        '',
-        'asc',
-        this.paginator.pageIndex + 1,
-        this.paginator.pageSize
-      )
+      .loadGenres(this.genreFilter)
       .subscribe((pagination: any) => {
         this.paginator.length = pagination.totalCount;
       });

@@ -3,6 +3,7 @@ import { Observable, BehaviorSubject, of } from 'rxjs';
 import { debounceTime, finalize } from 'rxjs/operators';
 import { Genre } from 'src/app/models/genre.model';
 import { GenreService } from '../../../../services/genre.service';
+import { Filter } from '../../../../models/filter.model';
 
 export class GenresDataSource implements DataSource<Genre> {
   private genresSubject = new BehaviorSubject<Genre[]>([]);
@@ -13,17 +14,12 @@ export class GenresDataSource implements DataSource<Genre> {
 
   constructor(private genreService: GenreService) {}
 
-  loadGenres(
-    filter: string,
-    sortDirection: string,
-    pageIndex: number,
-    pageSize: number
-  ) {
+  loadGenres(genreFilter: Filter) {
     return new Observable<number>((publisher) => {
       this.loadingGenres.next(true);
 
       this.genreService
-        .getGenres(filter, sortDirection, pageIndex, pageSize)
+        .getGenres(genreFilter)
         .pipe(
           // catchError(() => of([])),
           finalize(() => this.loadingGenres.next(false))

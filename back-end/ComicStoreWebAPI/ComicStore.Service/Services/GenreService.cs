@@ -6,12 +6,14 @@ using ComicStore.Service.Interfaces;
 using System.Linq;
 using System.Collections.Generic;
 using ComicStore.Service.Classes;
+using System.Linq.Expressions;
+using System;
 
 namespace ComicStore.Service.Services
 {
     public class GenreService : ServiceFacadeBase, IGenreService
     {
-        
+
         public GenreService(IFactoryRepository factoryRepository, IUnityOfWork unityOfWork) : base(factoryRepository, unityOfWork)
         {
 
@@ -19,7 +21,7 @@ namespace ComicStore.Service.Services
 
         public override int Commit()
         {
-            int result =  base.Commit();
+            int result = base.Commit();
             commands.ForEach(c => c.Execute());
             return result;
         }
@@ -51,7 +53,7 @@ namespace ComicStore.Service.Services
             var repoGenre = factoryRepository.CreateRepository<Genre>();
             Genre objGenre = repoGenre.GetQuery()
                                       .Where(c => c.GenreID == genreID)
-                                      .SingleOrDefault();            
+                                      .SingleOrDefault();
             repoGenre.Delete(objGenre);
             return objGenre;
         }
@@ -62,12 +64,16 @@ namespace ComicStore.Service.Services
             return repoGenre.GetQuery();
         }
 
-        public Paginator<IGenreDTO> GetGenres(IFilter<Genre> genreFilter, System.Func<Genre, IGenreDTO> projection)
+        public Paginator<IGenreDTO> GetGenres(IFilter<Genre> filter, Func<Genre, IGenreDTO> projection)
         {
             var repoGenre = factoryRepository.CreateRepository<Genre>();
+
+            Expression<Func<Genre, bool>> predicate = filter.GetPredicate(); 
+
             return Paginator<IGenreDTO>
                 .Paginate(repoGenre.GetQuery()
-                                   .OrderBy(c => c.GenreID), genreFilter, projection);
+                                   .Where(predicate)
+                                   .OrderBy(c => c.GenreID), filter, projection);
         }
 
 

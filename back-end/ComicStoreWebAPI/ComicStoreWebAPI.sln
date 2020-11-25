@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30413.136
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComicStore.Application", "ComicStoreWebAPI\ComicStore.Application.csproj", "{A50D8976-D937-4C52-AAB9-D0766BAFC9D1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComicStore.Application", "ComicStoreWebAPI\ComicStore.Application.csproj", "{A50D8976-D937-4C52-AAB9-D0766BAFC9D1}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 - Application", "1 - Application", "{75A79948-2BED-4813-AD86-2A4F09C6A08E}"
 EndProject
@@ -13,13 +13,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 - Service", "3 - Service"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4 - Infrastructure", "4 - Infrastructure", "{29AE16FE-0FA7-4E2D-BCA7-14FE85B56F30}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComicStore.Domain", "ComicStore.Domain\ComicStore.Domain.csproj", "{A548327F-4948-4ECD-8276-E09271CFB9D7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComicStore.Domain", "ComicStore.Domain\ComicStore.Domain.csproj", "{A548327F-4948-4ECD-8276-E09271CFB9D7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComicStore.Service", "ComicStore.Service\ComicStore.Service.csproj", "{C08941A4-D68F-44ED-959C-0C050CFE9282}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComicStore.Service", "ComicStore.Service\ComicStore.Service.csproj", "{C08941A4-D68F-44ED-959C-0C050CFE9282}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComicStore.Infra.BaseRepository", "ComicStore.Infra.BaseRepository\ComicStore.Infra.BaseRepository.csproj", "{7275BC88-E32E-4C49-B11B-467EE114297D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComicStore.Infra.BaseRepository", "ComicStore.Infra.BaseRepository\ComicStore.Infra.BaseRepository.csproj", "{7275BC88-E32E-4C49-B11B-467EE114297D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComicStore.Infra.EFRepository", "ComicStore.Infra.EFRepository\ComicStore.Infra.EFRepository.csproj", "{4FDDF2B0-1291-4D22-A27A-F4AE1D308C78}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComicStore.Infra.EFRepository", "ComicStore.Infra.EFRepository\ComicStore.Infra.EFRepository.csproj", "{4FDDF2B0-1291-4D22-A27A-F4AE1D308C78}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5 - Shared", "5 - Shared", "{3AC1C1A0-B5E6-49AD-A55C-511257B0EC92}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComicStore.Shared", "Comic.Shared\ComicStore.Shared.csproj", "{BD3F2F31-49EC-4DBD-B191-09D79FF5BE30}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +51,10 @@ Global
 		{4FDDF2B0-1291-4D22-A27A-F4AE1D308C78}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4FDDF2B0-1291-4D22-A27A-F4AE1D308C78}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4FDDF2B0-1291-4D22-A27A-F4AE1D308C78}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD3F2F31-49EC-4DBD-B191-09D79FF5BE30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD3F2F31-49EC-4DBD-B191-09D79FF5BE30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD3F2F31-49EC-4DBD-B191-09D79FF5BE30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD3F2F31-49EC-4DBD-B191-09D79FF5BE30}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -57,6 +65,7 @@ Global
 		{C08941A4-D68F-44ED-959C-0C050CFE9282} = {D558FB00-BBAB-4894-9165-BF1E3DB4F26B}
 		{7275BC88-E32E-4C49-B11B-467EE114297D} = {29AE16FE-0FA7-4E2D-BCA7-14FE85B56F30}
 		{4FDDF2B0-1291-4D22-A27A-F4AE1D308C78} = {29AE16FE-0FA7-4E2D-BCA7-14FE85B56F30}
+		{BD3F2F31-49EC-4DBD-B191-09D79FF5BE30} = {3AC1C1A0-B5E6-49AD-A55C-511257B0EC92}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2A956946-921A-4940-B926-D069772B5319}

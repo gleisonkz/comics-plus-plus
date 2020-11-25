@@ -6,21 +6,39 @@ import { delay } from 'rxjs/operators';
 
 import { environment } from 'src/environments/environment';
 import { Genre } from '../models/genre.model';
+import { Filter } from '../models/filter.model';
 
 @Injectable()
 export class GenreService {
   constructor(private http: HttpClient) {}
 
-  getGenres(filter = '', sortOrder = 'asc', pageNumber = 1, pageSize = 2): any {
+  getGenres(genreFilter: Filter): any {
+    const dest = Object.entries({
+      ...genreFilter,
+    }).reduce((acc, cur) => {
+      acc[cur[0]] = cur[1];
+      return acc;
+    }, {});
+    console.log('as', dest);
+
     return this.http
       .get<Genre[]>(`${environment.apiURL}/genre`, {
         observe: 'response',
         responseType: 'json',
-        params: new HttpParams()
-          // .set('filter', filter)
-          // .set('sortOrder', sortOrder)
-          .set('pageNumber', pageNumber.toString())
-          .set('pageSize', pageSize.toString()),
+        // params: Object.assign({},genreFilter.model)
+
+        params: Object.entries({
+          ...genreFilter,
+        }).reduce((acc, cur) => {
+          acc[cur[0]] = cur[1];
+          return acc;
+        }, {}),
+
+        // params: new HttpParams()
+        //   .set('genreID', genrePaginator.model?.genreID )
+        //   .set('description', genrePaginator.model?.description || '')
+        //   .set('pageNumber', genrePaginator.pageNumber.toString())
+        //   .set('pageSize', genrePaginator.pageSize.toString()),
       })
       .pipe(delay(200));
   }

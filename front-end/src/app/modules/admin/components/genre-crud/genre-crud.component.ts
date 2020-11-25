@@ -78,28 +78,24 @@ export class GenreCrudComponent implements OnInit, AfterViewInit {
     this.changeDetector.detectChanges();
   }
 
-  openDialog() {
+  openDialog(genre?: Genre) {
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.hasBackdrop = true;
 
-    dialogConfig.data = {
-      id: 1,
-      name: 'Drama',
-    };
+    dialogConfig.data = genre;
 
     const dialogRef = this.dialogService.open(
       GenreDialogComponent,
       dialogConfig
     );
 
-    dialogRef.afterClosed().subscribe((genre) => {
-      this.notificationService.showMessage(
-        `Você cadastrou a categoria ${genre.description}`
-      );
-      this.loadGenres();
+    dialogRef.afterClosed().subscribe((genre: Genre) => {
+      if (genre) {
+        this.loadGenres();
+      }
     });
   }
 

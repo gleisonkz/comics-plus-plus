@@ -11,6 +11,7 @@
         "mixins",
         "noopable",
         "quadrinho",
+        "registro",
         "scrollblock",
         "sidenav",
         "submenu"

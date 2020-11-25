@@ -26,9 +26,14 @@ export class GenreService {
   }
 
   postGenre(genre: Genre): Observable<Genre> {
-    console.log('service:', genre);
-
     return this.http.post<Genre>(`${environment.apiURL}/genre`, genre);
+  }
+
+  putGenre(genreID: number, genre: Genre): Observable<Genre> {
+    return this.http.put<Genre>(
+      `${environment.apiURL}/genre/${genreID}`,
+      genre
+    );
   }
 
   // get hasItems(): boolean {

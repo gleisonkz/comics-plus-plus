@@ -1,1 +1,21 @@
-<p>author-dialog works!</p>
+<form [formGroup]="form" novalidate>
+  <h2 mat-dialog-title>Autor</h2>
+
+  <mat-dialog-content>
+    <mat-form-field>
+      <input matInput placeholder="Nome" formControlName="name" />
+    </mat-form-field>
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+    <button class="mat-raised-button" (click)="close()">Fechar</button>
+    <button
+      [disabled]="form.invalid"
+      [class.disabled]="form.invalid"
+      class="mat-raised-button mat-primary"
+      (click)="save()"
+    >
+      Salvar
+    </button>
+  </mat-dialog-actions>
+</form>

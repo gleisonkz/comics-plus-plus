@@ -32,7 +32,7 @@ namespace ComicStore.Service.Services
             var objGenre = new Genre();
             genreDTO.AssignPoco(objGenre);
 
-            commands.Add(new CommandAssignGenre(objGenre, genreDTO));
+            commands.Add(new AssignGenreCommand(objGenre, genreDTO));
             repoGenre.Add(objGenre);
             return objGenre;
         }

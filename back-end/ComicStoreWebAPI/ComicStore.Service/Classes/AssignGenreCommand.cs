@@ -4,12 +4,12 @@ using ComicStore.Service.Interfaces;
 
 namespace ComicStore.Service.Classes
 {
-    public class CommandAssignGenre : ICommand
+    public class AssignGenreCommand : ICommand
     {
         private readonly Genre genre;
         private readonly IGenreDTO genreDTO;
 
-        public CommandAssignGenre(Genre genre, IGenreDTO genreDTO)
+        public AssignGenreCommand(Genre genre, IGenreDTO genreDTO)
         {
             this.genre = genre;
             this.genreDTO = genreDTO;

@@ -49,7 +49,7 @@ namespace ComicStore.Application.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] GenreDTO genreDTO)
+        public IActionResult PostGenre([FromBody] GenreDTO genreDTO)
         {
             try
             {

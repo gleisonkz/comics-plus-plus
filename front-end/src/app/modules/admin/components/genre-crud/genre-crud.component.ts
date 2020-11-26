@@ -1,3 +1,4 @@
+import { pageSizeOptions } from './../../constants/paginator-options';
 import { CustomDataSource } from '../../classes/custom-data-source';
 import { Genre } from './../../../../models/genre.model';
 import {
@@ -23,6 +24,7 @@ import { Filter } from '../../../../models/filter.model';
 })
 export class GenreCrudComponent implements OnInit, AfterViewInit {
   loadingComplete: boolean = false;
+  pageSizeOption: number[] = pageSizeOptions;
   form: FormGroup;
   dataSource: CustomDataSource<Genre>;
   @ViewChild(MatPaginator)
@@ -101,12 +103,12 @@ export class GenreCrudComponent implements OnInit, AfterViewInit {
 
     dialogRef.afterClosed().subscribe((genre: Genre) => {
       if (genre) {
-        this.loadGenres();
+        this.loadData();
       }
     });
   }
 
-  loadGenres(genre?: Genre): void {
+  loadData(genre?: Genre): void {
     this.dataSource.loading$
       .pipe(
         finalize(() => {
@@ -132,7 +134,7 @@ export class GenreCrudComponent implements OnInit, AfterViewInit {
     });
   }
 
-  deleteGenre(item: Genre) {
+  deleteItem(item: Genre) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.data = { id: item.genreID, description: item.description };
 
@@ -146,7 +148,7 @@ export class GenreCrudComponent implements OnInit, AfterViewInit {
           this.notificationService.showMessage(
             `Você deletou a categoria ${item.description} ID:${item.genreID}`
           );
-          this.loadGenres();
+          this.loadData();
         });
       }
     });

@@ -19,7 +19,12 @@
   <form class="genre-form" [formGroup]="form">
     <div class="controlers-wrapper">
       <mat-form-field>
-        <input matInput placeholder="ID" formControlName="genreID" />
+        <input
+          type="number"
+          matInput
+          placeholder="ID"
+          formControlName="genreID"
+        />
       </mat-form-field>
 
       <mat-form-field>
@@ -30,7 +35,7 @@
     <div class="full-wrapper button-wrapper">
       <div class="button-wrapper">
         <button
-          (click)="loadGenres(form.value)"
+          (click)="loadData(form.value)"
           class="search-button"
           mat-flat-button
           color="primary"
@@ -50,15 +55,19 @@
   <mat-divider fxFlex="1 0"></mat-divider>
 </div>
 
-<!-- <p *ngIf="genres.length <= 0" class="no-data">
-  Ainda não existe nenhuma categoria cadastrada
-</p> -->
-
-<!-- <div class="container" *ngIf="genres.length > 0"></div> -->
 <div class="container">
   <div class="spinner-container" *ngIf="dataSource.loading$ | async">
     <mat-spinner></mat-spinner>
   </div>
+
+  <p
+    [ngStyle]="{
+      display: loadingComplete && !paginator.length ? 'block' : 'none'
+    }"
+    class="no-data"
+  >
+    nenhum registro encontrado.
+  </p>
 
   <table
     mat-table
@@ -93,7 +102,7 @@
           class="btn"
           mat-raised-button
           color="warn"
-          (click)="deleteGenre(element)"
+          (click)="deleteItem(element)"
         >
           Delete
         </button>

@@ -1,12 +1,16 @@
-import { Component, NgZone, OnInit, ViewChild } from '@angular/core';
-import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { MatChipInputEvent } from '@angular/material/chips';
-
-export interface Subject {
-  name: string;
-}
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { pageSizeOptions } from '../../constants/paginator-options';
+import { Comic } from '../../../../models/comic.model';
+import { CustomDataSource } from '../../classes/custom-data-source';
+import { MatPaginator } from '@angular/material/paginator';
+import { Filter } from 'src/app/models/filter.model';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { NotificationService } from 'src/app/services/notification.service';
+import { GenreDialogComponent } from '../dialogs/genre-dialog/genre-dialog.component';
+import { finalize } from 'rxjs/operators';
+import { ConfirmationDialogComponent } from '../dialogs/confirmation-dialog/confirmation-dialog.component';
+import { ComicService } from '../../../../services/comic.service';
 
 @Component({
   selector: 'cms-comic-crud',
@@ -14,73 +18,134 @@ export interface Subject {
   styleUrls: ['./comic-crud.component.scss'],
 })
 export class ComicCrudComponent implements OnInit {
+  pageSizeOption: number[] = pageSizeOptions;
+  loadingComplete: boolean = false;
+  form: FormGroup;
+  dataSource: CustomDataSource<Comic>;
+  @ViewChild(MatPaginator)
+  paginator: MatPaginator;
+  comicFilter: Filter;
+  displayedColumns: string[] = ['GenreID', 'Nome', 'Ações'];
   constructor(
-    public fb: FormBuilder,
-    private router: Router,
-    private ngZone: NgZone
+    private dialogService: MatDialog,
+    private comicService: ComicService,
+    private changeDetector: ChangeDetectorRef,
+    private notificationService: NotificationService
   ) {}
 
-  visible = true;
-  selectable = true;
-  removable = true;
-  addOnBlur = true;
-  @ViewChild('chipList') chipList;
-  @ViewChild('resetStudentForm') myNgForm;
-  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
-  studentForm: FormGroup;
-  subjectArray: Subject[] = [];
-  SectioinArray: any = ['A', 'B', 'C', 'D', 'E'];
+  ngOnInit(): void {
+    this.form = new FormGroup({
+      comicID: new FormControl(''),
+      description: new FormControl(''),
+    });
 
-  ngOnInit(): void {}
+    this.dataSource = new CustomDataSource<Comic>((filter: Filter) =>
+      this.comicService.getComics2(filter)
+    );
+  }
 
-  /* Reactive book form */
-  submitBookForm() {
-    this.studentForm = this.fb.group({
-      student_name: ['', [Validators.required]],
-      student_email: ['', [Validators.required]],
-      section: ['', [Validators.required]],
-      subjects: [this.subjectArray],
-      dob: ['', [Validators.required]],
-      gender: ['Male'],
+  defaultPaginateValues() {
+    this.comicFilter.pageNumber = this.paginator.pageIndex + 1;
+    this.comicFilter.pageSize = this.paginator.pageSize;
+  }
+
+  ngAfterViewInit(): void {
+    this.paginator.page.subscribe(() => {
+      (this.comicFilter.pageNumber = this.paginator.pageIndex + 1),
+        (this.comicFilter.pageSize = this.paginator.pageSize),
+        this.dataSource
+          .loadData(this.comicFilter)
+          .subscribe((pagination: any) => {
+            this.paginator.length = pagination.totalCount;
+          });
+    });
+
+    this.paginator._intl.firstPageLabel = 'Primeira Página';
+    this.paginator._intl.lastPageLabel = 'Última Página';
+    this.paginator._intl.nextPageLabel = 'Próxima Página';
+    this.paginator._intl.previousPageLabel = 'Página Anterior';
+    this.paginator._intl.itemsPerPageLabel = 'Itens por página';
+    this.paginator._intl.getRangeLabel = function (page, pageSize, length) {
+      if (length === 0 || pageSize === 0) {
+        return '1 de ' + length;
+      }
+      length = Math.max(length, 0);
+      const startIndex = page * pageSize;
+      // If the start index exceeds the list length, do not try and fix the end index to the end.
+      const endIndex =
+        startIndex < length
+          ? Math.min(startIndex + pageSize, length)
+          : startIndex + pageSize;
+      return startIndex + 1 + ' - ' + endIndex + ' de ' + length;
+    };
+
+    this.changeDetector.detectChanges();
+  }
+
+  openDialog(genre?: Comic) {
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.hasBackdrop = true;
+
+    dialogConfig.data = genre;
+
+    const dialogRef = this.dialogService.open(
+      GenreDialogComponent,
+      dialogConfig
+    );
+
+    dialogRef.afterClosed().subscribe((genre: Comic) => {
+      if (genre) {
+        this.loadData();
+      }
     });
   }
 
-  /* Add dynamic languages */
-  add(event: MatChipInputEvent): void {
-    const input = event.input;
-    const value = event.value;
-    // Add language
-    if ((value || '').trim() && this.subjectArray.length < 5) {
-      this.subjectArray.push({ name: value.trim() });
-    }
-    // Reset the input value
-    if (input) {
-      input.value = '';
-    }
-  }
+  loadData(genre?: Comic): void {
+    this.dataSource.loading$
+      .pipe(
+        finalize(() => {
+          this.loadingComplete = true;
+        })
+      )
+      .subscribe((c) => {
+        this.loadingComplete = !c;
+      });
 
-  /* Remove dynamic languages */
-  remove(subject: Subject): void {
-    const index = this.subjectArray.indexOf(subject);
-    if (index >= 0) {
-      this.subjectArray.splice(index, 1);
-    }
-  }
+    this.comicFilter = Object.assign(
+      {
+        pageNumber: 1,
+        pageSize: this.paginator.pageSize,
+        sortOrder: 'asc',
+      },
+      genre
+    );
 
-  /* Date */
-  formatDate(e) {
-    var convertDate = new Date(e.target.value).toISOString().substring(0, 10);
-    this.studentForm.get('dob').setValue(convertDate, {
-      onlyself: true,
+    this.dataSource.loadData(this.comicFilter).subscribe((pagination: any) => {
+      this.paginator.length = pagination.totalCount;
+      this.paginator.firstPage();
     });
   }
 
-  /* Submit book */
-  submitStudentForm() {
-    // if (this.studentForm.valid) {
-    //   this.studentApi.AddStudent(this.studentForm.value).subscribe((res) => {
-    //     this.ngZone.run(() => this.router.navigateByUrl('/students-list'));
-    //   });
-    // }
+  deleteItem(item: Comic) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = { id: item.id, description: item.title };
+
+    const dialogRef = this.dialogService.open(
+      ConfirmationDialogComponent,
+      dialogConfig
+    );
+    dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+      if (confirmed) {
+        this.comicService.deleteComic(item.id).subscribe((c) => {
+          this.notificationService.showMessage(
+            `Você deletou o quadrinho ${item.description} ID:${item.id}`
+          );
+          this.loadData();
+        });
+      }
+    });
   }
 }

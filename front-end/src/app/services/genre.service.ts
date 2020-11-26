@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
 import { delay } from 'rxjs/operators';
@@ -12,15 +12,7 @@ import { Filter } from '../models/filter.model';
 export class GenreService {
   constructor(private http: HttpClient) {}
 
-  getGenres(genreFilter: Filter): any {
-    const dest = Object.entries({
-      ...genreFilter,
-    }).reduce((acc, cur) => {
-      acc[cur[0]] = cur[1];
-      return acc;
-    }, {});
-    console.log('as', dest);
-
+  getGenres(genreFilter: Filter): Observable<HttpResponse<Genre[]>> {
     return this.http
       .get<Genre[]>(`${environment.apiURL}/genre`, {
         observe: 'response',

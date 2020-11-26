@@ -1,3 +1,4 @@
+import { CustomDataSource } from '../../classes/custom-data-source';
 import { Genre } from './../../../../models/genre.model';
 import {
   AfterViewInit,
@@ -11,7 +12,6 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { GenreDialogComponent } from '../dialogs/genre-dialog/genre-dialog.component';
 import { GenreService } from '../../../../services/genre.service';
-import { GenresDataSource } from './genres-data-source';
 import { finalize } from 'rxjs/operators';
 import { NotificationService } from '../../../../services/notification.service';
 import { ConfirmationDialogComponent } from '../dialogs/confirmation-dialog/confirmation-dialog.component';
@@ -24,7 +24,7 @@ import { Filter } from '../../../../models/filter.model';
 export class GenreCrudComponent implements OnInit, AfterViewInit {
   loadingComplete: boolean = false;
   form: FormGroup;
-  dataSource: GenresDataSource;
+  dataSource: CustomDataSource<Genre>;
   @ViewChild(MatPaginator)
   paginator: MatPaginator;
   genreFilter: Filter;
@@ -42,7 +42,9 @@ export class GenreCrudComponent implements OnInit, AfterViewInit {
       description: new FormControl(''),
     });
 
-    this.dataSource = new GenresDataSource(this.genreService);
+    this.dataSource = new CustomDataSource<Genre>((filter: Filter) =>
+      this.genreService.getGenres(filter)
+    );
   }
 
   defaultPaginateValues() {
@@ -55,7 +57,7 @@ export class GenreCrudComponent implements OnInit, AfterViewInit {
       (this.genreFilter.pageNumber = this.paginator.pageIndex + 1),
         (this.genreFilter.pageSize = this.paginator.pageSize),
         this.dataSource
-          .loadGenres(this.genreFilter)
+          .loadData(this.genreFilter)
           .subscribe((pagination: any) => {
             this.paginator.length = pagination.totalCount;
           });
@@ -124,12 +126,10 @@ export class GenreCrudComponent implements OnInit, AfterViewInit {
       genre
     );
 
-    this.dataSource
-      .loadGenres(this.genreFilter)
-      .subscribe((pagination: any) => {
-        this.paginator.length = pagination.totalCount;
-        this.paginator.firstPage();
-      });
+    this.dataSource.loadData(this.genreFilter).subscribe((pagination: any) => {
+      this.paginator.length = pagination.totalCount;
+      this.paginator.firstPage();
+    });
   }
 
   deleteGenre(item: Genre) {

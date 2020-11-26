@@ -25,20 +25,7 @@ export class GenreService {
       .get<Genre[]>(`${environment.apiURL}/genre`, {
         observe: 'response',
         responseType: 'json',
-        // params: Object.assign({},genreFilter.model)
-
-        params: Object.entries({
-          ...genreFilter,
-        }).reduce((acc, cur) => {
-          acc[cur[0]] = cur[1];
-          return acc;
-        }, {}),
-
-        // params: new HttpParams()
-        //   .set('genreID', genrePaginator.model?.genreID )
-        //   .set('description', genrePaginator.model?.description || '')
-        //   .set('pageNumber', genrePaginator.pageNumber.toString())
-        //   .set('pageSize', genrePaginator.pageSize.toString()),
+        params: genreFilter,
       })
       .pipe(delay(200));
   }

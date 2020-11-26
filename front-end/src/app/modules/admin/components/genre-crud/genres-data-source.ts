@@ -4,6 +4,7 @@ import { debounceTime, finalize } from 'rxjs/operators';
 import { Genre } from 'src/app/models/genre.model';
 import { GenreService } from '../../../../services/genre.service';
 import { Filter } from '../../../../models/filter.model';
+import { HttpResponse } from '@angular/common/http';
 
 export class GenresDataSource implements DataSource<Genre> {
   private genresSubject = new BehaviorSubject<Genre[]>([]);

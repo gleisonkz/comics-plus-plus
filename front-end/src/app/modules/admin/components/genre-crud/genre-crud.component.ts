@@ -117,7 +117,7 @@ export class GenreCrudComponent implements OnInit, AfterViewInit {
 
     this.genreFilter = Object.assign(
       {
-        pageNumber: this.paginator.pageIndex + 1,
+        pageNumber: 1,
         pageSize: this.paginator.pageSize,
         sortOrder: 'asc',
       },
@@ -128,6 +128,7 @@ export class GenreCrudComponent implements OnInit, AfterViewInit {
       .loadGenres(this.genreFilter)
       .subscribe((pagination: any) => {
         this.paginator.length = pagination.totalCount;
+        this.paginator.firstPage();
       });
   }
 

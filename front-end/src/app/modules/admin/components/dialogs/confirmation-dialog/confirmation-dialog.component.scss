@@ -1,0 +1,8 @@
+@import "../../../../../../sass/functions";
+@import "../../../../../../sass/variables";
+@import "../../../../../../sass/mixins";
+@import "../../../../../../sass/media";
+
+.item-info {
+  @include flex-center;
+}

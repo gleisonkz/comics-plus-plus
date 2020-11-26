@@ -2,6 +2,9 @@
   <p>
     {{ message }}
   </p>
+  <p class="item-info">
+    ID : {{ item.id | number: "2.0" }} - {{ item.description }}
+  </p>
 </mat-dialog-content>
 <mat-dialog-actions align="center">
   <button

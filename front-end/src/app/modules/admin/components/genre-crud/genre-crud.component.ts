@@ -52,11 +52,13 @@ export class GenreCrudComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.paginator.page.subscribe(() => {
-      this.dataSource
-        .loadGenres(this.genreFilter)
-        .subscribe((pagination: any) => {
-          this.paginator.length = pagination.totalCount;
-        });
+      (this.genreFilter.pageNumber = this.paginator.pageIndex + 1),
+        (this.genreFilter.pageSize = this.paginator.pageSize),
+        this.dataSource
+          .loadGenres(this.genreFilter)
+          .subscribe((pagination: any) => {
+            this.paginator.length = pagination.totalCount;
+          });
     });
 
     this.paginator._intl.firstPageLabel = 'Primeira Página';
@@ -130,7 +132,13 @@ export class GenreCrudComponent implements OnInit, AfterViewInit {
   }
 
   deleteGenre(item: Genre) {
-    const dialogRef = this.dialogService.open(ConfirmationDialogComponent);
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = { id: item.genreID, description: item.description };
+
+    const dialogRef = this.dialogService.open(
+      ConfirmationDialogComponent,
+      dialogConfig
+    );
     dialogRef.afterClosed().subscribe((confirmed: boolean) => {
       if (confirmed) {
         this.genreService.deleteGenre(item.genreID).subscribe((c) => {

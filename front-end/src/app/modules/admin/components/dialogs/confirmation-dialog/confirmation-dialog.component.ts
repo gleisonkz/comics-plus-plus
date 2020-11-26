@@ -10,12 +10,14 @@ export class ConfirmationDialogComponent {
   message: string = 'Você tem certeza que deseja excluir o registro?';
   confirmButtonText = 'Sim';
   cancelButtonText = 'Cancelar';
+  item: any;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) private data: any,
     private dialogRef: MatDialogRef<ConfirmationDialogComponent>
   ) {
     if (data) {
+      this.item = data;
       this.message = data.message || this.message;
       if (data.buttonText) {
         this.confirmButtonText = data.buttonText.ok || this.confirmButtonText;

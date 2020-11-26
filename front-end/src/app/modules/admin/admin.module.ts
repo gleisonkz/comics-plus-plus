@@ -10,6 +10,9 @@ import { GenreDialogComponent } from './components/dialogs/genre-dialog/genre-di
 import { ReactiveFormsModule } from '@angular/forms';
 import { GenreService } from '../../services/genre.service';
 import { ConfirmationDialogComponent } from './components/dialogs/confirmation-dialog/confirmation-dialog.component';
+import { AuthorCrudComponent } from './components/author-crud/author-crud.component';
+import { AuthorDialogComponent } from './components/dialogs/author-dialog/author-dialog.component';
+import { ComicDialogComponent } from './components/dialogs/comic-dialog/comic-dialog.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +21,9 @@ import { ConfirmationDialogComponent } from './components/dialogs/confirmation-d
     GenreCrudComponent,
     GenreDialogComponent,
     ConfirmationDialogComponent,
+    AuthorCrudComponent,
+    AuthorDialogComponent,
+    ComicDialogComponent,
   ],
   imports: [
     CommonModule,

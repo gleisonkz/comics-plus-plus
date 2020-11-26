@@ -1,6 +1,6 @@
 import { Author } from './../../../../models/author.model';
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CustomDataSource } from '../../classes/custom-data-source';
 import { MatPaginator } from '@angular/material/paginator';
 import { Filter } from 'src/app/models/filter.model';
@@ -11,6 +11,7 @@ import { pageSizeOptions } from '../../constants/paginator-options';
 import { finalize } from 'rxjs/operators';
 import { ConfirmationDialogComponent } from '../dialogs/confirmation-dialog/confirmation-dialog.component';
 import { AuthorDialogComponent } from '../dialogs/author-dialog/author-dialog.component';
+import { MatPaginatorService } from '../../../../services/mat-paginator.service';
 
 @Component({
   templateUrl: './author-crud.component.html',
@@ -29,12 +30,13 @@ export class AuthorCrudComponent implements OnInit {
     private dialogService: MatDialog,
     private authorService: AuthorService,
     private changeDetector: ChangeDetectorRef,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private matPaginatorService: MatPaginatorService
   ) {}
 
   ngOnInit(): void {
     this.form = new FormGroup({
-      authorID: new FormControl(''),
+      authorID: new FormControl('', [Validators.min(1)]),
       name: new FormControl(''),
     });
 
@@ -59,24 +61,24 @@ export class AuthorCrudComponent implements OnInit {
           });
     });
 
-    this.paginator._intl.firstPageLabel = 'Primeira Página';
-    this.paginator._intl.lastPageLabel = 'Última Página';
-    this.paginator._intl.nextPageLabel = 'Próxima Página';
-    this.paginator._intl.previousPageLabel = 'Página Anterior';
-    this.paginator._intl.itemsPerPageLabel = 'Itens por página';
-    this.paginator._intl.getRangeLabel = function (page, pageSize, length) {
-      if (length === 0 || pageSize === 0) {
-        return '1 de ' + length;
-      }
-      length = Math.max(length, 0);
-      const startIndex = page * pageSize;
-      // If the start index exceeds the list length, do not try and fix the end index to the end.
-      const endIndex =
-        startIndex < length
-          ? Math.min(startIndex + pageSize, length)
-          : startIndex + pageSize;
-      return startIndex + 1 + ' - ' + endIndex + ' de ' + length;
-    };
+    this.matPaginatorService.applyGlobalization(this.paginator);
+    // this.paginator._intl.firstPageLabel = 'Primeira Página';
+    // this.paginator._intl.lastPageLabel = 'Última Página';
+    // this.paginator._intl.nextPageLabel = 'Próxima Página';
+    // this.paginator._intl.previousPageLabel = 'Página Anterior';
+    // this.paginator._intl.itemsPerPageLabel = 'Itens por página';
+    // this.paginator._intl.getRangeLabel = function (page, pageSize, length) {
+    //   if (length === 0 || pageSize === 0) {
+    //     return '1 de ' + length;
+    //   }
+    //   length = Math.max(length, 0);
+    //   const startIndex = page * pageSize;
+    //   const endIndex =
+    //     startIndex < length
+    //       ? Math.min(startIndex + pageSize, length)
+    //       : startIndex + pageSize;
+    //   return startIndex + 1 + ' - ' + endIndex + ' de ' + length;
+    // };
 
     this.changeDetector.detectChanges();
   }

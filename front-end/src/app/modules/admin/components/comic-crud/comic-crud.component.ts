@@ -131,7 +131,7 @@ export class ComicCrudComponent implements OnInit {
 
   deleteItem(item: Comic) {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.data = { id: item.id, description: item.title };
+    dialogConfig.data = { id: item.comicID, description: item.title };
 
     const dialogRef = this.dialogService.open(
       ConfirmationDialogComponent,
@@ -139,9 +139,9 @@ export class ComicCrudComponent implements OnInit {
     );
     dialogRef.afterClosed().subscribe((confirmed: boolean) => {
       if (confirmed) {
-        this.comicService.deleteComic(item.id).subscribe((c) => {
+        this.comicService.deleteComic(item.comicID).subscribe((c) => {
           this.notificationService.showMessage(
-            `Você deletou o quadrinho ${item.description} ID:${item.id}`
+            `Você deletou o quadrinho ${item.description} ID:${item.comicID}`
           );
           this.loadData();
         });

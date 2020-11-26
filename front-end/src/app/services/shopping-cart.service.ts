@@ -33,7 +33,7 @@ export class ShoppingCartService {
 
   public addItem(item: Comic, quantity: number = 1) {
     const foundItem = this.itemsSource$.value.find(
-      (c) => c.comic.id === item.id
+      (c) => c.comic.comicID === item.comicID
     );
 
     const expectations = [

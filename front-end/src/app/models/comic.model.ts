@@ -1,5 +1,5 @@
 export interface Comic {
-  id: number;
+  comicID: number;
   title: string;
   author: string;
   genre: string;

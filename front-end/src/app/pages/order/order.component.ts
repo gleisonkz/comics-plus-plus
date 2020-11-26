@@ -61,7 +61,7 @@ export class OrderComponent implements OnInit {
         (items) =>
           (orderItems = items.map((c: CartItem) => ({
             quantity: c.quantity,
-            comicID: c.comic.id,
+            comicID: c.comic.comicID,
           })))
       )
     );

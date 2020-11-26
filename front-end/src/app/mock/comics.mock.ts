@@ -1,7 +1,7 @@
 import { Comic } from '../models/comic.model';
 export const COMICS: Comic[] = [
   {
-    id: 1,
+    comicID: 1,
     title: 'Superman O Último Filho 3',
     author: '',
     genre: 'Ação,Aventura',
@@ -14,7 +14,7 @@ export const COMICS: Comic[] = [
     pages: 500,
   },
   {
-    id: 2,
+    comicID: 2,
     title: 'Batman Silêncio',
     author: '',
     genre: 'Ação',
@@ -27,7 +27,7 @@ export const COMICS: Comic[] = [
     pages: 700,
   },
   {
-    id: 3,
+    comicID: 3,
     title: 'LJA Ano Um',
     author: '',
     genre: 'Ciência,Ficção',

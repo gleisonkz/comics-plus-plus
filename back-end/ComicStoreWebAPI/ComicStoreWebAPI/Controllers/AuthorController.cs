@@ -1,11 +1,12 @@
 ﻿using ComicStore.Application.DTO;
+using ComicStore.Application.Filters;
 using ComicStore.Domain.POCO;
-using ComicStore.Infra.EFRepository.Context;
 using ComicStore.Service.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+using System;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace ComicStore.Application.Controllers
 {
@@ -20,19 +21,78 @@ namespace ComicStore.Application.Controllers
             this.svcAuthor = svcAuthor;
         }
 
-        // GET: api/Author
-        [HttpGet]
-        public async Task<IActionResult> GetAuthor()
+        public IActionResult GetAuthor([FromQuery] AuthorFilter filter)
         {
-            var authors =
-                await svcAuthor.GetAuthor()
-                .Select(c => new
+            var authors = svcAuthor.GetAuthors(
+                filter,
+                c => new AuthorDTO
                 {
-                    c.AuthorID,
-                    c.Name,
-                })
-                .ToListAsync();
-                return Ok(authors);
+                    AuthorID = c.AuthorID,
+                    Name = c.Name
+                });
+
+            var result = authors.ToList();
+
+            Response.Headers.Add(
+                "X-Pagination",
+                 JsonConvert.SerializeObject(authors.GetPaginatorMetadata(), new JsonSerializerSettings
+                 {
+                     ContractResolver = new DefaultContractResolver
+                     {
+                         NamingStrategy = new CamelCaseNamingStrategy()
+                     }
+                 })
+                 );
+
+            return Ok(authors);
+        }
+
+        [HttpPost]
+        public IActionResult PostGenre([FromBody] AuthorDTO authorDTO)
+        {
+            try
+            {
+                var genre = svcAuthor.CreateAuthor(authorDTO);
+                svcAuthor.Commit();
+                return Ok(authorDTO);
+            }
+            catch (Exception ex)
+            {
+                svcAuthor.Rollback();
+                return BadRequest($"Erro: {ex.Message}");
+            }
+        }
+        [HttpPut("{authorID}")]
+        public IActionResult PutGenre(int authorID, [FromBody] AuthorDTO authorDTO)
+        {
+            try
+            {
+                authorDTO.AuthorID = authorID;
+                svcAuthor.UpdateAuthor(authorDTO);
+                svcAuthor.Commit();
+                return Ok(authorDTO);
+            }
+            catch (Exception ex)
+            {
+                svcAuthor.Rollback();
+                return BadRequest($"Erro: {ex.Message}");
+            }
+        }
+
+        [HttpDelete("{authorID}")]
+        public IActionResult DeleteGenre(int authorID)
+        {
+            try
+            {
+                svcAuthor.DeleteAuthor(authorID);
+                svcAuthor.Commit();
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                svcAuthor.Rollback();
+                return BadRequest($"Erro: {ex.Message}");
+            }
         }
     }
 }

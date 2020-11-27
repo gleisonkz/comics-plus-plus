@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System.Drawing;
 
 namespace ComicStore.Domain.Interfaces
 {
@@ -10,6 +10,7 @@ namespace ComicStore.Domain.Interfaces
         public float Price { get; set; }
         public int Year { get; set; }
         public int Pages { get; set; }
+        public Image Image { get; set; }
         public  int[] Authors { get; set; }
         public int[] Genres { get; set; }
     }

@@ -39,7 +39,7 @@ export class ComicService {
     return this.http.post<Comic>(`${environment.apiURL}/comic`, comic);
   }
 
-  putGenre(comicID: number, comic: Comic): Observable<Comic> {
+  putComic(comicID: number, comic: Comic): Observable<Comic> {
     return this.http.put<Comic>(
       `${environment.apiURL}/comic/${comicID}`,
       comic

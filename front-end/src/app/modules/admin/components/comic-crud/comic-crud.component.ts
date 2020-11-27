@@ -7,10 +7,11 @@ import { MatPaginator } from '@angular/material/paginator';
 import { Filter } from 'src/app/models/filter.model';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { NotificationService } from 'src/app/services/notification.service';
-import { GenreDialogComponent } from '../dialogs/genre-dialog/genre-dialog.component';
 import { finalize } from 'rxjs/operators';
 import { ConfirmationDialogComponent } from '../dialogs/confirmation-dialog/confirmation-dialog.component';
 import { ComicService } from '../../../../services/comic.service';
+import { MatPaginatorService } from 'src/app/services/mat-paginator.service';
+import { ComicDialogComponent } from '../dialogs/comic-dialog/comic-dialog.component';
 
 @Component({
   selector: 'cms-comic-crud',
@@ -25,12 +26,21 @@ export class ComicCrudComponent implements OnInit {
   @ViewChild(MatPaginator)
   paginator: MatPaginator;
   comicFilter: Filter;
-  displayedColumns: string[] = ['GenreID', 'Nome', 'Ações'];
+  displayedColumns: string[] = [
+    'ComicID',
+    'Titulo',
+    // 'Descrição',
+    // 'Preço',
+    // 'Ano',
+    // 'Páginas',
+    'Ações',
+  ];
   constructor(
     private dialogService: MatDialog,
     private comicService: ComicService,
     private changeDetector: ChangeDetectorRef,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private matPaginatorService: MatPaginatorService
   ) {}
 
   ngOnInit(): void {
@@ -60,50 +70,32 @@ export class ComicCrudComponent implements OnInit {
           });
     });
 
-    this.paginator._intl.firstPageLabel = 'Primeira Página';
-    this.paginator._intl.lastPageLabel = 'Última Página';
-    this.paginator._intl.nextPageLabel = 'Próxima Página';
-    this.paginator._intl.previousPageLabel = 'Página Anterior';
-    this.paginator._intl.itemsPerPageLabel = 'Itens por página';
-    this.paginator._intl.getRangeLabel = function (page, pageSize, length) {
-      if (length === 0 || pageSize === 0) {
-        return '1 de ' + length;
-      }
-      length = Math.max(length, 0);
-      const startIndex = page * pageSize;
-      // If the start index exceeds the list length, do not try and fix the end index to the end.
-      const endIndex =
-        startIndex < length
-          ? Math.min(startIndex + pageSize, length)
-          : startIndex + pageSize;
-      return startIndex + 1 + ' - ' + endIndex + ' de ' + length;
-    };
-
+    this.matPaginatorService.applyGlobalization(this.paginator);
     this.changeDetector.detectChanges();
   }
 
-  openDialog(genre?: Comic) {
+  openDialog(comic?: Comic) {
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.hasBackdrop = true;
 
-    dialogConfig.data = genre;
+    dialogConfig.data = comic;
 
     const dialogRef = this.dialogService.open(
-      GenreDialogComponent,
+      ComicDialogComponent,
       dialogConfig
     );
 
-    dialogRef.afterClosed().subscribe((genre: Comic) => {
-      if (genre) {
+    dialogRef.afterClosed().subscribe((comic: Comic) => {
+      if (comic) {
         this.loadData();
       }
     });
   }
 
-  loadData(genre?: Comic): void {
+  loadData(comic?: Comic): void {
     this.dataSource.loading$
       .pipe(
         finalize(() => {
@@ -120,7 +112,7 @@ export class ComicCrudComponent implements OnInit {
         pageSize: this.paginator.pageSize,
         sortOrder: 'asc',
       },
-      genre
+      comic
     );
 
     this.dataSource.loadData(this.comicFilter).subscribe((pagination: any) => {

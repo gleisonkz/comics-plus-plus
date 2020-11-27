@@ -17,6 +17,7 @@ import { finalize } from 'rxjs/operators';
 import { NotificationService } from '../../../../services/notification.service';
 import { ConfirmationDialogComponent } from '../dialogs/confirmation-dialog/confirmation-dialog.component';
 import { Filter } from '../../../../models/filter.model';
+import { MatPaginatorService } from 'src/app/services/mat-paginator.service';
 
 @Component({
   templateUrl: './genre-crud.component.html',
@@ -35,7 +36,8 @@ export class GenreCrudComponent implements OnInit, AfterViewInit {
     private dialogService: MatDialog,
     private genreService: GenreService,
     private changeDetector: ChangeDetectorRef,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private matPaginatorService: MatPaginatorService
   ) {}
 
   ngOnInit(): void {
@@ -65,25 +67,7 @@ export class GenreCrudComponent implements OnInit, AfterViewInit {
           });
     });
 
-    this.paginator._intl.firstPageLabel = 'Primeira Página';
-    this.paginator._intl.lastPageLabel = 'Última Página';
-    this.paginator._intl.nextPageLabel = 'Próxima Página';
-    this.paginator._intl.previousPageLabel = 'Página Anterior';
-    this.paginator._intl.itemsPerPageLabel = 'Itens por página';
-    this.paginator._intl.getRangeLabel = function (page, pageSize, length) {
-      if (length === 0 || pageSize === 0) {
-        return '1 de ' + length;
-      }
-      length = Math.max(length, 0);
-      const startIndex = page * pageSize;
-      // If the start index exceeds the list length, do not try and fix the end index to the end.
-      const endIndex =
-        startIndex < length
-          ? Math.min(startIndex + pageSize, length)
-          : startIndex + pageSize;
-      return startIndex + 1 + ' - ' + endIndex + ' de ' + length;
-    };
-
+    this.matPaginatorService.applyGlobalization(this.paginator);
     this.changeDetector.detectChanges();
   }
 

@@ -62,24 +62,6 @@ export class AuthorCrudComponent implements OnInit {
     });
 
     this.matPaginatorService.applyGlobalization(this.paginator);
-    // this.paginator._intl.firstPageLabel = 'Primeira Página';
-    // this.paginator._intl.lastPageLabel = 'Última Página';
-    // this.paginator._intl.nextPageLabel = 'Próxima Página';
-    // this.paginator._intl.previousPageLabel = 'Página Anterior';
-    // this.paginator._intl.itemsPerPageLabel = 'Itens por página';
-    // this.paginator._intl.getRangeLabel = function (page, pageSize, length) {
-    //   if (length === 0 || pageSize === 0) {
-    //     return '1 de ' + length;
-    //   }
-    //   length = Math.max(length, 0);
-    //   const startIndex = page * pageSize;
-    //   const endIndex =
-    //     startIndex < length
-    //       ? Math.min(startIndex + pageSize, length)
-    //       : startIndex + pageSize;
-    //   return startIndex + 1 + ' - ' + endIndex + ' de ' + length;
-    // };
-
     this.changeDetector.detectChanges();
   }
 

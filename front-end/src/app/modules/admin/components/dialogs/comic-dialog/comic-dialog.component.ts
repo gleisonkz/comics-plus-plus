@@ -24,7 +24,35 @@ export class ComicDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = new FormGroup({
-      name: new FormControl(this.data?.title || '', [
+      title: new FormControl(this.data?.title || '', [
+        Validators.required,
+        Validators.minLength(3),
+      ]),
+      description: new FormControl(this.data?.title || '', [
+        Validators.required,
+        Validators.minLength(3),
+      ]),
+      price: new FormControl(this.data?.title || '', [
+        Validators.required,
+        Validators.minLength(3),
+      ]),
+      year: new FormControl(this.data?.title || '', [
+        Validators.required,
+        Validators.minLength(3),
+      ]),
+      pages: new FormControl(this.data?.title || '', [
+        Validators.required,
+        Validators.minLength(3),
+      ]),
+      authors: new FormControl(this.data?.title || '', [
+        Validators.required,
+        Validators.minLength(3),
+      ]),
+      genres: new FormControl(this.data?.title || '', [
+        Validators.required,
+        Validators.minLength(3),
+      ]),
+      image: new FormControl(this.data?.title || '', [
         Validators.required,
         Validators.minLength(3),
       ]),
@@ -36,14 +64,14 @@ export class ComicDialogComponent implements OnInit {
       this.data?.comicID > 0
         ? {
             operation: 'atualizado',
-            author$: this.comicService.putAuthor(
+            author$: this.comicService.putComic(
               this.data.comicID,
               this.form.value
             ),
           }
         : {
             operation: 'criado',
-            author$: this.comicService.postAuthor(this.form.value),
+            author$: this.comicService.postComic(this.form.value),
           };
 
     saveObj.author$

@@ -1,9 +1,43 @@
 <form [formGroup]="form" novalidate>
-  <h2 mat-dialog-title>Autor</h2>
+  <h2 mat-dialog-title>Quadrinho</h2>
 
   <mat-dialog-content>
+    <div>
+      <mat-form-field>
+        <input matInput placeholder="Titulo" formControlName="title" />
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Preço" formControlName="price" />
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Ano" formControlName="year" />
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field>
+        <input matInput placeholder="Nº Páginas" formControlName="pages" />
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Autores" formControlName="authors" />
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Categorias" formControlName="genres" />
+      </mat-form-field>
+    </div>
+
+    <div style="width: 100%">
+      <mat-form-field style="width: 100%">
+        <textarea
+          placeholder="Descrição"
+          formControlName="description"
+          matInput
+        ></textarea>
+      </mat-form-field>
+    </div>
+
     <mat-form-field>
-      <input matInput placeholder="Nome" formControlName="name" />
+      <input matInput placeholder="Imagem" formControlName="image" />
     </mat-form-field>
   </mat-dialog-content>
 

@@ -1,6 +1,5 @@
 ﻿using ComicStore.Application.DTO;
 using ComicStore.Application.Filters;
-using ComicStore.Domain.POCO;
 using ComicStore.Service.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;

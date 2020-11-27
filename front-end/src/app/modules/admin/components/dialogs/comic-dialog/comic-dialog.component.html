@@ -32,13 +32,24 @@
           placeholder="Descrição"
           formControlName="description"
           matInput
+          rows="7"
         ></textarea>
       </mat-form-field>
     </div>
 
     <mat-form-field>
-      <input matInput placeholder="Imagem" formControlName="image" />
+      <ngx-mat-file-input
+        formControlName="image"
+        placeholder="Imagem"
+      ></ngx-mat-file-input>
+      <mat-icon matSuffix>folder</mat-icon>
     </mat-form-field>
+
+    <p>Pre-Visualização:</p>
+
+    <div class="preview-image">
+      <img [src]="imagePreview" *ngIf="imagePreview" />
+    </div>
   </mat-dialog-content>
 
   <mat-dialog-actions>

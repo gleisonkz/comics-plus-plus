@@ -14,6 +14,7 @@ import { tap } from 'rxjs/operators';
 export class ComicDialogComponent implements OnInit {
   form: FormGroup;
   id: number;
+  imagePreview;
 
   constructor(
     private dialogRef: MatDialogRef<ComicDialogComponent>,
@@ -57,6 +58,15 @@ export class ComicDialogComponent implements OnInit {
         Validators.minLength(3),
       ]),
     });
+
+    this.getPreviewImage();
+  }
+
+  getPreviewImage(): void {
+    this.form.controls['image'].valueChanges.subscribe((c) => {
+      const file = c.files[0];
+      this.readFile(file).subscribe((c) => (this.imagePreview = c));
+    });
   }
 
   save() {
@@ -87,5 +97,22 @@ export class ComicDialogComponent implements OnInit {
 
   close() {
     this.dialogRef.close();
+  }
+
+  readFile(file: File): Observable<string | ArrayBuffer> {
+    const temporaryFileReader = new FileReader();
+
+    return new Observable<string | ArrayBuffer>((publisher) => {
+      temporaryFileReader.onload = () => {
+        publisher.next(temporaryFileReader.result);
+      };
+
+      temporaryFileReader.onerror = () => {
+        temporaryFileReader.abort();
+        publisher.error('Problem parsing with file.');
+      };
+
+      temporaryFileReader.readAsDataURL(file);
+    });
   }
 }

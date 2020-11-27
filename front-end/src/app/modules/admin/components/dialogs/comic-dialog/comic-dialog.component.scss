@@ -15,3 +15,10 @@ mat-dialog-actions {
 mat-form-field + mat-form-field {
   margin-left: rem(10);
 }
+
+.preview-image {
+  min-height: rem(146);
+  img {
+    @include size(100, 140);
+  }
+}

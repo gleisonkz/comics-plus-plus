@@ -25,7 +25,7 @@ import { MatPaginatorService } from 'src/app/services/mat-paginator.service';
 })
 export class GenreCrudComponent implements OnInit, AfterViewInit {
   loadingComplete: boolean = false;
-  pageSizeOption: number[] = pageSizeOptions;
+  readonly pageSizeOption: number[] = pageSizeOptions;
   form: FormGroup;
   dataSource: CustomDataSource<Genre>;
   @ViewChild(MatPaginator)

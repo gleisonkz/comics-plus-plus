@@ -8,7 +8,7 @@ export interface Comic {
   price: number;
   year: number;
   pages: number;
-  author: Author[];
-  genre: Genre[];
+  authors: Author[];
+  genres: Genre[];
   imagePath: string;
 }

@@ -24,6 +24,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MaterialFileInputModule } from 'ngx-material-file-input';
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 
 @NgModule({
   declarations: [],
@@ -59,6 +60,7 @@ import { MaterialFileInputModule } from 'ngx-material-file-input';
     MatProgressSpinnerModule,
     MatSnackBarModule,
     MaterialFileInputModule,
+    NgxMatSelectSearchModule,
   ],
 })
 export class MaterialModule {}

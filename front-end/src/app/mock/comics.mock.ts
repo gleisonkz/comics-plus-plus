@@ -3,8 +3,17 @@ export const COMICS: Comic[] = [
   {
     comicID: 1,
     title: 'Superman O Último Filho 3',
-    author: '',
-    genre: 'Ação,Aventura',
+    authors: [{ authorID: 1, name: 'Stan Lee' }],
+    genres: [
+      {
+        genreID: 1,
+        description: 'Aventura',
+      },
+      {
+        genreID: 2,
+        description: 'Ação',
+      },
+    ],
     imagePath:
       'https://excelsiorcomics.com.br/loja/wp-content/uploads/2016/08/xdc-eaglemoss-03-360x541.jpg.pagespeed.ic.B0Kj7DxdK5.webp',
     description:
@@ -16,8 +25,17 @@ export const COMICS: Comic[] = [
   {
     comicID: 2,
     title: 'Batman Silêncio',
-    author: '',
-    genre: 'Ação',
+    authors: [{ authorID: 1, name: 'Stan Lee' }],
+    genres: [
+      {
+        genreID: 1,
+        description: 'Aventura',
+      },
+      {
+        genreID: 2,
+        description: 'Ação',
+      },
+    ],
     imagePath:
       'https://excelsiorcomics.com.br/loja/wp-content/uploads/2016/08/xdc-eaglemoss-02-360x538.jpg.pagespeed.ic.xry6bFHav-.webp',
     description:
@@ -29,8 +47,17 @@ export const COMICS: Comic[] = [
   {
     comicID: 3,
     title: 'LJA Ano Um',
-    author: '',
-    genre: 'Ciência,Ficção',
+    authors: [{ authorID: 1, name: 'Stan Lee' }],
+    genres: [
+      {
+        genreID: 1,
+        description: 'Aventura',
+      },
+      {
+        genreID: 2,
+        description: 'Ação',
+      },
+    ],
     imagePath:
       'https://excelsiorcomics.com.br/loja/wp-content/uploads/2017/04/xeaglemoss-10-360x541.jpg.pagespeed.ic.OpCkzNGTpS.webp',
     description:

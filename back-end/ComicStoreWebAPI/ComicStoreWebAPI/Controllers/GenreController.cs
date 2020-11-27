@@ -63,6 +63,7 @@ namespace ComicStore.Application.Controllers
                 return BadRequest($"Erro: {ex.Message}");
             }
         } 
+
         [HttpPut("{genreID}")]
         public IActionResult PutGenre(int genreID,[FromBody] GenreDTO genreDTO)
         {

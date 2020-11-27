@@ -22,6 +22,7 @@
     "@angular/platform-browser-dynamic": "~10.0.2",
     "@angular/router": "~10.0.2",
     "ngx-awesome-uploader": "^9.0.7",
+    "ngx-mat-select-search": "^3.1.4",
     "ngx-material-file-input": "^2.1.1",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",

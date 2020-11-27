@@ -12,7 +12,7 @@ import { Filter } from '../models/filter.model';
 export class GenreService {
   constructor(private http: HttpClient) {}
 
-  getGenres(genreFilter: Filter): Observable<HttpResponse<Genre[]>> {
+  getGenres(genreFilter?: Filter): Observable<HttpResponse<Genre[]>> {
     return this.http
       .get<Genre[]>(`${environment.apiURL}/genre`, {
         observe: 'response',

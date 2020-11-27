@@ -7,22 +7,78 @@
         <input matInput placeholder="Titulo" formControlName="title" />
       </mat-form-field>
       <mat-form-field>
-        <input matInput placeholder="Preço" formControlName="price" />
+        <input
+          type="number"
+          matInput
+          placeholder="Preço"
+          formControlName="price"
+        />
       </mat-form-field>
       <mat-form-field>
-        <input matInput placeholder="Ano" formControlName="year" />
+        <input
+          type="number"
+          matInput
+          placeholder="Ano"
+          formControlName="year"
+        />
       </mat-form-field>
     </div>
 
     <div>
       <mat-form-field>
-        <input matInput placeholder="Nº Páginas" formControlName="pages" />
+        <input
+          type="number"
+          matInput
+          placeholder="Nº Páginas"
+          formControlName="pages"
+        />
       </mat-form-field>
+
       <mat-form-field>
-        <input matInput placeholder="Autores" formControlName="authors" />
+        <mat-select
+          [formControl]="authorsControl"
+          [multiple]="true"
+          placeholder="Autores"
+          #multiSelect
+        >
+          <mat-option>
+            <ngx-mat-select-search
+              [formControl]="authorsSearchControl"
+              [searching]=""
+              placeholderLabel="Digite pelo menos 3 caracteres"
+              noEntriesFoundLabel="'Nenhum item foi encontrado'"
+            >
+            </ngx-mat-select-search>
+          </mat-option>
+          <mat-option
+            *ngFor="let author of filteredAuthorsOptions$ | async"
+            [value]="author.authorID"
+          >
+            {{ author.name }}
+          </mat-option>
+        </mat-select>
       </mat-form-field>
+
       <mat-form-field>
-        <input matInput placeholder="Categorias" formControlName="genres" />
+        <mat-select
+          [formControl]="genreCtrl"
+          placeholder="Categorias"
+          [multiple]="true"
+          #multiSelect
+        >
+          <mat-option>
+            <ngx-mat-select-search
+              [formControl]="genreSearchCtrl"
+              placeholderLabel="pesquisar"
+            ></ngx-mat-select-search>
+          </mat-option>
+          <mat-option
+            *ngFor="let genre of filteredGenresOptions$ | async"
+            [value]="genre.genreID"
+          >
+            {{ genre.description }}
+          </mat-option>
+        </mat-select>
       </mat-form-field>
     </div>
 
@@ -51,6 +107,10 @@
       <img [src]="imagePreview" *ngIf="imagePreview" />
     </div>
   </mat-dialog-content>
+
+  <p>
+    {{ form.value | json }}
+  </p>
 
   <mat-dialog-actions>
     <button class="mat-raised-button" (click)="close()">Fechar</button>

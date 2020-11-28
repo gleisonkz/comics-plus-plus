@@ -36,7 +36,8 @@ export class ComicService {
   }
 
   postComic(comic: Comic): Observable<Comic> {
-    console.log(comic);
+    console.log('before request', comic);
+    console.log('image', comic.image);
     return this.http.post<Comic>(`${environment.apiURL}/comic`, comic);
   }
 

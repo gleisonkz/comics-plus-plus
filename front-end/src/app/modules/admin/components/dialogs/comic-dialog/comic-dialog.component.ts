@@ -1,15 +1,15 @@
-import { Component, Inject, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { NotificationService } from 'src/app/services/notification.service';
 import { ComicService } from '../../../../../services/comic.service';
 import { Comic } from '../../../../../models/comic.model';
 import { Observable, ReplaySubject, Subject, Subscription } from 'rxjs';
-import { filter, takeUntil, tap } from 'rxjs/operators';
+import { takeUntil, tap } from 'rxjs/operators';
 import { Author } from 'src/app/models/author.model';
-import { MatSelect } from '@angular/material/select';
 import { Genre } from 'src/app/models/genre.model';
 import { GenreService } from '../../../../../services/genre.service';
+import { AuthorService } from '../../../../../services/author.service';
 
 @Component({
   templateUrl: './comic-dialog.component.html',
@@ -17,120 +17,73 @@ import { GenreService } from '../../../../../services/genre.service';
 })
 export class ComicDialogComponent implements OnInit {
   form: FormGroup;
-  imagePreview;
-
-  authors: Author[] = [
-    {
-      authorID: 1,
-      name: 'Roger',
-    },
-    {
-      authorID: 2,
-      name: 'Fred',
-    },
-    {
-      authorID: 3,
-      name: 'John',
-    },
-    {
-      authorID: 4,
-      name: 'Richard',
-    },
-    {
-      authorID: 6,
-      name: 'Stan Lee',
-    },
-  ];
-
-  genres: Genre[] = [];
-
-  public authorsControl: FormControl = new FormControl();
-  public authorsSearchControl: FormControl = new FormControl();
-  public selectedAuthors: Author[] = [];
-  public filteredAuthorsOptions$: ReplaySubject<Author[]> = new ReplaySubject<
-    Author[]
-  >(1);
-
-  protected _onDestroy = new Subject<void>();
+  imageDataUrl: string | ArrayBuffer;
+  base64Image: string;
+  _onDestroy = new Subject<void>();
   private subscriptions: Subscription[] = [];
 
-  @ViewChild('multiSelect', { static: true }) multiSelect: MatSelect;
+  authors: Author[] = [];
+  genres: Genre[] = [];
 
-  /** control for the selected bank for multi-selection */
-  public genreCtrl: FormControl = new FormControl();
+  authorsControl: FormControl = new FormControl();
+  genresControl: FormControl = new FormControl();
+  authorsSearchControl: FormControl = new FormControl();
+  genresSearchControl: FormControl = new FormControl();
 
-  /** control for the MatSelect filter keyword multi-selection */
-  public genreSearchCtrl: FormControl = new FormControl();
+  /** Lista de categorias e autores filtradas pela pesquisa*/
 
-  /** Lista de categorias filtradas pela pesquisa*/
-  public filteredGenresOptions$: ReplaySubject<Genre[]> = new ReplaySubject<
-    Genre[]
+  filteredAuthorsOptions$: ReplaySubject<Author[]> = new ReplaySubject<
+    Author[]
   >(1);
+  filteredGenresOptions$: ReplaySubject<Genre[]> = new ReplaySubject<Genre[]>(
+    1
+  );
 
   constructor(
     private dialogRef: MatDialogRef<ComicDialogComponent>,
     private comicService: ComicService,
     private notificationService: NotificationService,
     private genreService: GenreService,
-
+    private authorService: AuthorService,
     @Inject(MAT_DIALOG_DATA) private data: Comic
   ) {}
 
   ngOnInit(): void {
-    // carregando a lista inicial de categorias do servidor
+    // carregando a lista inicial de categorias e autores do servidor
     this.getGenres();
+    this.getAuthors();
 
     // escutando pela atualizações no campo de pesquisa
-    this.genreSearchCtrl.valueChanges
+    this.genresSearchControl.valueChanges
       .pipe(takeUntil(this._onDestroy))
       .subscribe(() => {
         this.filterGenres();
       });
 
+    this.authorsSearchControl.valueChanges
+      .pipe(takeUntil(this._onDestroy))
+      .subscribe(() => {
+        this.filterAuthors();
+      });
+
     this.form = new FormGroup({
       comicID: new FormControl(this.data?.comicID || 0),
-      title: new FormControl(this.data?.title || '', [
-        Validators.required,
-        Validators.minLength(3),
-      ]),
+      title: new FormControl(this.data?.title || '', [Validators.required]),
       description: new FormControl(this.data?.description || '', [
         Validators.required,
-        Validators.minLength(3),
       ]),
-      price: new FormControl(this.data?.price || '', [
-        Validators.required,
-        Validators.minLength(3),
-      ]),
+      price: new FormControl(this.data?.price || '', [Validators.required]),
       year: new FormControl(this.data?.year || '', [
         Validators.required,
-        Validators.minLength(3),
+        Validators.minLength(4),
       ]),
-      pages: new FormControl(this.data?.pages || '', [
-        Validators.required,
-        Validators.minLength(3),
-      ]),
+      pages: new FormControl(this.data?.pages || '', [Validators.required]),
       authors: this.authorsControl,
-      genres: this.genreCtrl,
-      image: new FormControl(this.data?.title || '', [
-        Validators.required,
-        Validators.minLength(3),
-      ]),
+      genres: this.genresControl,
+      image: new FormControl(this.data?.title || '', [Validators.required]),
     });
 
-    this.getPreviewImage();
-
-    // listen for search field value changes
-    this.subscriptions.push(
-      this.authorsSearchControl.valueChanges
-        .pipe(
-          // tap((c) => this.filteredAuthorsMulti$.next(this.selectedAuthors)),
-          filter((c) => c.toString().length > 0),
-          takeUntil(this._onDestroy)
-        )
-        .subscribe(() => {
-          this.filterAuthors();
-        })
-    );
+    this.subscribeToPreviewImageControl();
   }
 
   ngOnDestroy() {
@@ -139,15 +92,20 @@ export class ComicDialogComponent implements OnInit {
     this.subscriptions.forEach((c) => c.unsubscribe());
   }
 
-  getPreviewImage(): void {
+  subscribeToPreviewImageControl(): void {
     this.form.controls['image'].valueChanges.subscribe((c) => {
       const file = c.files[0];
-      this.readFile(file).subscribe((c) => (this.imagePreview = c));
+      this.readFileAsDataURL(file).subscribe((c) => (this.imageDataUrl = c));
+      this.readFileAsBinaryString(file).subscribe(
+        (c) => (this.base64Image = c as string)
+      );
     });
   }
 
   save() {
-    console.log(this.form.value);
+    const comic: Comic = this.form.value;
+    comic.image = this.base64Image;
+
     const saveObj: { operation: string; author$: Observable<Comic> } =
       this.data?.comicID > 0
         ? {
@@ -159,7 +117,7 @@ export class ComicDialogComponent implements OnInit {
           }
         : {
             operation: 'criado',
-            author$: this.comicService.postComic(this.form.value),
+            author$: this.comicService.postComic(comic),
           };
 
     saveObj.author$
@@ -177,12 +135,32 @@ export class ComicDialogComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  readFile(file: File): Observable<string | ArrayBuffer> {
+  readFileAsBinaryString(file: File): Observable<string | ArrayBuffer> {
     const temporaryFileReader = new FileReader();
 
     return new Observable<string | ArrayBuffer>((publisher) => {
       temporaryFileReader.onload = () => {
-        publisher.next(temporaryFileReader.result);
+        const binaryString = temporaryFileReader.result as string;
+        const base64 = btoa(binaryString);
+        publisher.next(base64);
+      };
+
+      temporaryFileReader.onerror = () => {
+        temporaryFileReader.abort();
+        publisher.error('Problem parsing with file.');
+      };
+
+      temporaryFileReader.readAsBinaryString(file);
+    });
+  }
+
+  readFileAsDataURL(file: File): Observable<string | ArrayBuffer> {
+    const temporaryFileReader = new FileReader();
+
+    return new Observable<string | ArrayBuffer>((publisher) => {
+      temporaryFileReader.onload = () => {
+        const dataUrl = temporaryFileReader.result as string;
+        publisher.next(dataUrl);
       };
 
       temporaryFileReader.onerror = () => {
@@ -194,65 +172,22 @@ export class ComicDialogComponent implements OnInit {
     });
   }
 
-  filterAuthors() {
-    if (!this.authors) {
-      return;
-    }
-    // get the search keyword
-    const selectedItems = this.authorsControl.value || [];
-    let search = this.authorsSearchControl.value;
-    if (!search) {
-      // this.filteredAuthorsOptions$.subscribe((c) => {
-      //   this.selectedAuthors = [...this.selectedAuthors, ...c].filter(
-      //     (d) => selectedItems && selectedItems.indexOf(d.authorID) !== -1
-      //   );
-      //   console.log('fim', this.selectedAuthors, selectedItems);
-
-      //   this.filteredAuthorsOptions$.next([...this.selectedAuthors]);
-
-      // });
-
-      this.filteredAuthorsOptions$.next(this.authors.slice());
-
-      return;
-    } else {
-      search = search.toLowerCase();
-    }
-
-    // filter the authors
-
-    console.log('selectedItems', selectedItems);
-
-    // this.filteredAuthorsOptions$.subscribe((c) => {
-    //   this.selectedAuthors = c.filter(
-    //     (d) => selectedItems && selectedItems.indexOf(d.authorID) !== -1
-    //   );
-    //   console.log('filter:', this.selectedAuthors);
-    // });
-
-    const result = this.authors.filter(
-      (author) => author.name.toLowerCase().indexOf(search) > -1
+  getGenres() {
+    this.subscriptions.push(
+      this.genreService.getGenres().subscribe((c) => {
+        this.genres = c.body;
+        this.filteredGenresOptions$.next(this.genres);
+      })
     );
-
-    // this.selectedAuthors = [
-    //   // ...this.selectedAuthors,
-    //   ...result.filter(
-    //     (c) =>
-    //       this.selectedAuthors &&
-    //       !this.selectedAuthors.find((d) => d.authorID === c.authorID)
-    //   ),
-    // ];
-    console.log('next', this.selectedAuthors);
-
-    this.filteredAuthorsOptions$.next([...result]);
-    // this.filteredAuthorsOptions$.next([...this.selectedAuthors]);
   }
 
-  getGenres() {
-    this.genreService.getGenres().subscribe((c) => {
-      this.genres = c.body;
-      this.filteredGenresOptions$.next(this.genres);
-    });
+  getAuthors() {
+    this.subscriptions.push(
+      this.authorService.getAuthors().subscribe((c) => {
+        this.authors = c.body;
+        this.filteredAuthorsOptions$.next(this.authors);
+      })
+    );
   }
 
   filterGenres() {
@@ -262,7 +197,7 @@ export class ComicDialogComponent implements OnInit {
 
     // recuperando o termo de pesquisa
 
-    let searchTerm = this.genreSearchCtrl.value;
+    let searchTerm = this.genresSearchControl.value;
     if (!searchTerm) {
       this.filteredGenresOptions$.next(this.genres);
       return;
@@ -278,4 +213,79 @@ export class ComicDialogComponent implements OnInit {
       )
     );
   }
+
+  filterAuthors() {
+    if (!this.authors) {
+      return;
+    }
+    // recuperando o termo de pesquisa
+    let searchTerm = this.authorsSearchControl.value;
+    if (!searchTerm) {
+      this.filteredAuthorsOptions$.next(this.authors);
+      return;
+    } else {
+      searchTerm = searchTerm.toLowerCase();
+    }
+
+    // filtrando os autores
+    this.filteredAuthorsOptions$.next(
+      this.authors.filter(
+        (author) => author.name.toLowerCase().indexOf(searchTerm) > -1
+      )
+    );
+  }
+
+  // filterAuthors() {
+  //   if (!this.authors) {
+  //     return;
+  //   }
+  //   // get the search keyword
+  //   const selectedItems = this.authorsControl.value || [];
+  //   let search = this.authorsSearchControl.value;
+  //   if (!search) {
+  //     // this.filteredAuthorsOptions$.subscribe((c) => {
+  //     //   this.selectedAuthors = [...this.selectedAuthors, ...c].filter(
+  //     //     (d) => selectedItems && selectedItems.indexOf(d.authorID) !== -1
+  //     //   );
+  //     //   console.log('fim', this.selectedAuthors, selectedItems);
+
+  //     //   this.filteredAuthorsOptions$.next([...this.selectedAuthors]);
+
+  //     // });
+
+  //     this.filteredAuthorsOptions$.next(this.authors.slice());
+
+  //     return;
+  //   } else {
+  //     search = search.toLowerCase();
+  //   }
+
+  //   // filter the authors
+
+  //   console.log('selectedItems', selectedItems);
+
+  //   // this.filteredAuthorsOptions$.subscribe((c) => {
+  //   //   this.selectedAuthors = c.filter(
+  //   //     (d) => selectedItems && selectedItems.indexOf(d.authorID) !== -1
+  //   //   );
+  //   //   console.log('filter:', this.selectedAuthors);
+  //   // });
+
+  //   const result = this.authors.filter(
+  //     (author) => author.name.toLowerCase().indexOf(search) > -1
+  //   );
+
+  //   // this.selectedAuthors = [
+  //   //   // ...this.selectedAuthors,
+  //   //   ...result.filter(
+  //   //     (c) =>
+  //   //       this.selectedAuthors &&
+  //   //       !this.selectedAuthors.find((d) => d.authorID === c.authorID)
+  //   //   ),
+  //   // ];
+  //   console.log('next', this.selectedAuthors);
+
+  //   this.filteredAuthorsOptions$.next([...result]);
+  //   // this.filteredAuthorsOptions$.next([...this.selectedAuthors]);
+  // }
 }

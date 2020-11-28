@@ -61,14 +61,14 @@
 
       <mat-form-field>
         <mat-select
-          [formControl]="genreCtrl"
+          [formControl]="genresControl"
           placeholder="Categorias"
           [multiple]="true"
           #multiSelect
         >
           <mat-option>
             <ngx-mat-select-search
-              [formControl]="genreSearchCtrl"
+              [formControl]="genresSearchControl"
               placeholderLabel="pesquisar"
             ></ngx-mat-select-search>
           </mat-option>
@@ -104,7 +104,7 @@
     <p>Pre-Visualização:</p>
 
     <div class="preview-image">
-      <img [src]="imagePreview" *ngIf="imagePreview" />
+      <img [src]="imageDataUrl" *ngIf="imageDataUrl" />
     </div>
   </mat-dialog-content>
 

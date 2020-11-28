@@ -12,7 +12,7 @@ import { Filter } from '../models/filter.model';
 export class AuthorService {
   constructor(private http: HttpClient) {}
 
-  getAuthors(authorFilter: Filter): Observable<HttpResponse<Author[]>> {
+  getAuthors(authorFilter?: Filter): Observable<HttpResponse<Author[]>> {
     return this.http
       .get<Author[]>(`${environment.apiURL}/author`, {
         observe: 'response',

@@ -10,5 +10,5 @@ export interface Comic {
   pages: number;
   authors: Author[];
   genres: Genre[];
-  imagePath: string;
+  image: any;
 }

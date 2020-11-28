@@ -1,4 +1,4 @@
-﻿using System.Drawing;
+﻿using Microsoft.AspNetCore.Http;
 
 namespace ComicStore.Domain.Interfaces
 {
@@ -9,8 +9,8 @@ namespace ComicStore.Domain.Interfaces
         public string Description { get; set; }
         public float Price { get; set; }
         public int Year { get; set; }
+        public byte[] Image { get; set; }
         public int Pages { get; set; }
-        public Image Image { get; set; }
         public  int[] Authors { get; set; }
         public int[] Genres { get; set; }
     }

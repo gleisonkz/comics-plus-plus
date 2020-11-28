@@ -6,10 +6,14 @@ using ComicStore.Service.Interfaces;
 using ComicStore.Service.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
+using System.IO;
 
 namespace ComicStoreWebAPI
 {
@@ -38,9 +42,14 @@ namespace ComicStoreWebAPI
                        .AllowAnyMethod()
                        .AllowAnyHeader()
                        .WithExposedHeaders("X-Pagination");
-
-
             }));
+
+            services.Configure<FormOptions>(c =>
+            {
+                c.ValueLengthLimit = int.MaxValue;
+                c.MultipartBodyLengthLimit = int.MaxValue;
+                c.MemoryBufferThreshold = int.MaxValue;
+            });
 
             services.AddScoped<IFactoryRepository, FactoryEFCoreRepository>();
             services.AddScoped<IUnityOfWork, UnityOfWork>();

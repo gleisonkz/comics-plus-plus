@@ -3,7 +3,9 @@ using ComicStore.Service.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.IO;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
 namespace ComicStore.Application.Controllers
@@ -56,11 +58,11 @@ namespace ComicStore.Application.Controllers
             return Ok(authors);
         }
 
-        [HttpPost]
+        [HttpPost]        
         public IActionResult PostComic([FromBody] ComicDTO comicDTO)
         {
             try
-            {
+            {   
                 var comic = svcComic.CreateComic(comicDTO);
                 svcComic.Commit();
                 return Ok(comicDTO);

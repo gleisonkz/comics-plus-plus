@@ -38,7 +38,7 @@ namespace ComicStore.Service.Services
                 Image = comicDTO.Image,
                 Authors = authors,
                 Genres = genres
-            };
+            };          
 
             repoComic.Add(comic);
             return comic;

@@ -6,7 +6,8 @@ namespace ComicStore.Infra.BaseRepository.Interfaces
     {
         T Add(T entity);
         T Update(T entity);
-        void Delete(T entity);
+        void Delete(T entity);        
         IQueryable<T> GetQuery(bool trackingChanges = true);
+        T Attach(T entity);
     }
 }

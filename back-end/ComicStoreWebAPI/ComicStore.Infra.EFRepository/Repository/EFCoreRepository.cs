@@ -9,16 +9,16 @@ namespace ComicStore.Infra.EFRepository.Repository
     {
         private readonly ComicStoreDbContext context;
         private DbSet<T> dbSet;
-        private DbSet<T> DbSet => dbSet = (dbSet ?? context.Set<T>());
+        private DbSet<T> DbSet => dbSet ??= context.Set<T>();
 
         public EFCoreRepository(ComicStoreDbContext context)
         {
             this.context = context;
         }
         public T Add(T entity)
-        {
-            return DbSet.Add(entity).Entity;
-        }
+        {            
+            return DbSet.Add(entity).Entity;                  
+        }        
 
         public void Delete(T entity)
         {
@@ -32,7 +32,12 @@ namespace ComicStore.Infra.EFRepository.Repository
 
         public IQueryable<T> GetQuery(bool trackingChanges = true)
         {
-            return DbSet.AsNoTracking();
+            return DbSet.AsNoTracking();            
+        }
+
+        public T Attach(T entity)
+        {
+            return DbSet.Attach(entity).Entity;
         }
     }
 }

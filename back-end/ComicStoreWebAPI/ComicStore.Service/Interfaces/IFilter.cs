@@ -8,6 +8,5 @@ namespace ComicStore.Service.Interfaces
         int PageNumber { get; set; }
         int PageSize { get; set; }
         Expression<Func<T, bool>> GetPredicate();
-
     }
 }

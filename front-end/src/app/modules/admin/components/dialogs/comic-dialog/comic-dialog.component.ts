@@ -49,11 +49,18 @@ export class ComicDialogComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    if (this.data?.image) {
+      const img = document.createElement('img');
+      img.src = 'data:image/jpeg;base64,' + btoa(this.data?.image);
+      this.imageDataUrl = 'data:image/jpg;base64,' + this.data?.image;
+      document.body.appendChild(img);
+    }
+
     // carregando a lista inicial de categorias e autores do servidor
     this.getGenres();
     this.getAuthors();
 
-    // escutando pela atualizações no campo de pesquisa
+    // escutando pela atualizações no campo de pesquisa de categorias e autores
     this.genresSearchControl.valueChanges
       .pipe(takeUntil(this._onDestroy))
       .subscribe(() => {
@@ -137,6 +144,8 @@ export class ComicDialogComponent implements OnInit {
 
   readFileAsBinaryString(file: File): Observable<string | ArrayBuffer> {
     const temporaryFileReader = new FileReader();
+    console.log(file.name);
+    console.log(file.type);
 
     return new Observable<string | ArrayBuffer>((publisher) => {
       temporaryFileReader.onload = () => {

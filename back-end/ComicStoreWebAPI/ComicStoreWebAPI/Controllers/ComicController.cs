@@ -41,6 +41,7 @@ namespace ComicStore.Application.Controllers
                     c.Pages,
                     c.Price,
                     c.Year,
+                    c.Image
                 });
 
             var result = comics.ToList();

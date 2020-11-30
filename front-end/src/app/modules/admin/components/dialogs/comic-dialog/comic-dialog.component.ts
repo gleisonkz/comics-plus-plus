@@ -10,6 +10,7 @@ import { Author } from 'src/app/models/author.model';
 import { Genre } from 'src/app/models/genre.model';
 import { GenreService } from '../../../../../services/genre.service';
 import { AuthorService } from '../../../../../services/author.service';
+import { ComicImage } from '../../../../../models/comic-image.model';
 
 @Component({
   templateUrl: './comic-dialog.component.html',
@@ -142,16 +143,20 @@ export class ComicDialogComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  readFileAsBinaryString(file: File): Observable<string | ArrayBuffer> {
+  readFileAsBinaryString(file: File): Observable<ComicImage> {
     const temporaryFileReader = new FileReader();
-    console.log(file.name);
-    console.log(file.type);
+    const [fileName, fileExtension] = file.name.split('.');
 
-    return new Observable<string | ArrayBuffer>((publisher) => {
+    return new Observable<ComicImage>((publisher) => {
       temporaryFileReader.onload = () => {
         const binaryString = temporaryFileReader.result as string;
         const base64 = btoa(binaryString);
-        publisher.next(base64);
+        const comicImage: ComicImage = {
+          base64: base64,
+          extension: fileExtension,
+          name: fileName,
+        };
+        publisher.next(comicImage);
       };
 
       temporaryFileReader.onerror = () => {

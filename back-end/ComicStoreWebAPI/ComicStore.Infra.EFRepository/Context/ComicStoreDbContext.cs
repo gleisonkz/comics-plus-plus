@@ -14,5 +14,6 @@ namespace ComicStore.Infra.EFRepository.Context
         public DbSet<Comic> Comic { get; set; }
         public DbSet<Author> Author { get; set; }
         public DbSet<Genre> Genre { get; set; }
+        public DbSet<ComicImage> ComicImage { get; set; }
     }
 }

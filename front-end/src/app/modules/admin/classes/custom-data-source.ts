@@ -29,7 +29,6 @@ export class CustomDataSource<T> implements DataSource<T> {
           publisher.next(pagination);
 
           this.loadingData.next(false);
-          console.log(response.body);
 
           return this.sourceSubject.next(response.body);
         });

@@ -24,7 +24,6 @@ export class QueryParamsInterceptor implements HttpInterceptor {
 
   removeNullValuesFromQueryParams(params: HttpParams) {
     const paramsKeysAux = params.keys();
-    console.log('interceptor');
 
     paramsKeysAux.forEach((key) => {
       const value = params.get(key);

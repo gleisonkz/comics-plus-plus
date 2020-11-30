@@ -57,7 +57,6 @@ export class ComicCrudComponent implements OnInit {
     this.dataSource = new CustomDataSource<ComicList>((filter: Filter) =>
       this.comicService.getComics2(filter)
     );
-    console.log(this.dataSource);
   }
 
   defaultPaginateValues() {
@@ -102,8 +101,6 @@ export class ComicCrudComponent implements OnInit {
   }
 
   loadData(comic?: Comic): void {
-    console.log(comic);
-
     this.dataSource.loading$
       .pipe(
         finalize(() => {

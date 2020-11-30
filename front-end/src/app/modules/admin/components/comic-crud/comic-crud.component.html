@@ -15,13 +15,11 @@
 </h2>
 <mat-divider></mat-divider>
 
-<p>{{ form.value | json }}</p>
 <div class="inner-wrapper">
   <form class="genre-form" [formGroup]="form">
     <div class="controlers-wrapper">
       <mat-form-field>
         <input
-          cmsFormatNumber
           type="number"
           matInput
           placeholder="ID"

@@ -57,12 +57,6 @@ export class ShoppingCartService {
     currentExpect.action();
   }
 
-  // public addMultipleItemsToCart(item: Comic, quantity: number) {
-  //   for (let index = 0; index < quantity; index++) {
-  //     this.addItem(item);
-  //   }
-  // }
-
   public removeItem(item: CartItem) {
     const items = this.itemsSource$.value;
     items.splice(items.indexOf(item), 1);

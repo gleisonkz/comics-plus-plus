@@ -6,12 +6,12 @@ namespace ComicStore.Application.Filters
 {
     public class ComicFilter : BaseFilter<Comic>
     {
-        public int ComicID { get; set; }
+        public int? ComicID { get; set; } = null;
         public string Title { get; set; }
         public string Description { get; set; }
-        public float Price { get; set; }
-        public int Year { get; set; }
-        public int Pages { get; set; }
+        public float? Price { get; set; }
+        public int? Year { get; set; }
+        public int? Pages { get; set; }
         public int[] Authors { get; set; }
         public int[] Genres { get; set; }
         public byte[] Image { get; set; }
@@ -19,19 +19,22 @@ namespace ComicStore.Application.Filters
         {
             Expression<Func<Comic, bool>> predicate = c => true;
 
+            if (ComicID.HasValue)
+                predicate = predicate.And(c => c.ComicID == ComicID);
+
             if (!string.IsNullOrEmpty(Title))
                 predicate = predicate.And(c => c.Title.Contains(Title));
 
             if (!string.IsNullOrEmpty(Description))
                 predicate = predicate.And(c => c.Description.Contains(Description));
 
-            if (Price > 0)
+            if (Price.HasValue)
                 predicate = predicate.And(c => c.Price == Price);
 
-            if (Year > 0)
+            if (Year.HasValue)
                 predicate = predicate.And(c => c.Year == Year);
 
-            if (Pages > 0)
+            if (Pages.HasValue)
                 predicate = predicate.And(c => c.Pages == Pages);
 
             //if (Authors.Length > 0)

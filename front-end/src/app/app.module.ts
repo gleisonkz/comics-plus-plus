@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -21,6 +21,7 @@ import { MaterialModule } from './modules/material/material/material.module';
 import { OrderFinishedComponent } from './pages/order-finished/order-finished.component';
 import { RatingComponent } from './components/rating/rating.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { QueryParamsInterceptor } from './shared/interceptors/query-params.interceptor';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,13 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
     ReactiveFormsModule,
     MaterialModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: QueryParamsInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -2,6 +2,7 @@
 using ComicStore.Domain.POCO;
 using ComicStore.Service.Classes;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace ComicStore.Service.Interfaces
@@ -10,6 +11,8 @@ namespace ComicStore.Service.Interfaces
     {
         Comic CreateComic(IComicDTO comicDTO);
         IQueryable<Comic> GetComic();
-        Paginator<IComicDTO> GetComics(IFilter<Comic> filter, Func<Comic, IComicDTO> projection);
+        IQueryable<Author> GetAuthorsByComicID(int comicID);
+        IQueryable<Genre> GetGenresByComicID(int comicID);
+        Paginator<dynamic> GetComics(IFilter<Comic> filter, Func<Comic, dynamic> projection);
     }
 }

@@ -12,6 +12,7 @@ import { ConfirmationDialogComponent } from '../dialogs/confirmation-dialog/conf
 import { ComicService } from '../../../../services/comic.service';
 import { MatPaginatorService } from 'src/app/services/mat-paginator.service';
 import { ComicDialogComponent } from '../dialogs/comic-dialog/comic-dialog.component';
+import { ComicList } from '../../../../models/comic-list.model';
 
 @Component({
   selector: 'cms-comic-crud',
@@ -22,17 +23,17 @@ export class ComicCrudComponent implements OnInit {
   pageSizeOption: number[] = pageSizeOptions;
   loadingComplete: boolean = false;
   form: FormGroup;
-  dataSource: CustomDataSource<Comic>;
+  dataSource: CustomDataSource<ComicList>;
   @ViewChild(MatPaginator)
   paginator: MatPaginator;
   comicFilter: Filter;
   displayedColumns: string[] = [
     'ComicID',
     'Titulo',
-    // 'Descrição',
-    // 'Preço',
-    // 'Ano',
-    // 'Páginas',
+    'Descrição',
+    'Preço',
+    'Ano',
+    'Páginas',
     'Ações',
   ];
   constructor(
@@ -46,12 +47,17 @@ export class ComicCrudComponent implements OnInit {
   ngOnInit(): void {
     this.form = new FormGroup({
       comicID: new FormControl(''),
+      title: new FormControl(''),
       description: new FormControl(''),
+      price: new FormControl(''),
+      year: new FormControl(''),
+      pages: new FormControl(''),
     });
 
-    this.dataSource = new CustomDataSource<Comic>((filter: Filter) =>
+    this.dataSource = new CustomDataSource<ComicList>((filter: Filter) =>
       this.comicService.getComics2(filter)
     );
+    console.log(this.dataSource);
   }
 
   defaultPaginateValues() {
@@ -96,6 +102,8 @@ export class ComicCrudComponent implements OnInit {
   }
 
   loadData(comic?: Comic): void {
+    console.log(comic);
+
     this.dataSource.loading$
       .pipe(
         finalize(() => {

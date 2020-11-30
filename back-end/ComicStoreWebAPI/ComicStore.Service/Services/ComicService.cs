@@ -39,15 +39,19 @@ namespace ComicStore.Service.Services
                 Price = comicDTO.Price,
                 Year = comicDTO.Year,
                 Image = comicDTO.Image,
+                Genres = genres,
+                Authors = authors
             };
 
             repoComic.Attach(comic);
-
-            comic.Genres = genres;
-            comic.Authors = authors;
-
             repoComic.Add(comic);
             return comic;
+        }
+
+        public IQueryable<Author> GetAuthorsByComicID(int comicID)
+        {
+            return GetComic().Where(c => c.ComicID == comicID)
+                             .SelectMany(c => c.Authors);                          
         }
 
         public IQueryable<Comic> GetComic()
@@ -55,14 +59,20 @@ namespace ComicStore.Service.Services
             return repoComic.GetQuery();
         }
 
-        public Paginator<IComicDTO> GetComics(IFilter<Comic> filter, Func<Comic, IComicDTO> projection)
+        public Paginator<dynamic> GetComics(IFilter<Comic> filter, Func<Comic, dynamic> projection)
         {
             Expression<Func<Comic, bool>> predicate = filter.GetPredicate();
 
-            return Paginator<IComicDTO>
+            return Paginator<dynamic>
                 .Paginate(repoComic.GetQuery()
                                    .Where(predicate)
                                    .OrderBy(c => c.ComicID), filter, projection);
+        }
+
+        public IQueryable<Genre> GetGenresByComicID(int comicID)
+        {
+            return GetComic().Where(c => c.ComicID == comicID)
+                             .SelectMany(c => c.Genres);                          
         }
     }
 }

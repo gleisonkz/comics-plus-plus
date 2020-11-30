@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
 import { delay } from 'rxjs/operators';
@@ -35,35 +35,4 @@ export class GenreService {
   deleteGenre(genreID: number): Observable<Genre> {
     return this.http.delete<Genre>(`${environment.apiURL}/genre/${genreID}`);
   }
-
-  // get hasItems(): boolean {
-  //   return !!this.itemsSource$.value.length;
-  // }
-
-  // get totalItems(): number {
-  //   return this.itemsSource$.value.length;
-  // }
-
-  // public saveItem(item: Genre) {
-  //   const foundItem = this.itemsSource$.value.find(
-  //     (c) => c.genreID === item.genreID
-  //   );
-
-  //   const expectations = [
-  //     {
-  //       expect: () => foundItem !== undefined,
-  //       action: () => {
-  //         foundItem.name = item.name;
-  //         this.itemsSource$.next(this.itemsSource$.value);
-  //       },
-  //     },
-  //     {
-  //       expect: () => true,
-  //       action: () =>
-  //         this.itemsSource$.next([...this.itemsSource$.value, item]),
-  //     },
-  //   ];
-  //   const currentExpect = expectations.find((c) => c.expect());
-  //   currentExpect.action();
-  // }
 }

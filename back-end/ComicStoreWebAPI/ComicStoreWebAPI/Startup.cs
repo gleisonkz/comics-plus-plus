@@ -13,6 +13,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Mvc.NewtonsoftJson;
+
 using System.IO;
 
 namespace ComicStoreWebAPI
@@ -29,7 +31,9 @@ namespace ComicStoreWebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers()
+                    .AddNewtonsoftJson();
+
 
             _ = services.AddDbContext<ComicStoreDbContext>(options =>
             {
@@ -55,7 +59,8 @@ namespace ComicStoreWebAPI
             services.AddScoped<IUnityOfWork, UnityOfWork>();
             services.AddScoped<IComicService, ComicService>();
             services.AddScoped<IGenreService, GenreService>();
-            services.AddScoped<IAuthorService, AuthorService>();            
+            services.AddScoped<IAuthorService, AuthorService>();                  
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

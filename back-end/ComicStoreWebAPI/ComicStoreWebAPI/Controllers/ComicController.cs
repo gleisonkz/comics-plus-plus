@@ -21,32 +21,26 @@ namespace ComicStore.Application.Controllers
     public class ComicController : ControllerBase
     {
         private readonly IComicService svcComic;
-        private ComicStoreDbContext context;
 
-        public ComicController(IComicService svcComic, ComicStoreDbContext context)
+        public ComicController(IComicService svcComic)
         {
             this.svcComic = svcComic;
-            this.context = context;
         }
 
         // GET: api/Comic
         [HttpGet]
         public IActionResult GetComic([FromQuery] ComicFilter filter)
         {
-            var comic = svcComic.GetComic().ToList();
-
             var comics = svcComic.GetComics(
                 filter,
-                c => new ComicDTO
+                c => new 
                 {
-                    ComicID = filter.ComicID,
-                    Title = filter.Title,
-                    Description = filter.Description,
-                    Pages = filter.Pages,
-                    Price = filter.Price,
-                    Year = filter.Year,
-                    Authors = filter.Authors,
-                    Genres = filter.Genres
+                    c.ComicID,
+                    c.Title,
+                    c.Description,
+                    c.Pages,
+                    c.Price,
+                    c.Year,
                 });
 
             var result = comics.ToList();
@@ -65,25 +59,37 @@ namespace ComicStore.Application.Controllers
             return Ok(comics);
         }
 
-        
+
         [HttpGet]
-        [Route("{id}/authors")]
-        public async Task<IActionResult> GetAtuhors(int comicID)
+        [Route("{comicID}/authors")]
+        public IActionResult GetAuthorsByComicID(int comicID)
         {
-            var authors =
-               await svcComic.GetComic()
-                   .Where(c=> c.ComicID == comicID)
-                   .SelectMany(c=> c.Authors)
-                   .Select(c=> new
-                   {
-                      c.AuthorID,
-                      c.Name
-                   })
-                   .ToListAsync();
+            var authors = svcComic.GetAuthorsByComicID(comicID)
+                                  .Select(c => new
+                                       {
+                                           c.AuthorID,
+                                           c.Name
+                                       })
+                                  .ToList();
             return Ok(authors);
         }
 
-        [HttpPost]        
+        [HttpGet]
+        [Route("{comicID}/genres")]
+        public IActionResult GetGenresByComicID(int comicID)
+        {
+            var genres = svcComic.GetGenresByComicID(comicID)
+                                  .Select(c => new
+                                  {
+                                      c.GenreID,
+                                      c.Description
+                                  })
+                                  .ToList();
+            return Ok(genres);
+        }
+
+
+        [HttpPost]
         public IActionResult PostComic([FromBody] ComicDTO comicDTO)
         {
             try

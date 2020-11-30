@@ -15,11 +15,13 @@
 </h2>
 <mat-divider></mat-divider>
 
+<p>{{ form.value | json }}</p>
 <div class="inner-wrapper">
   <form class="genre-form" [formGroup]="form">
     <div class="controlers-wrapper">
       <mat-form-field>
         <input
+          cmsFormatNumber
           type="number"
           matInput
           placeholder="ID"
@@ -28,7 +30,7 @@
       </mat-form-field>
 
       <mat-form-field>
-        <input matInput placeholder="Titulo" formControlName="description" />
+        <input matInput placeholder="Titulo" formControlName="title" />
       </mat-form-field>
 
       <mat-form-field>
@@ -36,7 +38,7 @@
       </mat-form-field>
 
       <mat-form-field>
-        <input matInput placeholder="Preço" formControlName="description" />
+        <input matInput placeholder="Preço" formControlName="price" />
       </mat-form-field>
 
       <mat-form-field>
@@ -44,7 +46,7 @@
           type="number"
           matInput
           placeholder="Ano"
-          formControlName="description"
+          formControlName="year"
         />
       </mat-form-field>
 
@@ -53,7 +55,7 @@
           type="number"
           matInput
           placeholder="Páginas"
-          formControlName="description"
+          formControlName="pages"
         />
       </mat-form-field>
 
@@ -119,6 +121,26 @@
     <ng-container matColumnDef="Titulo">
       <th mat-header-cell *matHeaderCellDef>Titulo</th>
       <td mat-cell *matCellDef="let element">{{ element.title }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="Descrição">
+      <th mat-header-cell *matHeaderCellDef>Descrição</th>
+      <td mat-cell *matCellDef="let element">{{ element.description }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="Preço">
+      <th mat-header-cell *matHeaderCellDef>Preço</th>
+      <td mat-cell *matCellDef="let element">{{ element.price }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="Ano">
+      <th mat-header-cell *matHeaderCellDef>Ano</th>
+      <td mat-cell *matCellDef="let element">{{ element.year }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="Páginas">
+      <th mat-header-cell *matHeaderCellDef>Páginas</th>
+      <td mat-cell *matCellDef="let element">{{ element.pages }}</td>
     </ng-container>
 
     <ng-container matColumnDef="Ações">

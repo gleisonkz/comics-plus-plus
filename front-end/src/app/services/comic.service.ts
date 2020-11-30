@@ -1,11 +1,12 @@
-import { ErrorHandler, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Comic } from '../models/comic.model';
 import { Observable, of } from 'rxjs';
 import { COMICS } from '../mock/comics.mock';
 import { Filter } from '../models/filter.model';
 import { environment } from 'src/environments/environment';
-import { catchError, delay } from 'rxjs/operators';
+import { delay } from 'rxjs/operators';
+import { ComicList } from '../models/comic-list.model';
 
 @Injectable({
   providedIn: 'root',
@@ -17,9 +18,9 @@ export class ComicService {
     return of(COMICS);
   }
 
-  getComics2(comicFilter: Filter): Observable<HttpResponse<Comic[]>> {
+  getComics2(comicFilter: Filter): Observable<HttpResponse<ComicList[]>> {
     return this.http
-      .get<Comic[]>(`${environment.apiURL}/comic`, {
+      .get<ComicList[]>(`${environment.apiURL}/comic`, {
         observe: 'response',
         responseType: 'json',
         params: comicFilter,

@@ -4,14 +4,16 @@ using ComicStore.Infra.EFRepository.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ComicStore.Infra.EFRepository.Migrations
 {
     [DbContext(typeof(ComicStoreDbContext))]
-    partial class ComicStoreDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201201123241_ComicImageConfigurationOnetoOne")]
+    partial class ComicImageConfigurationOnetoOne
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -78,6 +80,9 @@ namespace ComicStore.Infra.EFRepository.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
+                    b.Property<byte[]>("Image")
+                        .HasColumnType("varbinary(max)");
+
                     b.Property<int>("Pages")
                         .HasColumnType("int");
 
@@ -100,8 +105,7 @@ namespace ComicStore.Infra.EFRepository.Migrations
             modelBuilder.Entity("ComicStore.Domain.POCO.ComicImage", b =>
                 {
                     b.Property<int>("ComicID")
-                        .HasColumnType("int")
-                        .HasColumnName("ComicID");
+                        .HasColumnType("int");
 
                     b.Property<byte[]>("Base64")
                         .IsRequired()
@@ -172,17 +176,12 @@ namespace ComicStore.Infra.EFRepository.Migrations
             modelBuilder.Entity("ComicStore.Domain.POCO.ComicImage", b =>
                 {
                     b.HasOne("ComicStore.Domain.POCO.Comic", "Comic")
-                        .WithOne("Image")
+                        .WithOne()
                         .HasForeignKey("ComicStore.Domain.POCO.ComicImage", "ComicID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Comic");
-                });
-
-            modelBuilder.Entity("ComicStore.Domain.POCO.Comic", b =>
-                {
-                    b.Navigation("Image");
                 });
 #pragma warning restore 612, 618
         }

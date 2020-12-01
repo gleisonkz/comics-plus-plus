@@ -42,7 +42,7 @@ namespace ComicStore.Application.Controllers
                     c.Price,
                     c.Year,
                     c.Image
-                });
+                });            
 
             var result = comics.ToList();
 
@@ -58,6 +58,21 @@ namespace ComicStore.Application.Controllers
                  );
 
             return Ok(comics);
+        }
+
+        [HttpGet]
+        [Route("{comicID}/image")]
+        public IActionResult GetComicImageByComicID(int comicID)
+        {
+            var image = svcComic.GetComicImageByComicID(comicID)
+                                       .Select(c => new
+                                       {
+                                           c.Name,
+                                           c.Base64,
+                                           c.Extension
+                                       }).SingleOrDefault(); 
+                
+            return Ok(image);
         }
 
 

@@ -22,6 +22,7 @@ namespace ComicStore.Service.Services
         {
             var repoAuthor = factoryRepository.CreateRepository<Author>();
             var repoGenre = factoryRepository.CreateRepository<Genre>();
+            var repoImage = factoryRepository.CreateRepository<ComicImage>();
 
             List<Author> authors = repoAuthor.GetQuery()
                                              .Where(c => comicDTO.Authors.Contains(c.AuthorID))
@@ -31,6 +32,13 @@ namespace ComicStore.Service.Services
                                           .Where(c => comicDTO.Genres.Contains(c.GenreID))
                                           .ToList();
 
+            var image = new ComicImage
+            {
+                Base64 = comicDTO.Image.Base64,                
+                Extension = comicDTO.Image.Extension,
+                Name = comicDTO.Image.Name
+            };
+
             Comic comic = new Comic
             {
                 Description = comicDTO.Description,
@@ -38,14 +46,13 @@ namespace ComicStore.Service.Services
                 Title = comicDTO.Title,
                 Price = comicDTO.Price,
                 Year = comicDTO.Year,
-                Image = comicDTO.Image,
+                Image = image,
                 Genres = genres,
                 Authors = authors
-            };
+            };            
 
             repoComic.Attach(comic);
-            repoComic.Add(comic);
-            return comic;
+            return repoComic.Add(comic);            
         }
 
         public IQueryable<Author> GetAuthorsByComicID(int comicID)
@@ -57,6 +64,14 @@ namespace ComicStore.Service.Services
         public IQueryable<Comic> GetComic()
         {
             return repoComic.GetQuery();
+        }
+
+        public IQueryable<ComicImage> GetComicImageByComicID(int comicID)
+        {
+            var repoImage = factoryRepository.CreateRepository<ComicImage>();
+            IQueryable<ComicImage> image = repoImage.GetQuery()
+                                                    .Where(c => c.ComicID == comicID);                                   
+            return image;
         }
 
         public Paginator<dynamic> GetComics(IFilter<Comic> filter, Func<Comic, dynamic> projection)

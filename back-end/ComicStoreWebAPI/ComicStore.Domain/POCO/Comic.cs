@@ -10,7 +10,7 @@ namespace ComicStore.Domain.POCO
         public float Price { get; set; }
         public int Year { get; set; }
         public int Pages { get; set; }
-        public byte[] Image { get; set; }
+        public ComicImage Image { get; set; }
         public virtual ICollection<Author> Authors { get; set; } 
         public virtual ICollection<Genre> Genres { get; set; }
     }

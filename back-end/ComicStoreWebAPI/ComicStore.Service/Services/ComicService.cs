@@ -89,5 +89,14 @@ namespace ComicStore.Service.Services
             return GetComic().Where(c => c.ComicID == comicID)
                              .SelectMany(c => c.Genres);                          
         }
+
+        public Comic DeleteComic(int comicID)
+        {
+            Comic objComic = repoComic.GetQuery()
+                                      .Where(c => c.ComicID == comicID)
+                                      .SingleOrDefault();
+            repoComic.Delete(objComic);
+            return objComic;
+        }
     }
 }

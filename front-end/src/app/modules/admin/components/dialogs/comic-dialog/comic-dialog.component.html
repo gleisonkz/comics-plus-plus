@@ -95,8 +95,10 @@
 
     <mat-form-field>
       <ngx-mat-file-input
-        formControlName="image"
+        [formControl]="imageControl"
         placeholder="Imagem"
+        accept="image/png,image/jpg,image/gif,image/jpeg"
+        (change)="loadImageTeste($event)"
       ></ngx-mat-file-input>
       <mat-icon matSuffix>folder</mat-icon>
     </mat-form-field>

@@ -15,5 +15,6 @@ namespace ComicStore.Service.Interfaces
         IQueryable<Genre> GetGenresByComicID(int comicID);
         Paginator<dynamic> GetComics(IFilter<Comic> filter, Func<Comic, dynamic> projection);
         IQueryable<ComicImage> GetComicImageByComicID(int comicID);
+        Comic DeleteComic(int comicID);
     }
 }

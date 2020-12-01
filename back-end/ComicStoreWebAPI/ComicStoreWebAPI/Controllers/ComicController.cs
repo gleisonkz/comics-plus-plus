@@ -120,5 +120,21 @@ namespace ComicStore.Application.Controllers
                 return BadRequest($"Erro: {ex.Message}");
             }
         }
+
+        [HttpDelete("{comicID}")]
+        public IActionResult DeleteComic(int comicID)
+        {
+            try
+            {
+                svcComic.DeleteComic(comicID);                
+                svcComic.Commit();
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                svcComic.Rollback();
+                return BadRequest($"Erro: {ex.Message}");
+            }
+        }
     }
 }

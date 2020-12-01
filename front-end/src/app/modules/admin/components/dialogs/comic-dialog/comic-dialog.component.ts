@@ -19,6 +19,7 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 })
 export class ComicDialogComponent implements OnInit {
   form: FormGroup;
+  imageControl = new FormControl();
   imageDataUrl: string | ArrayBuffer | SafeUrl;
   base64Image: string;
   comicImage: ComicImage;
@@ -95,7 +96,7 @@ export class ComicDialogComponent implements OnInit {
       image: new FormControl(this.data?.title || '', [Validators.required]),
     });
 
-    // this.subscribeToPreviewImageControl();
+    this.subscribeToPreviewImageControl();
   }
 
   ngOnDestroy() {
@@ -109,11 +110,9 @@ export class ComicDialogComponent implements OnInit {
       const file = c.files[0];
       // this.readFileAsDataURL(file).subscribe((c) => (this.imageDataUrl = c));
       this.readFileAsBinaryString(file).subscribe((comicImage: ComicImage) => {
-        // this.imageDataUrl = this.domSanitizer.bypassSecurityTrustUrl(
-        //   `data:image/${comicImage.extension}jpg;base64,` + comicImage.base64
-        // );
-        console.log('asdf');
-
+        this.imageDataUrl = this.domSanitizer.bypassSecurityTrustUrl(
+          `data:image/${comicImage.extension};base64,` + comicImage.base64
+        );
         this.comicImage = comicImage;
       });
     });
@@ -122,7 +121,7 @@ export class ComicDialogComponent implements OnInit {
   loadComicImage(comicID: number) {
     this.comicService.getComicImageByComicID(comicID).subscribe((c) => {
       this.imageDataUrl = this.domSanitizer.bypassSecurityTrustUrl(
-        `data:image/${c.extension}jpg;base64,` + c.base64
+        `data:image/${c.extension};base64,` + c.base64
       );
     });
   }

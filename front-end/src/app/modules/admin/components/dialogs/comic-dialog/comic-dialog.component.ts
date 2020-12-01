@@ -11,6 +11,7 @@ import { Genre } from 'src/app/models/genre.model';
 import { GenreService } from '../../../../../services/genre.service';
 import { AuthorService } from '../../../../../services/author.service';
 import { ComicImage } from '../../../../../models/comic-image.model';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 @Component({
   templateUrl: './comic-dialog.component.html',
@@ -18,8 +19,10 @@ import { ComicImage } from '../../../../../models/comic-image.model';
 })
 export class ComicDialogComponent implements OnInit {
   form: FormGroup;
-  imageDataUrl: string | ArrayBuffer;
+  imageDataUrl: string | ArrayBuffer | SafeUrl;
   base64Image: string;
+  comicImage: ComicImage;
+  comic: Comic;
   _onDestroy = new Subject<void>();
   private subscriptions: Subscription[] = [];
 
@@ -46,16 +49,17 @@ export class ComicDialogComponent implements OnInit {
     private notificationService: NotificationService,
     private genreService: GenreService,
     private authorService: AuthorService,
+    private domSanitizer: DomSanitizer,
     @Inject(MAT_DIALOG_DATA) private data: Comic
-  ) {}
+  ) {
+    this.comic = data;
+  }
 
   ngOnInit(): void {
-    if (this.data?.image) {
-      const img = document.createElement('img');
-      img.src = 'data:image/jpeg;base64,' + btoa(this.data?.image);
-      this.imageDataUrl = 'data:image/jpg;base64,' + this.data?.image;
-      document.body.appendChild(img);
-    }
+    // this.data?.comicID ? 'Update' : 'Create';
+    // if (this.data?.image) {
+    //   this.imageDataUrl = 'data:image/jpg;base64,' + this.data?.image.base64;
+    // }
 
     // carregando a lista inicial de categorias e autores do servidor
     this.getGenres();
@@ -91,7 +95,7 @@ export class ComicDialogComponent implements OnInit {
       image: new FormControl(this.data?.title || '', [Validators.required]),
     });
 
-    this.subscribeToPreviewImageControl();
+    // this.subscribeToPreviewImageControl();
   }
 
   ngOnDestroy() {
@@ -103,16 +107,29 @@ export class ComicDialogComponent implements OnInit {
   subscribeToPreviewImageControl(): void {
     this.form.controls['image'].valueChanges.subscribe((c) => {
       const file = c.files[0];
-      this.readFileAsDataURL(file).subscribe((c) => (this.imageDataUrl = c));
-      this.readFileAsBinaryString(file).subscribe(
-        (c) => (this.base64Image = c as string)
+      // this.readFileAsDataURL(file).subscribe((c) => (this.imageDataUrl = c));
+      this.readFileAsBinaryString(file).subscribe((comicImage: ComicImage) => {
+        // this.imageDataUrl = this.domSanitizer.bypassSecurityTrustUrl(
+        //   `data:image/${comicImage.extension}jpg;base64,` + comicImage.base64
+        // );
+        console.log('asdf');
+
+        this.comicImage = comicImage;
+      });
+    });
+  }
+
+  loadComicImage(comicID: number) {
+    this.comicService.getComicImageByComicID(comicID).subscribe((c) => {
+      this.imageDataUrl = this.domSanitizer.bypassSecurityTrustUrl(
+        `data:image/${c.extension}jpg;base64,` + c.base64
       );
     });
   }
 
   save() {
     const comic: Comic = this.form.value;
-    comic.image = this.base64Image;
+    comic.image = this.comicImage;
 
     const saveObj: { operation: string; author$: Observable<Comic> } =
       this.data?.comicID > 0

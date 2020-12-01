@@ -101,7 +101,16 @@
       <mat-icon matSuffix>folder</mat-icon>
     </mat-form-field>
 
-    <p>Pre-Visualização:</p>
+    <div class="preview-image-action">
+      <p>Pre-Visualização:</p>
+      <button
+        (click)="loadComicImage(comic.comicID)"
+        *ngIf="!!comic?.comicID"
+        class="mat-raised-button mat-primary"
+      >
+        Carregar
+      </button>
+    </div>
 
     <div class="preview-image">
       <img [src]="imageDataUrl" *ngIf="imageDataUrl" />

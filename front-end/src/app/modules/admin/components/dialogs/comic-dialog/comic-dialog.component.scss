@@ -22,3 +22,20 @@ mat-form-field + mat-form-field {
     @include size(100, 140);
   }
 }
+
+.preview-image-action {
+  display: flex;
+  align-items: center;
+
+  p {
+    margin: rem(0 5 0 0);
+  }
+
+  button {
+    font-size: rem(12);
+    height: rem(24);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

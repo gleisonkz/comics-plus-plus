@@ -7,6 +7,7 @@ import { Filter } from '../models/filter.model';
 import { environment } from 'src/environments/environment';
 import { delay } from 'rxjs/operators';
 import { ComicList } from '../models/comic-list.model';
+import { ComicImage } from '../models/comic-image.model';
 
 @Injectable({
   providedIn: 'root',
@@ -16,6 +17,12 @@ export class ComicService {
 
   getComics(): Observable<Comic[]> {
     return of(COMICS);
+  }
+
+  getComicImageByComicID(comicID: number) {
+    return this.http.get<ComicImage>(
+      `${environment.apiURL}/comic/${comicID}/image`
+    );
   }
 
   getComics2(comicFilter: Filter): Observable<HttpResponse<ComicList[]>> {

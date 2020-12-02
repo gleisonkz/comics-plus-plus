@@ -16,7 +16,7 @@ namespace ComicStore.Infra.EFRepository.Mapping
 
             builder.Property(c => c.Description)
                  .IsRequired()
-                 .HasMaxLength(200);
+                 .HasMaxLength(500);
 
             builder.Property(c => c.Price)
                  .IsRequired();

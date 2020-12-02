@@ -2,7 +2,9 @@
 using ComicStore.Application.Filters;
 using ComicStore.Domain.POCO;
 using ComicStore.Infra.EFRepository.Context;
+using ComicStore.Service.Classes;
 using ComicStore.Service.Interfaces;
+using ComicStore.Shared.Class;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
@@ -31,33 +33,45 @@ namespace ComicStore.Application.Controllers
         [HttpGet]
         public IActionResult GetComic([FromQuery] ComicFilter filter)
         {
-            var comics = svcComic.GetComics(
-                filter,
-                c => new 
-                {
-                    c.ComicID,
-                    c.Title,
-                    c.Description,
-                    c.Pages,
-                    c.Price,
-                    c.Year,
-                    c.Image
-                });            
+            try
+            {
+                Paginator<dynamic> comics = svcComic.GetPaginatedComics(
+                    filter,
+                    c => new
+                    {
+                        c.ComicID,
+                        c.Title,
+                        c.Description,
+                        c.Pages,
+                        c.Price,
+                        c.Year,                        
+                    });
 
-            var result = comics.ToList();
+                var result = comics.ToList();
 
-            Response.Headers.Add(
-                "X-Pagination",
-                 JsonConvert.SerializeObject(comics.GetPaginatorMetadata(), new JsonSerializerSettings
-                 {
-                     ContractResolver = new DefaultContractResolver
+                Response.Headers.Add(
+                    "X-Pagination",
+                     JsonConvert.SerializeObject(comics.GetPaginatorMetadata(), new JsonSerializerSettings
                      {
-                         NamingStrategy = new CamelCaseNamingStrategy()
-                     }
-                 })
-                 );
+                         ContractResolver = new DefaultContractResolver
+                         {
+                             NamingStrategy = new CamelCaseNamingStrategy()
+                         }
+                     })
+                     );
 
-            return Ok(comics);
+                return Ok(result);
+            }
+            catch (CustomException ex)
+            {
+                svcComic.Rollback();
+                return BadRequest(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                svcComic.Rollback();
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpGet]
@@ -70,8 +84,8 @@ namespace ComicStore.Application.Controllers
                                            c.Name,
                                            c.Base64,
                                            c.Extension
-                                       }).SingleOrDefault(); 
-                
+                                       }).SingleOrDefault();
+
             return Ok(image);
         }
 
@@ -82,10 +96,10 @@ namespace ComicStore.Application.Controllers
         {
             var authors = svcComic.GetAuthorsByComicID(comicID)
                                   .Select(c => new
-                                       {
-                                           c.AuthorID,
-                                           c.Name
-                                       })
+                                  {
+                                      c.AuthorID,
+                                      c.Name
+                                  })
                                   .ToList();
             return Ok(authors);
         }
@@ -126,7 +140,7 @@ namespace ComicStore.Application.Controllers
         {
             try
             {
-                svcComic.DeleteComic(comicID);                
+                svcComic.DeleteComic(comicID);
                 svcComic.Commit();
                 return Ok();
             }

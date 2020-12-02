@@ -13,7 +13,7 @@ namespace ComicStore.Service.Interfaces
         IQueryable<Comic> GetComic();
         IQueryable<Author> GetAuthorsByComicID(int comicID);
         IQueryable<Genre> GetGenresByComicID(int comicID);
-        Paginator<dynamic> GetComics(IFilter<Comic> filter, Func<Comic, dynamic> projection);
+        Paginator<dynamic> GetPaginatedComics(IFilter<Comic> filter, Func<Comic, dynamic> projection);
         IQueryable<ComicImage> GetComicImageByComicID(int comicID);
         Comic DeleteComic(int comicID);
     }

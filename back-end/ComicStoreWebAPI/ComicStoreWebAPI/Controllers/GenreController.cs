@@ -1,6 +1,8 @@
 ﻿using ComicStore.Application.DTO;
 using ComicStore.Application.Filters;
+using ComicStore.Service.Classes;
 using ComicStore.Service.Interfaces;
+using ComicStore.Shared.Class;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
@@ -24,7 +26,7 @@ namespace ComicStore.Application.Controllers
         [Route("")]
         public IActionResult GetGenre([FromQuery] GenreFilter filter)
         {
-            var genres = svcGenre.GetGenres(
+            Paginator<dynamic> genres = svcGenre.GetPaginatedGenres(
                 filter,
                 c => new GenreDTO
                 {
@@ -45,7 +47,7 @@ namespace ComicStore.Application.Controllers
                  })
                  );
 
-            return Ok(genres);
+            return Ok(result);
         }
 
         [HttpPost]
@@ -54,7 +56,7 @@ namespace ComicStore.Application.Controllers
             try
             {
                 var genre = svcGenre.CreateGenre(genreDTO);
-                svcGenre.Commit();    
+                svcGenre.Commit();
                 return Ok(genreDTO);
             }
             catch (Exception ex)
@@ -62,10 +64,10 @@ namespace ComicStore.Application.Controllers
                 svcGenre.Rollback();
                 return BadRequest($"Erro: {ex.Message}");
             }
-        } 
+        }
 
         [HttpPut("{genreID}")]
-        public IActionResult PutGenre(int genreID,[FromBody] GenreDTO genreDTO)
+        public IActionResult PutGenre(int genreID, [FromBody] GenreDTO genreDTO)
         {
             try
             {
@@ -85,12 +87,12 @@ namespace ComicStore.Application.Controllers
         public IActionResult DeleteGenre(int genreID)
         {
             try
-            {                
+            {
                 svcGenre.DeleteGenre(genreID);
                 svcGenre.Commit();
                 return Ok();
             }
-            catch (ApplicationException ex)
+            catch (CustomException ex)
             {
                 return BadRequest(ex.Message);
             }

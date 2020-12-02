@@ -1,6 +1,7 @@
 ﻿using ComicStore.Application.DTO;
 using ComicStore.Application.Filters;
 using ComicStore.Infra.EFRepository.Context;
+using ComicStore.Service.Classes;
 using ComicStore.Service.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -23,12 +24,12 @@ namespace ComicStore.Application.Controllers
 
         public IActionResult GetAuthor([FromQuery] AuthorFilter filter)
         {
-            var authors = svcAuthor.GetAuthors(
+            Paginator<dynamic> authors = svcAuthor.GetPaginatedAuthors(
                 filter,
-                c => new AuthorDTO
+                c => new
                 {
-                    AuthorID = c.AuthorID,
-                    Name = c.Name
+                    c.AuthorID,
+                    c.Name
                 });
 
             var result = authors.ToList();
@@ -44,7 +45,7 @@ namespace ComicStore.Application.Controllers
                  })
                  );
 
-            return Ok(authors);
+            return Ok(result);
         }
 
         [HttpPost]

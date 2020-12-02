@@ -74,7 +74,7 @@ namespace ComicStore.Service.Services
             return image;
         }
 
-        public Paginator<dynamic> GetComics(IFilter<Comic> filter, Func<Comic, dynamic> projection)
+        public Paginator<dynamic> GetPaginatedComics(IFilter<Comic> filter, Func<Comic, dynamic> projection)
         {
             Expression<Func<Comic, bool>> predicate = filter.GetPredicate();
 

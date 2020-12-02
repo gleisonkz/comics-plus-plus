@@ -11,6 +11,6 @@ namespace ComicStore.Service.Interfaces
         Genre UpdateGenre(IGenreDTO genreDTO);
         Genre DeleteGenre(int genreID);
         IQueryable<Genre> GetGenre();
-        Paginator<IGenreDTO> GetGenres(IFilter<Genre> filter, System.Func<Genre, IGenreDTO> projection);
+        Paginator<dynamic> GetPaginatedGenres(IFilter<Genre> filter, System.Func<Genre, dynamic> projection);
     }
 }

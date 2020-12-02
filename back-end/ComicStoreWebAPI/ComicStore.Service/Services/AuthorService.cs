@@ -46,11 +46,11 @@ namespace ComicStore.Service.Services
             return objAuthor;
         }
 
-        public Paginator<IAuthorDTO> GetAuthors(IFilter<Author> filter, Func<Author, IAuthorDTO> projection)
+        public Paginator<dynamic> GetPaginatedAuthors(IFilter<Author> filter, Func<Author, dynamic> projection)
         {
             Expression<Func<Author, bool>> predicate = filter.GetPredicate();
 
-            return Paginator<IAuthorDTO>
+            return Paginator<dynamic>
                 .Paginate(repoAuthor.GetQuery()
                                    .Where(predicate)
                                    .OrderBy(c => c.AuthorID), filter, projection);

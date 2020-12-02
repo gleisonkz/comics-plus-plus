@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using ComicStore.Service.Classes;
 using System.Linq.Expressions;
 using System;
+using ComicStore.Shared.Class;
 
 namespace ComicStore.Service.Services
 {
@@ -54,8 +55,9 @@ namespace ComicStore.Service.Services
             Genre objGenre = repoGenre.GetQuery()
                                       .Where(c => c.GenreID == genreID)                                      
                                       .SingleOrDefault();
+
             if (objGenre.Comics.Any())
-                throw new ApplicationException("Não é possível deletar uma categoria que possui vinculos");
+                throw new CustomException("Não é possível deletar uma categoria que possui vinculos");
 
             repoGenre.Delete(objGenre);
             return objGenre;
@@ -67,13 +69,13 @@ namespace ComicStore.Service.Services
             return repoGenre.GetQuery();
         }
 
-        public Paginator<IGenreDTO> GetGenres(IFilter<Genre> filter, Func<Genre, IGenreDTO> projection)
+        public Paginator<dynamic> GetPaginatedGenres(IFilter<Genre> filter, Func<Genre, dynamic> projection)
         {
             var repoGenre = factoryRepository.CreateRepository<Genre>();
 
             Expression<Func<Genre, bool>> predicate = filter.GetPredicate(); 
 
-            return Paginator<IGenreDTO>
+            return Paginator<dynamic>
                 .Paginate(repoGenre.GetQuery()
                                    .Where(predicate)
                                    .OrderBy(c => c.GenreID), filter, projection);

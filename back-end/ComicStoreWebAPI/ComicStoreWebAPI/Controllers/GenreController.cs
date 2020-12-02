@@ -90,6 +90,10 @@ namespace ComicStore.Application.Controllers
                 svcGenre.Commit();
                 return Ok();
             }
+            catch (ApplicationException ex)
+            {
+                return BadRequest(ex.Message);
+            }
             catch (Exception ex)
             {
                 svcGenre.Rollback();

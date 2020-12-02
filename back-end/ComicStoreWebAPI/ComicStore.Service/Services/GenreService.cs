@@ -52,8 +52,11 @@ namespace ComicStore.Service.Services
         {
             var repoGenre = factoryRepository.CreateRepository<Genre>();
             Genre objGenre = repoGenre.GetQuery()
-                                      .Where(c => c.GenreID == genreID)
+                                      .Where(c => c.GenreID == genreID)                                      
                                       .SingleOrDefault();
+            if (objGenre.Comics.Any())
+                throw new ApplicationException("Não é possível deletar uma categoria que possui vinculos");
+
             repoGenre.Delete(objGenre);
             return objGenre;
         }

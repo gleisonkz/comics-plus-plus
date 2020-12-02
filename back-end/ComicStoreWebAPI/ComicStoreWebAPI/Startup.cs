@@ -34,8 +34,9 @@ namespace ComicStoreWebAPI
                       });
 
             _ = services.AddDbContext<ComicStoreDbContext>(options =>
-                {
-                    options.UseSqlServer(@"Data Source=.\sqlexpress;Initial Catalog=ComicStore;Integrated Security=True");
+                {                    
+                    options.UseSqlServer(@"Data Source=.\sqlexpress;Initial Catalog=ComicStore;Integrated Security=True")
+                           .UseLazyLoadingProxies();     ;
                 });
 
             services.AddCors(c => c.AddPolicy("ComicStorePolicy", builder =>

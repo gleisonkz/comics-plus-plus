@@ -19,7 +19,6 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 })
 export class ComicDialogComponent implements OnInit {
   form: FormGroup;
-  imageControl = new FormControl();
   imageDataUrl: string | ArrayBuffer | SafeUrl;
   base64Image: string;
   comicImage: ComicImage;
@@ -108,8 +107,9 @@ export class ComicDialogComponent implements OnInit {
   subscribeToPreviewImageControl(): void {
     this.form.controls['image'].valueChanges.subscribe((c) => {
       const file = c.files[0];
-      // this.readFileAsDataURL(file).subscribe((c) => (this.imageDataUrl = c));
       this.readFileAsBinaryString(file).subscribe((comicImage: ComicImage) => {
+        console.log(comicImage);
+
         this.imageDataUrl = this.domSanitizer.bypassSecurityTrustUrl(
           `data:image/${comicImage.extension};base64,` + comicImage.base64
         );
@@ -181,24 +181,6 @@ export class ComicDialogComponent implements OnInit {
       };
 
       temporaryFileReader.readAsBinaryString(file);
-    });
-  }
-
-  readFileAsDataURL(file: File): Observable<string | ArrayBuffer> {
-    const temporaryFileReader = new FileReader();
-
-    return new Observable<string | ArrayBuffer>((publisher) => {
-      temporaryFileReader.onload = () => {
-        const dataUrl = temporaryFileReader.result as string;
-        publisher.next(dataUrl);
-      };
-
-      temporaryFileReader.onerror = () => {
-        temporaryFileReader.abort();
-        publisher.error('Problem parsing with file.');
-      };
-
-      temporaryFileReader.readAsDataURL(file);
     });
   }
 

@@ -90,3 +90,20 @@ body {
   cursor: default;
   @include button-disabled;
 }
+table {
+  td.mat-cell {
+    white-space: nowrap;
+    max-width: rem(200);
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: table-cell;
+    box-sizing: border-box;
+  }
+
+  th.mat-header-cell,
+  td.mat-cell,
+  td.mat-footer-cell {
+    padding: 0 10px;
+  }
+}

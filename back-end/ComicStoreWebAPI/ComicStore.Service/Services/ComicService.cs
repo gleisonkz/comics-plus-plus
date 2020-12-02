@@ -21,8 +21,7 @@ namespace ComicStore.Service.Services
         public Comic CreateComic(IComicDTO comicDTO)
         {
             var repoAuthor = factoryRepository.CreateRepository<Author>();
-            var repoGenre = factoryRepository.CreateRepository<Genre>();
-            var repoImage = factoryRepository.CreateRepository<ComicImage>();
+            var repoGenre = factoryRepository.CreateRepository<Genre>();            
 
             List<Author> authors = repoAuthor.GetQuery()
                                              .Where(c => comicDTO.Authors.Contains(c.AuthorID))
@@ -51,7 +50,7 @@ namespace ComicStore.Service.Services
                 Authors = authors
             };            
 
-            repoComic.Attach(comic);
+            //repoComic.Attach(comic);
             return repoComic.Add(comic);            
         }
 

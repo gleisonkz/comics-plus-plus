@@ -78,8 +78,8 @@ table {
     display: inline-flex;
   }
 
-  .btn-edit {
-    margin-right: rem(10);
+  .btn + .btn {
+    margin-left: rem(10);
   }
 }
 .no-data {

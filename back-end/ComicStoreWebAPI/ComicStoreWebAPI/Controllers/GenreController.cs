@@ -26,28 +26,36 @@ namespace ComicStore.Application.Controllers
         [Route("")]
         public IActionResult GetGenre([FromQuery] GenreFilter filter)
         {
-            Paginator<dynamic> genres = svcGenre.GetPaginatedGenres(
-                filter,
-                c => new GenreDTO
-                {
-                    GenreID = c.GenreID,
-                    Description = c.Description
-                });
+            try
+            {
+                Paginator<dynamic> genres = svcGenre.GetPaginatedGenres(
+                    filter,
+                    c => new GenreDTO
+                    {
+                        GenreID = c.GenreID,
+                        Description = c.Description
+                    });
 
-            var result = genres.ToList();
+                var result = genres.ToList();
 
-            Response.Headers.Add(
-                "X-Pagination",
-                 JsonConvert.SerializeObject(genres.GetPaginatorMetadata(), new JsonSerializerSettings
-                 {
-                     ContractResolver = new DefaultContractResolver
+                Response.Headers.Add(
+                    "X-Pagination",
+                     JsonConvert.SerializeObject(genres.GetPaginatorMetadata(), new JsonSerializerSettings
                      {
-                         NamingStrategy = new CamelCaseNamingStrategy()
-                     }
-                 })
-                 );
+                         ContractResolver = new DefaultContractResolver
+                         {
+                             NamingStrategy = new CamelCaseNamingStrategy()
+                         }
+                     })
+                     );
 
-            return Ok(result);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                svcGenre.Rollback();
+                return BadRequest($"Erro: {ex.Message}");
+            }
         }
 
         [HttpPost]
@@ -102,5 +110,24 @@ namespace ComicStore.Application.Controllers
                 return BadRequest($"Erro: {ex.Message}");
             }
         }
+
+        [HttpDelete]
+        [Route("{genreID}/relationships")]
+        public IActionResult DeleteGenreRelationships(int genreID)
+        {
+            try
+            {
+                svcGenre.DeleteGenreRelationships(genreID);
+                svcGenre.Commit();
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                svcGenre.Rollback();
+                return BadRequest($"Erro: {ex.Message}");
+            }
+        }
+
+
     }
 }

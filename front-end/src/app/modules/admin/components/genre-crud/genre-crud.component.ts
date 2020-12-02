@@ -137,4 +137,30 @@ export class GenreCrudComponent implements OnInit, AfterViewInit {
       }
     });
   }
+
+  deleteGenreRelationships(item: Genre) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = {
+      id: item.genreID,
+      description: item.description,
+      message:
+        'Você tem certeza que deseja remover os vínculos do registro abaixo?',
+    };
+
+    const dialogRef = this.dialogService.open(
+      ConfirmationDialogComponent,
+      dialogConfig
+    );
+    dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+      if (confirmed) {
+        this.genreService
+          .deleteGenreRelationships(item.genreID)
+          .subscribe(() => {
+            this.notificationService.showMessage(
+              `Você removeu os vínculos da categoria ${item.description} ID:${item.genreID}`
+            );
+          });
+      }
+    });
+  }
 }

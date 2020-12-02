@@ -37,10 +37,10 @@ namespace ComicStore.Service.Services
             return objAuthor;
         }
 
-        public Author DeleteAuthor(int genreID)
+        public Author DeleteAuthor(int authorID)
         {            
             Author objAuthor = repoAuthor.GetQuery()
-                                      .Where(c => c.AuthorID == genreID)
+                                      .Where(c => c.AuthorID == authorID)
                                       .SingleOrDefault();
             repoAuthor.Delete(objAuthor);
             return objAuthor;

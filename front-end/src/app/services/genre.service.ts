@@ -35,4 +35,10 @@ export class GenreService {
   deleteGenre(genreID: number): Observable<Genre> {
     return this.http.delete<Genre>(`${environment.apiURL}/genre/${genreID}`);
   }
+
+  deleteGenreRelationships(genreID: number): Observable<Genre> {
+    return this.http.delete<Genre>(
+      `${environment.apiURL}/genre/${genreID}/relationships`
+    );
+  }
 }

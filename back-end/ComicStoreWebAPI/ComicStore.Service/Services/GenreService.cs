@@ -53,13 +53,25 @@ namespace ComicStore.Service.Services
         {
             var repoGenre = factoryRepository.CreateRepository<Genre>();
             Genre objGenre = repoGenre.GetQuery()
-                                      .Where(c => c.GenreID == genreID)                                      
+                                      .Where(c => c.GenreID == genreID)
                                       .SingleOrDefault();
 
             if (objGenre.Comics.Any())
                 throw new CustomException("Não é possível deletar uma categoria que possui vinculos");
 
             repoGenre.Delete(objGenre);
+            return objGenre;
+        }
+
+        public Genre DeleteGenreRelationships(int genreID)
+        {
+            var repoGenre = factoryRepository.CreateRepository<Genre>();
+            Genre objGenre = repoGenre.GetQuery()
+                                      .Where(c => c.GenreID == genreID)
+                                      .SingleOrDefault();
+
+            objGenre.Comics = null;
+            repoGenre.Update(objGenre);
             return objGenre;
         }
 
@@ -73,7 +85,7 @@ namespace ComicStore.Service.Services
         {
             var repoGenre = factoryRepository.CreateRepository<Genre>();
 
-            Expression<Func<Genre, bool>> predicate = filter.GetPredicate(); 
+            Expression<Func<Genre, bool>> predicate = filter.GetPredicate();
 
             return Paginator<dynamic>
                 .Paginate(repoGenre.GetQuery()

@@ -9,7 +9,7 @@ namespace ComicStore.Service.Interfaces
     {
         Author CreateAuthor(IAuthorDTO authorDTO);
         Author UpdateAuthor(IAuthorDTO authorDTO);
-        Author DeleteAuthor(int authorID);
+        Author DeleteAuthor(int authorID);        
         IQueryable<Author> GetAuthor();
         Paginator<dynamic> GetPaginatedAuthors(IFilter<Author> filter, System.Func<Author, dynamic> projection);
     }

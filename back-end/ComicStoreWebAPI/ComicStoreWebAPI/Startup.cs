@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 
 namespace ComicStoreWebAPI
 {
@@ -34,9 +35,9 @@ namespace ComicStoreWebAPI
                       });
 
             _ = services.AddDbContext<ComicStoreDbContext>(options =>
-                {                    
-                    options.UseSqlServer(@"Data Source=.\sqlexpress;Initial Catalog=ComicStore;Integrated Security=True")
-                           .UseLazyLoadingProxies();     ;
+                {
+                    options.UseSqlServer(@"Data Source=.\sqlexpress;Initial Catalog=ComicStore;Integrated Security=True")                                                      
+                           .UseLazyLoadingProxies();
                 });
 
             services.AddCors(c => c.AddPolicy("ComicStorePolicy", builder =>
@@ -46,13 +47,6 @@ namespace ComicStoreWebAPI
                        .AllowAnyHeader()
                        .WithExposedHeaders("X-Pagination");
             }));
-
-            services.Configure<FormOptions>(c =>
-            {
-                c.ValueLengthLimit = int.MaxValue;
-                c.MultipartBodyLengthLimit = int.MaxValue;
-                c.MemoryBufferThreshold = int.MaxValue;
-            });
 
             services.AddScoped<IFactoryRepository, FactoryEFCoreRepository>();
             services.AddScoped<IUnityOfWork, UnityOfWork>();

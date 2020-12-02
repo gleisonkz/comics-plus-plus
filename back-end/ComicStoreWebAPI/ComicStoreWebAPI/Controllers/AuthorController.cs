@@ -81,7 +81,7 @@ namespace ComicStore.Application.Controllers
         }
 
         [HttpDelete("{authorID}")]
-        public IActionResult DeleteGenre(int authorID)
+        public IActionResult DeleteAuthor(int authorID)
         {
             try
             {
@@ -96,4 +96,6 @@ namespace ComicStore.Application.Controllers
             }
         }
     }
+
+
 }

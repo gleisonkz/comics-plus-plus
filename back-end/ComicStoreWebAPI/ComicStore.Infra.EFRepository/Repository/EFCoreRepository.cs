@@ -16,9 +16,9 @@ namespace ComicStore.Infra.EFRepository.Repository
             this.context = context;
         }
         public T Add(T entity)
-        {            
-            return DbSet.Add(entity).Entity;                  
-        }        
+        {
+            return DbSet.Add(entity).Entity;
+        }
 
         public void Delete(T entity)
         {
@@ -32,7 +32,7 @@ namespace ComicStore.Infra.EFRepository.Repository
 
         public IQueryable<T> GetQuery(bool trackingChanges = true)
         {
-            return DbSet.AsNoTracking();            
+            return trackingChanges ? DbSet : DbSet.AsNoTracking();
         }
 
         public T Attach(T entity)

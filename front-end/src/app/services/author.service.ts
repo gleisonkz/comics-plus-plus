@@ -12,7 +12,9 @@ import { Filter } from '../models/filter.model';
 export class AuthorService {
   constructor(private http: HttpClient) {}
 
-  getAuthors(authorFilter?: Filter): Observable<HttpResponse<Author[]>> {
+  getPaginatedAuthors(
+    authorFilter?: Filter
+  ): Observable<HttpResponse<Author[]>> {
     return this.http
       .get<Author[]>(`${environment.apiURL}/author`, {
         observe: 'response',
@@ -21,6 +23,12 @@ export class AuthorService {
       })
       .pipe(delay(200));
   }
+
+  // getAuthorsByComicID(comicID: number) {
+  //   return this.http.get<Author[]>(
+  //     `${environment.apiURL}/author/comic/${comicID}`
+  //   );
+  // }
 
   postAuthor(author: Author): Observable<Author> {
     return this.http.post<Author>(`${environment.apiURL}/author`, author);

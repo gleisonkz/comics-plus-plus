@@ -194,12 +194,27 @@ export class ComicDialogComponent implements OnInit {
   }
 
   getAuthors() {
-    this.subscriptions.push(
-      this.authorService.getAuthors().subscribe((c) => {
-        this.authors = c.body;
-        this.filteredAuthorsOptions$.next(this.authors);
-      })
-    );
+    if (this.comic?.comicID) {
+      this.subscriptions.push(
+        this.comicService
+          .GetAuthorsByComicID(this.comic.comicID)
+          .subscribe((responseAuthors) => {
+            this.authors = responseAuthors;
+            this.authorsControl.setValue(
+              responseAuthors.map((c) => c.authorID)
+            );
+
+            this.filteredAuthorsOptions$.next(this.authors);
+          })
+      );
+    } else {
+      this.subscriptions.push(
+        this.authorService.getPaginatedAuthors().subscribe((c) => {
+          this.authors = c.body;
+          this.filteredAuthorsOptions$.next(this.authors);
+        })
+      );
+    }
   }
 
   filterGenres() {

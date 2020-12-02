@@ -91,7 +91,7 @@ namespace ComicStore.Application.Controllers
 
 
         [HttpGet]
-        [Route("{comicID}/authors")]
+        [Route("{comicID}/author")]
         public IActionResult GetAuthorsByComicID(int comicID)
         {
             var authors = svcComic.GetAuthorsByComicID(comicID)

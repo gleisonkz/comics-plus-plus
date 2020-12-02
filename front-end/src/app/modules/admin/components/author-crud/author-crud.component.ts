@@ -41,7 +41,7 @@ export class AuthorCrudComponent implements OnInit {
     });
 
     this.dataSource = new CustomDataSource<Author>((filter: Filter) =>
-      this.authorService.getAuthors(filter)
+      this.authorService.getPaginatedAuthors(filter)
     );
   }
 

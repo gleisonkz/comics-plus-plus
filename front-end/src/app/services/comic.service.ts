@@ -8,6 +8,7 @@ import { environment } from 'src/environments/environment';
 import { delay } from 'rxjs/operators';
 import { ComicList } from '../models/comic-list.model';
 import { ComicImage } from '../models/comic-image.model';
+import { Author } from '../models/author.model';
 
 @Injectable({
   providedIn: 'root',
@@ -22,6 +23,12 @@ export class ComicService {
   getComicImageByComicID(comicID: number) {
     return this.http.get<ComicImage>(
       `${environment.apiURL}/comic/${comicID}/image`
+    );
+  }
+
+  GetAuthorsByComicID(comicID: number) {
+    return this.http.get<Author[]>(
+      `${environment.apiURL}/comic/${comicID}/author`
     );
   }
 

@@ -51,12 +51,11 @@ export class ComicDialogComponent implements OnInit {
       pages: new FormControl(this.data?.pages || '', [Validators.required]),
       authors: new FormControl([], [Validators.required]),
       genres: new FormControl([], [Validators.required]),
-      image: new FormControl(this.data?.image?.name || '', [
-        Validators.required,
-      ]),
+      image: new FormControl(this.data?.image || '', [Validators.required]),
     });
 
     this.subscribeToPreviewImageControl();
+    console.log(this.form.controls.image);
   }
 
   ngOnDestroy() {
@@ -93,12 +92,19 @@ export class ComicDialogComponent implements OnInit {
     });
   }
 
+  // loadComicImage(comicID: number) {
+  //   this.comicService.getComicImageByComicID(comicID).subscribe((c) => {
+  //     this.imageDataUrl = this.domSanitizer.bypassSecurityTrustUrl(
+  //       `data:image/${c.extension};base64,` + c.base64
+  //     );
+  //   });
+  // }
+
   loadComicImage(comicID: number) {
-    this.comicService.getComicImageByComicID(comicID).subscribe((c) => {
-      this.imageDataUrl = this.domSanitizer.bypassSecurityTrustUrl(
-        `data:image/${c.extension};base64,` + c.base64
-      );
-    });
+    this.imageDataUrl = this.domSanitizer.bypassSecurityTrustUrl(
+      `data:image/${this.form.controls.image.value.extension};base64,` +
+        this.form.controls.image.value.base64
+    );
   }
 
   save() {

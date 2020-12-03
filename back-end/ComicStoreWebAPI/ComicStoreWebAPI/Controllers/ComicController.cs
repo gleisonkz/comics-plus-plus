@@ -162,7 +162,9 @@ namespace ComicStore.Application.Controllers
                                         Image = new ComicImageInfo
                                         {
                                             Name = c.Image.Name,
-                                            Extension = c.Image.Extension
+                                            Extension = c.Image.Extension,
+                                            Base64 = c.Image.Base64
+
                                         },
                                         Authors = c.Authors.Select(d =>
                                                             new KeyValueAuthor { AuthorID = d.AuthorID, Name = d.Name })

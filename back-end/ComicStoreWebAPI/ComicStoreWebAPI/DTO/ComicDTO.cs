@@ -22,6 +22,7 @@ namespace ComicStore.Application.DTO
     {
         public string Name { get; set; }
         public string Extension { get; set; }
+        public byte[] Base64 { get; set; }
     }
 
     public class KeyValueAuthor

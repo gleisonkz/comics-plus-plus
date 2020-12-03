@@ -55,7 +55,8 @@ Technologies, Design and Patterns that I used to develop this application.
 ## ✨ Main Features
 
 - Toggle Theme
-- JTW Authentication
+- JTW Bearer Authentication
 - CRUD operations
 - Pagination
+- Generic Dropdown Component with server side search filter
 - ...

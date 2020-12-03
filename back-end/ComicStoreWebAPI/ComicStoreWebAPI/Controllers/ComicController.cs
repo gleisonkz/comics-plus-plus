@@ -1,20 +1,13 @@
 ﻿using ComicStore.Application.DTO;
 using ComicStore.Application.Filters;
-using ComicStore.Domain.POCO;
-using ComicStore.Infra.EFRepository.Context;
 using ComicStore.Service.Classes;
 using ComicStore.Service.Interfaces;
 using ComicStore.Shared.Class;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Net.Http.Headers;
-using System.Threading.Tasks;
 
 namespace ComicStore.Application.Controllers
 {
@@ -31,7 +24,8 @@ namespace ComicStore.Application.Controllers
 
         // GET: api/Comic
         [HttpGet]
-        public IActionResult GetComic([FromQuery] ComicFilter filter)
+        [Route("paginator")]
+        public IActionResult GetPaginatedComics([FromQuery] ComicFilter filter)
         {
             try
             {
@@ -44,7 +38,7 @@ namespace ComicStore.Application.Controllers
                         c.Description,
                         c.Pages,
                         c.Price,
-                        c.Year,                        
+                        c.Year,
                     });
 
                 var result = comics.ToList();
@@ -131,6 +125,35 @@ namespace ComicStore.Application.Controllers
             catch (Exception ex)
             {
                 svcComic.Rollback();
+                return BadRequest($"Erro: {ex.Message}");
+            }
+        }
+
+        [HttpGet("{comicID}")]
+        public IActionResult GetComicByID(int comicID)
+        {
+            try
+            {
+                var comic = svcComic.GetComicByID(comicID)
+                                    .Select(c => new
+                                    {
+                                        c.ComicID,
+                                        c.Title,
+                                        c.Description,
+                                        c.Price,
+                                        c.Year,
+                                        c.Pages,
+                                        Authors = c.Authors.Select(c => c.AuthorID),
+                                        Genres = c.Genres.Select(c => c.GenreID)
+                                    })
+                                    .SingleOrDefault();
+
+
+
+                return Ok(comic);
+            }
+            catch (Exception ex)
+            {
                 return BadRequest($"Erro: {ex.Message}");
             }
         }

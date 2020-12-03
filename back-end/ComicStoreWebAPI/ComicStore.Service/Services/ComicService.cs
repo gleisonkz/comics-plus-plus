@@ -21,7 +21,7 @@ namespace ComicStore.Service.Services
         public Comic CreateComic(IComicDTO comicDTO)
         {
             var repoAuthor = factoryRepository.CreateRepository<Author>();
-            var repoGenre = factoryRepository.CreateRepository<Genre>();            
+            var repoGenre = factoryRepository.CreateRepository<Genre>();
 
             List<Author> authors = repoAuthor.GetQuery()
                                              .Where(c => comicDTO.Authors.Contains(c.AuthorID))
@@ -33,7 +33,7 @@ namespace ComicStore.Service.Services
 
             var image = new ComicImage
             {
-                Base64 = comicDTO.Image.Base64,                
+                Base64 = comicDTO.Image.Base64,
                 Extension = comicDTO.Image.Extension,
                 Name = comicDTO.Image.Name
             };
@@ -48,16 +48,16 @@ namespace ComicStore.Service.Services
                 Image = image,
                 Genres = genres,
                 Authors = authors
-            };            
+            };
 
             //repoComic.Attach(comic);
-            return repoComic.Add(comic);            
+            return repoComic.Add(comic);
         }
 
         public IQueryable<Author> GetAuthorsByComicID(int comicID)
         {
             return GetComic().Where(c => c.ComicID == comicID)
-                             .SelectMany(c => c.Authors);                          
+                             .SelectMany(c => c.Authors);
         }
 
         public IQueryable<Comic> GetComic()
@@ -69,7 +69,7 @@ namespace ComicStore.Service.Services
         {
             var repoImage = factoryRepository.CreateRepository<ComicImage>();
             IQueryable<ComicImage> image = repoImage.GetQuery()
-                                                    .Where(c => c.ComicID == comicID);                                   
+                                                    .Where(c => c.ComicID == comicID);
             return image;
         }
 
@@ -86,7 +86,7 @@ namespace ComicStore.Service.Services
         public IQueryable<Genre> GetGenresByComicID(int comicID)
         {
             return GetComic().Where(c => c.ComicID == comicID)
-                             .SelectMany(c => c.Genres);                          
+                             .SelectMany(c => c.Genres);
         }
 
         public Comic DeleteComic(int comicID)
@@ -95,6 +95,24 @@ namespace ComicStore.Service.Services
                                       .Where(c => c.ComicID == comicID)
                                       .SingleOrDefault();
             repoComic.Delete(objComic);
+            return objComic;
+        }
+
+        public IQueryable<Comic> GetComicByID(int comicID)
+        {
+            //Comic objComic = repoComic.GetQuery()
+            //                          .Where(c => c.ComicID == comicID)
+            //                          .SingleOrDefault();
+
+            IQueryable<Comic> objComic = repoComic.GetQuery()
+                                                   .Where(c => c.ComicID == comicID);
+                          
+
+            //objComic.Authors.Where(c => c.AuthorID == comicID).ToList();
+            //objComic.Genres.Where(c => c.GenreID == comicID).ToList();
+
+
+
             return objComic;
         }
     }

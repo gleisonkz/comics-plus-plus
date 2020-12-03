@@ -13,6 +13,7 @@ import { ConfirmationDialogComponent } from './components/dialogs/confirmation-d
 import { AuthorCrudComponent } from './components/author-crud/author-crud.component';
 import { AuthorDialogComponent } from './components/dialogs/author-dialog/author-dialog.component';
 import { ComicDialogComponent } from './components/dialogs/comic-dialog/comic-dialog.component';
+import { DropdownListComponent } from '../../shared/components/dropdown-list/dropdown-list.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { ComicDialogComponent } from './components/dialogs/comic-dialog/comic-di
     AuthorCrudComponent,
     AuthorDialogComponent,
     ComicDialogComponent,
+    DropdownListComponent,
   ],
   imports: [
     CommonModule,

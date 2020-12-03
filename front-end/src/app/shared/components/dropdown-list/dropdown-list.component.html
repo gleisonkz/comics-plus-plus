@@ -1,0 +1,25 @@
+<mat-form-field>
+  <mat-select
+    (openedChange)="openedChange($event)"
+    [formControl]="dataControl"
+    [multiple]="true"
+    [placeholder]="placeholder"
+    #multiSelect
+  >
+    <mat-option>
+      <ngx-mat-select-search
+        [formControl]="dataSearchControl"
+        [searching]=""
+        placeholderLabel="Digite pelo menos 3 caracteres"
+        noEntriesFoundLabel="'Nenhum item foi encontrado'"
+      >
+      </ngx-mat-select-search>
+    </mat-option>
+    <mat-option
+      *ngFor="let data of filteredDataOptions$ | async"
+      [value]="data[idKeyObject]"
+    >
+      {{ data[valueKeyObject] }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>

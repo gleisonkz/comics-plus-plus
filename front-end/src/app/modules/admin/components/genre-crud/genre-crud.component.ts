@@ -47,7 +47,7 @@ export class GenreCrudComponent implements OnInit, AfterViewInit {
     });
 
     this.dataSource = new CustomDataSource<Genre>((filter: Filter) =>
-      this.genreService.getGenres(filter)
+      this.genreService.getPaginatedGenres(filter)
     );
   }
 

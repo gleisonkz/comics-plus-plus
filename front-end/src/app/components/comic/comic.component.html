@@ -1,8 +1,8 @@
 <div class="comic">
-  <img class="comic__image" [src]="comic.imagePath" alt="Image" />
+  <img class="comic__image" [src]="comic.image.base64" alt="Image" />
   <span class="comic__price">R$ {{ comic.price | number: "2.2" }}</span>
   <h2 class="comic__title">{{ comic.title }}</h2>
-  <span class="comic__title">{{ comic.genre }}</span>
+  <span class="comic__title">{{ comic }}</span>
   <!-- <h3 class="comic__author">{{ comic.author }}</h3> -->
   <p class="comic__description truncate-overflow">{{ comic.description }}</p>
 

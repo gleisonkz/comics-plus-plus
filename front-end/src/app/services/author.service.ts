@@ -30,6 +30,10 @@ export class AuthorService {
   //   );
   // }
 
+  getAuthorsByName(name: string) {
+    return this.http.get<Author[]>(`${environment.apiURL}/author/${name}`);
+  }
+
   postAuthor(author: Author): Observable<Author> {
     return this.http.post<Author>(`${environment.apiURL}/author`, author);
   }

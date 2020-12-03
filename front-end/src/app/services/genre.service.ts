@@ -12,14 +12,18 @@ import { Filter } from '../models/filter.model';
 export class GenreService {
   constructor(private http: HttpClient) {}
 
-  getGenres(genreFilter?: Filter): Observable<HttpResponse<Genre[]>> {
+  getPaginatedGenres(genreFilter?: Filter): Observable<HttpResponse<Genre[]>> {
     return this.http
-      .get<Genre[]>(`${environment.apiURL}/genre`, {
+      .get<Genre[]>(`${environment.apiURL}/genre/paginator`, {
         observe: 'response',
         responseType: 'json',
         params: genreFilter,
       })
       .pipe(delay(200));
+  }
+
+  getGenresByName(description: string) {
+    return this.http.get<Genre[]>(`${environment.apiURL}/genre/${description}`);
   }
 
   postGenre(genre: Genre): Observable<Genre> {

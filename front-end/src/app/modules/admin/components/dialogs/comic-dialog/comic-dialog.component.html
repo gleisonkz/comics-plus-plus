@@ -34,52 +34,25 @@
         />
       </mat-form-field>
 
-      <mat-form-field>
-        <mat-select
-          [formControl]="authorsControl"
-          [multiple]="true"
-          placeholder="Autores"
-          #multiSelect
-        >
-          <mat-option>
-            <ngx-mat-select-search
-              [formControl]="authorsSearchControl"
-              [searching]=""
-              placeholderLabel="Digite pelo menos 3 caracteres"
-              noEntriesFoundLabel="'Nenhum item foi encontrado'"
-            >
-            </ngx-mat-select-search>
-          </mat-option>
-          <mat-option
-            *ngFor="let author of filteredAuthorsOptions$ | async"
-            [value]="author.authorID"
-          >
-            {{ author.name }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+      <cms-dropdown-list
+        [isNew]="!comic?.comicID"
+        [placeholder]="'Autores'"
+        [getFilteredDataCallback]="getAuthorByNameCallback.bind(this)"
+        [getInitialDataCallback]="getAuthorsByComicIDCallback.bind(this)"
+        [dataControl]="form.controls.authors"
+        idKeyObject="authorID"
+        valueKeyObject="name"
+      ></cms-dropdown-list>
 
-      <mat-form-field>
-        <mat-select
-          [formControl]="genresControl"
-          placeholder="Categorias"
-          [multiple]="true"
-          #multiSelect
-        >
-          <mat-option>
-            <ngx-mat-select-search
-              [formControl]="genresSearchControl"
-              placeholderLabel="pesquisar"
-            ></ngx-mat-select-search>
-          </mat-option>
-          <mat-option
-            *ngFor="let genre of filteredGenresOptions$ | async"
-            [value]="genre.genreID"
-          >
-            {{ genre.description }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+      <cms-dropdown-list
+        [isNew]="!comic?.comicID"
+        [placeholder]="'Categorias'"
+        [getFilteredDataCallback]="getGenresByNameCallback.bind(this)"
+        [getInitialDataCallback]="getGenresByComicIDCallback.bind(this)"
+        [dataControl]="form.controls.genres"
+        idKeyObject="genreID"
+        valueKeyObject="description"
+      ></cms-dropdown-list>
     </div>
 
     <div style="width: 100%">

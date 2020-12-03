@@ -55,7 +55,7 @@ export class ComicCrudComponent implements OnInit {
     });
 
     this.dataSource = new CustomDataSource<ComicList>((filter: Filter) =>
-      this.comicService.getComics2(filter)
+      this.comicService.getPaginatedComics(filter)
     );
   }
 

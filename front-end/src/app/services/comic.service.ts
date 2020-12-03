@@ -9,6 +9,7 @@ import { delay } from 'rxjs/operators';
 import { ComicList } from '../models/comic-list.model';
 import { ComicImage } from '../models/comic-image.model';
 import { Author } from '../models/author.model';
+import { Genre } from '../models/genre.model';
 
 @Injectable({
   providedIn: 'root',
@@ -32,9 +33,17 @@ export class ComicService {
     );
   }
 
-  getComics2(comicFilter: Filter): Observable<HttpResponse<ComicList[]>> {
+  GetGenresByComicID(comicID: number) {
+    return this.http.get<Genre[]>(
+      `${environment.apiURL}/comic/${comicID}/genre`
+    );
+  }
+
+  getPaginatedComics(
+    comicFilter: Filter
+  ): Observable<HttpResponse<ComicList[]>> {
     return this.http
-      .get<ComicList[]>(`${environment.apiURL}/comic`, {
+      .get<ComicList[]>(`${environment.apiURL}/comic/paginator`, {
         observe: 'response',
         responseType: 'json',
         params: comicFilter,

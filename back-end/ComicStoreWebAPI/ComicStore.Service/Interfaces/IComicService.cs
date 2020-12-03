@@ -11,9 +11,10 @@ namespace ComicStore.Service.Interfaces
     {
         Comic CreateComic(IComicDTO comicDTO);
         Comic DeleteComic(int comicID);
+        Comic UpdateComic(IComicDTO comicDTO,int comicID);
         IQueryable<Comic> GetComicByID(int comicID);
         IQueryable<Comic> GetComic();
-        IQueryable<Author> GetAuthorsByComicID(int comicID);
+        IQueryable<Author> GetAuthorsByComicID(int comicID);        
         IQueryable<Genre> GetGenresByComicID(int comicID);
         Paginator<dynamic> GetPaginatedComics(IFilter<Comic> filter, Func<Comic, dynamic> projection);
         IQueryable<ComicImage> GetComicImageByComicID(int comicID);

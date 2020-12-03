@@ -12,6 +12,7 @@ namespace ComicStore.Service.Interfaces
         Genre DeleteGenre(int genreID);
         Genre DeleteGenreRelationships(int genreID);
         IQueryable<Genre> GetGenre();
+        IQueryable<Genre> GetGenresByName(string description);
         Paginator<dynamic> GetPaginatedGenres(IFilter<Genre> filter, System.Func<Genre, dynamic> projection);
     }
 }

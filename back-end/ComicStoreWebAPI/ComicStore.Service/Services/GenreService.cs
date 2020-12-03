@@ -81,6 +81,13 @@ namespace ComicStore.Service.Services
             return repoGenre.GetQuery();
         }
 
+        public IQueryable<Genre> GetGenresByName(string description)
+        {
+            var repoGenre = factoryRepository.CreateRepository<Genre>();
+            return repoGenre.GetQuery()
+                             .Where(c => c.Description.Contains(description));
+        }
+
         public Paginator<dynamic> GetPaginatedGenres(IFilter<Genre> filter, Func<Genre, dynamic> projection)
         {
             var repoGenre = factoryRepository.CreateRepository<Genre>();

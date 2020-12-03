@@ -99,7 +99,7 @@ namespace ComicStore.Application.Controllers
         }
 
         [HttpGet]
-        [Route("{comicID}/genres")]
+        [Route("{comicID}/genre")]
         public IActionResult GetGenresByComicID(int comicID)
         {
             var genres = svcComic.GetGenresByComicID(comicID)
@@ -114,7 +114,7 @@ namespace ComicStore.Application.Controllers
 
 
         [HttpPost]
-        public IActionResult PostComic([FromBody] ComicDTO comicDTO)
+        public IActionResult PostComic([FromBody] SaveComicDTO comicDTO)
         {
             try
             {
@@ -129,26 +129,49 @@ namespace ComicStore.Application.Controllers
             }
         }
 
+        [HttpPut("{comicID}")]
+        public IActionResult PutComic(int comicID, [FromBody] SaveComicDTO comicDTO)
+        {
+            try
+            {
+                svcComic.UpdateComic(comicDTO, comicID);
+                svcComic.Commit();
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                svcComic.Rollback();
+                return BadRequest($"Erro: {ex.Message}");
+            }
+        }
+
         [HttpGet("{comicID}")]
         public IActionResult GetComicByID(int comicID)
         {
             try
             {
                 var comic = svcComic.GetComicByID(comicID)
-                                    .Select(c => new
+                                    .Select(c => new ComicDTO
                                     {
-                                        c.ComicID,
-                                        c.Title,
-                                        c.Description,
-                                        c.Price,
-                                        c.Year,
-                                        c.Pages,
-                                        Authors = c.Authors.Select(c => c.AuthorID),
-                                        Genres = c.Genres.Select(c => c.GenreID)
+                                        ComicID = c.ComicID,
+                                        Title = c.Title,
+                                        Description = c.Description,
+                                        Price = c.Price,
+                                        Year = c.Year,
+                                        Pages = c.Pages,
+                                        Image = new ComicImageInfo
+                                        {
+                                            Name = c.Image.Name,
+                                            Extension = c.Image.Extension
+                                        },
+                                        Authors = c.Authors.Select(d =>
+                                                            new KeyValueAuthor { AuthorID = d.AuthorID, Name = d.Name })
+                                                           .ToList(),
+                                        Genres = c.Genres.Select(d =>
+                                                            new KeyValueGenre { GenreID = d.GenreID, Description = d.Description })
+                                                         .ToList(),
                                     })
                                     .SingleOrDefault();
-
-
 
                 return Ok(comic);
             }

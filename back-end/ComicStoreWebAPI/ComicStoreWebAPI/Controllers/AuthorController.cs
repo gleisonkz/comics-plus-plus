@@ -95,6 +95,26 @@ namespace ComicStore.Application.Controllers
                 return BadRequest($"Erro: {ex.Message}");
             }
         }
+
+        [HttpGet("{name}")]
+        public IActionResult GetAuthorsByName(string name)
+        {
+            try
+            {
+                var authors = svcAuthor.GetAuthorsByName(name)
+                         .Select(c => new
+                         {
+                             c.AuthorID,
+                             c.Name
+                         }).ToList();
+
+                return Ok(authors);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Erro: {ex.Message}");
+            }
+        }
     }
 
 

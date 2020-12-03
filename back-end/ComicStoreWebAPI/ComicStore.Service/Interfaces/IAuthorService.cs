@@ -11,6 +11,7 @@ namespace ComicStore.Service.Interfaces
         Author UpdateAuthor(IAuthorDTO authorDTO);
         Author DeleteAuthor(int authorID);        
         IQueryable<Author> GetAuthor();
+        IQueryable<Author> GetAuthorsByName(string name);
         Paginator<dynamic> GetPaginatedAuthors(IFilter<Author> filter, System.Func<Author, dynamic> projection);
     }
 }

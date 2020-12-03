@@ -58,6 +58,26 @@ namespace ComicStore.Application.Controllers
             }
         }
 
+        [HttpGet("{description}")]
+        public IActionResult GetAuthorsByName(string description)
+        {
+            try
+            {
+                var genres = svcGenre.GetGenresByName(description)
+                         .Select(c => new
+                         {
+                             c.GenreID,
+                             c.Description
+                         }).ToList();
+
+                return Ok(genres);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Erro: {ex.Message}");
+            }
+        }
+
         [HttpPost]
         public IActionResult PostGenre([FromBody] GenreDTO genreDTO)
         {
@@ -127,7 +147,5 @@ namespace ComicStore.Application.Controllers
                 return BadRequest($"Erro: {ex.Message}");
             }
         }
-
-
     }
 }

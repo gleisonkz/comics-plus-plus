@@ -98,6 +98,36 @@ namespace ComicStore.Service.Services
             return objComic;
         }
 
+        public Comic UpdateComic(IComicDTO comicDTO, int comicID)
+        {
+            var repoAuthor = factoryRepository.CreateRepository<Author>();
+            var repoGenre = factoryRepository.CreateRepository<Genre>();
+
+            Comic objComic = repoComic.GetQuery()
+                                      .Where(c => c.ComicID == comicID)
+                                      .SingleOrDefault();
+
+
+            var authors = repoAuthor.GetQuery()
+                                    .Where(author => comicDTO.Authors.Contains(author.AuthorID))
+                                    .ToList();
+
+            var genres = repoGenre.GetQuery()
+                                  .Where(genre => comicDTO.Genres.Contains(genre.GenreID))
+                                  .ToList();
+
+            objComic.Title = comicDTO.Title;
+            objComic.Description = comicDTO.Description;
+            objComic.Pages = comicDTO.Pages;
+            objComic.Price = comicDTO.Price;
+            objComic.Year = comicDTO.Year;
+            objComic.Authors = authors;
+            objComic.Genres = genres;
+
+            repoComic.Update(objComic);
+            return objComic;
+        }
+
         public IQueryable<Comic> GetComicByID(int comicID)
         {
             //Comic objComic = repoComic.GetQuery()
@@ -106,7 +136,7 @@ namespace ComicStore.Service.Services
 
             IQueryable<Comic> objComic = repoComic.GetQuery()
                                                    .Where(c => c.ComicID == comicID);
-                          
+
 
             //objComic.Authors.Where(c => c.AuthorID == comicID).ToList();
             //objComic.Genres.Where(c => c.GenreID == comicID).ToList();

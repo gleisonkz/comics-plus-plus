@@ -60,5 +60,11 @@ namespace ComicStore.Service.Services
         {
             return repoAuthor.GetQuery();
         }
+
+        public IQueryable<Author> GetAuthorsByName(string name)
+        {
+            return repoAuthor.GetQuery()
+                             .Where(c=> c.Name.Contains(name));
+        }
     }
 }

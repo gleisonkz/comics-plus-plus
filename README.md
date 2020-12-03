@@ -24,8 +24,16 @@ Technologies, Design and Patterns that I used to develop this application.
   - [C#](https://docs.microsoft.com/en-us/dotnet/csharp/)
   - [Entity Framework Core 5](https://docs.microsoft.com/en-us/ef/core/)
   - [SQL Server](https://docs.microsoft.com/en-us/sql/sql-server/?view=sql-server-ver15)
-  - [Nuget Librarys]()
-    - Predicate Builder
+  - Nuget Packages
+
+    - [Microsoft.EntityFrameworkCore 5.0.0](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore/5.0.0?_src=template)
+    - [Microsoft.EntityFrameworkCore.Design 5.0.0](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Design/5.0.0?_src=template)
+    - [Microsoft.EntityFrameworkCore.Proxies 5.0.0](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Proxies/5.0.0?_src=template)
+    - [Microsoft.EntityFrameworkCore.Tools 5.0.0](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Tools/5.0.0?_src=template)
+    - [Predicate Builder 1.0.0](https://www.nuget.org/packages/PredicateBuilder/)
+    - [System.Drawing.Common 5.0.0](https://www.nuget.org/packages/System.Drawing.Common/5.0.0?_src=template)
+    - [Microsoft.AspNetCore.Mvc.Newtonsoft 3.1.10](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.NewtonsoftJson/3.1.10?_src=template)
+
   - Development Approach
     - DDD - Domain Drive Design
     - SOLID Principles

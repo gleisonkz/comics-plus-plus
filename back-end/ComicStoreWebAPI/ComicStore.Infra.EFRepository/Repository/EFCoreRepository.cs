@@ -39,5 +39,12 @@ namespace ComicStore.Infra.EFRepository.Repository
         {
             return DbSet.Attach(entity).Entity;
         }
+
+        public void Detach(T entity)
+        {
+            this.context.Entry(entity).State = EntityState.Detached;
+        }
+
+
     }
 }

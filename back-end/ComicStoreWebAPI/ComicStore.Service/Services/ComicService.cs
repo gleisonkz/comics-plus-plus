@@ -102,11 +102,11 @@ namespace ComicStore.Service.Services
         {
             var repoAuthor = factoryRepository.CreateRepository<Author>();
             var repoGenre = factoryRepository.CreateRepository<Genre>();
+            var repoImage = factoryRepository.CreateRepository<ComicImage>();
 
-            Comic objComic = repoComic.GetQuery()
+            Comic objComic = repoComic.GetQuery(false)
                                       .Where(c => c.ComicID == comicID)
                                       .SingleOrDefault();
-
 
             var authors = repoAuthor.GetQuery()
                                     .Where(author => comicDTO.Authors.Contains(author.AuthorID))
@@ -116,6 +116,11 @@ namespace ComicStore.Service.Services
                                   .Where(genre => comicDTO.Genres.Contains(genre.GenreID))
                                   .ToList();
 
+            var image = repoImage.GetQuery()
+                                 .Where(image => image.ComicID == comicID)
+                                 .SingleOrDefault();
+
+
             objComic.Title = comicDTO.Title;
             objComic.Description = comicDTO.Description;
             objComic.Pages = comicDTO.Pages;
@@ -123,8 +128,11 @@ namespace ComicStore.Service.Services
             objComic.Year = comicDTO.Year;
             objComic.Authors = authors;
             objComic.Genres = genres;
+            
 
+            repoComic.Attach(objComic);
             repoComic.Update(objComic);
+
             return objComic;
         }
 

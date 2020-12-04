@@ -57,13 +57,23 @@
         />
       </mat-form-field>
 
-      <mat-form-field>
-        <input matInput placeholder="Autor" formControlName="description" />
-      </mat-form-field>
+      <cms-dropdown-list
+        [isNew]="true"
+        [placeholder]="'Autores'"
+        [getFilteredDataCallback]="getAuthorByNameCallback.bind(this)"
+        [dataControl]="form.controls.authors"
+        idKeyObject="authorID"
+        valueKeyObject="name"
+      ></cms-dropdown-list>
 
-      <mat-form-field>
-        <input matInput placeholder="Categoria" formControlName="description" />
-      </mat-form-field>
+      <cms-dropdown-list
+        [isNew]="true"
+        [placeholder]="'Categorias'"
+        [getFilteredDataCallback]="getGenresByNameCallback.bind(this)"
+        [dataControl]="form.controls.genres"
+        idKeyObject="genreID"
+        valueKeyObject="description"
+      ></cms-dropdown-list>
 
       <div class="full-wrapper button-wrapper">
         <div class="button-wrapper">

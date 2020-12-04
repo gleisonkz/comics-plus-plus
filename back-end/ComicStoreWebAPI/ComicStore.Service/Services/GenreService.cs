@@ -71,7 +71,7 @@ namespace ComicStore.Service.Services
                                       .SingleOrDefault();
 
             objGenre.Comics = null;
-            repoGenre.Update(objGenre);
+            // repoGenre.Update(objGenre);
             return objGenre;
         }
 

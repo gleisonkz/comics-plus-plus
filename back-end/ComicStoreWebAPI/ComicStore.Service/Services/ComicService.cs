@@ -128,7 +128,7 @@ namespace ComicStore.Service.Services
             objComic.Price = comicDTO.Price;
             objComic.Year = comicDTO.Year;
             objComic.Authors = authors;
-            objComic.Genres = genres;
+            objComic.Genres = genres;            
 
             repoComic.Attach(objComic);
             repoComic.Update(objComic);

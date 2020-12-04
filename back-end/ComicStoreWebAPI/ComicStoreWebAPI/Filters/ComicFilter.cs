@@ -1,5 +1,6 @@
 using ComicStore.Domain.POCO;
 using System;
+using System.Linq;
 using System.Linq.Expressions;
 
 namespace ComicStore.Application.Filters
@@ -37,11 +38,11 @@ namespace ComicStore.Application.Filters
             if (Pages.HasValue)
                 predicate = predicate.And(c => c.Pages == Pages);
 
-            //if (Authors.Length > 0)
-            //    predicate = predicate.And(c => c.Authors;
+            if (Authors?.Length > 0)
+                predicate = predicate.And(c => c.Authors.Any(d => Authors.Contains(d.AuthorID)));
 
-            //if (Genres.Length > 0)
-            //    predicate = predicate.And(c => c.Genres;
+            if (Genres?.Length > 0)
+                predicate = predicate.And(c => c.Genres.Any(d => Genres.Contains(d.GenreID)));
 
             return predicate;
         }

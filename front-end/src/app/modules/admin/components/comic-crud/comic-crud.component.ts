@@ -13,6 +13,8 @@ import { ComicService } from '../../../../services/comic.service';
 import { MatPaginatorService } from 'src/app/services/mat-paginator.service';
 import { ComicDialogComponent } from '../dialogs/comic-dialog/comic-dialog.component';
 import { ComicList } from '../../../../models/comic-list.model';
+import { AuthorService } from '../../../../services/author.service';
+import { GenreService } from '../../../../services/genre.service';
 
 @Component({
   selector: 'cms-comic-crud',
@@ -41,7 +43,9 @@ export class ComicCrudComponent implements OnInit {
     private comicService: ComicService,
     private changeDetector: ChangeDetectorRef,
     private notificationService: NotificationService,
-    private matPaginatorService: MatPaginatorService
+    private matPaginatorService: MatPaginatorService,
+    private authorService: AuthorService,
+    private genreService: GenreService
   ) {}
 
   ngOnInit(): void {
@@ -52,11 +56,21 @@ export class ComicCrudComponent implements OnInit {
       price: new FormControl(''),
       year: new FormControl(''),
       pages: new FormControl(''),
+      authors: new FormControl([]),
+      genres: new FormControl([]),
     });
 
     this.dataSource = new CustomDataSource<ComicList>((filter: Filter) =>
       this.comicService.getPaginatedComics(filter)
     );
+  }
+
+  getAuthorByNameCallback(searchTerm: string) {
+    return this.authorService.getAuthorsByName(searchTerm);
+  }
+
+  getGenresByNameCallback(searchTerm: string) {
+    return this.genreService.getGenresByName(searchTerm);
   }
 
   defaultPaginateValues() {

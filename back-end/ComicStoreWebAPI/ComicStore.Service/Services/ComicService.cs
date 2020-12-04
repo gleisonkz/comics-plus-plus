@@ -50,7 +50,6 @@ namespace ComicStore.Service.Services
                 Authors = authors
             };
 
-            //repoComic.Attach(comic);
             return repoComic.Add(comic);
         }
 

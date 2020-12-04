@@ -23,6 +23,112 @@ namespace ComicStore.Application.Controllers
         }
 
         // GET: api/Comic
+
+        [HttpGet("{comicID}")]
+        public IActionResult GetComicByID(int comicID)
+        {
+            try
+            {
+                var comic = svcComic.GetComicByID(comicID)
+                                    .Select(c => new ComicDTO
+                                    {
+                                        ComicID = c.ComicID,
+                                        Title = c.Title,
+                                        Description = c.Description,
+                                        Price = c.Price,
+                                        Year = c.Year,
+                                        Pages = c.Pages,
+                                        Image = new ComicImageInfo
+                                        {
+                                            Name = c.Image.Name,
+                                            Extension = c.Image.Extension,
+                                            Base64 = c.Image.Base64
+
+                                        },
+                                        Authors = c.Authors.Select(d =>
+                                                            new KeyValueAuthor { AuthorID = d.AuthorID, Name = d.Name })
+                                                           .ToList(),
+                                        Genres = c.Genres.Select(d =>
+                                                            new KeyValueGenre { GenreID = d.GenreID, Description = d.Description })
+                                                         .ToList(),
+                                    })
+                                    .SingleOrDefault();
+
+                return Ok(comic);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Erro: {ex.Message}");
+            }
+        }
+
+        [HttpGet]
+        [Route("shop-item")]
+        public IActionResult GetComicsShopItems()
+        {
+            try
+            {
+                var comics = svcComic.GetComic()
+                                    .Select(c => new
+                                    {
+                                        c.ComicID,
+                                        c.Title,
+                                        c.Description,
+                                        c.Price,
+                                        Image = new ComicImageInfo
+                                        {
+                                            Name = c.Image.Name,
+                                            Extension = c.Image.Extension,
+                                            Base64 = c.Image.Base64
+                                        },      
+                                        Authors = c.Authors.Select(c=> c.Name).ToList(),
+                                        Genres = c.Genres.Select(c=> c.Description).ToList()
+                                    })
+                                    .ToList();
+
+                return Ok(comics);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Erro: {ex.Message}");
+            }
+        }
+
+        [HttpGet]
+        [Route("{comicID}/shop-item")]
+        public IActionResult GetComicShopItemDetailByID(int comicID)
+        {
+            try
+            {
+                var comics = svcComic.GetComic()
+                                     .Where(c=> c.ComicID == comicID)
+                                     .Select(c => new
+                                        {
+                                            c.ComicID,
+                                            c.Title,
+                                            c.Description,
+                                            c.Price,
+                                            c.Pages,
+                                            c.Year,
+                                            Image = new ComicImageInfo
+                                            {
+                                                Name = c.Image.Name,
+                                                Extension = c.Image.Extension,
+                                                Base64 = c.Image.Base64
+                                            },
+                                            Authors = c.Authors.Select(c => c.Name).ToList(),
+                                            Genres = c.Genres.Select(c => c.Description).ToList()
+                                        })
+                                     .SingleOrDefault();
+
+                return Ok(comics);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Erro: {ex.Message}");
+            }
+        }
+
         [HttpGet]
         [Route("paginator")]
         public IActionResult GetPaginatedComics([FromQuery] ComicFilter filter)
@@ -83,7 +189,6 @@ namespace ComicStore.Application.Controllers
             return Ok(image);
         }
 
-
         [HttpGet]
         [Route("{comicID}/author")]
         public IActionResult GetAuthorsByComicID(int comicID)
@@ -111,7 +216,6 @@ namespace ComicStore.Application.Controllers
                                   .ToList();
             return Ok(genres);
         }
-
 
         [HttpPost]
         public IActionResult PostComic([FromBody] SaveComicDTO comicDTO)
@@ -141,44 +245,6 @@ namespace ComicStore.Application.Controllers
             catch (Exception ex)
             {
                 svcComic.Rollback();
-                return BadRequest($"Erro: {ex.Message}");
-            }
-        }
-
-        [HttpGet("{comicID}")]
-        public IActionResult GetComicByID(int comicID)
-        {
-            try
-            {
-                var comic = svcComic.GetComicByID(comicID)
-                                    .Select(c => new ComicDTO
-                                    {
-                                        ComicID = c.ComicID,
-                                        Title = c.Title,
-                                        Description = c.Description,
-                                        Price = c.Price,
-                                        Year = c.Year,
-                                        Pages = c.Pages,
-                                        Image = new ComicImageInfo
-                                        {
-                                            Name = c.Image.Name,
-                                            Extension = c.Image.Extension,
-                                            Base64 = c.Image.Base64
-
-                                        },
-                                        Authors = c.Authors.Select(d =>
-                                                            new KeyValueAuthor { AuthorID = d.AuthorID, Name = d.Name })
-                                                           .ToList(),
-                                        Genres = c.Genres.Select(d =>
-                                                            new KeyValueGenre { GenreID = d.GenreID, Description = d.Description })
-                                                         .ToList(),
-                                    })
-                                    .SingleOrDefault();
-
-                return Ok(comic);
-            }
-            catch (Exception ex)
-            {
                 return BadRequest($"Erro: {ex.Message}");
             }
         }

@@ -10,6 +10,8 @@ import { ComicList } from '../models/comic-list.model';
 import { ComicImage } from '../models/comic-image.model';
 import { Author } from '../models/author.model';
 import { Genre } from '../models/genre.model';
+import { ComicShopItem } from '../models/comic-shop-item.model';
+import { ComicShopItemDetail } from '../models/comic-shop-item-detail.model';
 
 @Injectable({
   providedIn: 'root',
@@ -17,8 +19,16 @@ import { Genre } from '../models/genre.model';
 export class ComicService {
   constructor(private http: HttpClient) {}
 
-  getComics(): Observable<Comic[]> {
-    return of(COMICS);
+  getComicShopItems(): Observable<ComicShopItem[]> {
+    return this.http.get<ComicShopItem[]>(
+      `${environment.apiURL}/comic/shop-item`
+    );
+  }
+
+  getComicShopItemDetailByID(comicID: number): Observable<ComicShopItemDetail> {
+    return this.http.get<ComicShopItemDetail>(
+      `${environment.apiURL}/comic/${comicID}/shop-item`
+    );
   }
 
   getComicImageByComicID(comicID: number) {

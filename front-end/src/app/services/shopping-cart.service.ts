@@ -2,7 +2,7 @@ import { CartItem } from './../models/cart-item.model';
 
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Comic } from '../models/comic.model';
+import { ComicShopItem } from '../models/comic-shop-item.model';
 
 @Injectable({
   providedIn: 'root',
@@ -31,7 +31,7 @@ export class ShoppingCartService {
     this.itemsSource$.next([...this.itemsSource$.value]);
   }
 
-  public addItem(item: Comic, quantity: number = 1) {
+  public addItem(item: ComicShopItem, quantity: number = 1) {
     const foundItem = this.itemsSource$.value.find(
       (c) => c.comic.comicID === item.comicID
     );

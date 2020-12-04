@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Comic } from 'src/app/models/comic.model';
 import { ComicService } from '../../services/comic.service';
 import { ShoppingCartService } from '../../services/shopping-cart.service';
+import { ComicShopItemDetail } from '../../models/comic-shop-item-detail.model';
+import { FileUploadService } from '../../services/file-upload.service';
 
 @Component({
   selector: 'cms-comic-detail',
@@ -11,7 +12,7 @@ import { ShoppingCartService } from '../../services/shopping-cart.service';
   styleUrls: ['./comic-detail.component.scss'],
 })
 export class ComicDetailComponent implements OnInit {
-  comic: Comic;
+  comic: ComicShopItemDetail;
   comicForm: FormGroup;
   get hasCartItems(): boolean {
     return this.shoppingCartService.hasItems;
@@ -21,6 +22,7 @@ export class ComicDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private comicService: ComicService,
     private shoppingCartService: ShoppingCartService,
+    private fileUploadService: FileUploadService,
     private router: Router
   ) {}
 
@@ -34,12 +36,15 @@ export class ComicDetailComponent implements OnInit {
 
     const comicID = +this.route.snapshot.params.id;
 
-    this.comicService.getComicByID(comicID).subscribe((comic) => {
+    this.comicService.getComicShopItemDetailByID(comicID).subscribe((comic) => {
       this.comic = comic;
+      this.comic.image.preview = this.fileUploadService.loadImagePreview(
+        comic.image
+      );
     });
   }
 
-  addMultipleItemsToCart(comic: Comic) {
+  addMultipleItemsToCart(comic: ComicShopItemDetail) {
     this.shoppingCartService.addItem(
       comic,
       +this.comicForm.controls.quantity.value
@@ -47,6 +52,8 @@ export class ComicDetailComponent implements OnInit {
   }
 
   navigateToOrder(): void {
-    this.router.navigate(['/order']);
+    console.log('Navigate');
+
+    this.hasCartItems && this.router.navigate(['/order']);
   }
 }

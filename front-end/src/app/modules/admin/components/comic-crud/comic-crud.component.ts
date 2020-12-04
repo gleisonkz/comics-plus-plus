@@ -149,9 +149,9 @@ export class ComicCrudComponent implements OnInit {
     );
     dialogRef.afterClosed().subscribe((confirmed: boolean) => {
       if (confirmed) {
-        this.comicService.deleteComic(item.comicID).subscribe((c) => {
+        this.comicService.deleteComic(item.comicID).subscribe(() => {
           this.notificationService.showMessage(
-            `Você deletou o quadrinho ${item.description} ID:${item.comicID}`
+            `Você deletou o quadrinho ${item.title} ID:${item.comicID}`
           );
           this.loadData();
         });

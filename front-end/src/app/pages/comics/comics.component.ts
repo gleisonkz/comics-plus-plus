@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Comic } from '../../models/comic.model';
 import { ComicService } from '../../services/comic.service';
+import { ComicShopItem } from '../../models/comic-shop-item.model';
 
 @Component({
   selector: 'cms-comics',
@@ -10,10 +11,10 @@ import { ComicService } from '../../services/comic.service';
 export class ComicsComponent implements OnInit {
   constructor(private comicService: ComicService) {}
 
-  comics: Comic[];
+  comics: ComicShopItem[];
 
   ngOnInit(): void {
-    this.comicService.getComics().subscribe((comics) => {
+    this.comicService.getComicShopItems().subscribe((comics) => {
       this.comics = comics;
     });
   }

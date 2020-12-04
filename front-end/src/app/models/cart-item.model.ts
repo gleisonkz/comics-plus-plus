@@ -1,7 +1,6 @@
-import { Comic } from './comic.model';
-
+import { ComicShopItem } from './comic-shop-item.model';
 export class CartItem {
-  constructor(public comic: Comic, public quantity: number = 1) {}
+  constructor(public comic: ComicShopItem, public quantity: number = 1) {}
 
   getTotalValue(): number {
     return this.comic.price * this.quantity;

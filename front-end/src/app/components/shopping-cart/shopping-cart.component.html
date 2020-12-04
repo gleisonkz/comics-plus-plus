@@ -12,7 +12,11 @@
     <div class="cart" (click)="$event.stopPropagation()">
       <div *ngIf="hasItems" class="cart__content">
         <div *ngFor="let item of items$ | async" class="cart__item">
-          <img [src]="item.comic.imagePath" alt="" class="cart__item__image" />
+          <img
+            [src]="item.comic.image.preview"
+            alt=""
+            class="cart__item__image"
+          />
 
           <div class="cart__group cart__group--title">
             <div>

@@ -1,16 +1,16 @@
 <div class="comic">
   <div class="comic__container-info">
-    <img class="comic__image" [src]="comic.image.base64" alt="Image" />
+    <img class="comic__image" [src]="comic?.image?.preview" alt="Image" />
     <div>
       <header>
-        <h1 class="comic__title">{{ comic.title }}</h1>
+        <h1 class="comic__title">{{ comic?.title }}</h1>
         <span class="comic__author"></span>
         <span class="comic__genre"></span>
       </header>
       <mat-tab-group>
         <mat-tab label="Descrição">
           <p class="comic__description">
-            {{ comic.description }}
+            {{ comic?.description }}
           </p>
         </mat-tab>
         <mat-tab label="Detalhes do Produto">
@@ -18,7 +18,35 @@
             <ul class="comic-details__info">
               <li class="comic-details__item">
                 <strong class="comic-details__item__label">Nº páginas:</strong>
-                <span class="comic-details__item__value">128 pages</span>
+                <span class="comic-details__item__value"
+                  >{{ comic?.pages }} páginas</span
+                >
+              </li>
+            </ul>
+            <ul class="comic-details__info">
+              <li class="comic-details__item">
+                <strong class="comic-details__item__label"
+                  >Ano de publicação:</strong
+                >
+                <span class="comic-details__item__value">{{
+                  comic?.year
+                }}</span>
+              </li>
+            </ul>
+            <ul class="comic-details__info">
+              <li class="comic-details__item">
+                <strong class="comic-details__item__label">Autores:</strong>
+                <span class="comic-details__item__value">{{
+                  comic?.authors
+                }}</span>
+              </li>
+            </ul>
+            <ul class="comic-details__info">
+              <li class="comic-details__item">
+                <strong class="comic-details__item__label">Categorias:</strong>
+                <span class="comic-details__item__value">{{
+                  comic?.genres
+                }}</span>
               </li>
             </ul>
             <ul class="comic-details__info">
@@ -29,27 +57,13 @@
                 >
               </li>
             </ul>
-            <ul class="comic-details__info">
-              <li class="comic-details__item">
-                <strong class="comic-details__item__label"
-                  >Data de publicação:</strong
-                >
-                <span class="comic-details__item__value">03 Nov 2011</span>
-              </li>
-            </ul>
-            <ul class="comic-details__info">
-              <li class="comic-details__item">
-                <strong class="comic-details__item__label">Idioma:</strong>
-                <span class="comic-details__item__value">Inglês</span>
-              </li>
-            </ul>
           </section>
         </mat-tab>
       </mat-tab-group>
     </div>
 
     <form [formGroup]="comicForm" class="comic__form">
-      <span class="comic__price">R$ {{ comic.price | number: "2.2" }}</span>
+      <span class="comic__price">R$ {{ comic?.price | number: "2.2" }}</span>
       <span class="comic__inventory">Disponibilidade: Em estoque</span>
       <mat-form-field>
         <mat-label>Quantidade</mat-label>
@@ -70,8 +84,12 @@
           <i class="fas fa-shopping-cart"></i>
           Adicionar
         </button>
-        <a [class.disabled]="!hasCartItems ? true : false" routerLink="/order">
-          <button [disabled]="!hasCartItems" class="comic__btn">
+        <a [class.disabled]="!hasCartItems ? true : false">
+          <button
+            (click)="navigateToOrder()"
+            [disabled]="!hasCartItems"
+            class="comic__btn"
+          >
             <i class="fas fa-credit-card"></i>
             Finalizar pedido
           </button>

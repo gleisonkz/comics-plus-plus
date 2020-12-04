@@ -23,7 +23,7 @@ namespace ComicStore.Application.Controllers
         }
 
         [HttpGet]
-        [Route("")]
+        [Route("paginator")]
         public IActionResult GetGenre([FromQuery] GenreFilter filter)
         {
             try

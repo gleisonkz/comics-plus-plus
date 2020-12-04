@@ -57,7 +57,16 @@
     font-size: rem(12);
   }
 
+  &__genre {
+    font-size: rem(12);
+  }
+
+  &__author {
+    font-size: rem(12);
+  }
+
   &__description {
+    margin-top: rem(10);
     font-size: rem(12);
     text-align: left;
     width: 100%;

@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Comic } from 'src/app/models/comic.model';
+import { ComicShopItem } from 'src/app/models/comic-shop-item.model';
 import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
+import { FileUploadService } from '../../services/file-upload.service';
 
 @Component({
   selector: 'cms-comic',
@@ -8,13 +9,19 @@ import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
   styleUrls: ['./comic.component.scss'],
 })
 export class ComicComponent implements OnInit {
-  constructor(private shoppingCartService: ShoppingCartService) {}
+  @Input() comic: ComicShopItem;
+  constructor(
+    private shoppingCartService: ShoppingCartService,
+    private fileUploadService: FileUploadService
+  ) {}
 
-  @Input() comic: Comic;
+  ngOnInit(): void {
+    this.comic.image.preview = this.fileUploadService.loadImagePreview(
+      this.comic.image
+    );
+  }
 
-  ngOnInit(): void {}
-
-  addToCart(comic: Comic) {
+  addToCart(comic: ComicShopItem) {
     this.shoppingCartService.addItem(comic);
   }
 }

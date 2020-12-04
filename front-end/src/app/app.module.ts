@@ -1,5 +1,6 @@
+import { ApplicationErrorHandler } from './classes/application-error-handler';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
@@ -54,6 +55,7 @@ import { QueryParamsInterceptor } from './shared/interceptors/query-params.inter
       useClass: QueryParamsInterceptor,
       multi: true,
     },
+    { provide: ErrorHandler, useClass: ApplicationErrorHandler },
   ],
   bootstrap: [AppComponent],
 })

@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable, ReplaySubject, Subject, Subscription } from 'rxjs';
-import { Comic } from '../../../models/comic.model';
 import {
   debounceTime,
   distinctUntilChanged,
@@ -57,8 +56,6 @@ export class DropdownListComponent implements OnInit {
   }
 
   getData() {
-    console.log('Dropdown Initial');
-
     if (!this.isNew) {
       this.subscriptions.push(
         this.getInitialDataCallback().subscribe((responseData) => {

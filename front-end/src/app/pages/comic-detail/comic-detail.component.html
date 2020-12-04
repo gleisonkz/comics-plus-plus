@@ -1,11 +1,11 @@
 <div class="comic">
   <div class="comic__container-info">
-    <img class="comic__image" [src]="comic.imagePath" alt="Image" />
+    <img class="comic__image" [src]="comic.image.base64" alt="Image" />
     <div>
       <header>
         <h1 class="comic__title">{{ comic.title }}</h1>
-        <span class="comic__author">{{ comic.author }}</span>
-        <span class="comic__genre">{{ comic.genre }}</span>
+        <span class="comic__author"></span>
+        <span class="comic__genre"></span>
       </header>
       <mat-tab-group>
         <mat-tab label="Descrição">

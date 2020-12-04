@@ -52,11 +52,7 @@ export class ComicService {
   }
 
   getComicByID(comicID: number): Observable<Comic> {
-    const foundComic = COMICS.find((c) => c.comicID === comicID);
-    return of(foundComic);
-    // return this.http
-    //   .get<Comic>(`${environment.meatApiUrl}/livros/${restaurantID}`)
-    //   .pipe(catchError(ErrorHandler.handleError));
+    return this.http.get<Comic>(`${environment.apiURL}/comic/${comicID}`);
   }
 
   postComic(comic: Comic): Observable<Comic> {

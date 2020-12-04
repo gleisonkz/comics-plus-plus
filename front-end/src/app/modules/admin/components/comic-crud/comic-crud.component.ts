@@ -80,12 +80,11 @@ export class ComicCrudComponent implements OnInit {
   }
 
   openDialog(comic?: Comic) {
-    const dialogConfig = new MatDialogConfig();
+    const dialogConfig = new MatDialogConfig<Comic>();
 
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.hasBackdrop = true;
-
     dialogConfig.data = comic;
 
     const dialogRef = this.dialogService.open(
@@ -93,8 +92,8 @@ export class ComicCrudComponent implements OnInit {
       dialogConfig
     );
 
-    dialogRef.afterClosed().subscribe((comic: Comic) => {
-      if (comic) {
+    dialogRef.afterClosed().subscribe((isUpdated: boolean) => {
+      if (isUpdated) {
         this.loadData();
       }
     });

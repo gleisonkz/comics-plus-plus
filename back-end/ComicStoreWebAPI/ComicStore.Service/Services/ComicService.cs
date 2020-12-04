@@ -120,6 +120,7 @@ namespace ComicStore.Service.Services
                                  .Where(image => image.ComicID == comicID)
                                  .SingleOrDefault();
 
+            
 
             objComic.Title = comicDTO.Title;
             objComic.Description = comicDTO.Description;
@@ -128,7 +129,6 @@ namespace ComicStore.Service.Services
             objComic.Year = comicDTO.Year;
             objComic.Authors = authors;
             objComic.Genres = genres;
-            
 
             repoComic.Attach(objComic);
             repoComic.Update(objComic);

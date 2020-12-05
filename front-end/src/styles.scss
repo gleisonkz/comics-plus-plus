@@ -34,6 +34,7 @@
   font: 400 24px/32px Roboto, "Helvetica Neue", sans-serif;
   letter-spacing: normal;
   margin: 0 0 10px;
+  color: $color-title-text;
 }
 
 .mat-h2,
@@ -90,6 +91,7 @@ body {
   cursor: default;
   @include button-disabled;
 }
+
 table {
   td.mat-cell {
     white-space: nowrap;
@@ -105,5 +107,49 @@ table {
   td.mat-cell,
   td.mat-footer-cell {
     padding: 0 10px;
+  }
+
+  th.mat-header-cell {
+    color: $color-title-text;
+  }
+
+  td.mat-cell,
+  td.mat-footer-cell {
+    color: $color-text;
+  }
+}
+
+.title-group {
+  @include flex-center;
+  color: $color-title-text;
+
+  justify-content: space-between;
+
+  h1 {
+    font-size: rem(14);
+    margin: 0;
+    padding-bottom: rem(10);
+  }
+
+  ::ng-deep.mat-button-wrapper {
+    @include flex-center;
+  }
+
+  button {
+    @include flex-center;
+
+    i {
+      margin-right: rem(5);
+    }
+  }
+
+  .title {
+    i {
+      margin-right: rem(10);
+      color: $color-title-text;
+    }
+
+    @include flex-center;
+    font-size: rem(20);
   }
 }

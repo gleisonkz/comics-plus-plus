@@ -24,40 +24,6 @@
   }
 }
 
-.title-group {
-  @include flex-center;
-
-  justify-content: space-between;
-
-  h1 {
-    font-size: rem(14);
-    margin: 0;
-    padding-bottom: rem(10);
-  }
-
-  ::ng-deep.mat-button-wrapper {
-    @include flex-center;
-  }
-
-  button {
-    @include flex-center;
-
-    i {
-      margin-right: rem(5);
-    }
-  }
-
-  .title {
-    i {
-      margin-right: rem(10);
-    }
-
-    @include flex-center;
-    font-size: rem(20);
-    color: $color-text;
-  }
-}
-
 mat-form-field {
   margin-right: rem(20);
 }

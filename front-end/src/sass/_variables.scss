@@ -14,6 +14,7 @@ $font-secondary: Arial, Helvetica, sans-serif;
 $color-primary: #{"var(--color-primary)"};
 $color-background: #{"var(--color-background)"};
 $color-text: #{"var(--color-text)"};
+$color-title-text: #{"var(--color-title-text)"};
 $color-link: #{"var(--color-link)"};
 $color-hover-bg-menu: #{"var(--color-hover-bg-menu)"};
 
@@ -35,6 +36,7 @@ $color-icon: #{"var(--color-icon)"};
 $project-colors: (
   "primary": #27ae61,
   "background": #f3f2f7,
+  "title-text": #444,
   "text": #444,
   "link": #6ba8c7,
   // "panel-bg": #e7e7e7,
@@ -54,7 +56,8 @@ $project-colors: (
 $project-colors-theme-dark: (
   "primary": #252a41,
   "background": hsl(230, 17%, 14%),
-  "text": white,
+  "text": #d3cdcd,
+  "title-text": white,
   "link": #6ba8c7,
   "panel-bg": "var(--color-primary)",
   "panel-text": white,

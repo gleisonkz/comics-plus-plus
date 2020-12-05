@@ -54,7 +54,6 @@
 
     @include flex-center;
     font-size: rem(20);
-    color: $color-text;
   }
 }
 
@@ -90,6 +89,7 @@ table {
 mat-paginator {
   background-color: $color-panel-bg;
   align-self: flex-end;
+  color: $color-text;
 }
 
 .container {

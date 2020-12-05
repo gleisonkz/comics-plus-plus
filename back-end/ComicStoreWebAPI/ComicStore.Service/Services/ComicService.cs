@@ -119,6 +119,10 @@ namespace ComicStore.Service.Services
                                  .Where(image => image.ComicID == comicID)
                                  .SingleOrDefault();
 
+            image.Base64 = comicDTO.Image.Base64;
+            image.Extension = comicDTO.Image.Extension;
+            image.Name = comicDTO.Image.Name;
+
             
 
             objComic.Title = comicDTO.Title;
@@ -127,7 +131,8 @@ namespace ComicStore.Service.Services
             objComic.Price = comicDTO.Price;
             objComic.Year = comicDTO.Year;
             objComic.Authors = authors;
-            objComic.Genres = genres;            
+            objComic.Genres = genres;
+            objComic.Image = image;
 
             repoComic.Attach(objComic);
             repoComic.Update(objComic);

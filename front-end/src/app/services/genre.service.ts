@@ -3,8 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { delay } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { Filter } from '../models/filter.model';
 import { Genre } from '../models/genre.model';
+import { Filter } from '../modules/admin/models/filter.model';
 
 @Injectable()
 export class GenreService {

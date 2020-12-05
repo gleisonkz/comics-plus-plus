@@ -1,6 +1,3 @@
-import { pageSizeOptions } from './../../constants/paginator-options';
-import { CustomDataSource } from '../../classes/custom-data-source';
-import { Genre } from './../../../../models/genre.model';
 import {
   AfterViewInit,
   ChangeDetectorRef,
@@ -11,13 +8,16 @@ import {
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
-import { GenreDialogComponent } from '../dialogs/genre-dialog/genre-dialog.component';
-import { GenreService } from '../../../../services/genre.service';
 import { finalize } from 'rxjs/operators';
-import { NotificationService } from '../../../../services/notification.service';
-import { ConfirmationDialogComponent } from '../dialogs/confirmation-dialog/confirmation-dialog.component';
-import { Filter } from '../../../../models/filter.model';
-import { MatPaginatorService } from 'src/app/services/mat-paginator.service';
+import { MatPaginatorService } from 'src/app/modules/admin/services/mat-paginator.service';
+import { GenreService } from '../../../../services/genre.service';
+import { NotificationService } from '../../../shared/services/notification.service';
+import { CustomDataSource } from '../../classes/custom-data-source';
+import { ConfirmationDialogComponent } from '../../components/confirmation-dialog/confirmation-dialog.component';
+import { GenreDialogComponent } from '../../components/genre-dialog/genre-dialog.component';
+import { Filter } from '../../models/filter.model';
+import { Genre } from './../../../../models/genre.model';
+import { pageSizeOptions } from './../../constants/paginator-options';
 
 @Component({
   templateUrl: './genre-crud.component.html',

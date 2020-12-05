@@ -1,8 +1,8 @@
 import { CollectionViewer, DataSource } from '@angular/cdk/collections';
-import { Observable, BehaviorSubject, of } from 'rxjs';
-import { debounceTime, finalize } from 'rxjs/operators';
-import { Filter } from '../../../models/filter.model';
 import { HttpResponse } from '@angular/common/http';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { debounceTime, finalize } from 'rxjs/operators';
+import { Filter } from '../models/filter.model';
 
 export class CustomDataSource<T> implements DataSource<T> {
   private sourceSubject = new BehaviorSubject<T[]>([]);

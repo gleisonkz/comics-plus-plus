@@ -1,11 +1,11 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { GenreService } from '../../../../../services/genre.service';
-import { NotificationService } from '../../../../../services/notification.service';
-import { Genre } from '../../../../../models/genre.model';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { Genre } from 'src/app/models/genre.model';
+import { NotificationService } from 'src/app/modules/shared/services/notification.service';
+import { GenreService } from 'src/app/services/genre.service';
 
 @Component({
   templateUrl: './genre-dialog.component.html',

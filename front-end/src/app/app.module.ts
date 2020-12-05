@@ -5,7 +5,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ApplicationErrorHandler } from './classes/application-error-handler';
 import { ComicComponent } from './components/comic/comic.component';
 import { HeaderComponent } from './components/header/header.component';
 import { OrderItemComponent } from './components/order-item/order-item.component';
@@ -14,6 +13,7 @@ import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.
 import { ToggleThemeComponent } from './components/toggle-theme/toggle-theme.component';
 import { QueryParamsInterceptor } from './interceptors/query-params.interceptor';
 import { MaterialModule } from './modules/material/material.module';
+import { ApplicationErrorHandler } from './modules/shared/classes/application-error-handler';
 import { AboutComponent } from './pages/about/about.component';
 import { ComicDetailComponent } from './pages/comic-detail/comic-detail.component';
 import { ComicsComponent } from './pages/comics/comics.component';

@@ -1,17 +1,16 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { NotificationService } from 'src/app/services/notification.service';
-import { ComicService } from '../../../../../services/comic.service';
-import { Comic } from '../../../../../models/comic.model';
-import { Observable, Subject, Subscription } from 'rxjs';
-import { tap } from 'rxjs/operators';
-
-import { GenreService } from '../../../../../services/genre.service';
-import { AuthorService } from '../../../../../services/author.service';
-import { ComicImage } from '../../../../../models/comic-image.model';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { FileInput } from 'ngx-material-file-input';
+import { Observable, Subject, Subscription } from 'rxjs';
+import { tap } from 'rxjs/operators';
+import { ComicImage } from 'src/app/models/comic-image.model';
+import { Comic } from 'src/app/models/comic.model';
+import { NotificationService } from 'src/app/modules/shared/services/notification.service';
+import { AuthorService } from 'src/app/services/author.service';
+import { ComicService } from 'src/app/services/comic.service';
+import { GenreService } from 'src/app/services/genre.service';
 
 @Component({
   templateUrl: './comic-dialog.component.html',

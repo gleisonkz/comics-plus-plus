@@ -5,12 +5,12 @@ import { delay } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Author } from '../models/author.model';
 import { ComicImage } from '../models/comic-image.model';
-import { ComicList } from '../models/comic-list.model';
 import { ComicShopItemDetail } from '../models/comic-shop-item-detail.model';
 import { ComicShopItem } from '../models/comic-shop-item.model';
 import { Comic } from '../models/comic.model';
-import { Filter } from '../models/filter.model';
 import { Genre } from '../models/genre.model';
+import { ComicList } from '../modules/admin/models/comic-list.model';
+import { Filter } from '../modules/admin/models/filter.model';
 
 @Injectable({
   providedIn: 'root',

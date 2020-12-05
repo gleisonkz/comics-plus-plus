@@ -1,0 +1,13 @@
+@import "../../../../../sass/functions";
+@import "../../../../../sass/variables";
+@import "../../../../../sass/mixins";
+@import "../../../../../sass/media";
+
+mat-dialog-actions {
+  @include flex-center;
+  justify-content: flex-end;
+
+  button:first-of-type {
+    margin-right: rem(10);
+  }
+}

@@ -1,8 +1,7 @@
-@import "../../../../../../sass/functions";
-@import "../../../../../../sass/variables";
-@import "../../../../../../sass/mixins";
-@import "../../../../../../sass/media";
-
+@import "../../../../../sass/functions";
+@import "../../../../../sass/variables";
+@import "../../../../../sass/mixins";
+@import "../../../../../sass/media";
 mat-dialog-actions {
   @include flex-center;
   justify-content: flex-end;

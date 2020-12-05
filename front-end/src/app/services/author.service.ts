@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { delay } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Author } from '../models/author.model';
-import { Filter } from '../models/filter.model';
+import { Filter } from '../modules/admin/models/filter.model';
 
 @Injectable({
   providedIn: 'root',

@@ -1,20 +1,20 @@
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { pageSizeOptions } from '../../constants/paginator-options';
-import { Comic } from '../../../../models/comic.model';
-import { CustomDataSource } from '../../classes/custom-data-source';
-import { MatPaginator } from '@angular/material/paginator';
-import { Filter } from 'src/app/models/filter.model';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { NotificationService } from 'src/app/services/notification.service';
+import { MatPaginator } from '@angular/material/paginator';
 import { finalize } from 'rxjs/operators';
-import { ConfirmationDialogComponent } from '../dialogs/confirmation-dialog/confirmation-dialog.component';
-import { ComicService } from '../../../../services/comic.service';
-import { MatPaginatorService } from 'src/app/services/mat-paginator.service';
-import { ComicDialogComponent } from '../dialogs/comic-dialog/comic-dialog.component';
-import { ComicList } from '../../../../models/comic-list.model';
+import { Filter } from 'src/app/modules/admin/models/filter.model';
+import { NotificationService } from 'src/app/modules/shared/services/notification.service';
+import { Comic } from '../../../../models/comic.model';
 import { AuthorService } from '../../../../services/author.service';
+import { ComicService } from '../../../../services/comic.service';
 import { GenreService } from '../../../../services/genre.service';
+import { CustomDataSource } from '../../classes/custom-data-source';
+import { ComicDialogComponent } from '../../components/comic-dialog/comic-dialog.component';
+import { ConfirmationDialogComponent } from '../../components/confirmation-dialog/confirmation-dialog.component';
+import { pageSizeOptions } from '../../constants/paginator-options';
+import { ComicList } from '../../models/comic-list.model';
+import { MatPaginatorService } from '../../services/mat-paginator.service';
 
 @Component({
   selector: 'cms-comic-crud',

@@ -2,7 +2,7 @@ import { DOCUMENT } from '@angular/common';
 import { Component, Inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { fadeAnimation } from './animations/fade.animations';
+import { fadeAnimation } from './modules/shared/animations/fade.animations';
 import { ToggleThemeService } from './services/toggle-theme.service';
 
 @Component({

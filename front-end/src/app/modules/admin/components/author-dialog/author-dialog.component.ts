@@ -1,11 +1,11 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { Author } from 'src/app/models/author.model';
-import { NotificationService } from 'src/app/services/notification.service';
-import { AuthorService } from '../../../../../services/author.service';
+import { NotificationService } from 'src/app/modules/shared/services/notification.service';
+import { AuthorService } from 'src/app/services/author.service';
 
 @Component({
   templateUrl: './author-dialog.component.html',

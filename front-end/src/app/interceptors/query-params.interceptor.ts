@@ -1,11 +1,11 @@
-import { Injectable } from '@angular/core';
 import {
-  HttpRequest,
-  HttpHandler,
   HttpEvent,
+  HttpHandler,
   HttpInterceptor,
   HttpParams,
+  HttpRequest,
 } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 @Injectable()

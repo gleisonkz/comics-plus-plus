@@ -17,7 +17,7 @@ export class OrderGuard implements CanActivate {
     state: RouterStateSnapshot
   ): boolean {
     if (sessionStorage.getItem('orderID') === null) {
-      this.router.navigateByUrl('/livros');
+      this.router.navigateByUrl('/quadrinhos');
       return false;
     }
     return true;

@@ -12,6 +12,7 @@ import { OrderItemComponent } from './components/order-item/order-item.component
 import { RatingComponent } from './components/rating/rating.component';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 import { ToggleThemeComponent } from './components/toggle-theme/toggle-theme.component';
+import { QueryParamsInterceptor } from './interceptors/query-params.interceptor';
 import { MaterialModule } from './modules/material/material.module';
 import { AboutComponent } from './pages/about/about.component';
 import { ComicDetailComponent } from './pages/comic-detail/comic-detail.component';
@@ -20,7 +21,6 @@ import { HomeComponent } from './pages/home/home.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { OrderFinishedComponent } from './pages/order-finished/order-finished.component';
 import { OrderComponent } from './pages/order/order.component';
-import { QueryParamsInterceptor } from './shared/interceptors/query-params.interceptor';
 
 @NgModule({
   declarations: [

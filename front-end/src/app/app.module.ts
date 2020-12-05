@@ -12,7 +12,7 @@ import { OrderItemComponent } from './components/order-item/order-item.component
 import { RatingComponent } from './components/rating/rating.component';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 import { ToggleThemeComponent } from './components/toggle-theme/toggle-theme.component';
-import { MaterialModule } from './modules/material/material/material.module';
+import { MaterialModule } from './modules/material/material.module';
 import { AboutComponent } from './pages/about/about.component';
 import { ComicDetailComponent } from './pages/comic-detail/comic-detail.component';
 import { ComicsComponent } from './pages/comics/comics.component';

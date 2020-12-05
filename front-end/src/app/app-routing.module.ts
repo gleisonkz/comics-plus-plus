@@ -11,8 +11,8 @@ import { OrderComponent } from './pages/order/order.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'livros', component: ComicsComponent },
-  { path: 'livros/:id', component: ComicDetailComponent },
+  { path: 'quadrinhos', component: ComicsComponent },
+  { path: 'quadrinhos/:id', component: ComicDetailComponent },
   { path: 'sobre', component: AboutComponent },
   { path: 'order', component: OrderComponent },
   {
@@ -25,7 +25,13 @@ const routes: Routes = [
     loadChildren: () =>
       import('./modules/admin/admin.module').then((m) => m.AdminModule),
   },
-  { path: 'authentication', loadChildren: () => import('./modules/authentication/authentication.module').then(m => m.AuthenticationModule) },
+  {
+    path: 'authentication',
+    loadChildren: () =>
+      import('./modules/authentication/authentication.module').then(
+        (m) => m.AuthenticationModule
+      ),
+  },
   { path: '**', component: NotFoundComponent },
 ];
 

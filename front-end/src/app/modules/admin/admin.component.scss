@@ -4,7 +4,7 @@
 @import "../../../sass/media";
 
 mat-sidenav {
-  top: rem(50) !important;
+  top: $header-size !important;
   left: 0;
   width: rem(150);
   background-color: $color-panel-bg;

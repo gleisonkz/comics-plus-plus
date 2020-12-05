@@ -9,9 +9,8 @@
   padding: rem(20);
   border-radius: $global-radius;
   @include flex-center(column);
-
   &__image {
-    background: transparent;
+    @include size(528, 338);
   }
   &__title {
     color: $color-text;

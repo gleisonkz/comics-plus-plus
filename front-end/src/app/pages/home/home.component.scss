@@ -5,12 +5,12 @@
 .panel {
   @include flex-center;
   justify-content: space-around;
-  flex-direction: column;
-  width: rem(800);
+  // flex-direction: column;
+  // width: rem(800);
   height: rem(400);
 
   margin: 20px auto;
-  padding: rem(20);
+  padding: rem(30);
 
   color: $color-panel-text;
   background-color: $color-panel-bg;
@@ -20,7 +20,16 @@
     font-size: rem(55);
   }
 
+  &__info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+
   &__subtitle {
+    margin-top: rem(20);
     text-align: center;
     font-size: rem(25);
     width: rem(500);
@@ -28,6 +37,13 @@
   }
 
   &__button {
+    margin-top: rem(50);
     @include base-button-style;
+
+    font-size: rem(20);
+  }
+
+  img {
+    @include size(300);
   }
 }

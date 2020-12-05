@@ -5,14 +5,18 @@ using ComicStore.Infra.EFRepository.Context;
 using ComicStore.Infra.EFRepository.Repository;
 using ComicStore.Service.Interfaces;
 using ComicStore.Service.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http.Features;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 using System;
+using System.Text;
 
 namespace ComicStoreWebAPI
 {
@@ -36,9 +40,14 @@ namespace ComicStoreWebAPI
 
             _ = services.AddDbContext<ComicStoreDbContext>(options =>
                 {
-                    options.UseSqlServer(@"Data Source=.\sqlexpress;Initial Catalog=ComicStore;Integrated Security=True")                                                      
+                    options.UseSqlServer(Configuration["ConnectionStrings:IdentityConnection"].ToString())
                            .UseLazyLoadingProxies();
                 });
+
+
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                    .AddEntityFrameworkStores<ComicStoreDbContext>()
+                    .AddDefaultTokenProviders();
 
             services.AddCors(c => c.AddPolicy("ComicStorePolicy", builder =>
             {
@@ -54,6 +63,29 @@ namespace ComicStoreWebAPI
             services.AddScoped<IGenreService, GenreService>();
             services.AddScoped<IAuthorService, AuthorService>();
 
+            var key = Encoding.UTF8.GetBytes(Configuration["ApplicationSettings:JWT_Secret"].ToString());
+            //Authentication With JWT
+            services.AddAuthentication(c =>
+            {
+                c.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                c.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                c.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(c =>
+            {
+                c.RequireHttpsMetadata = false;
+                c.SaveToken = true;
+                c.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    ClockSkew = TimeSpan.Zero
+                };
+            });
+
+            services.AddAuthorization();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -68,6 +100,8 @@ namespace ComicStoreWebAPI
 
             app.UseRouting();
 
+
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseCors("ComicStorePolicy");

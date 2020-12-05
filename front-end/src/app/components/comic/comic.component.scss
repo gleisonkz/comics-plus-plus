@@ -47,6 +47,7 @@
     position: absolute;
     left: rem(12);
     bottom: rem(20);
+    font-size: rem(20);
 
     @include tiny-mobile {
       font-size: rem(20);

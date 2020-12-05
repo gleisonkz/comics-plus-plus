@@ -1,7 +1,7 @@
 @import "./sass/variables";
 @import "./sass/responsive-helpers";
 @import "./sass/mixins";
-// @import "./theme.scss";
+//@import "./theme.scss";
 
 :root {
   --lh: 1.4rem;
@@ -49,6 +49,10 @@ body,
 html {
   height: 100%;
   background: #222;
+}
+
+.mat-dialog-container {
+  background-color: $color-panel-bg;
 }
 
 html,

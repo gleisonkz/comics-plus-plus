@@ -12,8 +12,9 @@ mat-dialog-actions {
   }
 }
 
-mat-form-field + mat-form-field {
-  margin-left: rem(10);
+mat-form-field,
+cms-dropdown-list {
+  margin-right: rem(10);
 }
 
 .preview-image {

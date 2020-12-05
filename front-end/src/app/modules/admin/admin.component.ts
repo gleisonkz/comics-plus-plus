@@ -1,6 +1,6 @@
 import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
-import { RouterOutlet } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'cms-admin',
@@ -10,9 +10,11 @@ import { RouterOutlet } from '@angular/router';
 export class AdminComponent implements OnInit {
   opened = true;
   @ViewChild('sidenav') sidenav: MatSidenav;
-  constructor() {}
+  constructor(private router: Router) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.router.navigateByUrl('admin/comic');
+  }
 
   @HostListener('window:resize', ['$event'])
   onResize(event) {

@@ -1,10 +1,9 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-
+import { RouterModule, Routes } from '@angular/router';
 import { AdminComponent } from './admin.component';
+import { AuthorCrudComponent } from './components/author-crud/author-crud.component';
 import { ComicCrudComponent } from './components/comic-crud/comic-crud.component';
 import { GenreCrudComponent } from './components/genre-crud/genre-crud.component';
-import { AuthorCrudComponent } from './components/author-crud/author-crud.component';
 
 const routes: Routes = [
   {

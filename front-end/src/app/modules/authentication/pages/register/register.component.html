@@ -16,7 +16,7 @@
 
       <mat-form-field>
         <input
-          type="text"
+          type="password"
           matInput
           placeholder="Senha"
           formControlName="password"
@@ -25,7 +25,7 @@
 
       <mat-form-field>
         <input
-          type="text"
+          type="password"
           matInput
           placeholder="Confirmação senha"
           formControlName="passwordCheck"
@@ -34,9 +34,17 @@
     </form>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-raised-button color="primary">Cadastrar</button>
-    <a class="pull-right" [routerLink]="['/authentication', 'login']"
-      >Já possui uma conta? faça seu login sua aqui!</a
+    <button
+      (click)="register(form.value)"
+      [disabled]="form.invalid"
+      mat-raised-button
+      color="primary"
     >
+      Cadastrar
+    </button>
+    <a class="pull-right" [routerLink]="['/authentication', 'login']"
+      ><span>Já possui uma conta?</span>
+      <span>faça seu login sua aqui!</span>
+    </a>
   </mat-card-actions>
 </mat-card>

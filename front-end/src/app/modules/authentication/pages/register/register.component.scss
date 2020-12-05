@@ -30,6 +30,11 @@ button {
 }
 
 a {
+  @include flex-center(column);
   color: $color-link;
   font-size: rem(12);
+
+  span {
+    display: block;
+  }
 }

@@ -83,7 +83,6 @@ export class ComicDialogComponent implements OnInit {
   subscribeToPreviewImageControl(): void {
     this.form.controls['image'].valueChanges.subscribe((c) => {
       const file: File = c.files[0];
-      console.log();
 
       this.readFileAsBinaryString(file).subscribe((comicImage: ComicImage) => {
         this.imageDataUrl = this.domSanitizer.bypassSecurityTrustUrl(
@@ -95,7 +94,7 @@ export class ComicDialogComponent implements OnInit {
   }
 
   loadPreviewImage() {
-    if (this.comic.comicID > 0) {
+    if (this.comic?.comicID > 0) {
       this.comicService
         .getComicImageByComicID(this.comic.comicID)
         .subscribe((image) => {

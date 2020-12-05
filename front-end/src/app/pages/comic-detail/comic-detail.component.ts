@@ -52,8 +52,6 @@ export class ComicDetailComponent implements OnInit {
   }
 
   navigateToOrder(): void {
-    console.log('Navigate');
-
     this.hasCartItems && this.router.navigate(['/order']);
   }
 }

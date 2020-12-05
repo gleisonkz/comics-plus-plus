@@ -60,6 +60,7 @@ export class DropdownListComponent implements OnInit {
       this.subscriptions.push(
         this.getInitialDataCallback().subscribe((responseData) => {
           this.dataList = responseData;
+
           this.dataControl.setValue(
             responseData.map((c) => c[this.idKeyObject])
           );
@@ -70,8 +71,6 @@ export class DropdownListComponent implements OnInit {
   }
 
   filterData() {
-    console.log('Filter dropdown');
-
     if (!this.dataList) {
       return;
     }

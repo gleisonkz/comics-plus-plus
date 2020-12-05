@@ -1,9 +1,9 @@
 import {
-  trigger,
   animate,
-  transition,
-  style,
   query,
+  style,
+  transition,
+  trigger,
 } from '@angular/animations';
 
 export const fadeAnimation = trigger('fadeAnimation', [

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Comic } from '../../models/comic.model';
-import { ComicService } from '../../services/comic.service';
 import { ComicShopItem } from '../../models/comic-shop-item.model';
+import { ComicService } from '../../services/comic.service';
 
 @Component({
   selector: 'cms-comics',

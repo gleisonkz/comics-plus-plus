@@ -4,5 +4,5 @@ export interface ComicImage {
   extension: string;
   name: string;
   base64: any;
-  preview: SafeUrl;
+  preview?: SafeUrl;
 }

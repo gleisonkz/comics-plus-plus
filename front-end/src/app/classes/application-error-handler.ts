@@ -1,11 +1,8 @@
-import { Injector, NgZone } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
-
-import { ErrorHandler, Inject, Injectable } from '@angular/core';
-
+import { ErrorHandler, Injectable, Injector, NgZone } from '@angular/core';
+import HttpStatusCode from '../enums/http-status-code.enum';
 // import { LoginService } from './services/login.service';
 import { NotificationService } from '../services/notification.service';
-import HttpStatusCode from '../enums/http-status-code.enum';
 
 @Injectable()
 export class ApplicationErrorHandler extends ErrorHandler {

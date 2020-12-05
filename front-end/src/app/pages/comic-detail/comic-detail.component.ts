@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ComicService } from '../../services/comic.service';
-import { ShoppingCartService } from '../../services/shopping-cart.service';
 import { ComicShopItemDetail } from '../../models/comic-shop-item-detail.model';
+import { ComicService } from '../../services/comic.service';
 import { FileUploadService } from '../../services/file-upload.service';
+import { ShoppingCartService } from '../../services/shopping-cart.service';
 
 @Component({
   selector: 'cms-comic-detail',

@@ -1,17 +1,16 @@
-import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
-import { Comic } from '../models/comic.model';
-import { Observable, of } from 'rxjs';
-import { COMICS } from '../mock/comics.mock';
-import { Filter } from '../models/filter.model';
-import { environment } from 'src/environments/environment';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { delay } from 'rxjs/operators';
-import { ComicList } from '../models/comic-list.model';
-import { ComicImage } from '../models/comic-image.model';
+import { environment } from 'src/environments/environment';
 import { Author } from '../models/author.model';
-import { Genre } from '../models/genre.model';
-import { ComicShopItem } from '../models/comic-shop-item.model';
+import { ComicImage } from '../models/comic-image.model';
+import { ComicList } from '../models/comic-list.model';
 import { ComicShopItemDetail } from '../models/comic-shop-item-detail.model';
+import { ComicShopItem } from '../models/comic-shop-item.model';
+import { Comic } from '../models/comic.model';
+import { Filter } from '../models/filter.model';
+import { Genre } from '../models/genre.model';
 
 @Injectable({
   providedIn: 'root',

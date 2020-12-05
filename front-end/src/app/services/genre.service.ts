@@ -1,12 +1,10 @@
-import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
-
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { delay } from 'rxjs/operators';
-
 import { environment } from 'src/environments/environment';
-import { Genre } from '../models/genre.model';
 import { Filter } from '../models/filter.model';
+import { Genre } from '../models/genre.model';
 
 @Injectable()
 export class GenreService {

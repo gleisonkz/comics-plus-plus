@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { FileInput } from 'ngx-material-file-input';
 import { Observable } from 'rxjs';
 import { ComicImage } from '../models/comic-image.model';
-import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 @Injectable({
   providedIn: 'root',

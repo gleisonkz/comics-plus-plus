@@ -1,10 +1,10 @@
-import { CartItem } from './../models/cart-item.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Order } from '../models/order.model';
-import { ShoppingCartService } from './shopping-cart.service';
 import { environment } from 'src/environments/environment';
+import { Order } from '../models/order.model';
+import { CartItem } from './../models/cart-item.model';
+import { ShoppingCartService } from './shopping-cart.service';
 
 @Injectable({
   providedIn: 'root',

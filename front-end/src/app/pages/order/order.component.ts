@@ -1,12 +1,12 @@
-import { Order } from './../../models/order.model';
-import { OrderItem } from './../../models/order-item.model';
-import { OrderService } from './../../services/order.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { CartItem } from 'src/app/models/cart-item.model';
 import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
+import { OrderItem } from './../../models/order-item.model';
+import { Order } from './../../models/order.model';
+import { OrderService } from './../../services/order.service';
 
 @Component({
   templateUrl: './order.component.html',

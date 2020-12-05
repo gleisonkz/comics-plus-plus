@@ -48,7 +48,7 @@ namespace ComicStore.Application.Controllers
             return Ok(result);
         }
 
-        [HttpPost]
+        [HttpPost]        
         public IActionResult PostGenre([FromBody] AuthorDTO authorDTO)
         {
             try

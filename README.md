@@ -30,9 +30,11 @@ Technologies, Design and Patterns that I used to develop this application.
     - [Microsoft.EntityFrameworkCore.Design 5.0.0](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Design/5.0.0?_src=template)
     - [Microsoft.EntityFrameworkCore.Proxies 5.0.0](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Proxies/5.0.0?_src=template)
     - [Microsoft.EntityFrameworkCore.Tools 5.0.0](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Tools/5.0.0?_src=template)
+    - [Microsoft.AspNetCore.Identity.EntityFrameworkCore 5.0.0](https://www.nuget.org/packages/Microsoft.AspNetCore.Identity.EntityFrameworkCore/5.0.0?_src=template)
     - [Predicate Builder 1.0.0](https://www.nuget.org/packages/PredicateBuilder/)
     - [System.Drawing.Common 5.0.0](https://www.nuget.org/packages/System.Drawing.Common/5.0.0?_src=template)
     - [Microsoft.AspNetCore.Mvc.Newtonsoft 3.1.10](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.NewtonsoftJson/3.1.10?_src=template)
+    - [Microsoft.AspNetCore.Authentication.JwtBearer 3.1.10](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.JwtBearer/3.1.10?_src=template)
 
   - Development Approach
     - DDD - Domain Drive Design
@@ -51,6 +53,44 @@ Technologies, Design and Patterns that I used to develop this application.
     - Factory
     - Command
     - Adapter
+
+## Folder Structure
+
+|-- app
+|-- [+] components
+|-- [+] pages
+|-- [+] guards
+|-- [+] interceptors
+|-- [+] services
+|-- [+] mocks
+|-- [+] models  
+|-- modules
+
+    |-- admin --Lazy Load Module Example
+        |-- [+] components
+        |-- [+] models
+        |-- [+] services
+        |-- [+] pages
+        |-- admin.module.ts
+        |-- admin.routes.ts
+
+    |-- authentication
+        |-- [+] models
+        |-- [+] services
+        |-- [+] pages
+        |-- authentication.module.ts
+        |-- authentication.routes.ts
+
+    |-- shared
+        |-- [+] animations
+        |-- [+] classes
+        |-- [+] components
+        |-- [+] enums
+        |-- [+] services
+        |-- shared.module.ts
+
+|-- app.module.ts
+|-- app.component.ts
 
 ## ✨ Main Features
 

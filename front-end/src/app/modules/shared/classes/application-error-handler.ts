@@ -27,6 +27,11 @@ export class ApplicationErrorHandler extends ErrorHandler {
             break;
           case HttpStatusCode.UNAUTHORIZED:
             // this.injector.get(LoginService).handleLogin();
+            this.notificationService.showMessage(
+              message || 'Não autorizado.',
+              ''
+            );
+            break;
             break;
           case HttpStatusCode.FORBIDDEN:
             this.notificationService.showMessage(
@@ -38,6 +43,13 @@ export class ApplicationErrorHandler extends ErrorHandler {
             this.notificationService.showMessage(
               message ||
                 'Recurso não encontrado. Verifique o console para mais detalhes.',
+              ''
+            );
+            break;
+          case HttpStatusCode.METHOD_NOT_ALLOWED:
+            this.notificationService.showMessage(
+              message ||
+                'Método não permitido. Verifique o console para mais detalhes.',
               ''
             );
             break;

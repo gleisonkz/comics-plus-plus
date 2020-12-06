@@ -35,6 +35,7 @@ Technologies, Design and Patterns that I used to develop this application.
     - [System.Drawing.Common 5.0.0](https://www.nuget.org/packages/System.Drawing.Common/5.0.0?_src=template)
     - [Microsoft.AspNetCore.Mvc.Newtonsoft 3.1.10](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.NewtonsoftJson/3.1.10?_src=template)
     - [Microsoft.AspNetCore.Authentication.JwtBearer 3.1.10](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.JwtBearer/3.1.10?_src=template)
+    - [Swashbuckle.AspNetCore 5.6.3](https://www.nuget.org/packages/Swashbuckle.AspNetCore/5.6.3?_src=template)
 
   - Development Approach
     - DDD - Domain Drive Design

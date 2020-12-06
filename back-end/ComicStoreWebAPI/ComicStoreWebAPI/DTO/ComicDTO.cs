@@ -1,6 +1,7 @@
 ﻿using ComicStore.Domain.Interfaces;
 using ComicStore.Domain.POCO;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace ComicStore.Application.DTO
 {
@@ -8,13 +9,21 @@ namespace ComicStore.Application.DTO
     public class ComicDTO
     {
         public int ComicID { get; set; }
+        [Required]
         public string Title { get; set; }
+        [Required]
         public string Description { get; set; }
+        [Required]
         public float Price { get; set; }
+        [Required]
         public int Year { get; set; }
+        [Required]
         public ComicImageInfo Image { get; set; }
+        [Required]
         public int Pages { get; set; }
+        [Required]
         public List<KeyValueAuthor> Authors { get; set; }
+        [Required]
         public List<KeyValueGenre> Genres { get; set; }
     }
 
@@ -47,17 +56,5 @@ namespace ComicStore.Application.DTO
         public int Pages { get; set; }
         public int[] Authors { get; set; }
         public int[] Genres { get; set; }
-
-        //public void AssignPoco(Comic poco, int comicID)
-        //{
-        //    poco.ComicID = comicID;
-        //    poco.Title = Title;
-        //    poco.Description = Description;
-        //    poco.Price = Price;
-        //    poco.Year = Year;
-        //    poco.Pages = Pages;
-        //    poco.Authors = Authors;
-
-        //}
     }
 }

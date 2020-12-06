@@ -74,6 +74,7 @@ namespace ComicStore.Application.Controllers
             return BadRequest("Usuário ou senha inválidos");
         }
 
+        [NonAction]
         public async Task<string> GenerateJwtToken(string email)
         {
             IdentityUser user = await userManager.FindByEmailAsync(email);

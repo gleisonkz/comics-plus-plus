@@ -130,8 +130,8 @@ namespace ComicStore.Application.Controllers
             }
         }
 
-        [HttpGet]      
-        [Authorize]
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
         [Route("paginator")]
         public IActionResult GetPaginatedComics([FromQuery] ComicFilter filter)
         {

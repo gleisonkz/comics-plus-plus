@@ -3,6 +3,7 @@ using ComicStore.Application.Filters;
 using ComicStore.Infra.EFRepository.Context;
 using ComicStore.Service.Classes;
 using ComicStore.Service.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
@@ -21,8 +22,11 @@ namespace ComicStore.Application.Controllers
         {
             this.svcAuthor = svcAuthor;
         }
-
-        public IActionResult GetAuthor([FromQuery] AuthorFilter filter)
+        [HttpGet]
+        [Authorize]
+        [Authorize(Roles = "Admin")]
+        [Route("paginator")]
+        public IActionResult GetPaginatedAuthors([FromQuery] AuthorFilter filter)
         {
             Paginator<dynamic> authors = svcAuthor.GetPaginatedAuthors(
                 filter,

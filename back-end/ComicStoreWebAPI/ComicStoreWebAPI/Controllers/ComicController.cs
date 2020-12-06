@@ -3,6 +3,7 @@ using ComicStore.Application.Filters;
 using ComicStore.Service.Classes;
 using ComicStore.Service.Interfaces;
 using ComicStore.Shared.Class;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
@@ -129,7 +130,8 @@ namespace ComicStore.Application.Controllers
             }
         }
 
-        [HttpGet]
+        [HttpGet]      
+        [Authorize]
         [Route("paginator")]
         public IActionResult GetPaginatedComics([FromQuery] ComicFilter filter)
         {

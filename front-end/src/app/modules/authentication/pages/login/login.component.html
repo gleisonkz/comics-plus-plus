@@ -19,7 +19,7 @@
 
       <mat-form-field>
         <input
-          type="text"
+          type="password"
           matInput
           placeholder="Senha"
           formControlName="password"
@@ -28,7 +28,14 @@
     </form>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-raised-button color="primary">Login</button>
+    <button
+      (click)="login(form.value)"
+      [disabled]="form.invalid"
+      mat-raised-button
+      color="primary"
+    >
+      Login
+    </button>
     <a class="pull-right" [routerLink]="['/authentication', 'register']"
       ><span>Não possui uma conta ainda?</span>
       <span>crie a sua aqui!</span>

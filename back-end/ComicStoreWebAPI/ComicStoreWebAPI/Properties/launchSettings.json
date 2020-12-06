@@ -12,7 +12,7 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "api/comic/shop-item",
+      "launchUrl": "api/comic/paginator",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

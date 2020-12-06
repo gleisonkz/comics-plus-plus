@@ -1,18 +1,15 @@
 
 using ComicStore.Application.DTO;
 using ComicStore.Infra.BaseRepository.Interfaces;
+using ComicStore.Infra.EFRepository;
 using ComicStore.Infra.EFRepository.Context;
 using ComicStore.Infra.EFRepository.Repository;
 using ComicStore.Service.Interfaces;
 using ComicStore.Service.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -48,6 +45,8 @@ namespace ComicStoreWebAPI
                     options.UseSqlServer(Configuration["ConnectionStrings:IdentityConnection"].ToString())
                            .UseLazyLoadingProxies();
                 });
+
+
 
             services.AddSwaggerGen(c =>
             {
@@ -120,14 +119,6 @@ namespace ComicStoreWebAPI
                 };
             });
 
-            //services.AddMvc(config =>
-            //{
-            //    var policy = new AuthorizationPolicyBuilder()
-            //                    .RequireAuthenticatedUser()
-            //                    .Build();
-            //    config.Filters.Add(new AuthorizeFilter(policy));
-            //}).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
-
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("User", policy => policy.RequireClaim("ComicStore", "User"));
@@ -137,7 +128,7 @@ namespace ComicStoreWebAPI
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public async void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -165,6 +156,11 @@ namespace ComicStoreWebAPI
             {
                 endpoints.MapControllers();
             });
+
+            using var scope = app.ApplicationServices.CreateScope();            
+            var userManager = (UserManager<IdentityUser>)scope.ServiceProvider.GetService(typeof(UserManager<IdentityUser>));
+            var roleManager = (RoleManager<IdentityRole>)scope.ServiceProvider.GetService(typeof(RoleManager<IdentityRole>));
+            await DataBaseInitializer.Init(userManager, roleManager);
         }
     }
 }

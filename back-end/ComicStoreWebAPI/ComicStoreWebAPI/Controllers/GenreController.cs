@@ -3,6 +3,7 @@ using ComicStore.Application.Filters;
 using ComicStore.Service.Classes;
 using ComicStore.Service.Interfaces;
 using ComicStore.Shared.Class;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
@@ -24,6 +25,7 @@ namespace ComicStore.Application.Controllers
 
         [HttpGet]
         [Route("paginator")]
+        [Authorize(Roles = "Admin")]
         public IActionResult GetGenre([FromQuery] GenreFilter filter)
         {
             try
@@ -59,6 +61,7 @@ namespace ComicStore.Application.Controllers
         }
 
         [HttpGet("{description}")]
+        [Authorize(Roles = "Admin")]
         public IActionResult GetAuthorsByName(string description)
         {
             try
@@ -79,6 +82,7 @@ namespace ComicStore.Application.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public IActionResult PostGenre([FromBody] GenreDTO genreDTO)
         {
             try
@@ -95,6 +99,7 @@ namespace ComicStore.Application.Controllers
         }
 
         [HttpPut("{genreID}")]
+        [Authorize(Roles = "Admin")]
         public IActionResult PutGenre(int genreID, [FromBody] GenreDTO genreDTO)
         {
             try
@@ -112,6 +117,7 @@ namespace ComicStore.Application.Controllers
         }
 
         [HttpDelete("{genreID}")]
+        [Authorize(Roles = "Admin")]
         public IActionResult DeleteGenre(int genreID)
         {
             try
@@ -132,6 +138,7 @@ namespace ComicStore.Application.Controllers
         }
 
         [HttpDelete]
+        [Authorize(Roles = "Admin")]
         [Route("{genreID}/relationships")]
         public IActionResult DeleteGenreRelationships(int genreID)
         {

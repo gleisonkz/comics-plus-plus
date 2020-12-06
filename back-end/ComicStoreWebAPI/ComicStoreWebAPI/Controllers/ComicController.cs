@@ -22,9 +22,7 @@ namespace ComicStore.Application.Controllers
         {
             this.svcComic = svcComic;
         }
-
-        // GET: api/Comic
-
+                
         [HttpGet("{comicID}")]
         public IActionResult GetComicByID(int comicID)
         {
@@ -193,6 +191,7 @@ namespace ComicStore.Application.Controllers
 
         [HttpGet]
         [Route("{comicID}/author")]
+        [Authorize(Roles = "Admin")]
         public IActionResult GetAuthorsByComicID(int comicID)
         {
             var authors = svcComic.GetAuthorsByComicID(comicID)
@@ -207,6 +206,7 @@ namespace ComicStore.Application.Controllers
 
         [HttpGet]
         [Route("{comicID}/genre")]
+        [Authorize(Roles = "Admin")]
         public IActionResult GetGenresByComicID(int comicID)
         {
             var genres = svcComic.GetGenresByComicID(comicID)
@@ -220,6 +220,7 @@ namespace ComicStore.Application.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public IActionResult PostComic([FromBody] SaveComicDTO comicDTO)
         {
             try
@@ -236,6 +237,7 @@ namespace ComicStore.Application.Controllers
         }
 
         [HttpPut("{comicID}")]
+        [Authorize(Roles = "Admin")]
         public IActionResult PutComic(int comicID, [FromBody] SaveComicDTO comicDTO)
         {
             try
@@ -252,6 +254,7 @@ namespace ComicStore.Application.Controllers
         }
 
         [HttpDelete("{comicID}")]
+        [Authorize(Roles = "Admin")]
         public IActionResult DeleteComic(int comicID)
         {
             try

@@ -1,6 +1,5 @@
 ﻿using ComicStore.Application.DTO;
 using ComicStore.Application.Filters;
-using ComicStore.Infra.EFRepository.Context;
 using ComicStore.Service.Classes;
 using ComicStore.Service.Interfaces;
 using Microsoft.AspNetCore.Authorization;
@@ -22,8 +21,8 @@ namespace ComicStore.Application.Controllers
         {
             this.svcAuthor = svcAuthor;
         }
-        [HttpGet]
-        [Authorize]
+
+        [HttpGet]        
         [Authorize(Roles = "Admin")]
         [Route("paginator")]
         public IActionResult GetPaginatedAuthors([FromQuery] AuthorFilter filter)
@@ -52,7 +51,8 @@ namespace ComicStore.Application.Controllers
             return Ok(result);
         }
 
-        [HttpPost]        
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
         public IActionResult PostGenre([FromBody] AuthorDTO authorDTO)
         {
             try
@@ -68,6 +68,7 @@ namespace ComicStore.Application.Controllers
             }
         }
         [HttpPut("{authorID}")]
+        [Authorize(Roles = "Admin")]
         public IActionResult PutGenre(int authorID, [FromBody] AuthorDTO authorDTO)
         {
             try
@@ -85,6 +86,7 @@ namespace ComicStore.Application.Controllers
         }
 
         [HttpDelete("{authorID}")]
+        [Authorize(Roles = "Admin")]
         public IActionResult DeleteAuthor(int authorID)
         {
             try
@@ -101,6 +103,7 @@ namespace ComicStore.Application.Controllers
         }
 
         [HttpGet("{name}")]
+        [Authorize(Roles = "Admin")]
         public IActionResult GetAuthorsByName(string name)
         {
             try

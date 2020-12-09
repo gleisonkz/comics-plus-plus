@@ -4,21 +4,211 @@ using ComicStore.Infra.EFRepository.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace ComicStore.Infra.Security.Migrations
+namespace ComicStore.Infra.EFRepository.Migrations
 {
-    [DbContext(typeof(ComicStoreIdentityDbContext))]
-    partial class ComicStoreIdentityDbContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(ComicStoreDbContext))]
+    [Migration("20201209151536_MockingInitialData")]
+    partial class MockingInitialData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasDefaultSchema("seg")
                 .UseIdentityColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.0");
+
+            modelBuilder.Entity("AuthorComic", b =>
+                {
+                    b.Property<int>("AuthorsAuthorID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ComicsComicID")
+                        .HasColumnType("int");
+
+                    b.HasKey("AuthorsAuthorID", "ComicsComicID");
+
+                    b.HasIndex("ComicsComicID");
+
+                    b.ToTable("AuthorComic");
+                });
+
+            modelBuilder.Entity("ComicGenre", b =>
+                {
+                    b.Property<int>("ComicsComicID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("GenresGenreID")
+                        .HasColumnType("int");
+
+                    b.HasKey("ComicsComicID", "GenresGenreID");
+
+                    b.HasIndex("GenresGenreID");
+
+                    b.ToTable("ComicGenre");
+                });
+
+            modelBuilder.Entity("ComicStore.Domain.POCO.Author", b =>
+                {
+                    b.Property<int>("AuthorID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("AuthorID");
+
+                    b.ToTable("Author");
+
+                    b.HasData(
+                        new
+                        {
+                            AuthorID = 1,
+                            Name = "John Doe"
+                        },
+                        new
+                        {
+                            AuthorID = 2,
+                            Name = "Jane Doe"
+                        },
+                        new
+                        {
+                            AuthorID = 3,
+                            Name = "Jim Starlin"
+                        },
+                        new
+                        {
+                            AuthorID = 4,
+                            Name = "Gail Simone"
+                        },
+                        new
+                        {
+                            AuthorID = 5,
+                            Name = "Warren Ellis"
+                        },
+                        new
+                        {
+                            AuthorID = 6,
+                            Name = "Jack Kirby"
+                        },
+                        new
+                        {
+                            AuthorID = 7,
+                            Name = "Jonathan Hickman"
+                        });
+                });
+
+            modelBuilder.Entity("ComicStore.Domain.POCO.Comic", b =>
+                {
+                    b.Property<int>("ComicID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<int>("Pages")
+                        .HasColumnType("int");
+
+                    b.Property<float>("Price")
+                        .HasColumnType("real");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<int>("Year")
+                        .HasColumnType("int");
+
+                    b.HasKey("ComicID");
+
+                    b.ToTable("Comic");
+                });
+
+            modelBuilder.Entity("ComicStore.Domain.POCO.ComicImage", b =>
+                {
+                    b.Property<int>("ComicID")
+                        .HasColumnType("int")
+                        .HasColumnName("ComicID");
+
+                    b.Property<byte[]>("Base64")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("Extension")
+                        .IsRequired()
+                        .HasMaxLength(5)
+                        .HasColumnType("nvarchar(5)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("ComicID");
+
+                    b.ToTable("ComicImage");
+                });
+
+            modelBuilder.Entity("ComicStore.Domain.POCO.Genre", b =>
+                {
+                    b.Property<int>("GenreID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.HasKey("GenreID");
+
+                    b.ToTable("Genre");
+
+                    b.HasData(
+                        new
+                        {
+                            GenreID = 1,
+                            Description = "Ação"
+                        },
+                        new
+                        {
+                            GenreID = 2,
+                            Description = "Aventura"
+                        },
+                        new
+                        {
+                            GenreID = 3,
+                            Description = "Drama"
+                        },
+                        new
+                        {
+                            GenreID = 4,
+                            Description = "Comedia"
+                        },
+                        new
+                        {
+                            GenreID = 5,
+                            Description = "Terror"
+                        },
+                        new
+                        {
+                            GenreID = 6,
+                            Description = "Guerra"
+                        });
+                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -44,7 +234,7 @@ namespace ComicStore.Infra.Security.Migrations
                         .HasDatabaseName("RoleNameIndex")
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
-                    b.ToTable("Roles");
+                    b.ToTable("AspNetRoles");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -68,7 +258,7 @@ namespace ComicStore.Infra.Security.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("RoleClaims");
+                    b.ToTable("AspNetRoleClaims");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
@@ -133,23 +323,7 @@ namespace ComicStore.Infra.Security.Migrations
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
-                    b.ToTable("Users");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "8ceb39d0-530b-4016-955e-fb4e713714eb",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "72df09dd-9a6c-4655-a700-6885eb58e37d",
-                            Email = "admin@comicstore.com",
-                            EmailConfirmed = true,
-                            LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAEPjNHxphxpBQUr5OiMGjilGAhA4laW0HUkbUK42CvlC9JEu1HvTZ6v6EL/n9ktnzFg==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "AHZGG2P4K6A7LOXC4YPTW2QAZKU52XON",
-                            TwoFactorEnabled = false,
-                            UserName = "admin@comicstore.com"
-                        });
+                    b.ToTable("AspNetUsers");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -173,7 +347,7 @@ namespace ComicStore.Infra.Security.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserClaims");
+                    b.ToTable("AspNetUserClaims");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
@@ -195,7 +369,7 @@ namespace ComicStore.Infra.Security.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserLogins");
+                    b.ToTable("AspNetUserLogins");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
@@ -210,7 +384,7 @@ namespace ComicStore.Infra.Security.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("UserRoles");
+                    b.ToTable("AspNetUserRoles");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -229,7 +403,48 @@ namespace ComicStore.Infra.Security.Migrations
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 
-                    b.ToTable("UserTokens");
+                    b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("AuthorComic", b =>
+                {
+                    b.HasOne("ComicStore.Domain.POCO.Author", null)
+                        .WithMany()
+                        .HasForeignKey("AuthorsAuthorID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ComicStore.Domain.POCO.Comic", null)
+                        .WithMany()
+                        .HasForeignKey("ComicsComicID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ComicGenre", b =>
+                {
+                    b.HasOne("ComicStore.Domain.POCO.Comic", null)
+                        .WithMany()
+                        .HasForeignKey("ComicsComicID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ComicStore.Domain.POCO.Genre", null)
+                        .WithMany()
+                        .HasForeignKey("GenresGenreID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ComicStore.Domain.POCO.ComicImage", b =>
+                {
+                    b.HasOne("ComicStore.Domain.POCO.Comic", "Comic")
+                        .WithOne("Image")
+                        .HasForeignKey("ComicStore.Domain.POCO.ComicImage", "ComicID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Comic");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -281,6 +496,11 @@ namespace ComicStore.Infra.Security.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("ComicStore.Domain.POCO.Comic", b =>
+                {
+                    b.Navigation("Image");
                 });
 #pragma warning restore 612, 618
         }

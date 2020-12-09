@@ -4,14 +4,16 @@ using ComicStore.Infra.EFRepository.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ComicStore.Infra.Security.Migrations
 {
     [DbContext(typeof(ComicStoreIdentityDbContext))]
-    partial class ComicStoreIdentityDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201209151701_MockingInitialDataAdminUser")]
+    partial class MockingInitialDataAdminUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

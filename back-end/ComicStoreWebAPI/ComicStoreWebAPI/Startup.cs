@@ -2,7 +2,6 @@
 using ComicStore.Application.Classes;
 using ComicStore.Application.DTO;
 using ComicStore.Infra.BaseRepository.Interfaces;
-using ComicStore.Infra.EFRepository;
 using ComicStore.Infra.EFRepository.Context;
 using ComicStore.Infra.EFRepository.Repository;
 using ComicStore.Service.Interfaces;
@@ -170,11 +169,6 @@ namespace ComicStoreWebAPI
             {
                 endpoints.MapControllers();
             });
-
-            using var scope = app.ApplicationServices.CreateScope();
-            var userManager = (UserManager<IdentityUser>)scope.ServiceProvider.GetService(typeof(UserManager<IdentityUser>));
-            var roleManager = (RoleManager<IdentityRole>)scope.ServiceProvider.GetService(typeof(RoleManager<IdentityRole>));
-            DataBaseInitializer.Init(userManager, roleManager).Wait();
         }
     }
 }

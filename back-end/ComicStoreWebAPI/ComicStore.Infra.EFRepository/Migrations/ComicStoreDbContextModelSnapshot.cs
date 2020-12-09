@@ -64,6 +64,43 @@ namespace ComicStore.Infra.EFRepository.Migrations
                     b.HasKey("AuthorID");
 
                     b.ToTable("Author");
+
+                    b.HasData(
+                        new
+                        {
+                            AuthorID = 1,
+                            Name = "John Doe"
+                        },
+                        new
+                        {
+                            AuthorID = 2,
+                            Name = "Jane Doe"
+                        },
+                        new
+                        {
+                            AuthorID = 3,
+                            Name = "Jim Starlin"
+                        },
+                        new
+                        {
+                            AuthorID = 4,
+                            Name = "Gail Simone"
+                        },
+                        new
+                        {
+                            AuthorID = 5,
+                            Name = "Warren Ellis"
+                        },
+                        new
+                        {
+                            AuthorID = 6,
+                            Name = "Jack Kirby"
+                        },
+                        new
+                        {
+                            AuthorID = 7,
+                            Name = "Jonathan Hickman"
+                        });
                 });
 
             modelBuilder.Entity("ComicStore.Domain.POCO.Comic", b =>
@@ -137,37 +174,38 @@ namespace ComicStore.Infra.EFRepository.Migrations
                     b.HasKey("GenreID");
 
                     b.ToTable("Genre");
-                });
 
-            modelBuilder.Entity("ComicStore.Domain.POCO.User", b =>
-                {
-                    b.Property<int>("UserID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Role")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("Username")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.HasKey("UserID");
-
-                    b.ToTable("User");
+                    b.HasData(
+                        new
+                        {
+                            GenreID = 1,
+                            Description = "Ação"
+                        },
+                        new
+                        {
+                            GenreID = 2,
+                            Description = "Aventura"
+                        },
+                        new
+                        {
+                            GenreID = 3,
+                            Description = "Drama"
+                        },
+                        new
+                        {
+                            GenreID = 4,
+                            Description = "Comedia"
+                        },
+                        new
+                        {
+                            GenreID = 5,
+                            Description = "Terror"
+                        },
+                        new
+                        {
+                            GenreID = 6,
+                            Description = "Guerra"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

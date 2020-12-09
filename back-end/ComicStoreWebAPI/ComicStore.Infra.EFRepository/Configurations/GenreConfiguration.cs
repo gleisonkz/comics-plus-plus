@@ -13,6 +13,15 @@ namespace ComicStore.Infra.EFRepository.Mapping
             _ = builder.Property(c => c.Description)
                  .IsRequired()
                  .HasMaxLength(200);
+
+            builder.HasData(
+                new Genre { GenreID = 1, Description = "Ação" },
+                new Genre { GenreID = 2, Description = "Aventura"},
+                new Genre { GenreID = 3, Description = "Drama" },
+                new Genre { GenreID = 4, Description = "Comedia" },
+                new Genre { GenreID = 5, Description = "Terror" },
+                new Genre { GenreID = 6, Description = "Guerra" }
+                );
         }
     }
 }

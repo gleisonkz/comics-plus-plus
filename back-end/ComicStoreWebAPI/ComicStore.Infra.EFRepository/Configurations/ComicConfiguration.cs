@@ -1,6 +1,7 @@
 ﻿using ComicStore.Domain.POCO;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System.Collections.Generic;
 
 namespace ComicStore.Infra.EFRepository.Mapping
 {

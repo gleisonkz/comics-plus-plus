@@ -16,19 +16,13 @@ export class AuthorService {
     authorFilter?: Filter
   ): Observable<HttpResponse<Author[]>> {
     return this.http
-      .get<Author[]>(`${environment.apiURL}/author`, {
+      .get<Author[]>(`${environment.apiURL}/author/paginator`, {
         observe: 'response',
         responseType: 'json',
         params: authorFilter,
       })
       .pipe(delay(200));
   }
-
-  // getAuthorsByComicID(comicID: number) {
-  //   return this.http.get<Author[]>(
-  //     `${environment.apiURL}/author/comic/${comicID}`
-  //   );
-  // }
 
   getAuthorsByName(name: string) {
     return this.http.get<Author[]>(`${environment.apiURL}/author/${name}`);

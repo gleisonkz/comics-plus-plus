@@ -53,11 +53,11 @@ namespace ComicStore.Application.Controllers
 
         [HttpPost]
         [Authorize(Roles = "Admin")]
-        public IActionResult PostGenre([FromBody] AuthorDTO authorDTO)
+        public IActionResult PostAuthor([FromBody] AuthorDTO authorDTO)
         {
             try
             {
-                var genre = svcAuthor.CreateAuthor(authorDTO);
+                var author = svcAuthor.CreateAuthor(authorDTO);
                 svcAuthor.Commit();
                 return Ok(authorDTO);
             }
@@ -69,7 +69,7 @@ namespace ComicStore.Application.Controllers
         }
         [HttpPut("{authorID}")]
         [Authorize(Roles = "Admin")]
-        public IActionResult PutGenre(int authorID, [FromBody] AuthorDTO authorDTO)
+        public IActionResult PutAuthor(int authorID, [FromBody] AuthorDTO authorDTO)
         {
             try
             {

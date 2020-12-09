@@ -27,10 +27,10 @@ namespace ComicStoreWebAPI
     {
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            this.configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
+        public IConfiguration configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -43,13 +43,13 @@ namespace ComicStoreWebAPI
 
             _ = services.AddDbContext<ComicStoreDbContext>(options =>
                 {
-                    options.UseSqlServer(Configuration["ConnectionStrings:IdentityConnection"].ToString())
+                    options.UseSqlServer(configuration["ConnectionStrings:IdentityConnection"].ToString())
                            .UseLazyLoadingProxies();
                 });
 
             _ = services.AddDbContext<ComicStoreIdentityDbContext>(options =>
             {
-                options.UseSqlServer(Configuration["ConnectionStrings:IdentityConnection"].ToString());
+                options.UseSqlServer(configuration["ConnectionStrings:IdentityConnection"].ToString());
             });
 
 
@@ -109,7 +109,7 @@ namespace ComicStoreWebAPI
 
 
 
-            var key = Encoding.ASCII.GetBytes(Configuration["ApplicationSettings:JWT_Secret"].ToString());
+            var key = Encoding.ASCII.GetBytes(configuration["ApplicationSettings:JWT_Secret"].ToString());
             //Authentication With JWT
             services.AddAuthentication(c =>
             {

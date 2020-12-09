@@ -10,10 +10,21 @@
       <li class="menu-list__item" routerLinkActive="menu-list__item--active">
         <a class="menu-list__link" routerLink="/sobre">Sobre</a>
       </li>
-      <li class="menu-list__item" routerLinkActive="menu-list__item--active">
-        <a class="menu-list__link" routerLink="/authentication">Login</a>
+      <li
+        *ngIf="!isLoggedIn"
+        class="menu-list__item"
+        routerLinkActive="menu-list__item--active"
+      >
+        <a class="menu-list__link" routerLink="/authentication"> Login </a>
       </li>
-      <li class="menu-list__item" routerLinkActive="menu-list__item--active">
+      <li *ngIf="isLoggedIn" (click)="logout()" class="menu-list__item">
+        <a class="menu-list__link" routerLink="/authentication"> Sair </a>
+      </li>
+      <li
+        *ngIf="isAdmin"
+        class="menu-list__item"
+        routerLinkActive="menu-list__item--active"
+      >
         <a class="menu-list__link" routerLink="/admin">Admin</a>
       </li>
     </ul>

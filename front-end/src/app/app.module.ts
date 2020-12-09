@@ -3,6 +3,7 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { JwtModule } from '@auth0/angular-jwt';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ComicComponent } from './components/comic/comic.component';
@@ -12,7 +13,7 @@ import { RatingComponent } from './components/rating/rating.component';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 import { ToggleThemeComponent } from './components/toggle-theme/toggle-theme.component';
 import { QueryParamsInterceptor } from './interceptors/query-params.interceptor';
-import { RequestTokenInterceptor } from './modules/authentication/interceptors/request-token.interceptor';
+import { JwtInterceptor } from './modules/authentication/interceptors/jwt.interceptor';
 import { MaterialModule } from './modules/material/material.module';
 import { ApplicationErrorHandler } from './modules/shared/classes/application-error-handler';
 import { AboutComponent } from './pages/about/about.component';
@@ -47,6 +48,11 @@ import { OrderComponent } from './pages/order/order.component';
     HttpClientModule,
     ReactiveFormsModule,
     MaterialModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+      },
+    }),
   ],
   providers: [
     {
@@ -56,7 +62,7 @@ import { OrderComponent } from './pages/order/order.component';
     },
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: RequestTokenInterceptor,
+      useClass: JwtInterceptor,
       multi: true,
     },
     { provide: ErrorHandler, useClass: ApplicationErrorHandler },
@@ -64,3 +70,7 @@ import { OrderComponent } from './pages/order/order.component';
   bootstrap: [AppComponent],
 })
 export class AppModule {}
+
+export function tokenGetter() {
+  return localStorage.getItem('access_token');
+}

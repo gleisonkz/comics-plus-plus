@@ -42,7 +42,7 @@ export class AuthorizationGuard implements CanActivate, CanActivateChild {
 
     if (!isAuthorized) {
       // if not authorized, show access denied message
-      this.router.navigate(['/accessdenied']);
+      this.router.navigate(['/']);
     }
 
     return isAuthorized;

@@ -13,6 +13,11 @@ const routes: Routes = [
     canActivateChild: [AuthorizationGuard],
     children: [
       {
+        path: '',
+        redirectTo: 'comic',
+        pathMatch: 'full',
+      },
+      {
         path: 'comic',
         component: ComicCrudComponent,
         data: { allowedRoles: ['Admin'] },

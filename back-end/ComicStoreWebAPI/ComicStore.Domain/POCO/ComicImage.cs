@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace ComicStore.Domain.POCO
+﻿namespace ComicStore.Domain.POCO
 {
     public class ComicImage
     {

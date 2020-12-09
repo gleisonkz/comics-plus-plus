@@ -1,10 +1,8 @@
-﻿using System.Reflection.Metadata;
-using ComicStore.Domain.Interfaces;
+﻿using ComicStore.Domain.Interfaces;
 using ComicStore.Domain.POCO;
 using ComicStore.Infra.BaseRepository.Interfaces;
 using ComicStore.Service.Interfaces;
 using System.Linq;
-using System.Collections.Generic;
 using ComicStore.Service.Classes;
 using System.Linq.Expressions;
 using System;

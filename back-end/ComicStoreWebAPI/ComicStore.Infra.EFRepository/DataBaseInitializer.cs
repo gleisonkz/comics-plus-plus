@@ -26,7 +26,7 @@ namespace ComicStore.Infra.EFRepository
             return result;
         }
         public static async Task Init(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager, ComicStoreDbContext context = null)
-        {
+        {            
             await CreateRoleIfNotExists(roleManager, "Admin");
             await CreateRoleIfNotExists(roleManager, "User");
 

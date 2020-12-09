@@ -2,7 +2,6 @@
 using ComicStore.Domain.POCO;
 using ComicStore.Service.Classes;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace ComicStore.Service.Interfaces

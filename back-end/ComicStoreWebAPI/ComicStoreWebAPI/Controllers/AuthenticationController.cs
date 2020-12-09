@@ -1,13 +1,8 @@
-﻿using ComicStore.Application.DTO;
+﻿using ComicStore.Application.Classes;
+using ComicStore.Application.DTO;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
 using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace ComicStore.Application.Controllers
@@ -19,14 +14,18 @@ namespace ComicStore.Application.Controllers
         private readonly SignInManager<IdentityUser> signInManager;
         private readonly UserManager<IdentityUser> userManager;
         private readonly RoleManager<IdentityRole> roleManager;
-        private readonly IConfiguration Configuration;
+        private readonly Lazy<AuthenticationHelper> authHelper;
 
-        public AuthenticationController(IConfiguration configuration, SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
+        public AuthenticationController(
+            SignInManager<IdentityUser> signInManager,
+            UserManager<IdentityUser> userManager,
+            RoleManager<IdentityRole> roleManager,
+            Lazy<AuthenticationHelper> authHelper)
         {
-            this.Configuration = configuration;
             this.signInManager = signInManager;
             this.userManager = userManager;
             this.roleManager = roleManager;
+            this.authHelper = authHelper;
         }
 
         [HttpPost]
@@ -53,7 +52,7 @@ namespace ComicStore.Application.Controllers
                         Name = "User"
                     };
                     await roleManager.CreateAsync(role);
-                }               
+                }
 
                 var resultRole = await userManager.AddToRoleAsync(user, "User");
 
@@ -70,36 +69,12 @@ namespace ComicStore.Application.Controllers
         public async Task<IActionResult> Login([FromBody] LoginUserDTO loginUser)
         {
             var result = await signInManager.PasswordSignInAsync(loginUser.Email, loginUser.Password, false, true);
-            if (result.Succeeded) return Ok(await GenerateJwtToken(loginUser.Email));
+            if (result.Succeeded)
+            {
+                string token = await authHelper.Value.GenerateJwtToken(loginUser.Email);
+                return Ok(new { Token = token });
+            }
             return BadRequest("Usuário ou senha inválidos");
-        }
-
-        [NonAction]
-        public async Task<string> GenerateJwtToken(string email)
-        {
-            IdentityUser user = await userManager.FindByEmailAsync(email);
-            var userRoles = await userManager.GetRolesAsync(user);
-
-            var claims = new List<Claim>
-            {
-                new Claim(ClaimTypes.Name, user.UserName)
-            };
-            foreach (var role in userRoles)
-            {
-                claims.Add(new Claim(ClaimTypes.Role, role));
-            };
-
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(Configuration["ApplicationSettings:JWT_Secret"].ToString());
-            var tokenDescriptor = new SecurityTokenDescriptor
-            {
-                Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.UtcNow.AddHours(2),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-            };
-            
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-            return tokenHandler.WriteToken(token);
         }
     }
 }

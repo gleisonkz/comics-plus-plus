@@ -1,5 +1,4 @@
 ﻿using ComicStore.Domain.Interfaces;
-using ComicStore.Domain.POCO;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 

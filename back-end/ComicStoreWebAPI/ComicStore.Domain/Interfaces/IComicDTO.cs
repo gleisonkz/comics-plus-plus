@@ -1,6 +1,4 @@
-﻿using ComicStore.Domain.POCO;
-
-namespace ComicStore.Domain.Interfaces
+﻿namespace ComicStore.Domain.Interfaces
 {
     public interface IComicDTO
     {

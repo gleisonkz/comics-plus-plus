@@ -12,6 +12,7 @@ import { RatingComponent } from './components/rating/rating.component';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 import { ToggleThemeComponent } from './components/toggle-theme/toggle-theme.component';
 import { QueryParamsInterceptor } from './interceptors/query-params.interceptor';
+import { RequestTokenInterceptor } from './modules/authentication/interceptors/request-token.interceptor';
 import { MaterialModule } from './modules/material/material.module';
 import { ApplicationErrorHandler } from './modules/shared/classes/application-error-handler';
 import { AboutComponent } from './pages/about/about.component';
@@ -51,6 +52,11 @@ import { OrderComponent } from './pages/order/order.component';
     {
       provide: HTTP_INTERCEPTORS,
       useClass: QueryParamsInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: RequestTokenInterceptor,
       multi: true,
     },
     { provide: ErrorHandler, useClass: ApplicationErrorHandler },

@@ -1,4 +1,5 @@
 
+using ComicStore.Application.Classes;
 using ComicStore.Application.DTO;
 using ComicStore.Infra.BaseRepository.Interfaces;
 using ComicStore.Infra.EFRepository;
@@ -88,7 +89,7 @@ namespace ComicStoreWebAPI
             {
                 builder.AllowAnyOrigin()
                        .AllowAnyMethod()
-                       .AllowAnyHeader()
+                       .AllowAnyHeader()                       
                        .WithExposedHeaders("X-Pagination");
             }));
 
@@ -97,6 +98,9 @@ namespace ComicStoreWebAPI
             services.AddScoped<IComicService, ComicService>();
             services.AddScoped<IGenreService, GenreService>();
             services.AddScoped<IAuthorService, AuthorService>();
+            services.AddScoped<AuthenticationHelper>();
+            
+            
 
             var key = Encoding.ASCII.GetBytes(Configuration["ApplicationSettings:JWT_Secret"].ToString());
             //Authentication With JWT
@@ -128,7 +132,7 @@ namespace ComicStoreWebAPI
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public async void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -139,11 +143,14 @@ namespace ComicStoreWebAPI
 
             app.UseRouting();
 
+            app.UseCors("ComicStorePolicy");
 
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseCors("ComicStorePolicy");
+            app.UseHttpsRedirection();
+
+
 
             app.UseSwagger();
             app.UseSwaggerUI(c =>
@@ -160,7 +167,7 @@ namespace ComicStoreWebAPI
             using var scope = app.ApplicationServices.CreateScope();            
             var userManager = (UserManager<IdentityUser>)scope.ServiceProvider.GetService(typeof(UserManager<IdentityUser>));
             var roleManager = (RoleManager<IdentityRole>)scope.ServiceProvider.GetService(typeof(RoleManager<IdentityRole>));
-            await DataBaseInitializer.Init(userManager, roleManager);
+            DataBaseInitializer.Init(userManager, roleManager).Wait();
         }
     }
 }

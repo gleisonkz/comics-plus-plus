@@ -47,6 +47,11 @@ namespace ComicStoreWebAPI
                            .UseLazyLoadingProxies();
                 });
 
+            _ = services.AddDbContext<ComicStoreIdentityDbContext>(options =>
+            {
+                options.UseSqlServer(Configuration["ConnectionStrings:IdentityConnection"].ToString());
+            });
+
 
 
             services.AddSwaggerGen(c =>
@@ -81,15 +86,13 @@ namespace ComicStoreWebAPI
             });
 
 
-            services.AddIdentity<IdentityUser, IdentityRole>()
-                    .AddEntityFrameworkStores<ComicStoreDbContext>()
-                    .AddDefaultTokenProviders();
+
 
             services.AddCors(c => c.AddPolicy("ComicStorePolicy", builder =>
             {
                 builder.AllowAnyOrigin()
                        .AllowAnyMethod()
-                       .AllowAnyHeader()                       
+                       .AllowAnyHeader()
                        .WithExposedHeaders("X-Pagination");
             }));
 
@@ -99,8 +102,12 @@ namespace ComicStoreWebAPI
             services.AddScoped<IGenreService, GenreService>();
             services.AddScoped<IAuthorService, AuthorService>();
             services.AddScoped<AuthenticationHelper>();
-            
-            
+
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                    .AddEntityFrameworkStores<ComicStoreIdentityDbContext>()
+                    .AddDefaultTokenProviders();
+
+
 
             var key = Encoding.ASCII.GetBytes(Configuration["ApplicationSettings:JWT_Secret"].ToString());
             //Authentication With JWT
@@ -164,7 +171,7 @@ namespace ComicStoreWebAPI
                 endpoints.MapControllers();
             });
 
-            using var scope = app.ApplicationServices.CreateScope();            
+            using var scope = app.ApplicationServices.CreateScope();
             var userManager = (UserManager<IdentityUser>)scope.ServiceProvider.GetService(typeof(UserManager<IdentityUser>));
             var roleManager = (RoleManager<IdentityRole>)scope.ServiceProvider.GetService(typeof(RoleManager<IdentityRole>));
             DataBaseInitializer.Init(userManager, roleManager).Wait();

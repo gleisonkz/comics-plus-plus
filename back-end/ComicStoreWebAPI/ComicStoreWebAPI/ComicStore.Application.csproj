@@ -28,6 +28,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ComicStore.Infra.EFRepository\ComicStore.Infra.EFRepository.csproj" />
+    <ProjectReference Include="..\ComicStore.Infra.Security\ComicStore.Infra.Security.csproj" />
     <ProjectReference Include="..\ComicStore.Service\ComicStore.Service.csproj" />
   </ItemGroup>
 

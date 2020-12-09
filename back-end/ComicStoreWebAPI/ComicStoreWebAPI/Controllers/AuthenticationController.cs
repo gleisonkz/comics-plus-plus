@@ -14,13 +14,13 @@ namespace ComicStore.Application.Controllers
         private readonly SignInManager<IdentityUser> signInManager;
         private readonly UserManager<IdentityUser> userManager;
         private readonly RoleManager<IdentityRole> roleManager;
-        private readonly Lazy<AuthenticationHelper> authHelper;
+        private readonly AuthenticationHelper authHelper;
 
         public AuthenticationController(
             SignInManager<IdentityUser> signInManager,
             UserManager<IdentityUser> userManager,
             RoleManager<IdentityRole> roleManager,
-            Lazy<AuthenticationHelper> authHelper)
+            AuthenticationHelper authHelper)
         {
             this.signInManager = signInManager;
             this.userManager = userManager;
@@ -71,7 +71,7 @@ namespace ComicStore.Application.Controllers
             var result = await signInManager.PasswordSignInAsync(loginUser.Email, loginUser.Password, false, true);
             if (result.Succeeded)
             {
-                string token = await authHelper.Value.GenerateJwtToken(loginUser.Email);
+                string token = await authHelper.GenerateJwtToken(loginUser.Email);
                 return Ok(new { Token = token });
             }
             return BadRequest("Usuário ou senha inválidos");

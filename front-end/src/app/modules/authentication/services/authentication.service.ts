@@ -26,12 +26,7 @@ export class AuthenticationService {
 
   private setSession(authResult) {
     const token = authResult.token;
-
-    // const payload = <JWTPayload>jwtDecode(token);
-    // const expiresAt = moment.unix(payload.exp);
-
-    localStorage.setItem('token', authResult.token);
-    // localStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()));
+    localStorage.setItem('token', token);
   }
 
   logout() {

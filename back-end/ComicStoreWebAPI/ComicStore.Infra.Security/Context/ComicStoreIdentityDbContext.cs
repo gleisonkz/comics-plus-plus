@@ -20,17 +20,45 @@ namespace ComicStore.Infra.EFRepository.Context
                 }
             }
 
+            var hasher = new PasswordHasher<IdentityUser>();
+            
+
             modelBuilder.Entity<IdentityUser>().HasData(
-                new IdentityUser
-                {
-                    Id = "8ceb39d0-530b-4016-955e-fb4e713714eb",
-                    UserName = "admin@comicstore.com",
-                    Email = "admin@comicstore.com",
-                    EmailConfirmed = true,
-                    PasswordHash = "AQAAAAEAACcQAAAAEPjNHxphxpBQUr5OiMGjilGAhA4laW0HUkbUK42CvlC9JEu1HvTZ6v6EL/n9ktnzFg==",
-                    SecurityStamp = "AHZGG2P4K6A7LOXC4YPTW2QAZKU52XON",
-                    ConcurrencyStamp = "72df09dd-9a6c-4655-a700-6885eb58e37d"
-                });
+                        new IdentityUser
+                        {
+                            Id = "1",
+                            UserName = "admin@comicstore.com",
+                            NormalizedUserName = "admin@comicstore.com".ToUpper(),
+                            NormalizedEmail = "admin@comicstore.com".ToUpper(),
+                            Email = "admin@comicstore.com",
+                            EmailConfirmed = true,
+                            PasswordHash = hasher.HashPassword(null, "@DMINc0m1cst0r34dm1n")
+                        });
+
+            modelBuilder.Entity<IdentityRole>().HasData(
+                        new IdentityRole
+                        {
+                            Id = "1",
+                            Name = "Admin",
+                            NormalizedName = "Admin".ToUpper()
+
+                        });
+
+            modelBuilder.Entity<IdentityRole>().HasData(
+                        new IdentityRole
+                        {
+                            Id = "2",
+                            Name = "User",
+                            NormalizedName = "User".ToUpper()
+                        });
+
+
+            modelBuilder.Entity<IdentityUserRole<string>>().HasData(
+                        new IdentityUserRole<string>
+                        {
+                            RoleId = "1",
+                            UserId = "1"
+                        });
 
         }
         public ComicStoreIdentityDbContext(DbContextOptions<ComicStoreIdentityDbContext> options) : base(options) { }

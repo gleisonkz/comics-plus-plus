@@ -43,7 +43,9 @@ namespace ComicStoreWebAPI
             _ = services.AddDbContext<ComicStoreDbContext>(options =>
                 {
                     options.UseSqlServer(configuration["ConnectionStrings:IdentityConnection"].ToString())
+                           .EnableSensitiveDataLogging()
                            .UseLazyLoadingProxies();
+                        
                 });
 
             _ = services.AddDbContext<ComicStoreIdentityDbContext>(options =>

@@ -10,13 +10,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ComicStore.Infra.Security.Migrations
 {
     [DbContext(typeof(ComicStoreIdentityDbContext))]
-    [Migration("20201209003614_ChangingIdentitySchema")]
-    partial class ChangingIdentitySchema
+    [Migration("20201209183730_DefaultUserAndRole")]
+    partial class DefaultUserAndRole
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
+                .HasDefaultSchema("seg")
                 .UseIdentityColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.0");
@@ -45,7 +46,23 @@ namespace ComicStore.Infra.Security.Migrations
                         .HasDatabaseName("RoleNameIndex")
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
-                    b.ToTable("AspNetRoles");
+                    b.ToTable("Roles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "1",
+                            ConcurrencyStamp = "f863c1e6-ad7c-416d-a6d9-a68a6aa66f4d",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = "2",
+                            ConcurrencyStamp = "cec76bf6-324c-4329-bfcd-b386e9196d77",
+                            Name = "User",
+                            NormalizedName = "USER"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -69,7 +86,7 @@ namespace ComicStore.Infra.Security.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("AspNetRoleClaims");
+                    b.ToTable("RoleClaims");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
@@ -134,7 +151,25 @@ namespace ComicStore.Infra.Security.Migrations
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
-                    b.ToTable("AspNetUsers");
+                    b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "1",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "1f989813-60ac-4374-9bb5-0bcc83c258d9",
+                            Email = "admin@comicstore.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ADMIN@COMICSTORE.COM",
+                            NormalizedUserName = "ADMIN@COMICSTORE.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEPx0YIGV1l+QU3qNemNn5kX0r4/8pGuwADIJGfF4qDeBRLbGEyVUym39D3iDrsfWlg==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "8dfc64d6-81cd-475e-b2d4-8e7c2c0a4138",
+                            TwoFactorEnabled = false,
+                            UserName = "admin@comicstore.com"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -158,7 +193,7 @@ namespace ComicStore.Infra.Security.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AspNetUserClaims");
+                    b.ToTable("UserClaims");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
@@ -180,7 +215,7 @@ namespace ComicStore.Infra.Security.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AspNetUserLogins");
+                    b.ToTable("UserLogins");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
@@ -195,7 +230,14 @@ namespace ComicStore.Infra.Security.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("AspNetUserRoles");
+                    b.ToTable("UserRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "1",
+                            RoleId = "1"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -214,7 +256,7 @@ namespace ComicStore.Infra.Security.Migrations
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 
-                    b.ToTable("AspNetUserTokens");
+                    b.ToTable("UserTokens");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

@@ -13,6 +13,8 @@ import { GenreDialogComponent } from './components/genre-dialog/genre-dialog.com
 import { AuthorCrudComponent } from './pages/author-crud/author-crud.component';
 import { ComicCrudComponent } from './pages/comic-crud/comic-crud.component';
 import { GenreCrudComponent } from './pages/genre-crud/genre-crud.component';
+import { InventoryCrudComponent } from './pages/inventory-crud/inventory-crud.component';
+import { ComicInventoryDialogComponent } from './components/comic-inventory-dialog/comic-inventory-dialog.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,8 @@ import { GenreCrudComponent } from './pages/genre-crud/genre-crud.component';
     AuthorCrudComponent,
     AuthorDialogComponent,
     ComicDialogComponent,
+    InventoryCrudComponent,
+    ComicInventoryDialogComponent,
   ],
   imports: [
     CommonModule,

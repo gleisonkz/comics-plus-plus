@@ -1,0 +1,63 @@
+@import "../../../../../sass/functions";
+@import "../../../../../sass/variables";
+@import "../../../../../sass/mixins";
+@import "../../../../../sass/media";
+
+.filter {
+  margin-top: rem(10);
+  font-size: rem(15);
+  color: $color-panel-text;
+}
+
+.genre-form {
+  display: flex;
+  align-items: center;
+
+  .mat-form-field-wrapper {
+    padding: 0;
+  }
+
+  .search-button {
+    @include flex-center;
+    height: rem(29);
+    margin-bottom: rem(6);
+  }
+}
+
+mat-form-field {
+  margin-right: rem(20);
+}
+
+table {
+  width: 100%;
+  background-color: $color-panel-bg;
+
+  th.mat-header-cell:first-of-type,
+  td.mat-cell:first-of-type,
+  td.mat-footer-cell:first-of-type {
+    padding-left: 0;
+  }
+
+  .btn {
+    @include flex-center;
+    height: rem(29);
+    display: inline-flex;
+  }
+
+  .btn + .btn {
+    margin-left: rem(10);
+  }
+}
+.no-data {
+  margin-top: rem(20);
+}
+
+mat-paginator {
+  background-color: $color-panel-bg;
+  align-self: flex-end;
+}
+
+.container {
+  @include flex-center(column);
+  background-color: $color-panel-bg;
+}

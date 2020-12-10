@@ -5,6 +5,7 @@ import { AdminComponent } from './admin.component';
 import { AuthorCrudComponent } from './pages/author-crud/author-crud.component';
 import { ComicCrudComponent } from './pages/comic-crud/comic-crud.component';
 import { GenreCrudComponent } from './pages/genre-crud/genre-crud.component';
+import { InventoryCrudComponent } from './pages/inventory-crud/inventory-crud.component';
 
 const routes: Routes = [
   {
@@ -30,6 +31,11 @@ const routes: Routes = [
       {
         path: 'genre',
         component: GenreCrudComponent,
+        data: { allowedRoles: ['Admin'] },
+      },
+      {
+        path: 'inventory',
+        component: InventoryCrudComponent,
         data: { allowedRoles: ['Admin'] },
       },
     ],

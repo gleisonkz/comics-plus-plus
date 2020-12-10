@@ -6,6 +6,7 @@ export interface ComicShopItem {
   description: string;
   price: number;
   image: ComicImage;
+  inventoryQuantity: number;
   genres: string[];
   authors: string[];
 }

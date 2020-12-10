@@ -88,6 +88,14 @@
 
   &__inventory {
     margin-top: rem(20);
+
+    &--available {
+      color: green;
+    }
+
+    &--unavailable {
+      color: $color-danger;
+    }
   }
 
   mat-form-field {

@@ -2,12 +2,26 @@
   <img class="comic__image" [src]="comic.image.preview" alt="Image" />
   <span class="comic__price">R$ {{ comic.price | number: "2.2" }}</span>
   <h2 class="comic__title">{{ comic.title }}</h2>
+
+  <span
+    class="comic__inventory comic__inventory{{
+      isInventoryAvailable ? '--available' : '--unavailable'
+    }}"
+  >
+    {{ isInventoryAvailable ? "Disponível" : "Indisponível" }}
+  </span>
+
   <span class="comic__genre">{{ comic.genres }}</span>
   <h3 class="comic__author">{{ comic.authors }}</h3>
   <p class="comic__description truncate-overflow">{{ comic.description }}</p>
 
   <div class="comic__btn-container">
-    <button (click)="addToCart(comic)" class="comic__btn">
+    <button
+      [class.disabled]="!isInventoryAvailable"
+      [disabled]="!isInventoryAvailable"
+      (click)="addToCart(comic)"
+      class="comic__btn"
+    >
       <i class="fas fa-shopping-cart"></i>
       Adicionar
     </button>

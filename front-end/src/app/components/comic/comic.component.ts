@@ -10,6 +10,11 @@ import { FileUploadService } from '../../services/file-upload.service';
 })
 export class ComicComponent implements OnInit {
   @Input() comic: ComicShopItem;
+
+  get isInventoryAvailable() {
+    return this.comic.inventoryQuantity > 0;
+  }
+
   constructor(
     private shoppingCartService: ShoppingCartService,
     private fileUploadService: FileUploadService
@@ -22,6 +27,7 @@ export class ComicComponent implements OnInit {
   }
 
   addToCart(comic: ComicShopItem) {
+    if (!this.isInventoryAvailable) return;
     this.shoppingCartService.addItem(comic);
   }
 }

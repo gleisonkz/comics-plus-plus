@@ -64,7 +64,22 @@
 
     <form [formGroup]="comicForm" class="comic__form">
       <span class="comic__price">R$ {{ comic?.price | number: "2.2" }}</span>
-      <span class="comic__inventory">Disponibilidade: Em estoque</span>
+      <span class="comic__inventory">
+        Disponibilidade:
+        <span
+          class="comic__inventory{{
+            isInventoryAvailable ? '--available' : '--unavailable'
+          }}"
+        >
+          {{
+            isInventoryAvailable
+              ? comic.inventoryQuantity + " unidade(s)"
+              : "não disponível"
+          }}
+          em estoque</span
+        ></span
+      >
+
       <mat-form-field>
         <mat-label>Quantidade</mat-label>
         <input
@@ -78,7 +93,7 @@
       <div class="comic__btn-container">
         <button
           (click)="addMultipleItemsToCart(comic)"
-          [disabled]="comicForm.invalid"
+          [disabled]="comicForm.invalid || comic?.inventoryQuantity === 0"
           class="comic__btn"
         >
           <i class="fas fa-shopping-cart"></i>

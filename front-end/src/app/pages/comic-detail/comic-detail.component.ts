@@ -14,8 +14,13 @@ import { ShoppingCartService } from '../../services/shopping-cart.service';
 export class ComicDetailComponent implements OnInit {
   comic: ComicShopItemDetail;
   comicForm: FormGroup;
+
   get hasCartItems(): boolean {
     return this.shoppingCartService.hasItems;
+  }
+
+  get isInventoryAvailable() {
+    return this.comic.inventoryQuantity > 0;
   }
 
   constructor(
@@ -45,6 +50,7 @@ export class ComicDetailComponent implements OnInit {
   }
 
   addMultipleItemsToCart(comic: ComicShopItemDetail) {
+    if (this.comicForm.invalid || this.comic.inventoryQuantity === 0) return;
     this.shoppingCartService.addItem(
       comic,
       +this.comicForm.controls.quantity.value

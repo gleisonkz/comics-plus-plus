@@ -43,6 +43,31 @@
       0 50px 80px rgba(0, 0, 0, 0.12);
   }
 
+  &__inventory {
+    position: absolute;
+
+    top: rem(15);
+    right: rem(28);
+
+    font-size: rem(18);
+
+    &--available {
+      color: green;
+      animation: is-pulsing 0.45s ease-in alternate infinite 1s;
+    }
+
+    &--unavailable {
+      color: $color-danger;
+      animation: is-pulsing 0.45s ease-in alternate infinite 1s;
+    }
+  }
+
+  @keyframes is-pulsing {
+    to {
+      opacity: 0.35;
+    }
+  }
+
   &__price {
     position: absolute;
     left: rem(12);

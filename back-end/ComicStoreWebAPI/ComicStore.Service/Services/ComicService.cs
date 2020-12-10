@@ -84,7 +84,7 @@ namespace ComicStore.Service.Services
             return image;
         }
 
-        public Paginator<dynamic> GetPaginatedComics(IFilter<Comic> filter, Func<Comic, dynamic> projection)
+        public Paginator<dynamic> GetPaginatedComics(IFilter<Comic> filter, Expression<Func<Comic, dynamic>> projection)
         {
             Expression<Func<Comic, bool>> predicate = filter.GetPredicate();
 
@@ -94,7 +94,7 @@ namespace ComicStore.Service.Services
                                    .OrderBy(c => c.ComicID), filter, projection);
         }
 
-        public Paginator<dynamic> GetPaginatedComicsInventory(IFilter<ComicInventory> filter, Func<ComicInventory, dynamic> projection)
+        public Paginator<dynamic> GetPaginatedComicsInventory(IFilter<ComicInventory> filter, Expression<Func<ComicInventory, dynamic>> projection)
         {
             var repoComicInventory = factoryRepository.CreateRepository<ComicInventory>();
 

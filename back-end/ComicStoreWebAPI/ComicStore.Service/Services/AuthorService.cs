@@ -46,7 +46,7 @@ namespace ComicStore.Service.Services
             return objAuthor;
         }
 
-        public Paginator<dynamic> GetPaginatedAuthors(IFilter<Author> filter, Func<Author, dynamic> projection)
+        public Paginator<dynamic> GetPaginatedAuthors(IFilter<Author> filter, Expression<Func<Author, dynamic>> projection)
         {
             Expression<Func<Author, bool>> predicate = filter.GetPredicate();
 

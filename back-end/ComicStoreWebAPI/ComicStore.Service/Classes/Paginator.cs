@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace ComicStore.Service.Classes
 {
@@ -32,7 +33,7 @@ namespace ComicStore.Service.Classes
             return new MetaDataPaginatorAdapter(this);
         }
 
-        public static Paginator<TResult> Paginate<TPoco>(IQueryable<TPoco> source, IFilter<TPoco> filter, Func<TPoco, TResult> projection)
+        public static Paginator<TResult> Paginate<TPoco>(IQueryable<TPoco> source, IFilter<TPoco> filter, Expression<Func<TPoco, TResult>> projection)
         where TPoco : class
         {
             var predicate = filter.GetPredicate();
@@ -41,6 +42,7 @@ namespace ComicStore.Service.Classes
             var items = source.Skip((filter.PageNumber - 1) * filter.PageSize)
                               .Take(filter.PageSize)
                               .Select(projection);
+
             return new Paginator<TResult>(items, count, filter.PageNumber, filter.PageSize);
         }
         public IEnumerator<TResult> GetEnumerator()

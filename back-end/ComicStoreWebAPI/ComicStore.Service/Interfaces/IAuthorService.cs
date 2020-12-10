@@ -1,7 +1,9 @@
 ﻿using ComicStore.Domain.Interfaces;
 using ComicStore.Domain.POCO;
 using ComicStore.Service.Classes;
+using System;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace ComicStore.Service.Interfaces
 {
@@ -12,6 +14,6 @@ namespace ComicStore.Service.Interfaces
         Author DeleteAuthor(int authorID);        
         IQueryable<Author> GetAuthor();
         IQueryable<Author> GetAuthorsByName(string name);
-        Paginator<dynamic> GetPaginatedAuthors(IFilter<Author> filter, System.Func<Author, dynamic> projection);
+        Paginator<dynamic> GetPaginatedAuthors(IFilter<Author> filter, Expression<Func<Author, dynamic>> projection);
     }
 }

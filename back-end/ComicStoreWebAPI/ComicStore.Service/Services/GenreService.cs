@@ -86,7 +86,7 @@ namespace ComicStore.Service.Services
                              .Where(c => c.Description.Contains(description));
         }
 
-        public Paginator<dynamic> GetPaginatedGenres(IFilter<Genre> filter, Func<Genre, dynamic> projection)
+        public Paginator<dynamic> GetPaginatedGenres(IFilter<Genre> filter, Expression<Func<Genre, dynamic>> projection)
         {
             var repoGenre = factoryRepository.CreateRepository<Genre>();
 

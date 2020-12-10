@@ -11,7 +11,7 @@ namespace ComicStore.Infra.EFRepository.Mapping
             builder.HasKey(c => c.ComicID);
 
             _ = builder.HasOne(c => c.Comic)
-                       .WithOne(d => d.Stock)
+                       .WithOne(d => d.Inventory)
                        .OnDelete(DeleteBehavior.Cascade)
                        .IsRequired();
         }

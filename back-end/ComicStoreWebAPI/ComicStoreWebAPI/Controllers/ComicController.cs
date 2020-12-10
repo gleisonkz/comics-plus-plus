@@ -74,6 +74,7 @@ namespace ComicStore.Application.Controllers
                                         c.Title,
                                         c.Description,
                                         c.Price,
+                                        InventoryQuantity =  c.Inventory.Quantity,
                                         Image = new ComicImageInfo
                                         {
                                             Name = c.Image.Name,
@@ -109,6 +110,7 @@ namespace ComicStore.Application.Controllers
                                          c.Price,
                                          c.Pages,
                                          c.Year,
+                                         InventoryQuantity = c.Inventory.Quantity,
                                          Image = new ComicImageInfo
                                          {
                                              Name = c.Image.Name,

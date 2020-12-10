@@ -51,7 +51,7 @@ namespace ComicStore.Service.Services
                 Price = comicDTO.Price,
                 Year = comicDTO.Year,
                 Image = image,
-                Stock = stockItem,
+                Inventory = stockItem,
                 Genres = genres,
                 Authors = authors
             };

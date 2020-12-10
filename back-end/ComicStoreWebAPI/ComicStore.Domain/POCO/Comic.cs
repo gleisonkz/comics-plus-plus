@@ -11,7 +11,7 @@ namespace ComicStore.Domain.POCO
         public int Year { get; set; }
         public int Pages { get; set; }
         public virtual ComicImage Image { get; set; }
-        public virtual ComicInventory Stock { get; set; }
+        public virtual ComicInventory Inventory { get; set; }
         public virtual ICollection<Author> Authors { get; set; } 
         public virtual ICollection<Genre> Genres { get; set; }
     }

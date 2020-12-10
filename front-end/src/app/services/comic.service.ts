@@ -9,6 +9,7 @@ import { ComicShopItemDetail } from '../models/comic-shop-item-detail.model';
 import { ComicShopItem } from '../models/comic-shop-item.model';
 import { Comic } from '../models/comic.model';
 import { Genre } from '../models/genre.model';
+import { ComicInventory } from '../modules/admin/models/comic-inventory.model';
 import { ComicList } from '../modules/admin/models/comic-list.model';
 import { Filter } from '../modules/admin/models/filter.model';
 
@@ -60,6 +61,21 @@ export class ComicService {
       .pipe(delay(200));
   }
 
+  getPaginatedComicsInventory(
+    comicFilter: Filter
+  ): Observable<HttpResponse<ComicInventory[]>> {
+    return this.http
+      .get<ComicInventory[]>(
+        `${environment.apiURL}/comic/inventory/paginator`,
+        {
+          observe: 'response',
+          responseType: 'json',
+          params: comicFilter,
+        }
+      )
+      .pipe(delay(200));
+  }
+
   getComicByID(comicID: number): Observable<Comic> {
     return this.http.get<Comic>(`${environment.apiURL}/comic/${comicID}`);
   }
@@ -74,6 +90,14 @@ export class ComicService {
       comic
     );
   }
+
+  putComicInventory(comic: ComicInventory): Observable<ComicInventory> {
+    return this.http.put<ComicInventory>(
+      `${environment.apiURL}/comic/${comic.comicID}/inventory`,
+      comic.quantity
+    );
+  }
+
   deleteComic(comicID: number): Observable<Comic> {
     return this.http.delete<Comic>(`${environment.apiURL}/comic/${comicID}`);
   }

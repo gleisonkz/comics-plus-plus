@@ -14,8 +14,6 @@ export class AuthorizationService {
   }
 
   isLoggedIn(): boolean {
-    console.log('isLoggedIn');
-
     const decodeToken = this.getDecodeToken();
     if (!decodeToken) {
       return false;

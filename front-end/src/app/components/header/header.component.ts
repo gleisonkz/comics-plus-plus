@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Role } from 'src/app/enums/role.enum';
 import { AuthorizationService } from 'src/app/services/authorization.service';
 import { AuthenticationService } from '../../modules/authentication/services/authentication.service';
@@ -9,6 +9,8 @@ import { AuthenticationService } from '../../modules/authentication/services/aut
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
+  @Output() openSide = new EventEmitter<boolean>(false);
+
   get isAdmin() {
     return (
       this.authorizationService.getUserRoles() &&

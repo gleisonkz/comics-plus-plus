@@ -1,8 +1,26 @@
-<cms-header></cms-header>
-
 <!-- <main [@fadeAnimation]="getRouterOutletState(o)">
   <router-outlet class="main" #o="outlet"></router-outlet>
 </main> -->
-<main>
+
+<!-- <main>
   <router-outlet class="main"></router-outlet>
-</main>
+</main> -->
+
+<mat-sidenav-container>
+  <mat-sidenav #sidenav>
+    <mat-nav-list>
+      <a (click)="sidenav.toggle()" href="" mat-list-item>Close</a>
+      <a href="#" mat-list-item>Menu Item 1</a>
+      <a href="#" mat-list-item>Menu Item 2</a>
+      <a href="#" mat-list-item>Menu Item 3</a>
+      <a href="#" mat-list-item>Menu Item 4</a>
+      <a href="#" mat-list-item>Menu Item 5</a>
+      <a href="#" mat-list-item>Menu Item 6</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content style="height: 100vh">
+    <cms-header (openSide)="sidenav.toggle()"></cms-header>
+    <div style="margin-bottom: 60px"></div>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

@@ -1,6 +1,15 @@
 <header class="header">
   <nav class="menu">
     <ul class="menu-list">
+      <li>
+        <button
+          class="menu-list__item menu-list__item--mobile"
+          mat-icon-button
+          (click)="openSide.emit(true)"
+        >
+          <mat-icon>menu</mat-icon>
+        </button>
+      </li>
       <li class="menu-list__item logo">
         <a class="menu-list__link" routerLink="/"><strong>Comics ++</strong></a>
       </li>

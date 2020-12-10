@@ -14,6 +14,11 @@ mat-card {
   background-color: $color-panel-bg;
 }
 
+mat-card-title,
+mat-card-subtitle {
+  color: $color-text;
+}
+
 form {
   display: flex;
   flex-direction: column;

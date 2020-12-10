@@ -7,6 +7,7 @@ import {
   RouterStateSnapshot,
 } from '@angular/router';
 import { Observable } from 'rxjs';
+import { NotificationService } from '../modules/shared/services/notification.service';
 import { AuthorizationService } from '../services/authorization.service';
 
 @Injectable({
@@ -15,7 +16,8 @@ import { AuthorizationService } from '../services/authorization.service';
 export class AuthorizationGuard implements CanActivate, CanActivateChild {
   constructor(
     private authorizationService: AuthorizationService,
-    private router: Router
+    private router: Router,
+    private notificationService: NotificationService
   ) {}
 
   canActivate(
@@ -25,10 +27,12 @@ export class AuthorizationGuard implements CanActivate, CanActivateChild {
     const allowedRoles = next.data.allowedRoles;
     const isAuthorized = this.authorizationService.isAuthorized(allowedRoles);
 
-    console.log('AuthorizationGuard');
+    this.notificationService.showMessage(
+      'é necessário estar logado para acessar essa rota'
+    );
 
     if (!isAuthorized) {
-      this.router.navigate(['/']);
+      this.router.navigate(['/authentication/login']);
     }
 
     return isAuthorized;

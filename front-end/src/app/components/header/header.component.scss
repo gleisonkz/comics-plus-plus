@@ -51,6 +51,17 @@
       height: 100%;
       transition: background-color 0.2s;
       cursor: pointer;
+
+      @include medias($tiny-mobile, $mobile) {
+        display: none;
+      }
+
+      &--mobile {
+        display: none;
+        @include medias($tiny-mobile, $mobile) {
+          display: block;
+        }
+      }
     }
 
     &__item--active .menu-list__link,

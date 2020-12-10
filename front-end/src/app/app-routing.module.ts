@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthorizationGuard } from './guards/authorization.guard';
 import { OrderGuard } from './guards/order.guard';
 import { AboutComponent } from './pages/about/about.component';
 import { ComicDetailComponent } from './pages/comic-detail/comic-detail.component';
@@ -14,7 +15,12 @@ const routes: Routes = [
   { path: 'quadrinhos', component: ComicsComponent },
   { path: 'quadrinhos/:id', component: ComicDetailComponent },
   { path: 'sobre', component: AboutComponent },
-  { path: 'order', component: OrderComponent },
+  {
+    path: 'order',
+    component: OrderComponent,
+    canActivate: [AuthorizationGuard],
+    data: { allowedRoles: ['Admin'] },
+  },
   {
     path: 'order-finished',
     component: OrderFinishedComponent,

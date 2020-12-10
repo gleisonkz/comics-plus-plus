@@ -1,0 +1,37 @@
+@import "../../../../../sass/functions";
+@import "../../../../../sass/variables";
+@import "../../../../../sass/mixins";
+@import "../../../../../sass/media";
+
+:host {
+  @include flex-center;
+
+  @include mobile {
+    flex-direction: column;
+  }
+}
+
+.success-image {
+  @include size(400);
+
+  @include mobile {
+    @include size(300);
+  }
+}
+
+.info {
+  @include flex-center(column);
+
+  &__title {
+    font-size: rem(50);
+    margin-top: rem(10);
+  }
+  &__message {
+    margin-top: rem(10);
+    color: $color-text;
+  }
+  &__button {
+    margin-top: rem(10);
+    @include base-button-style;
+  }
+}

@@ -1,6 +1,7 @@
 @import "../../../sass/variables";
 @import "../../../sass/mixins";
 @import "../../../sass/functions";
+@import "../../../sass/media";
 
 .panel {
   @include flex-center;
@@ -15,6 +16,10 @@
   color: $color-panel-text;
   background-color: $color-panel-bg;
   border-radius: 10px;
+
+  @include mobile {
+    flex-direction: column;
+  }
 
   &__title {
     font-size: rem(55);

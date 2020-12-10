@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ComicStore.Infra.EFRepository.Migrations
 {
-    public partial class SettingUpMockingData : Migration
+    public partial class ComicInventory : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -95,6 +95,24 @@ namespace ComicStore.Infra.EFRepository.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ComicInventory",
+                columns: table => new
+                {
+                    ComicID = table.Column<int>(type: "int", nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ComicInventory", x => x.ComicID);
+                    table.ForeignKey(
+                        name: "FK_ComicInventory_Comic_ComicID",
+                        column: x => x.ComicID,
+                        principalTable: "Comic",
+                        principalColumn: "ComicID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ComicGenre",
                 columns: table => new
                 {
@@ -166,6 +184,9 @@ namespace ComicStore.Infra.EFRepository.Migrations
 
             migrationBuilder.DropTable(
                 name: "ComicImage");
+
+            migrationBuilder.DropTable(
+                name: "ComicInventory");
 
             migrationBuilder.DropTable(
                 name: "Author");

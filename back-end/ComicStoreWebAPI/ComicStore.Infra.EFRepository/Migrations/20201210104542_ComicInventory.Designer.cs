@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ComicStore.Infra.EFRepository.Migrations
 {
     [DbContext(typeof(ComicStoreDbContext))]
-    [Migration("20201209194833_CreationStockEntity")]
-    partial class CreationStockEntity
+    [Migration("20201210104542_ComicInventory")]
+    partial class ComicInventory
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -161,7 +161,7 @@ namespace ComicStore.Infra.EFRepository.Migrations
                     b.ToTable("ComicImage");
                 });
 
-            modelBuilder.Entity("ComicStore.Domain.POCO.ComicStock", b =>
+            modelBuilder.Entity("ComicStore.Domain.POCO.ComicInventory", b =>
                 {
                     b.Property<int>("ComicID")
                         .HasColumnType("int");
@@ -171,7 +171,7 @@ namespace ComicStore.Infra.EFRepository.Migrations
 
                     b.HasKey("ComicID");
 
-                    b.ToTable("ComicStock");
+                    b.ToTable("ComicInventory");
                 });
 
             modelBuilder.Entity("ComicStore.Domain.POCO.Genre", b =>
@@ -264,11 +264,11 @@ namespace ComicStore.Infra.EFRepository.Migrations
                     b.Navigation("Comic");
                 });
 
-            modelBuilder.Entity("ComicStore.Domain.POCO.ComicStock", b =>
+            modelBuilder.Entity("ComicStore.Domain.POCO.ComicInventory", b =>
                 {
                     b.HasOne("ComicStore.Domain.POCO.Comic", "Comic")
                         .WithOne("Stock")
-                        .HasForeignKey("ComicStore.Domain.POCO.ComicStock", "ComicID")
+                        .HasForeignKey("ComicStore.Domain.POCO.ComicInventory", "ComicID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

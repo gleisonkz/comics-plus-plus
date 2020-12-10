@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace ComicStore.Infra.EFRepository.Mapping
 {
-    public class ComicStockConfiguration : IEntityTypeConfiguration<ComicStock>
+    public class ComicInventoryConfiguration : IEntityTypeConfiguration<ComicInventory>
     {
-        public void Configure(EntityTypeBuilder<ComicStock> builder)
+        public void Configure(EntityTypeBuilder<ComicInventory> builder)
         {
             builder.HasKey(c => c.ComicID);
 

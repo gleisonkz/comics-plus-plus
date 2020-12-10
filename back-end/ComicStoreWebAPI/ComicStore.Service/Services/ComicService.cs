@@ -38,6 +38,11 @@ namespace ComicStore.Service.Services
                 Name = comicDTO.Image.Name
             };
 
+            var stockItem = new ComicInventory
+            {
+                Quantity = 0
+            };
+
             Comic comic = new Comic
             {
                 Description = comicDTO.Description,
@@ -46,6 +51,7 @@ namespace ComicStore.Service.Services
                 Price = comicDTO.Price,
                 Year = comicDTO.Year,
                 Image = image,
+                Stock = stockItem,
                 Genres = genres,
                 Authors = authors
             };
@@ -64,6 +70,12 @@ namespace ComicStore.Service.Services
             return repoComic.GetQuery();
         }
 
+        public IQueryable<ComicInventory> GetComicsInventory()
+        {
+            var repoInventory = factoryRepository.CreateRepository<ComicInventory>();
+            return repoInventory.GetQuery();
+        }
+
         public IQueryable<ComicImage> GetComicImageByComicID(int comicID)
         {
             var repoImage = factoryRepository.CreateRepository<ComicImage>();
@@ -80,6 +92,18 @@ namespace ComicStore.Service.Services
                 .Paginate(repoComic.GetQuery()
                                    .Where(predicate)
                                    .OrderBy(c => c.ComicID), filter, projection);
+        }
+
+        public Paginator<dynamic> GetPaginatedComicsInventory(IFilter<ComicInventory> filter, Func<ComicInventory, dynamic> projection)
+        {
+            var repoComicInventory = factoryRepository.CreateRepository<ComicInventory>();
+
+            Expression<Func<ComicInventory, bool>> predicate = filter.GetPredicate();
+
+            return Paginator<dynamic>
+                .Paginate(repoComicInventory.GetQuery()
+                                            .Where(predicate)
+                                            .OrderBy(c => c.ComicID), filter, projection);
         }
 
         public IQueryable<Genre> GetGenresByComicID(int comicID)
@@ -123,7 +147,7 @@ namespace ComicStore.Service.Services
             image.Extension = comicDTO.Image.Extension;
             image.Name = comicDTO.Image.Name;
 
-            
+
 
             objComic.Title = comicDTO.Title;
             objComic.Description = comicDTO.Description;
@@ -138,6 +162,16 @@ namespace ComicStore.Service.Services
             repoComic.Update(objComic);
 
             return objComic;
+        }
+
+        public ComicInventory UpdateComicInventory(int comicID, int quantity)
+        {
+            var repoComicInventory = factoryRepository.CreateRepository<ComicInventory>();
+            ComicInventory comicInventory = repoComicInventory.GetQuery()
+                                                              .SingleOrDefault(c => c.ComicID == comicID);
+
+            comicInventory.Quantity = quantity;
+            return comicInventory;
         }
 
         public IQueryable<Comic> GetComicByID(int comicID)
@@ -157,5 +191,7 @@ namespace ComicStore.Service.Services
 
             return objComic;
         }
+
+
     }
 }

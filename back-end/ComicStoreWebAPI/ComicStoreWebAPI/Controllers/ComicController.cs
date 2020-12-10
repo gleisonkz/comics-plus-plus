@@ -22,7 +22,7 @@ namespace ComicStore.Application.Controllers
         {
             this.svcComic = svcComic;
         }
-                
+
         [HttpGet("{comicID}")]
         public IActionResult GetComicByID(int comicID)
         {
@@ -79,9 +79,9 @@ namespace ComicStore.Application.Controllers
                                             Name = c.Image.Name,
                                             Extension = c.Image.Extension,
                                             Base64 = c.Image.Base64
-                                        },      
-                                        Authors = c.Authors.Select(c=> c.Name).ToList(),
-                                        Genres = c.Genres.Select(c=> c.Description).ToList()
+                                        },
+                                        Authors = c.Authors.Select(c => c.Name).ToList(),
+                                        Genres = c.Genres.Select(c => c.Description).ToList()
                                     })
                                     .ToList();
 
@@ -100,24 +100,24 @@ namespace ComicStore.Application.Controllers
             try
             {
                 var comics = svcComic.GetComic()
-                                     .Where(c=> c.ComicID == comicID)
+                                     .Where(c => c.ComicID == comicID)
                                      .Select(c => new
-                                        {
-                                            c.ComicID,
-                                            c.Title,
-                                            c.Description,
-                                            c.Price,
-                                            c.Pages,
-                                            c.Year,
-                                            Image = new ComicImageInfo
-                                            {
-                                                Name = c.Image.Name,
-                                                Extension = c.Image.Extension,
-                                                Base64 = c.Image.Base64
-                                            },
-                                            Authors = c.Authors.Select(c => c.Name).ToList(),
-                                            Genres = c.Genres.Select(c => c.Description).ToList()
-                                        })
+                                     {
+                                         c.ComicID,
+                                         c.Title,
+                                         c.Description,
+                                         c.Price,
+                                         c.Pages,
+                                         c.Year,
+                                         Image = new ComicImageInfo
+                                         {
+                                             Name = c.Image.Name,
+                                             Extension = c.Image.Extension,
+                                             Base64 = c.Image.Base64
+                                         },
+                                         Authors = c.Authors.Select(c => c.Name).ToList(),
+                                         Genres = c.Genres.Select(c => c.Description).ToList()
+                                     })
                                      .SingleOrDefault();
 
                 return Ok(comics);
@@ -219,6 +219,49 @@ namespace ComicStore.Application.Controllers
             return Ok(genres);
         }
 
+        [HttpGet]
+        [Route("inventory/paginator")]
+        [Authorize(Roles = "Admin")]
+        public IActionResult GetPaginatedComicsInventory([FromQuery] ComicInventoryFilter filter)
+        {
+            try
+            {
+                Paginator<dynamic> comicsInventory = svcComic.GetPaginatedComicsInventory(
+                    filter,
+                    c => new
+                    {
+                        c.ComicID,
+                        c.Comic.Title,
+                        c.Quantity,
+                    });
+
+                var result = comicsInventory.ToList();
+
+                Response.Headers.Add(
+                    "X-Pagination",
+                     JsonConvert.SerializeObject(comicsInventory.GetPaginatorMetadata(), new JsonSerializerSettings
+                     {
+                         ContractResolver = new DefaultContractResolver
+                         {
+                             NamingStrategy = new CamelCaseNamingStrategy()
+                         }
+                     })
+                     );
+
+                return Ok(result);
+            }
+            catch (CustomException ex)
+            {
+                svcComic.Rollback();
+                return BadRequest(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                svcComic.Rollback();
+                return BadRequest(ex.Message);
+            }
+        }
+
         [HttpPost]
         [Authorize(Roles = "Admin")]
         public IActionResult PostComic([FromBody] SaveComicDTO comicDTO)
@@ -243,6 +286,23 @@ namespace ComicStore.Application.Controllers
             try
             {
                 svcComic.UpdateComic(comicDTO, comicID);
+                svcComic.Commit();
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                svcComic.Rollback();
+                return BadRequest($"Erro: {ex.Message}");
+            }
+        }
+
+        [HttpPut("{comicID}/inventory")]
+        [Authorize(Roles = "Admin")]
+        public IActionResult PutComicInventory(int comicID, [FromBody] int quantity)
+        {
+            try
+            {
+                svcComic.UpdateComicInventory(comicID, quantity);
                 svcComic.Commit();
                 return Ok();
             }

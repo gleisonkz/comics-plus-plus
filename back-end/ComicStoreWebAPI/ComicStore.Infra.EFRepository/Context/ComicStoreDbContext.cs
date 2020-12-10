@@ -1,8 +1,6 @@
 ﻿using ComicStore.Domain.POCO;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 
 namespace ComicStore.Infra.EFRepository.Context
@@ -42,6 +40,7 @@ namespace ComicStore.Infra.EFRepository.Context
         public DbSet<Comic> Comic { get; set; }
         public DbSet<Author> Author { get; set; }
         public DbSet<Genre> Genre { get; set; }
+        public DbSet<ComicInventory> ComicInventory { get; set; }
         public DbSet<ComicImage> ComicImage { get; set; }
     }
 }

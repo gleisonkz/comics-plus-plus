@@ -1,7 +1,7 @@
 @import "./sass/variables";
 @import "./sass/responsive-helpers";
 @import "./sass/mixins";
-//@import "./theme.scss";
+// @import "./theme.scss";
 
 :root {
   --lh: 1.4rem;
@@ -43,6 +43,14 @@
   font: 500 20px/32px Roboto, "Helvetica Neue", sans-serif;
   letter-spacing: normal;
   margin: 0 0 10px;
+}
+
+.mat-menu-panel {
+  background-color: var(--color-panel-bg) !important;
+}
+
+.mat-menu-item span {
+  color: $color-text;
 }
 
 body,
@@ -126,13 +134,14 @@ table {
 .title-group {
   @include flex-center;
   color: $color-title-text;
+  width: 100%;
+  margin-bottom: rem(10);
 
   justify-content: space-between;
 
   h1 {
     font-size: rem(14);
     margin: 0;
-    padding-bottom: rem(10);
   }
 
   ::ng-deep.mat-button-wrapper {
@@ -156,4 +165,43 @@ table {
     @include flex-center;
     font-size: rem(20);
   }
+}
+
+// override material paginator
+
+mat-paginator {
+  div.mat-paginator-range-actions {
+    color: $color-text;
+    @include medias($tiny-mobile, $mobile) {
+      width: 100%;
+      justify-content: space-between;
+    }
+  }
+
+  div.mat-paginator-range-label {
+    color: $color-text;
+    @include medias($tiny-mobile, $mobile) {
+      margin: 0 !important;
+    }
+  }
+
+  div.mat-paginator-page-size {
+    color: $color-text;
+  }
+}
+
+.mat-form-field-underline {
+  background-color: $color-tab-panel-border-bottom !important;
+}
+
+.mat-form-field-ripple {
+  background-color: $color-form-field-placeholder-active !important;
+}
+
+.mat-form-field-label {
+  color: $color-form-field-placeholder !important;
+}
+
+.mat-focused .mat-form-field-label {
+  color: $color-form-field-placeholder-active !important;
 }

@@ -15,6 +15,7 @@ import { ComicCrudComponent } from './pages/comic-crud/comic-crud.component';
 import { GenreCrudComponent } from './pages/genre-crud/genre-crud.component';
 import { InventoryCrudComponent } from './pages/inventory-crud/inventory-crud.component';
 import { ComicInventoryDialogComponent } from './components/comic-inventory-dialog/comic-inventory-dialog.component';
+import { AddButtonComponent } from './components/add-button/add-button.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { ComicInventoryDialogComponent } from './components/comic-inventory-dial
     ComicDialogComponent,
     InventoryCrudComponent,
     ComicInventoryDialogComponent,
+    AddButtonComponent,
   ],
   imports: [
     CommonModule,

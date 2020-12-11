@@ -7,15 +7,17 @@
   background-color: $color-panel-bg !important;
 }
 
-@include medias($mobile, tiny-mobile) {
-  ::ng-deep.cdk-overlay-pane {
-    right: 50% !important;
-    transform: translateX(50%) !important;
-    width: 100% !important;
-  }
-  ::ng-deep.mat-menu-panel {
-    width: 100% !important;
-    margin: rem(20);
+:host {
+  @include medias($mobile, tiny-mobile) {
+    ::ng-deep.cdk-overlay-pane {
+      // right: 50% !important;
+      // transform: translateX(50%) !important;
+      width: 100% !important;
+    }
+    ::ng-deep.mat-menu-panel {
+      width: 100% !important;
+      margin: rem(20);
+    }
   }
 }
 

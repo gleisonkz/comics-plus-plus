@@ -26,6 +26,9 @@ $color-panel-button-text: #{"var(--color-panel-button-text)"};
 $color-tab-panel-border-bottom: #{"var(--color-tab-panel-border-bottom)"};
 $color-tab-panel-border-top: #{"var(--color-tab-panel-border-top)"};
 
+$color-form-field-placeholder: #{"var(--color-form-field-placeholder)"};
+$color-form-field-placeholder-active: #{"var(--color-form-field-placeholder-active)"};
+
 $color-footer-text: #{"var(--color-footer-text)"};
 $color-footer-bg: #{"var(--color-footer-bg)"};
 
@@ -35,6 +38,8 @@ $color-icon: #{"var(--color-icon)"};
 
 $project-colors: (
   "primary": #27ae61,
+  "form-field-placeholder": #00000061,
+  "form-field-placeholder-active": #3f51b5,
   "background": #f3f2f7,
   "title-text": #444,
   "text": #444,
@@ -44,7 +49,7 @@ $project-colors: (
   "panel-text": #444,
   "panel-button-bg": #06618c,
   "panel-button-text": white,
-  "tab-panel-border-bottom": var(--color-primary),
+  "tab-panel-border-bottom": rgba(0, 0, 0, 0.12),
   "tab-panel-border-top": #f5f3f3,
   "footer-bg": white,
   "hover-bg-menu": rgba(0, 0, 0, 0.1),
@@ -55,6 +60,8 @@ $project-colors: (
 
 $project-colors-theme-dark: (
   "primary": #252a41,
+  "form-field-placeholder": #d7d7d7,
+  "form-field-placeholder-active": #6ba8c7,
   "background": #1e202a,
   "text": #d3cdcd,
   "title-text": white,
@@ -63,7 +70,7 @@ $project-colors-theme-dark: (
   "panel-text": white,
   "panel-button-bg": #dd4b39,
   "panel-button-text": white,
-  "tab-panel-border-bottom": #dd4b39,
+  "tab-panel-border-bottom": #c3c3c3,
   "tab-panel-border-top": hsl(228deg 27% 24%),
   "footer-bg": "var(--color-primary)",
   "hover-bg-menu": rgba(133, 130, 130, 0.1),

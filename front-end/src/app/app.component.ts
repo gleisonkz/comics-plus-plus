@@ -1,8 +1,10 @@
 import { DOCUMENT } from '@angular/common';
-import { Component, Inject } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, Inject, ViewChild } from '@angular/core';
+import { MatSidenav } from '@angular/material/sidenav';
+import { Router, RouterOutlet } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Role } from './enums/role.enum';
+import { AuthenticationService } from './modules/authentication/services/authentication.service';
 import { fadeAnimation } from './modules/shared/animations/fade.animations';
 import { AuthorizationService } from './services/authorization.service';
 import { ToggleThemeService } from './services/toggle-theme.service';
@@ -15,7 +17,9 @@ import { ToggleThemeService } from './services/toggle-theme.service';
 })
 export class AppComponent {
   title = 'comics-plus-plus';
-  subscription: Subscription;
+  subscriptions: Subscription[] = [];
+  @ViewChild('sidenav') public sidenav: MatSidenav;
+
   get isAdmin() {
     return (
       this.authorizationService.getUserRoles &&
@@ -23,23 +27,41 @@ export class AppComponent {
     );
   }
 
+  get isLoggedIn(): boolean {
+    return this.authorizationService.isLoggedIn();
+  }
+
   constructor(
     private toggleThemeService: ToggleThemeService,
     @Inject(DOCUMENT) private documentRef: Document,
-    private authorizationService: AuthorizationService
+    private authorizationService: AuthorizationService,
+    private authenticationService: AuthenticationService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.subscription = this.toggleThemeService.changeTheme.subscribe(() => {
-      this.documentRef.documentElement.classList.toggle('dark-mode');
-    });
+    this.subscriptions.push(
+      this.toggleThemeService.changeTheme.subscribe(() => {
+        this.documentRef.documentElement.classList.toggle('dark-mode');
+      })
+    );
+
+    this.subscriptions.push(
+      this.router.events.subscribe(() => {
+        this.sidenav.close();
+      })
+    );
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this.subscriptions.forEach((c) => c.unsubscribe());
   }
 
-  public getRouterOutletState(outlet: RouterOutlet) {
+  getRouterOutletState(outlet: RouterOutlet) {
     return outlet.isActivated ? outlet.activatedRoute : '';
+  }
+
+  logout(): void {
+    this.authenticationService.logout();
   }
 }

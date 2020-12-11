@@ -23,7 +23,7 @@ namespace ComicStore.Application.Classes
         }
 
         public async Task<string> GenerateJwtToken(string email)
-        {            
+        {
             IdentityUser user = await userManager.FindByEmailAsync(email);
             var userRoles = await userManager.GetRolesAsync(user);
 

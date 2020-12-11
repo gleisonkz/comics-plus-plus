@@ -9,18 +9,26 @@
 <mat-sidenav-container>
   <mat-sidenav #sidenav>
     <mat-nav-list>
-      <a (click)="sidenav.toggle()" href="" mat-list-item>Close</a>
-      <a href="#" mat-list-item>Menu Item 1</a>
-      <a href="#" mat-list-item>Menu Item 2</a>
-      <a href="#" mat-list-item>Menu Item 3</a>
-      <a href="#" mat-list-item>Menu Item 4</a>
-      <a href="#" mat-list-item>Menu Item 5</a>
-      <a href="#" mat-list-item>Menu Item 6</a>
+      <a mat-list-item routerLink="/quadrinhos">Quadrinhos</a>
+      <a mat-list-item routerLink="/admin">Admin</a>
+      <a mat-list-item routerLink="/sobre">Sobre</a>
+      <a mat-list-item *ngIf="!isLoggedIn" routerLink="/authentication">
+        Login
+      </a>
+      <a
+        mat-list-item
+        *ngIf="isLoggedIn"
+        (click)="logout()"
+        routerLink="/authentication"
+      >
+        Sair
+      </a>
+      <a (click)="sidenav.toggle()" mat-list-item>Fechar</a>
     </mat-nav-list>
   </mat-sidenav>
-  <mat-sidenav-content style="height: 100vh">
+  <mat-sidenav-content>
     <cms-header (openSide)="sidenav.toggle()"></cms-header>
-    <div style="margin-bottom: 60px"></div>
+    <!-- <div style="margin-bottom: 60px"></div> -->
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>

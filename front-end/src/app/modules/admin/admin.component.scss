@@ -8,15 +8,26 @@ mat-sidenav {
   left: 0;
   width: rem(150);
   background-color: $color-panel-bg;
+
+  mat-nav-list {
+    span {
+      color: $color-title-text;
+    }
+  }
 }
 
 mat-sidenav-container {
   margin-left: rem(150);
   padding: rem(30);
   background-color: $color-panel-bg;
+
+  @include medias($tiny-mobile, $mobile) {
+    margin-left: 0;
+  }
 }
 
 mat-sidenav-content {
+  display: flex;
   margin-left: 0 !important;
   min-height: rem(330);
 }

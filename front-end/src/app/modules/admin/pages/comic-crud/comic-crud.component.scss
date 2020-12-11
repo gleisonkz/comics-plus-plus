@@ -3,6 +3,14 @@
 @import "../../../../../sass/mixins";
 @import "../../../../../sass/media";
 
+:host {
+  margin: 0 !important;
+}
+
+.spinner-container {
+  margin-top: rem(60);
+}
+
 .filter {
   margin-top: rem(10);
   font-size: rem(15);
@@ -28,12 +36,6 @@
   @include flex-center;
 
   justify-content: space-between;
-
-  h1 {
-    font-size: rem(14);
-    margin: 0;
-    padding-bottom: rem(10);
-  }
 
   ::ng-deep.mat-button-wrapper {
     @include flex-center;

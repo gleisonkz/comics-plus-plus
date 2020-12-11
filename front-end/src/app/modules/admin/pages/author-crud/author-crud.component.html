@@ -3,9 +3,10 @@
     <i class="fa fa-tag" aria-hidden="true"></i>
     Autores
   </h1>
-  <button (click)="openDialog()" mat-button>
-    <i class="fas fa-plus"></i> Novo Autor
-  </button>
+  <cms-add-button
+    (clickEvent)="openDialog()"
+    [buttonText]="'Novo Autor'"
+  ></cms-add-button>
 </div>
 <mat-divider fxFlex="1 0"></mat-divider>
 
@@ -47,12 +48,16 @@
   </form>
 </div>
 
-<div class="title-group">
+<div
+  class="title-group subtitle"
+  [ngStyle]="{
+    display: loadingComplete && paginator.length ? 'table' : 'none'
+  }"
+>
   <h1 class="mat-h1">
     <i class="fa fa-list-alt" aria-hidden="true"></i>
     Lista de Autores
   </h1>
-  <mat-divider fxFlex="1 0"></mat-divider>
 </div>
 
 <div class="container">
@@ -91,21 +96,22 @@
       <th mat-header-cell *matHeaderCellDef>Ações</th>
       <td mat-cell *matCellDef="let element; let i = index">
         <button
-          class="btn btn-edit"
-          mat-raised-button
-          color="primary"
-          (click)="openDialog(element)"
+          mat-icon-button
+          [matMenuTriggerFor]="menu"
+          aria-label="Example icon-button with a menu"
         >
-          Editar
+          <mat-icon>more_vert</mat-icon>
         </button>
-        <button
-          class="btn"
-          mat-raised-button
-          color="warn"
-          (click)="deleteItem(element)"
-        >
-          Deletar
-        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="openDialog(element)">
+            <mat-icon color="primary">edit</mat-icon>
+            <span>Editar</span>
+          </button>
+          <button mat-menu-item (click)="deleteItem(element)">
+            <mat-icon color="warn">delete</mat-icon>
+            <span>Deletar</span>
+          </button>
+        </mat-menu>
       </td>
     </ng-container>
 

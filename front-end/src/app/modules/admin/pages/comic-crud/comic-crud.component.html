@@ -3,9 +3,10 @@
     <i class="fa fa-tag" aria-hidden="true"></i>
     Quadrinhos
   </h1>
-  <button (click)="openDialog()" mat-button>
-    <i class="fas fa-plus"></i> Novo Quadrinho
-  </button>
+  <cms-add-button
+    (clickEvent)="openDialog()"
+    [buttonText]="'Novo Quadrinho'"
+  ></cms-add-button>
 </div>
 <mat-divider fxFlex="1 0"></mat-divider>
 
@@ -91,12 +92,16 @@
   </form>
 </div>
 
-<div class="title-group">
+<div
+  class="title-group subtitle"
+  [ngStyle]="{
+    display: loadingComplete && paginator.length ? 'table' : 'none'
+  }"
+>
   <h1 class="mat-h1">
     <i class="fa fa-list-alt" aria-hidden="true"></i>
     Lista de Quadrinhos
   </h1>
-  <mat-divider fxFlex="1 0"></mat-divider>
 </div>
 
 <div class="container">

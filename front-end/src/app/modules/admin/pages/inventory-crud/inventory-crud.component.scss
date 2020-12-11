@@ -3,6 +3,14 @@
 @import "../../../../../sass/mixins";
 @import "../../../../../sass/media";
 
+:host {
+  margin: 0 !important;
+}
+
+.spinner-container {
+  margin-top: rem(60);
+}
+
 .filter {
   margin-top: rem(10);
   font-size: rem(15);

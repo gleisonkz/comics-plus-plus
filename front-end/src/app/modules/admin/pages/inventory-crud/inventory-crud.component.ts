@@ -40,8 +40,8 @@ export class InventoryCrudComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = new FormGroup({
-      genreID: new FormControl(''),
-      description: new FormControl(''),
+      comicID: new FormControl(''),
+      title: new FormControl(''),
     });
 
     this.dataSource = new CustomDataSource<ComicInventory>((filter: Filter) =>
@@ -91,6 +91,7 @@ export class InventoryCrudComponent implements OnInit {
   }
 
   loadData(comicInventory?: ComicInventory): void {
+
     this.dataSource.loading$
       .pipe(
         finalize(() => {

@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
@@ -10,7 +11,7 @@ import { RegisterUser } from '../models/register-user.model';
   providedIn: 'root',
 })
 export class AuthenticationService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   postRegisterUser(user: RegisterUser): Observable<RegisterUser> {
     return this.http.post<RegisterUser>(
@@ -32,6 +33,7 @@ export class AuthenticationService {
   logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('expires_at');
+    this.router.navigate(['/']);
   }
 
   get token(): string {

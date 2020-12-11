@@ -20,12 +20,12 @@
           type="number"
           matInput
           placeholder="ID"
-          formControlName="genreID"
+          formControlName="comicID"
         />
       </mat-form-field>
 
       <mat-form-field>
-        <input matInput placeholder="Nome" formControlName="description" />
+        <input matInput placeholder="Nome" formControlName="title" />
       </mat-form-field>
     </div>
 
@@ -75,7 +75,7 @@
     style="display: none !important"
   >
     <ng-container matColumnDef="ComicInventoryID">
-      <th mat-header-cell *matHeaderCellDef>ComicInventoryID</th>
+      <th mat-header-cell *matHeaderCellDef>ID</th>
       <td mat-cell *matCellDef="let element">{{ element.comicID }}</td>
     </ng-container>
 
@@ -93,13 +93,18 @@
       <th mat-header-cell *matHeaderCellDef>Ações</th>
       <td mat-cell *matCellDef="let element; let i = index">
         <button
-          class="btn btn-edit"
-          mat-raised-button
-          color="primary"
-          (click)="openDialog(element)"
+          mat-icon-button
+          [matMenuTriggerFor]="menu"
+          aria-label="Example icon-button with a menu"
         >
-          Edit
+          <mat-icon>more_vert</mat-icon>
         </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="openDialog(element)">
+            <mat-icon color="primary">edit</mat-icon>
+            <span>Editar</span>
+          </button>
+        </mat-menu>
       </td>
     </ng-container>
 

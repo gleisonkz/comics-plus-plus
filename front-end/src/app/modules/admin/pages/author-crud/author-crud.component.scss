@@ -21,6 +21,10 @@
   display: flex;
   align-items: center;
 
+  @include medias($tiny-mobile, $mobile) {
+    flex-direction: column;
+  }
+
   .mat-form-field-wrapper {
     padding: 0;
   }
@@ -29,6 +33,13 @@
     @include flex-center;
     height: rem(29);
     margin-bottom: rem(6);
+  }
+
+  .full-wrapper,
+  .full-wrapper button {
+    @include medias($tiny-mobile, $mobile) {
+      width: 100%;
+    }
   }
 }
 
@@ -61,6 +72,10 @@
 
 mat-form-field {
   margin-right: rem(20);
+
+  @include medias($tiny-mobile, $mobile) {
+    width: 100%;
+  }
 }
 
 table {

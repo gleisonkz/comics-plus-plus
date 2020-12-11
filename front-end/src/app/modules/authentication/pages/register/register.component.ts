@@ -5,6 +5,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 import { NotificationService } from '../../../shared/services/notification.service';
 import { RegisterUser } from '../../models/register-user.model';
 import { AuthenticationService } from '../../services/authentication.service';
@@ -17,7 +18,8 @@ export class RegisterComponent implements OnInit {
   form: FormGroup;
   constructor(
     private authenticationService: AuthenticationService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -51,7 +53,7 @@ export class RegisterComponent implements OnInit {
   register(user: RegisterUser) {
     if (this.form.invalid) return;
     this.authenticationService.postRegisterUser(user).subscribe((c) => {
-      this.notificationService.showMessage('Usuário cadastrado com sucesso');
+      this.router.navigate(['authentication/register/done']);
     });
   }
 }

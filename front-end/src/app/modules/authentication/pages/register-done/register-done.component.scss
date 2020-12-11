@@ -5,9 +5,12 @@
 
 :host {
   @include flex-center;
+  align-items: flex-start;
 
   @include mobile {
     flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
   }
 }
 
@@ -16,6 +19,14 @@
 
   @include mobile {
     @include size(300);
+  }
+}
+
+.info-container {
+  @include flex-center;
+
+  @include mobile {
+    flex-direction: column;
   }
 }
 

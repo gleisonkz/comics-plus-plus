@@ -1,0 +1,26 @@
+@import "../../../../../sass/functions";
+@import "../../../../../sass/variables";
+@import "../../../../../sass/mixins";
+@import "../../../../../sass/media";
+
+button {
+  display: none;
+}
+
+.desktop {
+  @include medias($small-tablet, $tablet, $large-tablet, $desktop) {
+    display: initial;
+  }
+}
+
+.mobile {
+  display: none;
+
+  @include medias($tiny-mobile, $mobile) {
+    display: initial;
+    .small {
+      @include flex-center;
+      @include size(35);
+    }
+  }
+}

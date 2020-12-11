@@ -1,0 +1,12 @@
+<button class="desktop" (click)="clickEvent.emit()" mat-button>
+  <i class="fas fa-plus"></i> {{ buttonText }}
+</button>
+
+<button
+  class="mobile small"
+  (click)="clickEvent.emit()"
+  mat-mini-fab
+  color="primary"
+>
+  <mat-icon>add</mat-icon>
+</button>

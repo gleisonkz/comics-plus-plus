@@ -8,12 +8,11 @@ namespace ComicStore.Infra.EFRepository.Mapping
     {
         public void Configure(EntityTypeBuilder<Genre> builder)
         {
-            builder.HasKey(c => c.GenreID);
+            _ = builder.HasKey(c => c.GenreID);
 
             _ = builder.Property(c => c.Description)
                  .IsRequired()
                  .HasMaxLength(200);
-
         }
     }
 }

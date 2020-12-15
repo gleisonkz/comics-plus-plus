@@ -8,7 +8,7 @@ namespace ComicStore.Infra.EFRepository.Mapping
     {
         public void Configure(EntityTypeBuilder<Author> builder)
         {
-            builder.HasKey(c => c.AuthorID);
+            _ = builder.HasKey(c => c.AuthorID);
 
             _ = builder.Property(c => c.Name)
                        .IsRequired()

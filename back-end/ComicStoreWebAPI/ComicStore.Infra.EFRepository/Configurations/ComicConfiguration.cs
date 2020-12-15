@@ -9,20 +9,20 @@ namespace ComicStore.Infra.EFRepository.Mapping
     {
         public void Configure(EntityTypeBuilder<Comic> builder)
         {
-            builder.HasKey(c => c.ComicID);
+            _ = builder.HasKey(c => c.ComicID);
 
             _ = builder.Property(c => c.Title)
                  .IsRequired()
                  .HasMaxLength(100);
 
-            builder.Property(c => c.Description)
+            _ = builder.Property(c => c.Description)
                  .IsRequired()
                  .HasMaxLength(500);
 
-            builder.Property(c => c.Price)
+            _ = builder.Property(c => c.Price)
                  .IsRequired();
 
-            builder.Property(c => c.Pages)
+            _ = builder.Property(c => c.Pages)
                  .IsRequired();
         }
     }

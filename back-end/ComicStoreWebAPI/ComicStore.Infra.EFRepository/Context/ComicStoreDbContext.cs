@@ -9,7 +9,6 @@ namespace ComicStore.Infra.EFRepository.Context
     {
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
             base.OnModelCreating(modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly()));
 
             var genres = new List<Genre>
@@ -33,14 +32,18 @@ namespace ComicStore.Infra.EFRepository.Context
               new Author { AuthorID = 7, Name = "Jonathan Hickman" }
             };
 
-            modelBuilder.Entity<Author>().HasData(authors);
-            modelBuilder.Entity<Genre>().HasData(genres);
+            _ = modelBuilder.Entity<Author>().HasData(authors);
+            _ = modelBuilder.Entity<Genre>().HasData(genres);
         }
+
         public ComicStoreDbContext(DbContextOptions<ComicStoreDbContext> options) : base(options) { }
         public DbSet<Comic> Comic { get; set; }
         public DbSet<Author> Author { get; set; }
         public DbSet<Genre> Genre { get; set; }
         public DbSet<ComicInventory> ComicInventory { get; set; }
         public DbSet<ComicImage> ComicImage { get; set; }
+        public DbSet<Customer> Customer { get; set; }
+        public DbSet<Order> Order { get; set; }
+        public DbSet<OrderItem> OrderItem { get; set; }
     }
 }

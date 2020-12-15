@@ -8,9 +8,9 @@ namespace ComicStore.Infra.EFRepository.Mapping
     {
         public void Configure(EntityTypeBuilder<ComicImage> builder)
         {
-            builder.HasKey(c => c.ComicID);
+            _ = builder.HasKey(c => c.ComicID);
 
-            builder.Property(c => c.ComicID)
+            _ = builder.Property(c => c.ComicID)
                    .HasColumnName("ComicID");
 
             _ = builder.HasOne(c => c.Comic)                

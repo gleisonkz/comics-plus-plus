@@ -21,7 +21,6 @@ namespace ComicStore.Infra.EFRepository.Context
             }
 
             var hasher = new PasswordHasher<IdentityUser>();
-            
 
             modelBuilder.Entity<IdentityUser>().HasData(
                         new IdentityUser
@@ -52,14 +51,12 @@ namespace ComicStore.Infra.EFRepository.Context
                             NormalizedName = "User".ToUpper()
                         });
 
-
             modelBuilder.Entity<IdentityUserRole<string>>().HasData(
                         new IdentityUserRole<string>
                         {
                             RoleId = "1",
                             UserId = "1"
                         });
-
         }
         public ComicStoreIdentityDbContext(DbContextOptions<ComicStoreIdentityDbContext> options) : base(options) { }
 

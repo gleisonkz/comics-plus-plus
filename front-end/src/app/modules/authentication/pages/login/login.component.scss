@@ -32,6 +32,10 @@ mat-card-actions {
 
 button {
   width: rem(200);
+
+  @include medias($tiny-mobile, $mobile) {
+    width: rem(130);
+  }
 }
 
 a {

@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 import { Role } from './enums/role.enum';
 import { AuthenticationService } from './modules/authentication/services/authentication.service';
 import { fadeAnimation } from './modules/shared/animations/fade.animations';
+import { NotificationService } from './modules/shared/services/notification.service';
 import { AuthorizationService } from './services/authorization.service';
 import { ToggleThemeService } from './services/toggle-theme.service';
 
@@ -23,7 +24,7 @@ export class AppComponent {
   get isAdmin() {
     return (
       this.authorizationService.getUserRoles &&
-      this.authorizationService.getUserRoles().includes(Role.Admin)
+      this.authorizationService.getUserRoles()?.includes(Role.Admin)
     );
   }
 
@@ -36,6 +37,7 @@ export class AppComponent {
     @Inject(DOCUMENT) private documentRef: Document,
     private authorizationService: AuthorizationService,
     private authenticationService: AuthenticationService,
+    private notificationService: NotificationService,
     private router: Router
   ) {}
 
@@ -63,5 +65,6 @@ export class AppComponent {
 
   logout(): void {
     this.authenticationService.logout();
+    this.notificationService.showMessage('Logout efetuado com sucesso!');
   }
 }

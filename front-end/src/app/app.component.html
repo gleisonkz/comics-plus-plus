@@ -10,7 +10,7 @@
   <mat-sidenav #sidenav>
     <mat-nav-list>
       <a mat-list-item routerLink="/quadrinhos">Quadrinhos</a>
-      <a mat-list-item routerLink="/admin">Admin</a>
+      <a *ngIf="isAdmin" mat-list-item routerLink="/admin">Admin</a>
       <a mat-list-item routerLink="/sobre">Sobre</a>
       <a mat-list-item *ngIf="!isLoggedIn" routerLink="/authentication">
         Login

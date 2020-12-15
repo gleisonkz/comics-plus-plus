@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 
 namespace ComicStore.Application.DTO
 {
@@ -11,5 +12,17 @@ namespace ComicStore.Application.DTO
         [Required]
         [Compare("Password", ErrorMessage = "As senhas não conferem")]
         public string PasswordCheck { get; set; }
+
+        public static implicit operator IdentityUser(RegisterUserDTO dto)
+        {
+            var user = new IdentityUser
+            {
+                UserName = dto.Email,
+                Email = dto.Email,
+                EmailConfirmed = true
+            };
+
+            return user;
+        }
     }
 }

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
+using System.Transactions;
 
 namespace ComicStore.Application.Controllers
 {
@@ -34,29 +35,21 @@ namespace ComicStore.Application.Controllers
         {
             try
             {
-                var user = new IdentityUser
-                {
-                    UserName = registerUser.Email,
-                    Email = registerUser.Email,
-                    EmailConfirmed = true
-                };
+                using TransactionScope transaction = new TransactionScope();
+                IdentityUser user = registerUser;
 
                 var resultUser = await userManager.CreateAsync(user, registerUser.Password);
                 if (!resultUser.Succeeded) return BadRequest(resultUser.Errors);
 
-                bool roleExists = await roleManager.RoleExistsAsync("User");
-                if (!roleExists)
-                {
-                    var role = new IdentityRole
-                    {
-                        Name = "User"
-                    };
-                    await roleManager.CreateAsync(role);
-                }
+                await CheckRoleExists("User");
 
                 var resultRole = await userManager.AddToRoleAsync(user, "User");
 
                 await signInManager.SignInAsync(user, false);
+
+                //customerService.create(user)
+
+                transaction.Complete();
                 return Ok("Usuario Criado");
             }
             catch (Exception ex)
@@ -64,6 +57,20 @@ namespace ComicStore.Application.Controllers
                 return BadRequest($"Erro: {ex.Message}");
             }
         }
+
+        private async Task CheckRoleExists(string roleName)
+        {
+            bool roleExists = await roleManager.RoleExistsAsync(roleName);
+            if (!roleExists)
+            {
+                var role = new IdentityRole
+                {
+                    Name = roleName
+                };
+                await roleManager.CreateAsync(role);
+            }
+        }
+
         [HttpPost]
         [Route("login")]
         public async Task<IActionResult> Login([FromBody] LoginUserDTO loginUser)

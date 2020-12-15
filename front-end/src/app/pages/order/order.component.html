@@ -11,57 +11,6 @@
   [formGroup]="orderForm"
   (submit)="submitOrder(orderForm.value)"
 >
-  <fieldset class="client-information">
-    <legend class="form-legend">Informações do Cliente:</legend>
-    <div class="client-information__controls">
-      <mat-form-field appearance="outline">
-        <mat-label>Nome</mat-label>
-        <input
-          type="text"
-          formControlName="name"
-          matInput
-          placeholder="Ex: Richard"
-        />
-        <mat-error>
-          <span mtShowValidation="name"></span>
-        </mat-error>
-
-        <i *ngIf="orderForm.controls['name'].valid" class="fa fa-check"> OK</i>
-      </mat-form-field>
-
-      <mat-form-field appearance="outline">
-        <mat-label>Email</mat-label>
-        <input
-          type="text"
-          formControlName="email"
-          matInput
-          placeholder="pat@example.com"
-        />
-        <mat-error>
-          <span mtShowValidation="email"></span>
-        </mat-error>
-
-        <i *ngIf="orderForm.controls['email'].valid" class="fa fa-check"> OK</i>
-      </mat-form-field>
-
-      <mat-form-field appearance="outline">
-        <mat-label>Verificação Email</mat-label>
-        <input
-          type="text"
-          formControlName="emailCheck"
-          matInput
-          placeholder="pat@example.com"
-        />
-        <mat-error>
-          <span mtShowValidation="emailCheck"></span>
-        </mat-error>
-
-        <i *ngIf="orderForm.controls['emailCheck'].valid" class="fa fa-check">
-          OK</i
-        >
-      </mat-form-field>
-    </div>
-  </fieldset>
   <fieldset class="delivery-address">
     <legend class="form-legend">Endereço de entrega:</legend>
 

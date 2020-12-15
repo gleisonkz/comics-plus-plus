@@ -24,15 +24,16 @@ export class AuthorizationGuard implements CanActivate, CanActivateChild {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
+    console.log('guard');
+
     const allowedRoles = next.data.allowedRoles;
     const isAuthorized = this.authorizationService.isAuthorized(allowedRoles);
 
-    this.notificationService.showMessage(
-      'é necessário estar logado para acessar essa rota'
-    );
-
     if (!isAuthorized) {
       this.router.navigate(['/authentication/login']);
+      this.notificationService.showMessage(
+        'é necessário estar logado para acessar essa rota'
+      );
     }
 
     return isAuthorized;

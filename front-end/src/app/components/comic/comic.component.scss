@@ -46,8 +46,10 @@
   &__inventory {
     position: absolute;
 
+    transform: rotate(45deg);
+
     top: rem(15);
-    right: rem(28);
+    right: rem(5);
 
     font-size: rem(18);
 

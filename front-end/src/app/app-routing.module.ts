@@ -19,7 +19,7 @@ const routes: Routes = [
     path: 'order',
     component: OrderComponent,
     canActivate: [AuthorizationGuard],
-    data: { allowedRoles: ['Admin'] },
+    data: { allowedRoles: ['User'] },
   },
   {
     path: 'order-finished',

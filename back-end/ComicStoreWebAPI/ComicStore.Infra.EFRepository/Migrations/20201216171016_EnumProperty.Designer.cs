@@ -4,14 +4,16 @@ using ComicStore.Infra.EFRepository.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ComicStore.Infra.EFRepository.Migrations
 {
     [DbContext(typeof(ComicStoreDbContext))]
-    partial class ComicStoreDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201216171016_EnumProperty")]
+    partial class EnumProperty
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -245,7 +247,7 @@ namespace ComicStore.Infra.EFRepository.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<byte>("PaymentMethodID")
+                    b.Property<byte>("PaymentMethod")
                         .HasColumnType("tinyint");
 
                     b.HasKey("OrderID");

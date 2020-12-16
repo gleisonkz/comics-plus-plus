@@ -45,4 +45,8 @@
     margin-top: rem(10);
     @include base-button-style;
   }
+  &__link {
+    color: white;
+    text-decoration: none;
+  }
 }

@@ -17,6 +17,7 @@ export class ApplicationErrorHandler extends ErrorHandler {
   handleError(errorResponse: HttpErrorResponse | any) {
     if (errorResponse instanceof HttpErrorResponse) {
       const message = errorResponse?.error;
+
       this.zone.run(() => {
         switch (errorResponse.status) {
           case HttpStatusCode.BAD_REQUEST:

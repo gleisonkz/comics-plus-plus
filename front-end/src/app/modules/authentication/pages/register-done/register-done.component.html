@@ -7,6 +7,10 @@
   <div class="info">
     <h1 class="info__title">Parabéns</h1>
     <span class="info__message">Cadastro realizado com sucesso!</span>
-    <button class="info__button">Ir para página de quadrinhos</button>
+    <button class="info__button">
+      <a class="info__link" [routerLink]="['/quadrinhos']"
+        >Ir para página de quadrinhos</a
+      >
+    </button>
   </div>
 </div>

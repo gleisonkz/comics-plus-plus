@@ -18,7 +18,7 @@
       <mat-label>CEP</mat-label>
       <input type="text" formControlName="cep" matInput />
       <mat-error>
-        <span mtShowValidation="cep"></span>
+        <span cmsShowValidation="cep"></span>
       </mat-error>
       <div matSuffix>
         <mat-icon (click)="searchCEP(orderForm.controls.cep.value)"
@@ -32,7 +32,7 @@
       <mat-label>Rua</mat-label>
       <input type="text" formControlName="line1" matInput />
       <mat-error>
-        <span mtShowValidation="line1"></span>
+        <span cmsShowValidation="line1"></span>
       </mat-error>
 
       <i *ngIf="orderForm.controls['line1'].valid" class="fa fa-check"> OK</i>
@@ -42,7 +42,7 @@
       <mat-label>Número</mat-label>
       <input type="text" formControlName="number" matInput placeholder="123" />
       <mat-error>
-        <span mtShowValidation="number"></span>
+        <span cmsShowValidation="number"></span>
       </mat-error>
       <i *ngIf="orderForm.controls['number'].valid" class="fa fa-check"> OK</i>
     </mat-form-field>
@@ -56,7 +56,7 @@
         placeholder="123"
       />
       <mat-error>
-        <span mtShowValidation="neighborhood"></span>
+        <span cmsShowValidation="neighborhood"></span>
       </mat-error>
       <i *ngIf="orderForm.controls['neighborhood'].valid" class="fa fa-check">
         OK</i
@@ -67,7 +67,7 @@
       <mat-label>Complemento</mat-label>
       <input type="text" formControlName="line2" matInput />
       <mat-error>
-        <span mtShowValidation="line2"></span>
+        <span cmsShowValidation="line2"></span>
       </mat-error>
 
       <i *ngIf="orderForm.controls['line2'].valid" class="fa fa-check">OK</i>
@@ -77,7 +77,7 @@
       <mat-label>Cidade</mat-label>
       <input type="text" formControlName="city" matInput />
       <mat-error>
-        <span mtShowValidation="city"></span>
+        <span cmsShowValidation="city"></span>
       </mat-error>
 
       <i *ngIf="orderForm.controls['city'].valid" class="fa fa-check">OK</i>
@@ -87,7 +87,7 @@
       <mat-label>Estado</mat-label>
       <input type="text" formControlName="state" matInput />
       <mat-error>
-        <span mtShowValidation="state"></span>
+        <span cmsShowValidation="state"></span>
       </mat-error>
 
       <i *ngIf="orderForm.controls['state'].valid" class="fa fa-check">OK</i>

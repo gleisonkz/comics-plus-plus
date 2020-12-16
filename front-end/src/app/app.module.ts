@@ -12,6 +12,7 @@ import { OrderItemComponent } from './components/order-item/order-item.component
 import { RatingComponent } from './components/rating/rating.component';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 import { ToggleThemeComponent } from './components/toggle-theme/toggle-theme.component';
+import { ShowValidationDirective } from './directives/show-validation.directive';
 import { QueryParamsInterceptor } from './interceptors/query-params.interceptor';
 import { JwtInterceptor } from './modules/authentication/interceptors/jwt.interceptor';
 import { MaterialModule } from './modules/material/material.module';
@@ -40,6 +41,7 @@ import { OrderComponent } from './pages/order/order.component';
     OrderFinishedComponent,
     RatingComponent,
     NotFoundComponent,
+    ShowValidationDirective,
   ],
   imports: [
     BrowserModule,

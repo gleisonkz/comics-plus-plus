@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import * as getCep from 'cep-promise';
-import { CEP } from 'cep-promise';
 import { Observable, Subscription } from 'rxjs';
 import { CartItem } from 'src/app/models/cart-item.model';
 import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
@@ -67,18 +66,17 @@ export class OrderComponent implements OnInit {
   }
 
   searchCEP(cep: string) {
-    getCep(cep)
-      .then((result: CEP) => {
-        console.log(result);
-
-        this.updateAddress(result);
+    getCep
+      .default(cep)
+      .then((cep) => {
+        this.updateAddress(cep);
       })
       .catch((err) => {
         console.log(err);
       });
   }
 
-  private updateAddress(cep: CEP) {
+  private updateAddress(cep) {
     this.orderForm.controls['line1'].setValue(cep.street);
     this.orderForm.controls['state'].setValue(cep.state);
     this.orderForm.controls['neighborhood'].setValue(cep.neighborhood);

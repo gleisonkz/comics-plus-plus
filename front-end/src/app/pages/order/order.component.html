@@ -15,18 +15,27 @@
     <legend class="form-legend">Endereço de entrega:</legend>
 
     <mat-form-field appearance="outline">
-      <mat-label>Endereço</mat-label>
-      <input
-        type="text"
-        formControlName="address"
-        matInput
-        placeholder="Main Street, New York, NY 10030"
-      />
+      <mat-label>CEP</mat-label>
+      <input type="text" formControlName="cep" matInput />
       <mat-error>
-        <span mtShowValidation="address"></span>
+        <span mtShowValidation="cep"></span>
+      </mat-error>
+      <div matSuffix>
+        <mat-icon (click)="searchCEP(orderForm.controls.cep.value)"
+          >search</mat-icon
+        >
+      </div>
+      <i *ngIf="orderForm.get('cep').valid" class="fa fa-check">OK</i>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Rua</mat-label>
+      <input type="text" formControlName="line1" matInput />
+      <mat-error>
+        <span mtShowValidation="line1"></span>
       </mat-error>
 
-      <i *ngIf="orderForm.controls['address'].valid" class="fa fa-check"> OK</i>
+      <i *ngIf="orderForm.controls['line1'].valid" class="fa fa-check"> OK</i>
     </mat-form-field>
 
     <mat-form-field appearance="outline">
@@ -39,18 +48,49 @@
     </mat-form-field>
 
     <mat-form-field appearance="outline">
-      <mat-label>Complemento</mat-label>
+      <mat-label>Bairro</mat-label>
       <input
         type="text"
-        formControlName="address2"
+        formControlName="neighborhood"
         matInput
-        placeholder="Main Street, New York, NY 10030"
+        placeholder="123"
       />
       <mat-error>
-        <span mtShowValidation="address2"></span>
+        <span mtShowValidation="neighborhood"></span>
+      </mat-error>
+      <i *ngIf="orderForm.controls['neighborhood'].valid" class="fa fa-check">
+        OK</i
+      >
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Complemento</mat-label>
+      <input type="text" formControlName="line2" matInput />
+      <mat-error>
+        <span mtShowValidation="line2"></span>
       </mat-error>
 
-      <i *ngIf="orderForm.controls['address'].valid" class="fa fa-check">OK</i>
+      <i *ngIf="orderForm.controls['line2'].valid" class="fa fa-check">OK</i>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Cidade</mat-label>
+      <input type="text" formControlName="city" matInput />
+      <mat-error>
+        <span mtShowValidation="city"></span>
+      </mat-error>
+
+      <i *ngIf="orderForm.controls['city'].valid" class="fa fa-check">OK</i>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Estado</mat-label>
+      <input type="text" formControlName="state" matInput />
+      <mat-error>
+        <span mtShowValidation="state"></span>
+      </mat-error>
+
+      <i *ngIf="orderForm.controls['state'].valid" class="fa fa-check">OK</i>
     </mat-form-field>
   </fieldset>
   <div class="order__items">

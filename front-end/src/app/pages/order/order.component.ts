@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import * as getCep from 'cep-promise';
+import { CEP } from 'cep-promise';
 import { Observable, Subscription } from 'rxjs';
 import { CartItem } from 'src/app/models/cart-item.model';
 import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
@@ -29,21 +31,16 @@ export class OrderComponent implements OnInit {
 
   ngOnInit(): void {
     this.orderForm = new FormGroup({
-      name: new FormControl('gleison', [
+      cep: new FormControl('30580585', [
         Validators.required,
-        Validators.minLength(5),
+        Validators.minLength(8),
       ]),
-      email: new FormControl('gleison@test.com', [
-        Validators.required,
-        Validators.email,
-      ]),
-      emailCheck: new FormControl('gleison@test.com', [
-        Validators.required,
-        Validators.email,
-      ]),
-      address: new FormControl('street D', [Validators.required]),
-      number: new FormControl('07', [Validators.required]),
-      address2: new FormControl('block 105', []),
+      line1: new FormControl('', [Validators.required]),
+      number: new FormControl('', [Validators.required]),
+      line2: new FormControl(''),
+      neighborhood: new FormControl('', Validators.required),
+      city: new FormControl('', Validators.required),
+      state: new FormControl('', [Validators.required]),
       paymentMethod: new FormControl('1', [Validators.required]),
     });
 
@@ -67,6 +64,25 @@ export class OrderComponent implements OnInit {
     );
 
     return orderItems;
+  }
+
+  searchCEP(cep: string) {
+    getCep(cep)
+      .then((result: CEP) => {
+        console.log(result);
+
+        this.updateAddress(result);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  private updateAddress(cep: CEP) {
+    this.orderForm.controls['line1'].setValue(cep.street);
+    this.orderForm.controls['state'].setValue(cep.state);
+    this.orderForm.controls['neighborhood'].setValue(cep.neighborhood);
+    this.orderForm.controls['city'].setValue(cep.city);
   }
 
   submitOrder(order: Order): void {

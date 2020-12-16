@@ -57,6 +57,10 @@
       mat-form-field {
         margin-right: rem(15);
       }
+
+      mat-icon {
+        cursor: pointer;
+      }
     }
 
     &__input {

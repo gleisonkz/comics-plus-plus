@@ -1,5 +1,6 @@
 ﻿using ComicStore.Application.DTO;
 using ComicStore.Application.Filters;
+using ComicStore.Domain.POCO;
 using ComicStore.Service.Classes;
 using ComicStore.Service.Interfaces;
 using ComicStore.Shared.Class;
@@ -9,6 +10,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace ComicStore.Application.Controllers
 {
@@ -24,36 +26,16 @@ namespace ComicStore.Application.Controllers
         }
 
         [HttpGet("{comicID}")]
-        public IActionResult GetComicByID(int comicID)
+        public async Task<IActionResult> GetComicByID(int comicID)
         {
             try
             {
-                var comic = svcComic.GetComicByID(comicID)
-                                    .Select(c => new ComicDTO
-                                    {
-                                        ComicID = c.ComicID,
-                                        Title = c.Title,
-                                        Description = c.Description,
-                                        Price = c.Price,
-                                        Year = c.Year,
-                                        Pages = c.Pages,
-                                        Image = new ComicImageInfo
-                                        {
-                                            Name = c.Image.Name,
-                                            Extension = c.Image.Extension,
-                                            Base64 = c.Image.Base64
-
-                                        },
-                                        Authors = c.Authors.Select(d =>
-                                                            new KeyValueAuthor { AuthorID = d.AuthorID, Name = d.Name })
-                                                           .ToList(),
-                                        Genres = c.Genres.Select(d =>
-                                                            new KeyValueGenre { GenreID = d.GenreID, Description = d.Description })
-                                                         .ToList(),
-                                    })
-                                    .SingleOrDefault();
-
+                ComicDTO comic = await svcComic.FindAsync<Comic>(comicID);
                 return Ok(comic);
+            }
+            catch (ArgumentNullException)
+            {
+                return NotFound(comicID);
             }
             catch (Exception ex)
             {
@@ -74,7 +56,7 @@ namespace ComicStore.Application.Controllers
                                         c.Title,
                                         c.Description,
                                         c.Price,
-                                        InventoryQuantity =  c.Inventory.Quantity,
+                                        InventoryQuantity = c.Inventory.Quantity,
                                         Image = new ComicImageInfo
                                         {
                                             Name = c.Image.Name,

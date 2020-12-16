@@ -9,14 +9,13 @@ namespace ComicStore.Service.Interfaces
 {
     public interface IComicService : IServiceFacadeBase
     {
-        Comic CreateComic(IComicDTO comicDTO);
+        Comic CreateComic(ISaveComicDTO comicDTO);
         Comic DeleteComic(int comicID);
-        Comic UpdateComic(IComicDTO comicDTO,int comicID);
-        ComicInventory UpdateComicInventory(int comicID,int quantity);
-        IQueryable<Comic> GetComicByID(int comicID);
+        Comic UpdateComic(ISaveComicDTO comicDTO, int comicID);
+        ComicInventory UpdateComicInventory(int comicID, int quantity);
         IQueryable<Comic> GetComic();
         IQueryable<ComicInventory> GetComicsInventory();
-        IQueryable<Author> GetAuthorsByComicID(int comicID);        
+        IQueryable<Author> GetAuthorsByComicID(int comicID);
         IQueryable<Genre> GetGenresByComicID(int comicID);
         Paginator<dynamic> GetPaginatedComics(IFilter<Comic> filter, Expression<Func<Comic, dynamic>> projection);
         Paginator<dynamic> GetPaginatedComicsInventory(IFilter<ComicInventory> filter, Expression<Func<ComicInventory, dynamic>> projection);

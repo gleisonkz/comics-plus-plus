@@ -18,7 +18,7 @@ namespace ComicStore.Service.Services
             repoComic = factoryRepository.CreateRepository<Comic>();
         }
 
-        public Comic CreateComic(IComicDTO comicDTO)
+        public Comic CreateComic(ISaveComicDTO comicDTO)
         {
             var repoAuthor = factoryRepository.CreateRepository<Author>();
             var repoGenre = factoryRepository.CreateRepository<Genre>();
@@ -121,7 +121,7 @@ namespace ComicStore.Service.Services
             return objComic;
         }
 
-        public Comic UpdateComic(IComicDTO comicDTO, int comicID)
+        public Comic UpdateComic(ISaveComicDTO comicDTO, int comicID)
         {
             var repoAuthor = factoryRepository.CreateRepository<Author>();
             var repoGenre = factoryRepository.CreateRepository<Genre>();

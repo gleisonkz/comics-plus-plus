@@ -1,6 +1,6 @@
 ﻿namespace ComicStore.Domain.Interfaces
 {
-    public interface IComicDTO
+    public interface ISaveComicDTO
     {
         public string Title { get; set; }
         public string Description { get; set; }

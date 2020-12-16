@@ -2,6 +2,7 @@
 using ComicStore.Infra.EFRepository.Context;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace ComicStore.Infra.EFRepository.Repository
 {
@@ -33,6 +34,12 @@ namespace ComicStore.Infra.EFRepository.Repository
         public IQueryable<T> GetQuery(bool trackingChanges = true)
         {
             return trackingChanges ? DbSet : DbSet.AsNoTracking();
+
+        }
+
+        public async Task<T> FindAsync(params object[] id)
+        {
+            return await DbSet.FindAsync(id);
         }
 
         public T Attach(T entity)

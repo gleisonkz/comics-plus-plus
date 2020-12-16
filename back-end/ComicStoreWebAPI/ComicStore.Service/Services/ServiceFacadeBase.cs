@@ -1,6 +1,7 @@
 ﻿using ComicStore.Infra.BaseRepository.Interfaces;
 using ComicStore.Service.Interfaces;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ComicStore.Service.Services
 {
@@ -15,6 +16,12 @@ namespace ComicStore.Service.Services
             this.unityOfWork = unityOfWork;
             this.factoryRepository = factoryRepository;
         }
+
+        public async Task<T> FindAsync<T>(params object[] id) where T : class
+        {
+            return await factoryRepository.CreateRepository<T>().FindAsync(id);
+        }
+
         public virtual int Commit()
         {
             return unityOfWork.Commit();

@@ -42,20 +42,20 @@ namespace ComicStoreWebAPI
 
             _ = services.AddDbContext<ComicStoreDbContext>(options =>
                 {
-                    //options.UseSqlServer(configuration["ConnectionStrings:IdentityConnection"].ToString())
-                    //       .EnableSensitiveDataLogging()
-                    //       .UseLazyLoadingProxies();
-
-                    options.UseSqlServer("Data Source=DESKTOP-2AKCSN7\\PROFFY;Initial Catalog=ComicStore;Integrated Security=True")
+                    options.UseSqlServer(configuration["ConnectionStrings:IdentityConnection"].ToString())
                            .EnableSensitiveDataLogging()
                            .UseLazyLoadingProxies();
+
+                    //options.UseSqlServer("Data Source=DESKTOP-2AKCSN7\\PROFFY;Initial Catalog=ComicStore;Integrated Security=True")
+                    //       .EnableSensitiveDataLogging()
+                    //       .UseLazyLoadingProxies();
 
                 });
 
             _ = services.AddDbContext<ComicStoreIdentityDbContext>(options =>
             {
-                options.UseSqlServer("Data Source=DESKTOP-2AKCSN7\\PROFFY;Initial Catalog=ComicStore;Integrated Security=True");
-                //options.UseSqlServer(configuration["ConnectionStrings:IdentityConnection"].ToString());
+                //options.UseSqlServer("Data Source=DESKTOP-2AKCSN7\\PROFFY;Initial Catalog=ComicStore;Integrated Security=True");
+                options.UseSqlServer(configuration["ConnectionStrings:IdentityConnection"].ToString());
             });
 
 
@@ -107,6 +107,7 @@ namespace ComicStoreWebAPI
             services.AddScoped<IComicService, ComicService>();
             services.AddScoped<IGenreService, GenreService>();
             services.AddScoped<IAuthorService, AuthorService>();
+            services.AddScoped<ICustomerService, CustomerService>();
             services.AddScoped<AuthenticationHelper>();
 
             services.AddIdentity<IdentityUser, IdentityRole>()

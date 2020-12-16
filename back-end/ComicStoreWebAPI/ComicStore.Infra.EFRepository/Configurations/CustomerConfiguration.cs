@@ -10,6 +10,9 @@ namespace ComicStore.Infra.EFRepository.Mapping
         {
             _ = builder.HasKey(c => c.CustomerID);
 
+            _ = builder.Property(c => c.UserID).IsRequired()
+                                               .HasMaxLength(450);
+
             _ = builder.OwnsOne(c => c.Address, d =>
             {
                 d.Property(e => e.Line1).HasColumnName("Line1")

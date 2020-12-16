@@ -1,5 +1,7 @@
 ﻿using ComicStore.Application.Classes;
 using ComicStore.Application.DTO;
+using ComicStore.Service.Interfaces;
+using ComicStore.Service.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -16,17 +18,21 @@ namespace ComicStore.Application.Controllers
         private readonly UserManager<IdentityUser> userManager;
         private readonly RoleManager<IdentityRole> roleManager;
         private readonly AuthenticationHelper authHelper;
+        private readonly ICustomerService customerService;
+
 
         public AuthenticationController(
             SignInManager<IdentityUser> signInManager,
             UserManager<IdentityUser> userManager,
             RoleManager<IdentityRole> roleManager,
+            ICustomerService customerService,
             AuthenticationHelper authHelper)
         {
             this.signInManager = signInManager;
             this.userManager = userManager;
             this.roleManager = roleManager;
             this.authHelper = authHelper;
+            this.customerService = customerService;
         }
 
         [HttpPost]
@@ -35,22 +41,22 @@ namespace ComicStore.Application.Controllers
         {
             try
             {
-                using TransactionScope transaction = new TransactionScope();
-                IdentityUser user = registerUser;
+                using (TransactionScope transaction = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
+                {
+                    IdentityUser user = registerUser;
 
-                var resultUser = await userManager.CreateAsync(user, registerUser.Password);
-                if (!resultUser.Succeeded) return BadRequest(resultUser.Errors);
+                    var resultUser = await userManager.CreateAsync(user, registerUser.Password);
+                    if (!resultUser.Succeeded) return BadRequest(resultUser.Errors);
 
-                await CheckRoleExists("User");
+                    await CheckRoleExists("User");
 
-                var resultRole = await userManager.AddToRoleAsync(user, "User");
+                    var resultRole = await userManager.AddToRoleAsync(user, "User");
 
-                await signInManager.SignInAsync(user, false);
-
-                //customerService.create(user)
-
-                transaction.Complete();
-                return Ok("Usuario Criado");
+                    customerService.CreateCustomer(user.Id);
+                    customerService.Commit();
+                    transaction.Complete();
+                    return Ok();
+                };
             }
             catch (Exception ex)
             {

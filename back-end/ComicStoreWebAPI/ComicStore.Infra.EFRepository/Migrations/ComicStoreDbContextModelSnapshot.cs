@@ -4,16 +4,14 @@ using ComicStore.Infra.EFRepository.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ComicStore.Infra.EFRepository.Migrations
 {
     [DbContext(typeof(ComicStoreDbContext))]
-    [Migration("20201215145252_OrderAndCustomerConfiguration")]
-    partial class OrderAndCustomerConfiguration
+    partial class ComicStoreDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -181,8 +179,10 @@ namespace ComicStore.Infra.EFRepository.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<int>("UserID")
-                        .HasColumnType("int");
+                    b.Property<string>("UserID")
+                        .IsRequired()
+                        .HasMaxLength(450)
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("CustomerID");
 
@@ -322,6 +322,104 @@ namespace ComicStore.Infra.EFRepository.Migrations
                         .IsRequired();
 
                     b.Navigation("Comic");
+                });
+
+            modelBuilder.Entity("ComicStore.Domain.POCO.Customer", b =>
+                {
+                    b.OwnsOne("ComicStore.Domain.POCO.Address", "Address", b1 =>
+                        {
+                            b1.Property<int>("CustomerID")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("int")
+                                .UseIdentityColumn();
+
+                            b1.Property<string>("Country")
+                                .HasMaxLength(100)
+                                .HasColumnType("nvarchar(100)")
+                                .HasColumnName("Country");
+
+                            b1.Property<string>("Line1")
+                                .HasMaxLength(100)
+                                .HasColumnType("nvarchar(100)")
+                                .HasColumnName("Line1");
+
+                            b1.Property<string>("Line2")
+                                .HasMaxLength(100)
+                                .HasColumnType("nvarchar(100)")
+                                .HasColumnName("Line2");
+
+                            b1.Property<int>("Number")
+                                .HasColumnType("int")
+                                .HasColumnName("Number");
+
+                            b1.Property<string>("PostalCode")
+                                .HasMaxLength(8)
+                                .HasColumnType("nvarchar(8)")
+                                .HasColumnName("PostalCode");
+
+                            b1.Property<string>("State")
+                                .HasMaxLength(100)
+                                .HasColumnType("nvarchar(100)")
+                                .HasColumnName("State");
+
+                            b1.HasKey("CustomerID");
+
+                            b1.ToTable("Customer");
+
+                            b1.WithOwner()
+                                .HasForeignKey("CustomerID");
+                        });
+
+                    b.Navigation("Address");
+                });
+
+            modelBuilder.Entity("ComicStore.Domain.POCO.Order", b =>
+                {
+                    b.OwnsOne("ComicStore.Domain.POCO.Address", "Address", b1 =>
+                        {
+                            b1.Property<int>("OrderID")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("int")
+                                .UseIdentityColumn();
+
+                            b1.Property<string>("Country")
+                                .HasMaxLength(100)
+                                .HasColumnType("nvarchar(100)")
+                                .HasColumnName("Country");
+
+                            b1.Property<string>("Line1")
+                                .HasMaxLength(100)
+                                .HasColumnType("nvarchar(100)")
+                                .HasColumnName("Line1");
+
+                            b1.Property<string>("Line2")
+                                .HasMaxLength(100)
+                                .HasColumnType("nvarchar(100)")
+                                .HasColumnName("Line2");
+
+                            b1.Property<int>("Number")
+                                .HasColumnType("int")
+                                .HasColumnName("Number");
+
+                            b1.Property<string>("PostalCode")
+                                .HasMaxLength(8)
+                                .HasColumnType("nvarchar(8)")
+                                .HasColumnName("PostalCode");
+
+                            b1.Property<string>("State")
+                                .HasMaxLength(100)
+                                .HasColumnType("nvarchar(100)")
+                                .HasColumnName("State");
+
+                            b1.HasKey("OrderID");
+
+                            b1.ToTable("Order");
+
+                            b1.WithOwner()
+                                .HasForeignKey("OrderID");
+                        });
+
+                    b.Navigation("Address");
                 });
 
             modelBuilder.Entity("ComicStore.Domain.POCO.OrderItem", b =>

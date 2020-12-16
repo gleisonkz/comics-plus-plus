@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ComicStore.Infra.EFRepository.Migrations
 {
-    public partial class ComicInventory : Migration
+    public partial class NewMigrationStructure : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -38,6 +38,32 @@ namespace ComicStore.Infra.EFRepository.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Customer",
+                columns: table => new
+                {
+                    CustomerID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserID = table.Column<string>(type: "nvarchar(450)", maxLength: 450, nullable: true),
+                    Line1 = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    Number = table.Column<int>(type: "int", nullable: true),
+                    Line2 = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    State = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    Country = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    PostalCode = table.Column<string>(type: "nvarchar(8)", maxLength: 8, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Customer", x => x.CustomerID);
+                    table.ForeignKey(
+                            name: "FK_Users_Customer_UserID",
+                            column: x => x.UserID,
+                            principalSchema: "seg",
+                            principalTable: "Users",
+                            principalColumn: "id",
+                            onDelete: ReferentialAction.NoAction);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Genre",
                 columns: table => new
                 {
@@ -48,6 +74,24 @@ namespace ComicStore.Infra.EFRepository.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Genre", x => x.GenreID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Order",
+                columns: table => new
+                {
+                    OrderID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Line1 = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    Number = table.Column<int>(type: "int", nullable: true),
+                    Line2 = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    State = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    Country = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    PostalCode = table.Column<string>(type: "nvarchar(8)", maxLength: 8, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Order", x => x.OrderID);
                 });
 
             migrationBuilder.CreateTable(
@@ -136,6 +180,32 @@ namespace ComicStore.Infra.EFRepository.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "OrderItem",
+                columns: table => new
+                {
+                    OrderItemID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ComicID = table.Column<int>(type: "int", nullable: false),
+                    OrderID = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OrderItem", x => x.OrderItemID);
+                    table.ForeignKey(
+                        name: "FK_OrderItem_Comic_ComicID",
+                        column: x => x.ComicID,
+                        principalTable: "Comic",
+                        principalColumn: "ComicID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_OrderItem_Order_OrderID",
+                        column: x => x.OrderID,
+                        principalTable: "Order",
+                        principalColumn: "OrderID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.InsertData(
                 table: "Author",
                 columns: new[] { "AuthorID", "Name" },
@@ -172,6 +242,16 @@ namespace ComicStore.Infra.EFRepository.Migrations
                 name: "IX_ComicGenre_GenresGenreID",
                 table: "ComicGenre",
                 column: "GenresGenreID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OrderItem_ComicID",
+                table: "OrderItem",
+                column: "ComicID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OrderItem_OrderID",
+                table: "OrderItem",
+                column: "OrderID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -189,6 +269,12 @@ namespace ComicStore.Infra.EFRepository.Migrations
                 name: "ComicInventory");
 
             migrationBuilder.DropTable(
+                name: "Customer");
+
+            migrationBuilder.DropTable(
+                name: "OrderItem");
+
+            migrationBuilder.DropTable(
                 name: "Author");
 
             migrationBuilder.DropTable(
@@ -196,6 +282,9 @@ namespace ComicStore.Infra.EFRepository.Migrations
 
             migrationBuilder.DropTable(
                 name: "Comic");
+
+            migrationBuilder.DropTable(
+                name: "Order");
         }
     }
 }

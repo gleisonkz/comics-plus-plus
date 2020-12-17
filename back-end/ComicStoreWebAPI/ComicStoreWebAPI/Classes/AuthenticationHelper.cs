@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using ComicStore.Service.Interfaces;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -15,21 +16,30 @@ namespace ComicStore.Application.Classes
 
         private readonly UserManager<IdentityUser> userManager;
         private readonly IConfiguration configuration;
+        private readonly ICustomerService customerService;
 
-        public AuthenticationHelper(UserManager<IdentityUser> userManager, IConfiguration configuration)
+        public AuthenticationHelper(
+            UserManager<IdentityUser> userManager,
+            IConfiguration configuration,
+            ICustomerService customerService)
         {
             this.userManager = userManager;
             this.configuration = configuration;
+            this.customerService = customerService;
         }
 
         public async Task<string> GenerateJwtToken(string email)
         {
             IdentityUser user = await userManager.FindByEmailAsync(email);
-            var userRoles = await userManager.GetRolesAsync(user);
+            IList<string> userRoles = await userManager.GetRolesAsync(user);
+            string customerID = customerService.GetCustomerByUserID(user.Id).CustomerID
+                                               .ToString();
 
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name, user.UserName)
+                new Claim(ClaimTypes.Name, user.UserName),
+                new Claim("userID",user.Id),
+                new Claim("customerID",customerID)
             };
             foreach (var role in userRoles)
             {

@@ -10,6 +10,7 @@ namespace ComicStore.Service.Interfaces
     public interface ICustomerService : IServiceFacadeBase
     {
         Customer CreateCustomer(string userID);
+        Customer GetCustomerByUserID(string userID);
 
     }
 }

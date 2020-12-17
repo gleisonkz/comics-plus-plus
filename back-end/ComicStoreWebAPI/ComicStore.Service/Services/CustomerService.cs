@@ -26,5 +26,14 @@ namespace ComicStore.Service.Services
             repoCustomer.Add(objCustomer);
             return objCustomer;
         }
+
+        public Customer GetCustomerByUserID(string userID)
+        {
+            Customer customer = repoCustomer.GetQuery(false)
+                                            .Where(c => c.UserID == userID)
+                                            .SingleOrDefault();
+
+            return customer;
+        }
     }
 }

@@ -23,6 +23,7 @@
           matInput
           placeholder="Senha"
           formControlName="password"
+          (keyup.enter)="login(form.value)"
         />
       </mat-form-field>
     </form>

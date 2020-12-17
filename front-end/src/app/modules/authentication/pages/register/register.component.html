@@ -29,6 +29,7 @@
           matInput
           placeholder="Confirmação senha"
           formControlName="passwordCheck"
+          (keyup.enter)="register(form.value)"
         />
       </mat-form-field>
     </form>

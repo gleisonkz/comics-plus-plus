@@ -10,9 +10,7 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class QueryParamsInterceptor implements HttpInterceptor {
-  constructor() {
-    console.log('int');
-  }
+  constructor() {}
 
   intercept(
     request: HttpRequest<unknown>,

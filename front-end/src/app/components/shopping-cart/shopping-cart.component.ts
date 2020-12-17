@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
-import { ShoppingCartService } from '../../services/shopping-cart.service';
-import { CartItem } from 'src/app/models/cart-item.model';
 import { MatMenuTrigger } from '@angular/material/menu';
+import { Observable, Subscription } from 'rxjs';
+import { CartItem } from 'src/app/models/cart-item.model';
+import { ShoppingCartService } from '../../services/shopping-cart.service';
 
 @Component({
   selector: 'cms-shopping-cart',
@@ -59,7 +59,8 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
   }
 
   quantityUp(item: CartItem): void {
-    this.shoppingCartService.quantityUp(item);
+    // this.shoppingCartService.quantityUp(item);
+    this.shoppingCartService.addItem(item.comic);
   }
 
   quantityDown(item: CartItem): void {

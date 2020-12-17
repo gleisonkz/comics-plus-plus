@@ -13,8 +13,6 @@ export class JwtInterceptor implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    console.log('interceptor');
-
     const token = localStorage.getItem('token');
 
     if (token) {

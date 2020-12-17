@@ -20,7 +20,7 @@ export class OrderService {
   }
 
   postOrder(order: Order): Observable<Order> {
-    return this.http.post<Order>(`${environment.apiURL}/orders`, order);
+    return this.http.post<Order>(`${environment.apiURL}/order`, order);
   }
 
   quantityUp(item: CartItem): void {

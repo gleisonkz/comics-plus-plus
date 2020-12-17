@@ -1,11 +1,15 @@
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { NotificationService } from '../modules/shared/services/notification.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthorizationService {
-  constructor(private jwtHelperService: JwtHelperService) {}
+  constructor(
+    private jwtHelperService: JwtHelperService,
+    private notificationService: NotificationService
+  ) {}
 
   getUserRoles(): any {
     const decodeToken = this.getDecodeToken();
@@ -22,30 +26,31 @@ export class AuthorizationService {
   }
 
   getDecodeToken() {
-    // get token from local storage or state management
     const token = localStorage.getItem('token');
-
-    // decode token to read the payload details
     const decodeToken = this.jwtHelperService.decodeToken(token);
-
     return decodeToken;
+  }
+
+  private allowedRolesIsEmpty(allowedRoles: string[]) {
+    return allowedRoles == null || allowedRoles.length === 0;
   }
 
   isAuthorized(allowedRoles: string[]): boolean {
     // check if the list of allowed roles is empty, if empty, authorize the user to access the page
-    if (allowedRoles == null || allowedRoles.length === 0) {
-      return true;
-    }
+    if (this.allowedRolesIsEmpty(allowedRoles)) return true;
+    // if (allowedRoles == null || allowedRoles.length === 0) {
+    //   return true;
+    // }
 
-    const decodeToken = this.getDecodeToken();
+    const decodedToken = this.getDecodeToken();
 
     // check if it was decoded successfully, if not the token is not valid, deny access
-    if (!decodeToken) {
-      console.log('Invalid token');
+    if (!decodedToken) {
+      this.notificationService.showMessage('Invalid Token');
       return false;
     }
 
     // check if the user roles is in the list of allowed roles, return true if allowed and false if not allowed
-    return allowedRoles.includes(decodeToken['role']);
+    return allowedRoles.includes(decodedToken['role']);
   }
 }

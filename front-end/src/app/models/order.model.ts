@@ -1,12 +1,12 @@
+import { PaymentMethod } from '../enums/payment-method.enum';
 import { OrderItem } from './order-item.model';
 
 export interface Order {
   orderID: number;
-  address: string;
-  address2: string;
-  email: string;
-  name: string;
+  customerID: number;
+  line1: string;
+  line2: string;
   number: number;
-  paymentMethod: string;
+  paymentMethodID: PaymentMethod;
   orderItems: OrderItem[];
 }

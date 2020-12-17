@@ -5,6 +5,7 @@ import * as getCep from 'cep-promise';
 import { Observable, Subscription } from 'rxjs';
 import { CartItem } from 'src/app/models/cart-item.model';
 import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
+import { CustomerService } from '../../services/customer.service';
 import { OrderItem } from './../../models/order-item.model';
 import { Order } from './../../models/order.model';
 import { OrderService } from './../../services/order.service';
@@ -25,7 +26,8 @@ export class OrderComponent implements OnInit {
   constructor(
     private router: Router,
     private cartService: ShoppingCartService,
-    private orderService: OrderService
+    private orderService: OrderService,
+    private customerService: CustomerService
   ) {}
 
   ngOnInit(): void {
@@ -40,7 +42,7 @@ export class OrderComponent implements OnInit {
       neighborhood: new FormControl('', Validators.required),
       city: new FormControl('', Validators.required),
       state: new FormControl('', [Validators.required]),
-      paymentMethod: new FormControl('1', [Validators.required]),
+      paymentMethodID: new FormControl('1', [Validators.required]),
     });
 
     this.orderItems$ = this.cartService.items$;
@@ -72,7 +74,7 @@ export class OrderComponent implements OnInit {
         this.updateAddress(cep);
       })
       .catch((err) => {
-        console.log(err);
+        throw err;
       });
   }
 
@@ -83,18 +85,23 @@ export class OrderComponent implements OnInit {
     this.orderForm.controls['city'].setValue(cep.city);
   }
 
-  submitOrder(order: Order): void {
-    // order.orderItems = this.getOrderItems();
-    // this.orderService.postOrder(order).subscribe((c) => {
-    //   order.orderID = c.orderID;
-    //   sessionStorage.setItem('orderID', `${c.orderID}`);
-    //   this.router.navigate(['/order-finished'], {
-    //     state: { order: order },
-    //   });
+  submitOrder(event: Event, order: Order): void {
+    event.preventDefault();
+    order.customerID = this.customerService.getCustomerID();
+    order.orderItems = this.getOrderItems();
 
-    //   this.orderService.clear();
-    // });
-    this.orderService.clear();
-    this.router.navigate(['/order-finished']);
+    this.orderService.postOrder(order).subscribe((c) => {
+      order.orderID = c.orderID;
+
+      sessionStorage.setItem('orderID', `${c.orderID}`);
+      this.router.navigate(['/order-finished'], {
+        state: { order: order },
+      });
+
+      this.orderService.clear();
+    });
+
+    // this.orderService.clear();
+    // this.router.navigate(['/order-finished']);
   }
 }

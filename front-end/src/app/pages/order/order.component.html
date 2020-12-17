@@ -9,7 +9,7 @@
   class="order__form"
   novalidate
   [formGroup]="orderForm"
-  (submit)="submitOrder(orderForm.value)"
+  (submit)="submitOrder($event, orderForm.value)"
 >
   <fieldset class="delivery-address">
     <legend class="form-legend">Endereço de entrega:</legend>
@@ -111,7 +111,7 @@
     </div>
     <p class="empty-message" *ngIf="!hasItems">
       Seu carrinho está vazio, que tal começar dando uma olhada
-      <a class="empty-message__link" [routerLink]="['/livros']">aqui</a>
+      <a class="empty-message__link" [routerLink]="['/quadrinhos']">aqui</a>
       ?
     </p>
   </div>
@@ -119,10 +119,10 @@
   <div class="order__form__payment-and-total">
     <fieldset class="order__form__payment-and-total__payment-method">
       <legend>Método de Pagamento:</legend>
-      <mat-radio-group formControlName="paymentMethod">
-        <mat-radio-button value="1">Dinheiro</mat-radio-button>
-        <mat-radio-button value="2">Cartão de Crédito</mat-radio-button>
-        <mat-radio-button value="3">Boleto</mat-radio-button>
+      <mat-radio-group formControlName="paymentMethodID">
+        <mat-radio-button [value]="1">Dinheiro</mat-radio-button>
+        <mat-radio-button [value]="2">Cartão de Crédito</mat-radio-button>
+        <mat-radio-button [value]="3">Boleto</mat-radio-button>
       </mat-radio-group>
     </fieldset>
 

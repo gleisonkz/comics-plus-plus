@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { ComicShopItem } from '../models/comic-shop-item.model';
+import { NotificationService } from '../modules/shared/services/notification.service';
 import { CartItem } from './../models/cart-item.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ShoppingCartService {
-  constructor() {}
+  constructor(private notificationService: NotificationService) {}
 
   private itemsSource$ = new BehaviorSubject<CartItem[]>([]);
   items$: Observable<CartItem[]> = this.itemsSource$.asObservable();
@@ -21,8 +22,26 @@ export class ShoppingCartService {
   }
 
   public quantityUp(item: CartItem, quantity: number = 1): void {
-    item.quantityUp(quantity);
-    this.itemsSource$.next([...this.itemsSource$.value]);
+    const expectations = [
+      {
+        expect: () => item.hasItemsAvailable(quantity) === false,
+        action: () => {
+          this.notificationService.showMessage(
+            'Não há itens disponíveis para está quantidade'
+          );
+        },
+      },
+      {
+        expect: () => true,
+        action: () => {
+          item.quantityUp(quantity);
+          this.itemsSource$.next([...this.itemsSource$.value]);
+        },
+      },
+    ];
+
+    const currentExpect = expectations.find((c) => c.expect());
+    currentExpect.action();
   }
 
   public quantityDown(item: CartItem): void {
@@ -37,10 +56,21 @@ export class ShoppingCartService {
 
     const expectations = [
       {
+        expect: () =>
+          quantity > item.inventoryQuantity ||
+          (foundItem !== undefined &&
+            foundItem.hasItemsAvailable(quantity) === false),
+        action: () => {
+          this.notificationService.showMessage(
+            'Não há itens disponíveis para está quantidade'
+          );
+        },
+      },
+      {
         expect: () => foundItem !== undefined,
         action: () => {
           this.quantityUp(foundItem, quantity);
-          // this.itemsSource$.next(this.itemsSource$.value);
+          this.itemsSource$.next(this.itemsSource$.value);
         },
       },
       {

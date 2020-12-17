@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ComicShopItemDetail } from '../../models/comic-shop-item-detail.model';
+import { NotificationService } from '../../modules/shared/services/notification.service';
 import { ComicService } from '../../services/comic.service';
 import { FileUploadService } from '../../services/file-upload.service';
 import { ShoppingCartService } from '../../services/shopping-cart.service';
@@ -20,13 +21,14 @@ export class ComicDetailComponent implements OnInit {
   }
 
   get isInventoryAvailable() {
-    return this.comic.inventoryQuantity > 0;
+    return this.comic?.inventoryQuantity > 0;
   }
 
   constructor(
     private route: ActivatedRoute,
     private comicService: ComicService,
     private shoppingCartService: ShoppingCartService,
+    private notificationService: NotificationService,
     private fileUploadService: FileUploadService,
     private router: Router
   ) {}
@@ -49,13 +51,25 @@ export class ComicDetailComponent implements OnInit {
     });
   }
 
-  addMultipleItemsToCart(comic: ComicShopItemDetail) {
-    if (this.comicForm.invalid || this.comic.inventoryQuantity === 0) return;
-    this.shoppingCartService.addItem(
-      comic,
-      +this.comicForm.controls.quantity.value
-    );
+  addMultipleItemsToCart(comic: ComicShopItemDetail, quantity: number) {
+    if (this.isFormInvalid()) {
+      this.notificationService.showMessage('O formulário está inválido');
+      return;
+    }
+    this.shoppingCartService.addItem(comic, quantity);
   }
+
+  private isFormInvalid(): boolean {
+    return this.comicForm.invalid;
+  }
+
+  // private hasItemsAvailable(quantity: number): boolean {
+  //   return this.comic.inventoryQuantity < quantity;
+  // }
+
+  // private isInventoryEmpty(): boolean {
+  //   return this.comic.inventoryQuantity === 0;
+  // }
 
   navigateToOrder(): void {
     this.hasCartItems && this.router.navigate(['/order']);

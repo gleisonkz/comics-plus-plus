@@ -1,16 +1,29 @@
 import { ComicShopItem } from './comic-shop-item.model';
 export class CartItem {
-  constructor(public comic: ComicShopItem, public quantity: number = 1) {}
+  private _quantity: number = 0;
+  get quantity(): number {
+    return this._quantity;
+  }
+  constructor(public comic: ComicShopItem, quantity: number = 1) {
+    this.quantityUp(quantity);
+  }
 
   getTotalValue(): number {
     return this.comic.price * this.quantity;
   }
 
+  hasItemsAvailable(quantity: number): boolean {
+    return this.quantity + quantity <= this.comic.inventoryQuantity;
+  }
+
   quantityUp(quantity: number) {
-    this.quantity += quantity;
+    if (this.hasItemsAvailable(quantity) === false) {
+      return;
+    }
+    this._quantity += quantity;
   }
 
   quantityDown() {
-    this.quantity > 1 && this.quantity--;
+    this.quantity > 1 && this._quantity--;
   }
 }

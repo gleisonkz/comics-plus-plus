@@ -10,6 +10,5 @@
         public int Pages { get; set; }
         public int[] Authors { get; set; }
         public int[] Genres { get; set; }
-        //void AssignPoco(Comic poco);
     }
 }

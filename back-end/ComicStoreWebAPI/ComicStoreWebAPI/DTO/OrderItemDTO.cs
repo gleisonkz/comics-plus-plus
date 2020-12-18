@@ -1,4 +1,4 @@
-﻿using ComicStore.Service.Interfaces;
+﻿using ComicStore.Domain.Interfaces;
 
 namespace ComicStore.Application.DTO
 {

@@ -4,14 +4,16 @@ using ComicStore.Infra.EFRepository.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ComicStore.Infra.EFRepository.Migrations
 {
     [DbContext(typeof(ComicStoreDbContext))]
-    partial class ComicStoreDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201218172033_AddressColumnsUpdate")]
+    partial class AddressColumnsUpdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

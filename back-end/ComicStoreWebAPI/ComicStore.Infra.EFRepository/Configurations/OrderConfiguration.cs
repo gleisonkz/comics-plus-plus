@@ -20,14 +20,17 @@ namespace ComicStore.Infra.EFRepository.Mapping
 
                 d.Property(e => e.Number).HasColumnName("Number");
 
+                d.Property(e => e.City).HasColumnName("City")
+                                       .HasMaxLength(100);
+
+                d.Property(e => e.Neighborhood).HasColumnName("Neighborhood")
+                                               .HasMaxLength(100);
+
                 d.Property(e => e.State).HasColumnName("State")
                                         .HasMaxLength(100);
 
                 d.Property(e => e.PostalCode).HasColumnName("PostalCode")
                                              .HasMaxLength(8);
-
-                d.Property(e => e.Country).HasColumnName("Country")
-                                          .HasMaxLength(100);
             });
         }
     }

@@ -1,6 +1,7 @@
-﻿using ComicStore.Domain.Enums;
+﻿using ComicStore.Application.DTO;
+using ComicStore.Service.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
+using System;
 
 namespace ComicStore.Application.Controllers
 {
@@ -8,30 +9,28 @@ namespace ComicStore.Application.Controllers
     [ApiController]
     public class OrderController : ControllerBase
     {
-        public OrderController() { }
+        private readonly IOrderService orderService;
+
+        public OrderController(IOrderService orderService)
+        {
+            this.orderService = orderService;
+        }
 
         [HttpPost]
-        public async Task<IActionResult> PostOrder([FromBody] OrderDTO order)
+        public IActionResult PostOrder([FromBody] OrderDTO orderDTO)
         {
-            var newOrder = order.CustomerID;
-            return Ok();
+            try
+            {
+                var order = orderService.CreateOrder(orderDTO);
+                orderService.Commit();
+                return Ok(order.OrderID);
+            }
+            catch (Exception ex)
+            {
+                orderService.Rollback();
+                return BadRequest($"Erro: {ex.Message}");
+            }
         }
-    }
-
-    public class OrderDTO
-    {
-        public int CustomerID { get; set; }
-        public string Line1 { get; set; }
-        public string Line2 { get; set; }
-        public int Number { get; set; }
-        public PaymentMethod PaymentMethodID { get; set; }
-        public OrderItemDTO[] OrderItems { get; set; }
-    }
-
-    public class OrderItemDTO
-    {
-        public int Quantity { get; set; }
-        public int ComicID { get; set; }
     }
 }
 

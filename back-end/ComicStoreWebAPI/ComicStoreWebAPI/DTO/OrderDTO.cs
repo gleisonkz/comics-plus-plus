@@ -16,7 +16,7 @@ namespace ComicStore.Application.DTO
         public string City { get; set; }
         public string PostalCode { get; set; }
         public string State { get; set; }
-        [JsonConverter(typeof(CustomConverter<IOrderItemDTO, OrderItemDTO>))]
+        [JsonConverter(typeof(CustomJsonConverter<IOrderItemDTO, OrderItemDTO>))]
         public ICollection<IOrderItemDTO> OrderItems { get; set; }
     }
 }

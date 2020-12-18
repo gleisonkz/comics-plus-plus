@@ -57,7 +57,7 @@ namespace ComicStore.Application.Controllers
                                         c.Description,
                                         c.Price,
                                         InventoryQuantity = c.Inventory.Quantity,
-                                        Image = new ComicImageInfo
+                                        Image = new ComicImageDTO
                                         {
                                             Name = c.Image.Name,
                                             Extension = c.Image.Extension,
@@ -93,7 +93,7 @@ namespace ComicStore.Application.Controllers
                                          c.Pages,
                                          c.Year,
                                          InventoryQuantity = c.Inventory.Quantity,
-                                         Image = new ComicImageInfo
+                                         Image = new ComicImageDTO
                                          {
                                              Name = c.Image.Name,
                                              Extension = c.Image.Extension,

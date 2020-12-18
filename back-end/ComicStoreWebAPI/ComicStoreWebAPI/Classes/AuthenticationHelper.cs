@@ -32,15 +32,23 @@ namespace ComicStore.Application.Classes
         {
             IdentityUser user = await userManager.FindByEmailAsync(email);
             IList<string> userRoles = await userManager.GetRolesAsync(user);
-            string customerID = customerService.GetCustomerByUserID(user.Id).CustomerID
+            string customerID = customerService.GetCustomerByUserID(user.Id)?.CustomerID
                                                .ToString();
+
+
 
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name, user.UserName),
                 new Claim("userID",user.Id),
-                new Claim("customerID",customerID)
             };
+
+            if (customerID != null)
+            {
+                Claim customerIDClaim = new Claim("customerID", customerID);
+                claims.Add(customerIDClaim);
+            }
+
             foreach (var role in userRoles)
             {
                 claims.Add(new Claim(ClaimTypes.Role, role));

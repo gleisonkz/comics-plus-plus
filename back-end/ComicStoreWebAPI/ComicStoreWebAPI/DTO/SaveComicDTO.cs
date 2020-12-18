@@ -15,7 +15,7 @@ namespace ComicStore.Application.DTO
         [Required]
         public int Year { get; set; }
         [Required]
-        [JsonConverter(typeof(CustomConverter<IComicImageDTO, ComicImageDTO>))]
+        [JsonConverter(typeof(CustomJsonConverter<IComicImageDTO, ComicImageDTO>))]
         public IComicImageDTO Image { get; set; }
         [Required]
         public int Pages { get; set; }

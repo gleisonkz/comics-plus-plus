@@ -1,6 +1,5 @@
 
 using ComicStore.Application.Classes;
-using ComicStore.Application.DTO;
 using ComicStore.Infra.BaseRepository.Interfaces;
 using ComicStore.Infra.EFRepository.Context;
 using ComicStore.Infra.EFRepository.Repository;
@@ -35,10 +34,7 @@ namespace ComicStoreWebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers()
-                     .AddNewtonsoftJson(options =>
-                      {
-                          options.SerializerSettings.Converters.Add(new ComicImageConverter());
-                      });
+                    .AddNewtonsoftJson();
 
             _ = services.AddDbContext<ComicStoreDbContext>(options =>
                 {
@@ -92,8 +88,6 @@ namespace ComicStoreWebAPI
             });
 
 
-
-
             services.AddCors(c => c.AddPolicy("ComicStorePolicy", builder =>
             {
                 builder.AllowAnyOrigin()
@@ -108,6 +102,10 @@ namespace ComicStoreWebAPI
             services.AddScoped<IGenreService, GenreService>();
             services.AddScoped<IAuthorService, AuthorService>();
             services.AddScoped<ICustomerService, CustomerService>();
+            services.AddScoped<IOrderService, OrderService>();
+
+
+
             services.AddScoped<AuthenticationHelper>();
 
             services.AddIdentity<IdentityUser, IdentityRole>()
@@ -117,6 +115,7 @@ namespace ComicStoreWebAPI
 
 
             var key = Encoding.ASCII.GetBytes(configuration["ApplicationSettings:JWT_Secret"].ToString());
+
             //Authentication With JWT
             services.AddAuthentication(c =>
             {
@@ -157,13 +156,13 @@ namespace ComicStoreWebAPI
 
             app.UseRouting();
 
+            // UserCors ever must to be placed after UserRouting and before UseAuthentication and UseAuthorization
             app.UseCors("ComicStorePolicy");
 
             app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseHttpsRedirection();
-
 
 
             app.UseSwagger();

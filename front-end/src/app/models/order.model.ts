@@ -7,6 +7,8 @@ export interface Order {
   line1: string;
   line2: string;
   number: number;
+  neighborhood: string;
+  city: string;
   paymentMethodID: PaymentMethod;
   orderItems: OrderItem[];
 }

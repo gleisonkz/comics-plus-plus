@@ -5,6 +5,7 @@ import * as getCep from 'cep-promise';
 import { Observable, Subscription } from 'rxjs';
 import { CartItem } from 'src/app/models/cart-item.model';
 import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
+import { PaymentMethod } from '../../enums/payment-method.enum';
 import { CustomerService } from '../../services/customer.service';
 import { OrderItem } from './../../models/order-item.model';
 import { Order } from './../../models/order.model';
@@ -32,7 +33,7 @@ export class OrderComponent implements OnInit {
 
   ngOnInit(): void {
     this.orderForm = new FormGroup({
-      cep: new FormControl('30580585', [
+      postalCode: new FormControl('30580585', [
         Validators.required,
         Validators.minLength(8),
       ]),
@@ -42,7 +43,9 @@ export class OrderComponent implements OnInit {
       neighborhood: new FormControl('', Validators.required),
       city: new FormControl('', Validators.required),
       state: new FormControl('', [Validators.required]),
-      paymentMethodID: new FormControl('1', [Validators.required]),
+      paymentMethodID: new FormControl(PaymentMethod.BankSlip, [
+        Validators.required,
+      ]),
     });
 
     this.orderItems$ = this.cartService.items$;
@@ -87,6 +90,8 @@ export class OrderComponent implements OnInit {
 
   submitOrder(event: Event, order: Order): void {
     event.preventDefault();
+    console.log(order);
+
     order.customerID = this.customerService.getCustomerID();
     order.orderItems = this.getOrderItems();
 

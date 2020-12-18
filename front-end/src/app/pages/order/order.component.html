@@ -16,16 +16,16 @@
 
     <mat-form-field appearance="outline">
       <mat-label>CEP</mat-label>
-      <input type="text" formControlName="cep" matInput />
+      <input type="text" formControlName="postalCode" matInput />
       <mat-error>
-        <span cmsShowValidation="cep"></span>
+        <span cmsShowValidation="postalCode"></span>
       </mat-error>
       <div matSuffix>
-        <mat-icon (click)="searchCEP(orderForm.controls.cep.value)"
+        <mat-icon (click)="searchCEP(orderForm.controls.postalCode.value)"
           >search</mat-icon
         >
       </div>
-      <i *ngIf="orderForm.get('cep').valid" class="fa fa-check">OK</i>
+      <i *ngIf="orderForm.get('postalCode').valid" class="fa fa-check">OK</i>
     </mat-form-field>
 
     <mat-form-field appearance="outline">

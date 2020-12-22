@@ -10,7 +10,9 @@ export class OrderFinishedComponent implements OnInit {
   orderID: number;
   rated: boolean = false;
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.orderID = sessionStorage.orderID;
+  }
 
   finishOrder() {
     this.rated = true;

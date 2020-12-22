@@ -5,8 +5,6 @@ import { Inject, Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class ToggleThemeService {
-  // changeTheme = new Subject();
-
   constructor(@Inject(DOCUMENT) private documentRef: Document) {}
   toggleTheme(checked: boolean): void {
     const theme = checked ? 'dark-mode' : 'light-mode';

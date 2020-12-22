@@ -1,7 +1,6 @@
 @import "./sass/variables";
 @import "./sass/responsive-helpers";
 @import "./sass/mixins";
-// @import "./theme.scss";
 
 :root {
   --lh: 1.4rem;
@@ -28,13 +27,24 @@
   margin-right: rem(10);
 }
 
+.mat-dialog-title,
+.mat-h1,
+.mat-headline,
+.mat-typography h1,
+.mat-list-item-content,
+.mat-expansion-panel-header-title,
+.mat-expansion-panel-header-description,
+.mat-expansion-indicator::after,
+.mat-select-arrow {
+  color: $color-title-text !important;
+}
+
 .mat-h1,
 .mat-headline,
 .mat-typography h1 {
   font: 400 24px/32px Roboto, "Helvetica Neue", sans-serif;
   letter-spacing: normal;
   margin: 0 0 10px;
-  color: $color-title-text;
 }
 
 .mat-h2,
@@ -173,8 +183,6 @@ table {
   }
 }
 
-// override material paginator
-
 mat-paginator {
   div.mat-paginator-range-actions {
     color: $color-text;
@@ -205,6 +213,12 @@ mat-paginator {
   padding: 0 !important;
 }
 
+.mat-expansion-panel,
+.mat-expansion-panel:not(.mat-expanded):not([aria-disabled="true"])
+  .mat-expansion-panel-header:hover {
+  background: transparent !important;
+}
+
 .mat-expansion-panel:not([class*="mat-elevation-z"]) {
   box-shadow: none !important;
 }
@@ -213,18 +227,18 @@ mat-paginator {
   margin-right: 2px !important ;
 }
 
-// .mat-form-field-ripple {
-//   background-color: $color-form-field-placeholder-active !important;
-// }
+.mat-drawer-inner-container {
+  background-color: $color-panel-bg !important;
+}
 
-// .mat-form-field-label {
-//   color: $color-form-field-placeholder !important;
-// }
+.mat-form-field-placeholder {
+  color: red !important;
+}
 
-// .mat-focused .mat-form-field-label {
-//   color: $color-form-field-placeholder-active !important;
-// }
+.mat-focused .mat-form-field-placeholder {
+  color: red !important;
+}
 
-// .mat-focused .mat-form-field-label {
-//   color: $color-form-field-placeholder-active !important;
-// }
+.mat-form-field-appearance-legacy .mat-form-field-label {
+  color: $color-form-field-placeholder;
+}

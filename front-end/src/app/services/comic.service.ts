@@ -76,10 +76,6 @@ export class ComicService {
       .pipe(delay(200));
   }
 
-  getComicByID(comicID: number): Observable<Comic> {
-    return this.http.get<Comic>(`${environment.apiURL}/comic/${comicID}`);
-  }
-
   postComic(comic: Comic): Observable<Comic> {
     return this.http.post<Comic>(`${environment.apiURL}/comic`, comic);
   }

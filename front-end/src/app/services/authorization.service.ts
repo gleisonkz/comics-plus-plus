@@ -49,21 +49,15 @@ export class AuthorizationService {
   }
 
   isAuthorized(allowedRoles: string[]): boolean {
-    // check if the list of allowed roles is empty, if empty, authorize the user to access the page
     if (this.allowedRolesIsEmpty(allowedRoles)) return true;
-    // if (allowedRoles == null || allowedRoles.length === 0) {
-    //   return true;
-    // }
 
     const decodedToken = this.getDecodeToken();
 
-    // check if it was decoded successfully, if not the token is not valid, deny access
     if (!decodedToken) {
       this.notificationService.showMessage('Invalid Token');
       return false;
     }
 
-    // check if the user roles is in the list of allowed roles, return true if allowed and false if not allowed
     return allowedRoles.includes(decodedToken['role']);
   }
 }

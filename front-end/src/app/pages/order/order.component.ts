@@ -90,7 +90,6 @@ export class OrderComponent implements OnInit {
 
   submitOrder(event: Event, order: Order): void {
     event.preventDefault();
-    console.log(order);
 
     order.customerID = this.customerService.getCustomerID();
     order.orderItems = this.getOrderItems();
@@ -105,8 +104,5 @@ export class OrderComponent implements OnInit {
 
       this.orderService.clear();
     });
-
-    // this.orderService.clear();
-    // this.router.navigate(['/order-finished']);
   }
 }

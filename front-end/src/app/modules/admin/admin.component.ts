@@ -1,4 +1,4 @@
-import { Component, HostListener, ViewChild } from '@angular/core';
+import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 
 @Component({
@@ -6,10 +6,14 @@ import { MatSidenav } from '@angular/material/sidenav';
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.scss'],
 })
-export class AdminComponent {
+export class AdminComponent implements OnInit {
   opened = true;
   @ViewChild('sidenav') sidenav: MatSidenav;
   constructor() {}
+
+  ngOnInit(): void {
+    this.opened = this.isBiggerScreen() ? false : true;
+  }
 
   @HostListener('window:resize', ['$event'])
   onResize(event) {

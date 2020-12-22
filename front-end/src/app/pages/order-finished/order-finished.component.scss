@@ -1,31 +1,42 @@
 @import "../../../sass/variables";
 @import "../../../sass/mixins";
 @import "../../../sass/functions";
+@import "../../../sass/media";
 
 :host {
-  margin-top: rem(40);
-  background-color: $color-panel-bg;
-  @include size(700, 350);
-  padding: rem(50);
-  border-radius: $global-radius;
+  .panel {
+    @include flex-center(column);
+    width: rem(700);
+    padding: rem(50);
+    margin: 0 auto;
+    background-color: $color-panel-bg;
+    border-radius: $global-radius;
+    color: $color-text;
 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+    @include medias($tiny-mobile, $mobile) {
+      padding: rem(20);
+      width: initial;
+    }
 
-  color: $color-text;
+    .title {
+      font-size: rem(40);
 
-  .title {
-    font-size: rem(40);
-  }
-  .description {
-    text-align: center;
-    margin-top: rem(20);
-    font-size: rem(21);
-  }
+      @include medias($tiny-mobile, $mobile) {
+        font-size: rem(25);
+      }
+    }
+    .description {
+      text-align: center;
+      margin-top: rem(20);
+      font-size: rem(21);
 
-  .info-rating {
-    margin-top: rem(10);
+      @include medias($tiny-mobile, $mobile) {
+        font-size: rem(16);
+      }
+    }
+
+    .info-rating {
+      margin-top: rem(10);
+    }
   }
 }

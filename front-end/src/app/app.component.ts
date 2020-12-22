@@ -40,12 +40,6 @@ export class AppComponent {
 
   ngOnInit(): void {
     this.subscriptions.push(
-      this.toggleThemeService.changeTheme.subscribe(() => {
-        this.documentRef.documentElement.classList.toggle('dark-mode');
-      })
-    );
-
-    this.subscriptions.push(
       this.router.events.subscribe(() => {
         this.sidenav.close();
         this.adminSide.close();

@@ -33,7 +33,7 @@ export class OrderComponent implements OnInit {
 
   ngOnInit(): void {
     this.orderForm = new FormGroup({
-      postalCode: new FormControl('30580585', [
+      postalCode: new FormControl('', [
         Validators.required,
         Validators.minLength(8),
       ]),
@@ -43,7 +43,7 @@ export class OrderComponent implements OnInit {
       neighborhood: new FormControl('', Validators.required),
       city: new FormControl('', Validators.required),
       state: new FormControl('', [Validators.required]),
-      paymentMethodID: new FormControl(PaymentMethod.BankSlip, [
+      paymentMethodID: new FormControl(PaymentMethod.Cash, [
         Validators.required,
       ]),
     });

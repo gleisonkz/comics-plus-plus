@@ -12,11 +12,9 @@
 .panel {
   @include flex-center;
   justify-content: space-around;
-  // flex-direction: column;
-  // width: rem(800);
   height: rem(400);
 
-  margin: 20px auto;
+  margin: 0 auto;
   padding: rem(30);
 
   color: $color-panel-text;

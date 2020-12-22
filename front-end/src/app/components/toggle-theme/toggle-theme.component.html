@@ -1,8 +1,9 @@
 <label for="toggle" class="toggle">
   <input
+    #checkboxTheme
     type="checkbox"
     id="toggle"
-    (change)="changeTheme()"
+    (change)="changeTheme($event.target.checked)"
     class="toggle__input"
   />
   <span class="toggle__switch"></span>

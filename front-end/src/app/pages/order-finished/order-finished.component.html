@@ -1,7 +1,9 @@
-<h1 class="title">Compra Finalizada, nº {{ orderID }}</h1>
-<p class="description">
-  O seu pedido foi recebido pelo nosso sistema. utilize o nº do pedido para
-  acompanhamento!
-</p>
-<cms-rating (rated)="finishOrder()"></cms-rating>
-<p class="info-rating" [hidden]="!rated">Obrigado pela sua avaliação</p>
+<div class="panel">
+  <h1 class="title">Compra Finalizada, nº {{ orderID }}</h1>
+  <p class="description">
+    O seu pedido foi recebido pelo nosso sistema. utilize o nº do pedido para
+    acompanhamento!
+  </p>
+  <cms-rating (rated)="finishOrder()"></cms-rating>
+  <p class="info-rating" [hidden]="!rated">Obrigado pela sua avaliação</p>
+</div>

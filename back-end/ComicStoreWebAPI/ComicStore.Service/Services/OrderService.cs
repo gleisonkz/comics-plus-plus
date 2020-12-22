@@ -1,4 +1,5 @@
-﻿using ComicStore.Domain.POCO;
+﻿using ComicStore.Domain.Interfaces;
+using ComicStore.Domain.POCO;
 using ComicStore.Infra.BaseRepository.Interfaces;
 using ComicStore.Service.Interfaces;
 using System.Collections.Generic;
@@ -20,14 +21,25 @@ namespace ComicStore.Service.Services
         public Order CreateOrder(IOrderDTO orderDTO)
         {
 
-            ICollection<OrderItem> orderItemsPOCO = orderDTO.OrderItems.Select(c => new OrderItem
+            ICollection<OrderItem> orderItemsPOCO = orderDTO.OrderItems.Select(c =>
             {
-                ComicID = c.ComicID,
-                Quantity = c.Quantity,
-                UnitValue = repoComic.GetQuery()
-                                     .Single(d => d.ComicID == c.ComicID).Price,
-                TotalValue = repoComic.GetQuery()
-                                     .Single(d => d.ComicID == c.ComicID).Price * c.Quantity
+                var comic = repoComic.GetQuery().Where(d => d.ComicID == c.ComicID)
+                                .Single();
+
+                var orderItem = new OrderItem
+                {
+                    ComicID = c.ComicID,
+                    Quantity = c.Quantity,
+                    UnitValue = comic.Price,
+                    TotalValue = comic.Price * c.Quantity
+                };
+
+                comic.Inventory.QuantityDown(c.Quantity);
+
+
+
+                return orderItem;
+
             }).ToList();
 
 

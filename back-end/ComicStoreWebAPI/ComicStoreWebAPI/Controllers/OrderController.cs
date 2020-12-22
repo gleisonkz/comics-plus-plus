@@ -23,7 +23,7 @@ namespace ComicStore.Application.Controllers
             {
                 var order = orderService.CreateOrder(orderDTO);
                 orderService.Commit();
-                return Ok(order.OrderID);
+                return Ok(new { orderID = order.OrderID });
             }
             catch (Exception ex)
             {

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { Role } from 'src/app/enums/role.enum';
+import { Router } from '@angular/router';
 import { AuthorizationService } from 'src/app/services/authorization.service';
 import { AuthenticationService } from '../../modules/authentication/services/authentication.service';
 
@@ -10,12 +10,10 @@ import { AuthenticationService } from '../../modules/authentication/services/aut
 })
 export class HeaderComponent implements OnInit {
   @Output() openSide = new EventEmitter<boolean>(false);
+  @Output() openAdminSide = new EventEmitter<boolean>(false);
 
   get isAdmin() {
-    return (
-      this.authorizationService.getUserRoles() &&
-      this.authorizationService.getUserRoles().includes(Role.Admin)
-    );
+    return this.authorizationService.isAdmin;
   }
 
   get isLoggedIn(): boolean {
@@ -24,12 +22,18 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private authorizationService: AuthorizationService,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {}
 
   logout(): void {
     this.authenticationService.logout();
+  }
+
+  isAdminPage() {
+    const isAdminPage = this.router.url.includes('/admin');
+    return isAdminPage;
   }
 }

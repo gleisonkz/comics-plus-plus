@@ -29,6 +29,14 @@
     height: 100%;
     @include flex-center;
     color: $color-text;
+
+    .admin-side-icon {
+      color: white;
+      display: none;
+      @include medias($tiny-mobile, $mobile) {
+        display: block;
+      }
+    }
   }
 }
 
@@ -51,6 +59,7 @@
       height: 100%;
       transition: background-color 0.2s;
       cursor: pointer;
+      color: white;
 
       @include medias($tiny-mobile, $mobile) {
         display: none;

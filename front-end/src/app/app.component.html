@@ -1,11 +1,3 @@
-<!-- <main [@fadeAnimation]="getRouterOutletState(o)">
-  <router-outlet class="main" #o="outlet"></router-outlet>
-</main> -->
-
-<!-- <main>
-  <router-outlet class="main"></router-outlet>
-</main> -->
-
 <mat-sidenav-container>
   <mat-sidenav #sidenav>
     <mat-nav-list>
@@ -26,9 +18,39 @@
       <a (click)="sidenav.toggle()" mat-list-item>Fechar</a>
     </mat-nav-list>
   </mat-sidenav>
+  <mat-sidenav #adminSide [position]="'end'">
+    <mat-nav-list>
+      <a mat-list-item routerLinkActive="active" [routerLink]="['admin/comic']">
+        <i class="fas fa-book icon"></i>
+        <span>Quadrinhos</span>
+      </a>
+      <a
+        mat-list-item
+        routerLinkActive="active"
+        [routerLink]="['admin/author']"
+      >
+        <i class="fas fa-user-edit icon"></i>
+        <span>Autores</span>
+      </a>
+      <a mat-list-item routerLinkActive="active" [routerLink]="['admin/genre']">
+        <i class="fad fa-tasks icon"></i>
+        <span>Categorias</span>
+      </a>
+      <a
+        mat-list-item
+        routerLinkActive="active"
+        [routerLink]="['admin/inventory']"
+      >
+        <i class="fas fa-inventory icon"></i>
+        <span>Estoque</span>
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
   <mat-sidenav-content>
-    <cms-header (openSide)="sidenav.toggle()"></cms-header>
-    <!-- <div style="margin-bottom: 60px"></div> -->
+    <cms-header
+      (openAdminSide)="adminSide.toggle()"
+      (openSide)="sidenav.toggle()"
+    ></cms-header>
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>

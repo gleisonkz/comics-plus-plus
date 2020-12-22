@@ -3,7 +3,6 @@ import { Component, Inject, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { Router, RouterOutlet } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { Role } from './enums/role.enum';
 import { AuthenticationService } from './modules/authentication/services/authentication.service';
 import { fadeAnimation } from './modules/shared/animations/fade.animations';
 import { NotificationService } from './modules/shared/services/notification.service';
@@ -20,12 +19,10 @@ export class AppComponent {
   title = 'comics-plus-plus';
   subscriptions: Subscription[] = [];
   @ViewChild('sidenav') public sidenav: MatSidenav;
+  @ViewChild('adminSide') public adminSide: MatSidenav;
 
   get isAdmin() {
-    return (
-      this.authorizationService.getUserRoles &&
-      this.authorizationService.getUserRoles()?.includes(Role.Admin)
-    );
+    return this.authorizationService.isAdmin;
   }
 
   get isLoggedIn(): boolean {
@@ -51,6 +48,7 @@ export class AppComponent {
     this.subscriptions.push(
       this.router.events.subscribe(() => {
         this.sidenav.close();
+        this.adminSide.close();
       })
     );
   }

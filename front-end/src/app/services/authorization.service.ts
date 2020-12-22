@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { Role } from '../enums/role.enum';
 import { NotificationService } from '../modules/shared/services/notification.service';
 
 @Injectable({
@@ -11,6 +12,14 @@ export class AuthorizationService {
     private notificationService: NotificationService
   ) {}
 
+  get isAdmin(): boolean {
+    return (
+      this.isLoggedIn() &&
+      this.getUserRoles() &&
+      this.getUserRoles().includes(Role.Admin)
+    );
+  }
+
   getUserRoles(): any {
     const decodeToken = this.getDecodeToken();
     const roles = decodeToken && decodeToken['role'];
@@ -18,11 +27,15 @@ export class AuthorizationService {
   }
 
   isLoggedIn(): boolean {
-    const decodeToken = this.getDecodeToken();
-    if (!decodeToken) {
+    const decodedToken = this.getDecodeToken();
+    if (!decodedToken || this.isExpired(decodedToken.exp * 1000)) {
       return false;
     }
     return true;
+  }
+
+  isExpired(milliseconds: number): boolean {
+    return milliseconds < new Date().getTime();
   }
 
   getDecodeToken() {

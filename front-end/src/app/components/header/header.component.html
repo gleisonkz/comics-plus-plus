@@ -42,5 +42,13 @@
     <cms-toggle-theme style="margin-right: 20px"></cms-toggle-theme>
 
     <cms-shopping-cart></cms-shopping-cart>
+    <button
+      *ngIf="isAdmin && isAdminPage()"
+      class="admin-side-icon"
+      mat-icon-button
+      (click)="openAdminSide.emit(true)"
+    >
+      <mat-icon>more_vert</mat-icon>
+    </button>
   </div>
 </header>

@@ -14,6 +14,10 @@ mat-dialog-actions {
 mat-form-field,
 cms-dropdown-list {
   margin-right: rem(10);
+
+  @include medias($tiny-mobile, $mobile) {
+    width: 100%;
+  }
 }
 
 .preview-image {

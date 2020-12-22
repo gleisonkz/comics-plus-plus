@@ -43,7 +43,9 @@
       cursor: pointer;
     }
 
-    i.fa-remove {
+    i.fa-remove,
+    i.fa-trash,
+    i.fa-trash-alt {
       color: $color-danger;
     }
   }

@@ -200,6 +200,19 @@ mat-paginator {
   background-color: $color-tab-panel-border-bottom !important;
 }
 
+.mat-expansion-panel-body,
+.mat-expansion-panel-header {
+  padding: 0 !important;
+}
+
+.mat-expansion-panel:not([class*="mat-elevation-z"]) {
+  box-shadow: none !important;
+}
+
+.mat-expansion-indicator {
+  margin-right: 2px !important ;
+}
+
 // .mat-form-field-ripple {
 //   background-color: $color-form-field-placeholder-active !important;
 // }

@@ -3,19 +3,19 @@
 @import "../../../sass/functions";
 
 :host {
-  width: rem(1060) !important;
+}
 
+.order {
+  margin: 0 auto;
+  width: rem(1060) !important;
   padding: rem(30 30 20 30);
-  margin-top: rem(20);
 
   display: flex;
   flex-direction: column;
 
   background-color: $color-panel-bg;
   border-radius: $global-radius;
-}
 
-.order {
   &__title {
     color: $color-text;
     font-size: rem(22);

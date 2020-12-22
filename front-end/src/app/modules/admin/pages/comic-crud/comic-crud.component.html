@@ -36,7 +36,66 @@
         <input matInput placeholder="Descrição" formControlName="description" />
       </mat-form-field>
 
-      <mat-form-field>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title> Filtros </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <mat-form-field>
+          <input matInput placeholder="Preço" formControlName="price" />
+        </mat-form-field>
+
+        <mat-form-field>
+          <input
+            type="number"
+            matInput
+            placeholder="Ano"
+            formControlName="year"
+          />
+        </mat-form-field>
+
+        <mat-form-field>
+          <input
+            type="number"
+            matInput
+            placeholder="Páginas"
+            formControlName="pages"
+          />
+        </mat-form-field>
+
+        <cms-dropdown-list
+          [isNew]="true"
+          [placeholder]="'Autores'"
+          [getFilteredDataCallback]="getAuthorByNameCallback.bind(this)"
+          [dataControl]="form.controls.authors"
+          idKeyObject="authorID"
+          valueKeyObject="name"
+        ></cms-dropdown-list>
+
+        <cms-dropdown-list
+          [isNew]="true"
+          [placeholder]="'Categorias'"
+          [getFilteredDataCallback]="getGenresByNameCallback.bind(this)"
+          [dataControl]="form.controls.genres"
+          idKeyObject="genreID"
+          valueKeyObject="description"
+        ></cms-dropdown-list>
+      </mat-expansion-panel>
+
+      <div class="full-wrapper button-wrapper">
+        <div class="button-wrapper">
+          <button
+            (click)="loadData(form.value)"
+            class="search-button"
+            mat-flat-button
+            color="primary"
+          >
+            Pesquisar
+          </button>
+        </div>
+      </div>
+
+      <!-- <mat-form-field>
         <input matInput placeholder="Preço" formControlName="price" />
       </mat-form-field>
 
@@ -87,7 +146,7 @@
             Pesquisar
           </button>
         </div>
-      </div>
+      </div> -->
     </div>
   </form>
 </div>

@@ -1,6 +1,7 @@
-@import "../../../sass/variables";
-@import "../../../sass/mixins";
-@import "../../../sass/functions";
+@import "media";
+@import "variables";
+@import "mixins";
+@import "functions";
 
 :host {
   grid-template-columns: inherit;

@@ -30,14 +30,19 @@ export class ShowValidationDirective implements AfterContentInit, OnDestroy {
     const group = this.parent.control as FormGroup;
     const control = group.controls[this.controlName] as FormControl;
 
+    const handleState = () => {
+      const errorMessage = this.checkValidations(control);
+      const errorMessageParent = this.checkValidations(group);
+      const error = errorMessage || errorMessageParent;
+      this.setInnerHTML(error);
+      console.log('error', error);
+    };
+
     this.subscriptions.push(
-      control.statusChanges.subscribe((c) => {
-        const errorMessage = this.checkValidations(control);
-        const errorMessageParent = this.checkValidations(group);
-        const error = errorMessage || errorMessageParent;
-        this.setInnerHTML(error);
-      })
+      control.statusChanges.subscribe(() => handleState())
     );
+
+    handleState();
   }
 
   ngOnDestroy(): void {
@@ -67,11 +72,25 @@ export const ArrayValidation = [
   {
     key: 'minlength',
     value: (control: AbstractControl) =>
-      `mínimo de of <strong>${control.errors.minlength.requiredLength} caracteres</strong>`,
+      `mínimo de <strong>${control.errors.minlength.requiredLength} caracteres</strong>`,
+  },
+  {
+    key: 'maxlength',
+    value: (control: AbstractControl) =>
+      `máximo de <strong>${control.errors.maxlength.requiredLength} caracteres</strong>`,
+  },
+  {
+    key: 'pattern',
+    value: (control: AbstractControl) =>
+      `<strong>caracteres</strong> inválidos`,
   },
   {
     key: 'emailsNotMatch',
     value: (control: AbstractControl) =>
       `os emails <strong>estão diferentes!</strong>`,
+  },
+  {
+    key: 'postalCodeError',
+    value: (control: AbstractControl) => control.errors.postalCodeError,
   },
 ];

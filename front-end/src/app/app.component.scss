@@ -1,7 +1,7 @@
-@import "../sass/variables";
-@import "../sass/mixins";
-@import "../sass/functions";
-@import "../sass/media";
+@import "media";
+@import "variables";
+@import "mixins";
+@import "functions";
 
 :host {
   display: flex;
@@ -10,6 +10,11 @@
 
   mt-footer {
     height: 50px;
+  }
+
+  mat-sidenav {
+    padding: rem(10);
+    background-color: $color-panel-bg;
   }
 
   mat-sidenav-content {

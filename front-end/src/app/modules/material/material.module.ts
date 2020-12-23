@@ -4,7 +4,7 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
-import { MatNativeDateModule } from '@angular/material/core';
+import { ErrorStateMatcher, MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatExpansionModule } from '@angular/material/expansion';
@@ -26,6 +26,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { MaterialFileInputModule } from 'ngx-material-file-input';
+import { CustomErrorStateMatcher } from '../shared/classes/custom-error-state-matcher';
 
 @NgModule({
   declarations: [],
@@ -63,6 +64,9 @@ import { MaterialFileInputModule } from 'ngx-material-file-input';
     MaterialFileInputModule,
     NgxMatSelectSearchModule,
     MatExpansionModule,
+  ],
+  providers: [
+    { provide: ErrorStateMatcher, useValue: new CustomErrorStateMatcher() },
   ],
 })
 export class MaterialModule {}

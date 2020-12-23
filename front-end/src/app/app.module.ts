@@ -1,15 +1,15 @@
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ErrorHandler, NgModule } from '@angular/core';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { JwtModule } from '@auth0/angular-jwt';
+import { NgxMaskModule } from 'ngx-mask';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ComicComponent } from './components/comic/comic.component';
 import { HeaderComponent } from './components/header/header.component';
-import { OrderItemComponent } from './components/order-item/order-item.component';
-import { RatingComponent } from './components/rating/rating.component';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 import { ToggleThemeComponent } from './components/toggle-theme/toggle-theme.component';
 import { ShowValidationDirective } from './directives/show-validation.directive';
@@ -22,8 +22,6 @@ import { ComicDetailComponent } from './pages/comic-detail/comic-detail.componen
 import { ComicsComponent } from './pages/comics/comics.component';
 import { HomeComponent } from './pages/home/home.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
-import { OrderFinishedComponent } from './pages/order-finished/order-finished.component';
-import { OrderComponent } from './pages/order/order.component';
 
 @NgModule({
   declarations: [
@@ -36,10 +34,6 @@ import { OrderComponent } from './pages/order/order.component';
     ComicComponent,
     ComicDetailComponent,
     ShoppingCartComponent,
-    OrderComponent,
-    OrderItemComponent,
-    OrderFinishedComponent,
-    RatingComponent,
     NotFoundComponent,
     ShowValidationDirective,
   ],
@@ -50,6 +44,8 @@ import { OrderComponent } from './pages/order/order.component';
     HttpClientModule,
     ReactiveFormsModule,
     MaterialModule,
+    FlexLayoutModule,
+    NgxMaskModule.forRoot(),
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,

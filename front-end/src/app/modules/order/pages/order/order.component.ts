@@ -5,11 +5,11 @@ import * as getCep from 'cep-promise';
 import { Observable, Subscription } from 'rxjs';
 import { CartItem } from 'src/app/models/cart-item.model';
 import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
-import { PaymentMethod } from '../../enums/payment-method.enum';
-import { CustomerService } from '../../services/customer.service';
-import { OrderItem } from './../../models/order-item.model';
-import { Order } from './../../models/order.model';
-import { OrderService } from './../../services/order.service';
+import { PaymentMethod } from '../../../../enums/payment-method.enum';
+import { OrderItem } from '../../../../models/order-item.model';
+import { Order } from '../../../../models/order.model';
+import { CustomerService } from '../../../../services/customer.service';
+import { OrderService } from '../../../../services/order.service';
 
 @Component({
   templateUrl: './order.component.html',
@@ -35,10 +35,14 @@ export class OrderComponent implements OnInit {
     this.orderForm = new FormGroup({
       postalCode: new FormControl('', [
         Validators.required,
-        Validators.minLength(8),
+        OrderComponent.postalCode,
       ]),
       line1: new FormControl('', [Validators.required]),
-      number: new FormControl('', [Validators.required]),
+      number: new FormControl('', [
+        Validators.required,
+        Validators.maxLength(6),
+        Validators.pattern('\\d+'),
+      ]),
       line2: new FormControl(''),
       neighborhood: new FormControl('', Validators.required),
       city: new FormControl('', Validators.required),
@@ -49,6 +53,18 @@ export class OrderComponent implements OnInit {
     });
 
     this.orderItems$ = this.cartService.items$;
+  }
+
+  static postalCode(postalCode: FormControl): { [key: string]: string } {
+    if (postalCode.value.length !== 8) {
+      return { postalCodeError: 'o CEP deve conter 8 dígitos' };
+    }
+
+    if (!/\d{8}/.test(postalCode.value)) {
+      return { postalCodeError: 'CEP inválido' };
+    }
+
+    return undefined;
   }
 
   getTotalItems(): number {

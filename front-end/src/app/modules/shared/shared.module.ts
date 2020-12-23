@@ -8,7 +8,12 @@ import { NotificationService } from './services/notification.service';
 @NgModule({
   declarations: [DropdownListComponent],
   imports: [CommonModule, MaterialModule, ReactiveFormsModule],
-  exports: [DropdownListComponent],
+  exports: [
+    CommonModule,
+    DropdownListComponent,
+    MaterialModule,
+    ReactiveFormsModule,
+  ],
   providers: [NotificationService],
 })
 export class SharedModule {}

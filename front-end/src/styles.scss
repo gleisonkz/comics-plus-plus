@@ -35,7 +35,8 @@
 .mat-expansion-panel-header-title,
 .mat-expansion-panel-header-description,
 .mat-expansion-indicator::after,
-.mat-select-arrow {
+.mat-select-arrow,
+.mat-tab-label .mat-tab-label-content {
   color: $color-title-text !important;
 }
 

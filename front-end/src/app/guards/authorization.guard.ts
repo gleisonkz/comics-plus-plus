@@ -26,7 +26,7 @@ export class AuthorizationGuard implements CanActivate, CanActivateChild {
   ): Observable<boolean> | Promise<boolean> | boolean {
     const allowedRoles = next.data.allowedRoles;
     const isAuthorized = this.authorizationService.isAuthorized(allowedRoles);
-
+    console.log('asdf');
     if (!isAuthorized) {
       this.router.navigate(['/authentication/login']);
       this.notificationService.showMessage(

@@ -1,13 +1,16 @@
-@import "../../../sass/variables";
-@import "../../../sass/mixins";
-@import "../../../sass/functions";
+@import "media";
+@import "variables";
+@import "mixins";
+@import "functions";
 
 :host {
+  display: flex;
+  align-items: flex-start;
 }
 
 .order {
   margin: 0 auto;
-  width: rem(1060) !important;
+  width: rem(1060);
   padding: rem(30 30 20 30);
 
   display: flex;
@@ -15,6 +18,10 @@
 
   background-color: $color-panel-bg;
   border-radius: $global-radius;
+
+  @include medias($tiny-mobile, $mobile) {
+    width: 100%;
+  }
 
   &__title {
     color: $color-text;
@@ -54,6 +61,10 @@
     }
 
     .delivery-address {
+      @include medias($tiny-mobile, $mobile) {
+        @include flex-column;
+      }
+
       mat-form-field {
         margin-right: rem(15);
       }
@@ -92,6 +103,10 @@
         &__body {
           display: grid;
           grid-template-columns: rem(100) 1fr 2fr rem(100) rem(15);
+
+          @include medias($tiny-mobile, $mobile) {
+            grid-template-columns: rem(100) 1fr rem(15);
+          }
         }
 
         &__header {
@@ -123,8 +138,16 @@
       margin-top: rem(20);
       justify-content: space-between;
 
+      @include medias($tiny-mobile, $mobile) {
+        flex-direction: column;
+      }
+
       &__payment-method {
         width: 50%;
+
+        @include medias($tiny-mobile, $mobile) {
+          width: 100%;
+        }
 
         legend {
           @include form-title;
@@ -164,6 +187,11 @@
 .total-order {
   width: rem(500);
 
+  @include medias($tiny-mobile, $mobile) {
+    margin-top: rem(20);
+    width: 100%;
+  }
+
   &__title {
     @include form-title;
   }
@@ -179,9 +207,20 @@
       padding: rem(10 0);
       border-top: solid 1px $color-tab-panel-border-top;
 
+      @include medias($tiny-mobile, $mobile) {
+        width: 100%;
+      }
+
       &__text {
         @include base-bold;
       }
     }
+  }
+}
+
+.mat-form-field-appearance-outline,
+.mat-form-field-wrapper {
+  @include medias($desktop, $large-tablet) {
+    width: rem(200);
   }
 }

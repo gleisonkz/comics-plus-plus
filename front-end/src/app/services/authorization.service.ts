@@ -53,8 +53,7 @@ export class AuthorizationService {
 
     const decodedToken = this.getDecodeToken();
 
-    if (!decodedToken) {
-      this.notificationService.showMessage('Invalid Token');
+    if (!this.isLoggedIn()) {
       return false;
     }
 

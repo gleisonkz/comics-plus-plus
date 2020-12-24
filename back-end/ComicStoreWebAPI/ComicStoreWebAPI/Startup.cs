@@ -156,7 +156,9 @@ namespace ComicStoreWebAPI
 
             app.UseRouting();
 
-            // UserCors ever must to be placed after UserRouting and before UseAuthentication and UseAuthorization
+            /* UserCors EVER must to be placed after UserRouting 
+              and before UseAuthentication and UseAuthorization
+            */
             app.UseCors("ComicStorePolicy");
 
             app.UseAuthentication();

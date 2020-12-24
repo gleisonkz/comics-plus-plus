@@ -173,25 +173,5 @@ namespace ComicStore.Service.Services
             comicInventory.Quantity = quantity;
             return comicInventory;
         }
-
-        public IQueryable<Comic> GetComicByID(int comicID)
-        {
-            //Comic objComic = repoComic.GetQuery()
-            //                          .Where(c => c.ComicID == comicID)
-            //                          .SingleOrDefault();
-
-            IQueryable<Comic> objComic = repoComic.GetQuery()
-                                                   .Where(c => c.ComicID == comicID);
-
-
-            //objComic.Authors.Where(c => c.AuthorID == comicID).ToList();
-            //objComic.Genres.Where(c => c.GenreID == comicID).ToList();
-
-
-
-            return objComic;
-        }
-
-
     }
 }

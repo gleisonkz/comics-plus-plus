@@ -1,7 +1,6 @@
 ﻿using ComicStore.Domain.POCO;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System.Collections.Generic;
 
 namespace ComicStore.Infra.EFRepository.Mapping
 {
@@ -17,7 +16,7 @@ namespace ComicStore.Infra.EFRepository.Mapping
 
             _ = builder.Property(c => c.Description)
                  .IsRequired()
-                 .HasMaxLength(500);
+                 .HasMaxLength(800);
 
             _ = builder.Property(c => c.Price)
                  .IsRequired();

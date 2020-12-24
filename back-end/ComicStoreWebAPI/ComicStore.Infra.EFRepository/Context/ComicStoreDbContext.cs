@@ -25,7 +25,7 @@ namespace ComicStore.Infra.EFRepository.Context
             {
               new Author { AuthorID = 1, Name = "John Doe" },
               new Author { AuthorID = 2, Name = "Jane Doe" },
-              new Author { AuthorID = 3, Name = "Jim Starlin" },
+              new Author { AuthorID = 3, Name = "JK Rowling" },
               new Author { AuthorID = 4, Name = "Gail Simone" },
               new Author { AuthorID = 5, Name = "Warren Ellis" },
               new Author { AuthorID = 6, Name = "Jack Kirby" },

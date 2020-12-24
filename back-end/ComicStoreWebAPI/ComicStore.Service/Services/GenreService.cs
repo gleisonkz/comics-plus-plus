@@ -1,12 +1,12 @@
 ﻿using ComicStore.Domain.Interfaces;
 using ComicStore.Domain.POCO;
 using ComicStore.Infra.BaseRepository.Interfaces;
-using ComicStore.Service.Interfaces;
-using System.Linq;
 using ComicStore.Service.Classes;
-using System.Linq.Expressions;
-using System;
+using ComicStore.Service.Interfaces;
 using ComicStore.Shared.Class;
+using System;
+using System.Linq;
+using System.Linq.Expressions;
 
 namespace ComicStore.Service.Services
 {
@@ -69,7 +69,6 @@ namespace ComicStore.Service.Services
                                       .SingleOrDefault();
 
             objGenre.Comics = null;
-            // repoGenre.Update(objGenre);
             return objGenre;
         }
 

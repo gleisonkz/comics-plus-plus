@@ -119,7 +119,7 @@
     }
 
     &:disabled {
-      border: 1px solid #999999;
+      border: rem(1) solid #999999;
       background-color: #cccccc;
       color: #666666;
       cursor: not-allowed;

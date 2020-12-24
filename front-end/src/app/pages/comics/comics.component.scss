@@ -23,9 +23,9 @@
 
     grid-template-rows: auto;
 
-    gap: 40px 40px;
+    gap: rem(40 40);
 
-    margin: 20px;
+    margin: rem(20);
 
     @include medias($tiny-mobile, $mobile) {
       grid-template-columns: 1fr;

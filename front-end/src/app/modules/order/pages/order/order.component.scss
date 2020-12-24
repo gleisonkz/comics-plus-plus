@@ -41,10 +41,10 @@
 
       i {
         position: absolute;
-        right: 0px;
-        top: 45px;
+        right: 0;
+        top: rem(45);
         bottom: 0;
-        left: -6px;
+        left: rem(-6);
         font-size: rem(10);
         color: $color-success;
       }
@@ -76,15 +76,15 @@
 
     &__input {
       box-shadow: none;
-      height: 34px;
-      padding: 6px 12px;
+      height: rem(34);
+      padding: rem(6) rem(12);
 
-      font-size: 14px;
+      font-size: rem(14);
       line-height: 1.42857143;
       color: #555;
       background-color: #fff;
       background-image: none;
-      border: 1px solid #ccc;
+      border: rem(1) solid #ccc;
       outline: none;
 
       &:focus {
@@ -177,7 +177,7 @@
       background-color: $color-success;
       font-size: rem(15);
       width: initial;
-      margin: 10px 0 0 auto;
+      margin: rem(10) 0 0 auto;
 
       @include button-disabled;
     }
@@ -205,7 +205,7 @@
       font-size: rem(12);
       color: $color-text;
       padding: rem(10 0);
-      border-top: solid 1px $color-tab-panel-border-top;
+      border-top: solid rem(1) $color-tab-panel-border-top;
 
       @include medias($tiny-mobile, $mobile) {
         width: 100%;

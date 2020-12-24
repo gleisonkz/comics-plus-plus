@@ -10,8 +10,6 @@
 :host {
   @include medias($mobile, tiny-mobile) {
     ::ng-deep.cdk-overlay-pane {
-      // right: 50% !important;
-      // transform: translateX(50%) !important;
       width: 100% !important;
     }
     ::ng-deep.mat-menu-panel {
@@ -25,11 +23,9 @@
   display: flex;
   flex-direction: column;
   align-items: baseline;
-  // min-width: rem(320);
-  // width: rem(200);
 
   padding: rem(20);
-  margin-left: 10px;
+  margin-left: rem(10);
   border-radius: $global-radius;
   background-color: $color-panel-bg;
 
@@ -61,7 +57,7 @@
       display: inherit;
       padding: inherit;
       background-color: inherit;
-      font-size: 20px;
+      font-size: rem(20);
     }
   }
 
@@ -90,12 +86,8 @@
       align-items: center;
       width: 100%;
 
-      // div {
-      //   @include flex-center;
-      // }
-
       &__image {
-        height: 50px;
+        height: rem(50);
       }
 
       &__quantity-icon {
@@ -126,7 +118,6 @@
 
       &__text {
         @include base-bold;
-        // text-transform: lowercase;
       }
 
       &__text:first-letter {
@@ -151,8 +142,8 @@
 
     .cart__item:not(:last-child) {
       padding: rem(10 0);
-      border: solid 1px $color-tab-panel-border-top;
-      border-width: 1px 0 1px 0px;
+      border: solid rem(1) $color-tab-panel-border-top;
+      border-width: rem(1) 0 rem(1) 0;
     }
 
     .cart__item:last-child {

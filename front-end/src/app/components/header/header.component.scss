@@ -79,12 +79,12 @@
     }
 
     &__link {
-      font-size: 14px;
+      font-size: rem(14);
       transition: color 0.2s;
       color: white;
 
       strong {
-        font-size: 18px;
+        font-size: rem(18);
       }
     }
 

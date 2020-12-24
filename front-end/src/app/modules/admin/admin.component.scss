@@ -36,7 +36,7 @@ a[mat-list-item] {
   color: $color-text;
 
   i {
-    font-size: 18px;
+    font-size: rem(18);
     width: rem(20);
   }
 }

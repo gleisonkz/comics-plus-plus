@@ -4,8 +4,8 @@
 @import "../../../sass/media";
 
 :host {
-  height: 29px;
-  width: 65px;
+  height: rem(29);
+  width: rem(65);
 }
 
 $size: rem(20);
@@ -13,10 +13,10 @@ $size: rem(20);
 .toggle {
   position: relative;
 
-  width: 65px;
-  height: 29px;
+  height: rem(29);
+  width: rem(65);
 
-  margin-right: 20px;
+  margin-right: rem(20);
 
   &__input {
     opacity: 0;
@@ -26,7 +26,7 @@ $size: rem(20);
 
   &__input:checked + &__switch::before {
     background-image: url(../../../assets/img/icons/dark-mode.svg);
-    transform: translateX(-21px);
+    transform: translateX(rem(-21));
   }
 
   &__switch {
@@ -42,8 +42,8 @@ $size: rem(20);
     height: rem(23);
     width: rem(48);
 
-    border-radius: 34px;
-    border: white solid 0.5px;
+    border-radius: rem(34);
+    border: white solid rem(0.5);
 
     &::before {
       content: "";
@@ -55,7 +55,7 @@ $size: rem(20);
       height: $size;
       width: $size;
 
-      right: 4px;
+      right: rem(4);
       bottom: 0;
 
       transition: background-image 0.4s, transform 0.4s;

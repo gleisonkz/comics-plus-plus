@@ -32,8 +32,8 @@
   width: rem(180);
   height: rem(40);
 
-  padding: 15px;
-  border-radius: 5px;
+  padding: rem(15);
+  border-radius: rem(5);
 
   user-select: none;
 
@@ -49,11 +49,11 @@
 }
 
 @mixin base-border-bottom() {
-  border-bottom: 0.1px solid $color-tab-panel-border-top;
+  border-bottom: rem(0.1) solid $color-tab-panel-border-top;
 }
 
 @mixin form-title() {
-  font-size: 18px;
+  font-size: rem(18);
   margin-bottom: rem(15);
   font-weight: 300;
   line-height: 1.4;

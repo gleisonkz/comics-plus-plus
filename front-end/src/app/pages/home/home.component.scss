@@ -19,7 +19,7 @@
 
   color: $color-panel-text;
   background-color: $color-panel-bg;
-  border-radius: 10px;
+  border-radius: rem(10);
 
   @include medias($tiny-mobile, $mobile) {
     flex-direction: column;
@@ -52,8 +52,8 @@
     line-height: rem(25);
 
     @include medias($tiny-mobile, $mobile) {
-      width: 350px;
-      font-size: 19px;
+      width: rem(350);
+      font-size: rem(19);
     }
   }
 

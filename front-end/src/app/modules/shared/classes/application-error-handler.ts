@@ -1,8 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { ErrorHandler, Injectable, Injector, NgZone } from '@angular/core';
+import { NotificationService } from '../../../services/notification.service';
 import HttpStatusCode from '../enums/http-status-code.enum';
-// import { LoginService } from './services/login.service';
-import { NotificationService } from '../services/notification.service';
 
 @Injectable()
 export class ApplicationErrorHandler extends ErrorHandler {
@@ -15,7 +14,6 @@ export class ApplicationErrorHandler extends ErrorHandler {
   }
 
   handleError(errorResponse: HttpErrorResponse | any) {
-    console.log('ApplicationErrorHandler');
     if (errorResponse instanceof HttpErrorResponse) {
       const message = errorResponse?.error;
 
@@ -28,7 +26,6 @@ export class ApplicationErrorHandler extends ErrorHandler {
             );
             break;
           case HttpStatusCode.UNAUTHORIZED:
-            // this.injector.get(LoginService).handleLogin();
             this.notificationService.showMessage(
               message || 'Não autorizado.',
               ''

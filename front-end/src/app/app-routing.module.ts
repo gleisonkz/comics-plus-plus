@@ -11,17 +11,6 @@ const routes: Routes = [
   { path: 'quadrinhos', component: ComicsComponent },
   { path: 'quadrinhos/:id', component: ComicDetailComponent },
   { path: 'sobre', component: AboutComponent },
-  // {
-  //   path: 'order',
-  //   component: OrderComponent,
-  //   canActivate: [AuthorizationGuard],
-  //   data: { allowedRoles: ['User'] },
-  // },
-  // {
-  //   path: 'order-finished',
-  //   component: OrderFinishedComponent,
-  //   canActivate: [OrderGuard],
-  // },
   {
     path: 'order',
     loadChildren: () =>

@@ -11,7 +11,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { finalize } from 'rxjs/operators';
 import { MatPaginatorService } from 'src/app/modules/admin/services/mat-paginator.service';
 import { GenreService } from '../../../../services/genre.service';
-import { NotificationService } from '../../../shared/services/notification.service';
+import { NotificationService } from '../../../../services/notification.service';
 import { CustomDataSource } from '../../classes/custom-data-source';
 import { ConfirmationDialogComponent } from '../../components/confirmation-dialog/confirmation-dialog.component';
 import { GenreDialogComponent } from '../../components/genre-dialog/genre-dialog.component';

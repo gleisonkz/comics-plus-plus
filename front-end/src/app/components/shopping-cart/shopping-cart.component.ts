@@ -39,7 +39,6 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
   }
 
   quantityUp(item: CartItem): void {
-    // this.shoppingCartService.quantityUp(item);
     this.shoppingCartService.addItem(item.comic);
   }
 

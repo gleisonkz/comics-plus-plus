@@ -40,12 +40,6 @@
     }
   }
 
-  // &__info {
-  //   background-color: $color-panel-bg;
-  //   display: flex;
-  //   flex-direction: column;
-  // }
-
   &__genre,
   &__title {
     @include base-bold;
@@ -69,7 +63,6 @@
     flex-direction: column;
     align-items: stretch;
     padding: rem(0 20);
-    // height: rem(240);
 
     background-color: $color-panel-bg;
     border-radius: $global-radius;

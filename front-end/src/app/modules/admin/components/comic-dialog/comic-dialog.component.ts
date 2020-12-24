@@ -7,10 +7,10 @@ import { Observable, Subject, Subscription } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { ComicImage } from 'src/app/models/comic-image.model';
 import { Comic } from 'src/app/models/comic.model';
-import { NotificationService } from 'src/app/modules/shared/services/notification.service';
 import { AuthorService } from 'src/app/services/author.service';
 import { ComicService } from 'src/app/services/comic.service';
 import { GenreService } from 'src/app/services/genre.service';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   templateUrl: './comic-dialog.component.html',
@@ -111,14 +111,6 @@ export class ComicDialogComponent implements OnInit {
         });
     }
   }
-
-  // loadComicImage(comicID: number) {
-  //   this.comicService.getComicImageByComicID(comicID).subscribe((c) => {
-  //     this.imageDataUrl = this.domSanitizer.bypassSecurityTrustUrl(
-  //       `data:image/${c.extension};base64,` + c.base64
-  //     );
-  //   });
-  // }
 
   save() {
     const comic: Comic = this.form.value;

@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { tap } from 'rxjs/operators';
-import { NotificationService } from 'src/app/modules/shared/services/notification.service';
+import { NotificationService } from 'src/app/services/notification.service';
 import { ComicService } from '../../../../services/comic.service';
 import { ComicInventory } from '../../models';
 

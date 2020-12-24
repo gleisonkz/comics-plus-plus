@@ -4,7 +4,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { finalize } from 'rxjs/operators';
 import { Filter } from 'src/app/modules/admin/models/filter.model';
-import { NotificationService } from 'src/app/modules/shared/services/notification.service';
+import { NotificationService } from 'src/app/services/notification.service';
 import { Comic } from '../../../../models/comic.model';
 import { AuthorService } from '../../../../services/author.service';
 import { ComicService } from '../../../../services/comic.service';

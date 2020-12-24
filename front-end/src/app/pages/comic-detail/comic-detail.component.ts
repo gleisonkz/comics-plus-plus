@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ComicShopItemDetail } from '../../models/comic-shop-item-detail.model';
-import { NotificationService } from '../../modules/shared/services/notification.service';
 import { ComicService } from '../../services/comic.service';
 import { FileUploadService } from '../../services/file-upload.service';
+import { NotificationService } from '../../services/notification.service';
 import { ShoppingCartService } from '../../services/shopping-cart.service';
 
 @Component({
@@ -62,15 +62,6 @@ export class ComicDetailComponent implements OnInit {
   private isFormInvalid(): boolean {
     return this.comicForm.invalid;
   }
-
-  // private hasItemsAvailable(quantity: number): boolean {
-  //   return this.comic.inventoryQuantity < quantity;
-  // }
-
-  // private isInventoryEmpty(): boolean {
-  //   return this.comic.inventoryQuantity === 0;
-  // }
-
   navigateToOrder(): void {
     this.hasCartItems && this.router.navigate(['/order']);
   }

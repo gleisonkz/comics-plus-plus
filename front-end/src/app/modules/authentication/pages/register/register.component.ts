@@ -6,7 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { NotificationService } from '../../../shared/services/notification.service';
+import { NotificationService } from '../../../../services/notification.service';
 import { RegisterUser } from '../../models/register-user.model';
 import { AuthenticationService } from '../../services/authentication.service';
 

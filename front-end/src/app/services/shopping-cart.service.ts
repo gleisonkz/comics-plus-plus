@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { ComicShopItem } from '../models/comic-shop-item.model';
-import { NotificationService } from '../modules/shared/services/notification.service';
 import { CartItem } from './../models/cart-item.model';
+import { NotificationService } from './notification.service';
 
 @Injectable({
   providedIn: 'root',

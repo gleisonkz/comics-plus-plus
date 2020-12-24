@@ -3,7 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { finalize } from 'rxjs/operators';
-import { NotificationService } from 'src/app/modules/shared/services/notification.service';
+import { NotificationService } from 'src/app/services/notification.service';
 import { ComicService } from '../../../../services/comic.service';
 import { CustomDataSource } from '../../classes/custom-data-source';
 import { ComicInventoryDialogComponent } from '../../components/comic-inventory-dialog/comic-inventory-dialog.component';
@@ -91,7 +91,6 @@ export class InventoryCrudComponent implements OnInit {
   }
 
   loadData(comicInventory?: ComicInventory): void {
-
     this.dataSource.loading$
       .pipe(
         finalize(() => {

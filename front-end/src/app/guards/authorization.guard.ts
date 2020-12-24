@@ -7,8 +7,8 @@ import {
   RouterStateSnapshot,
 } from '@angular/router';
 import { Observable } from 'rxjs';
-import { NotificationService } from '../modules/shared/services/notification.service';
 import { AuthorizationService } from '../services/authorization.service';
+import { NotificationService } from '../services/notification.service';
 
 @Injectable({
   providedIn: 'root',
@@ -26,7 +26,7 @@ export class AuthorizationGuard implements CanActivate, CanActivateChild {
   ): Observable<boolean> | Promise<boolean> | boolean {
     const allowedRoles = next.data.allowedRoles;
     const isAuthorized = this.authorizationService.isAuthorized(allowedRoles);
-    console.log('asdf');
+
     if (!isAuthorized) {
       this.router.navigate(['/authentication/login']);
       this.notificationService.showMessage(
@@ -44,7 +44,6 @@ export class AuthorizationGuard implements CanActivate, CanActivateChild {
     const isAuthorized = this.authorizationService.isAuthorized(allowedRoles);
 
     if (!isAuthorized) {
-      // if not authorized, show access denied message
       this.router.navigate(['/']);
     }
 

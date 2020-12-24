@@ -4,8 +4,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { Genre } from 'src/app/models/genre.model';
-import { NotificationService } from 'src/app/modules/shared/services/notification.service';
 import { GenreService } from 'src/app/services/genre.service';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   templateUrl: './genre-dialog.component.html',

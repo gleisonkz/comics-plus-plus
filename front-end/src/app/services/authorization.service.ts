@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Role } from '../enums/role.enum';
-import { NotificationService } from '../modules/shared/services/notification.service';
+import { NotificationService } from './notification.service';
 
 @Injectable({
   providedIn: 'root',

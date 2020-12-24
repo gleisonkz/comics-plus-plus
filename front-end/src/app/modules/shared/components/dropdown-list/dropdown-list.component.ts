@@ -18,7 +18,6 @@ export class DropdownListComponent implements OnInit {
 
   isMatSelectClosing: boolean;
 
-  // @Input() comic: Comic;
   @Input() isNew: boolean;
   @Input() idKeyObject: string;
   @Input() valueKeyObject: string;
@@ -75,6 +74,7 @@ export class DropdownListComponent implements OnInit {
       return;
     }
     // recuperando o termo de pesquisa
+
     let searchTerm = this.dataSearchControl.value;
     if (!searchTerm) {
       const previousSelectedData = this.dataList.filter((c) => {

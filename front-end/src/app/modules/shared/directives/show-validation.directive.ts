@@ -35,7 +35,6 @@ export class ShowValidationDirective implements AfterContentInit, OnDestroy {
       const errorMessageParent = this.checkValidations(group);
       const error = errorMessage || errorMessageParent;
       this.setInnerHTML(error);
-      console.log('error', error);
     };
 
     this.subscriptions.push(

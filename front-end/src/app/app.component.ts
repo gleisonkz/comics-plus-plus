@@ -1,13 +1,11 @@
-import { DOCUMENT } from '@angular/common';
-import { Component, Inject, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { Router, RouterOutlet } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthenticationService } from './modules/authentication/services/authentication.service';
 import { fadeAnimation } from './modules/shared/animations/fade.animations';
-import { NotificationService } from './modules/shared/services/notification.service';
 import { AuthorizationService } from './services/authorization.service';
-import { ToggleThemeService } from './services/toggle-theme.service';
+import { NotificationService } from './services/notification.service';
 
 @Component({
   selector: 'app-root',
@@ -30,8 +28,6 @@ export class AppComponent {
   }
 
   constructor(
-    private toggleThemeService: ToggleThemeService,
-    @Inject(DOCUMENT) private documentRef: Document,
     private authorizationService: AuthorizationService,
     private authenticationService: AuthenticationService,
     private notificationService: NotificationService,
@@ -57,7 +53,5 @@ export class AppComponent {
 
   logout(): void {
     this.authenticationService.logout();
-    this.notificationService.showMessage('Logout efetuado com sucesso!');
-    this.router.navigate(['authentication', 'login']);
   }
 }

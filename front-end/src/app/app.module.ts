@@ -60,7 +60,6 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
     },
   ],
   bootstrap: [AppComponent],
-  // schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
 })
 export class AppModule {}
 

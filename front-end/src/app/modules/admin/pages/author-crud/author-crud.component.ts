@@ -7,8 +7,10 @@ import { Filter } from 'src/app/modules/admin/models/filter.model';
 import { NotificationService } from 'src/app/modules/shared/services/notification.service';
 import { AuthorService } from '../../../../services/author.service';
 import { CustomDataSource } from '../../classes/custom-data-source';
-import { AuthorDialogComponent } from '../../components/author-dialog/author-dialog.component';
-import { ConfirmationDialogComponent } from '../../components/confirmation-dialog/confirmation-dialog.component';
+import {
+  AuthorDialogComponent,
+  ConfirmationDialogComponent,
+} from '../../components';
 import { pageSizeOptions } from '../../constants/paginator-options';
 import { MatPaginatorService } from '../../services/mat-paginator.service';
 import { Author } from './../../../../models/author.model';

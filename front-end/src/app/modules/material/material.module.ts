@@ -26,7 +26,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { MaterialFileInputModule } from 'ngx-material-file-input';
-import { CustomErrorStateMatcher } from '../shared/classes/custom-error-state-matcher';
+import { CustomErrorStateMatcher } from './custom-error-state-matcher';
 
 @NgModule({
   declarations: [],

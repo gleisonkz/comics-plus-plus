@@ -6,9 +6,7 @@ import {
   RouterStateSnapshot,
 } from '@angular/router';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class OrderGuard implements CanActivate {
   constructor(private router: Router) {}
 

@@ -114,7 +114,7 @@ export class OrderComponent implements OnInit {
       order.orderID = c.orderID;
 
       sessionStorage.setItem('orderID', `${c.orderID}`);
-      this.router.navigate(['/order-finished'], {
+      this.router.navigate(['order/order-finished'], {
         state: { order: order },
       });
 

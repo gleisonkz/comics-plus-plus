@@ -3,6 +3,7 @@ import { OrderFinishedComponent } from 'src/app/modules/order/pages/order-finish
 import { SharedModule } from '../shared/shared.module';
 import { OrderItemComponent } from './components/order-item/order-item.component';
 import { RatingComponent } from './components/rating/rating.component';
+import { OrderGuard } from './guards/order.guard';
 import { OrderRoutingModule } from './order-routing.module';
 import { OrderComponent } from './pages/order/order.component';
 
@@ -14,5 +15,6 @@ import { OrderComponent } from './pages/order/order.component';
     OrderFinishedComponent,
   ],
   imports: [OrderRoutingModule, SharedModule],
+  providers: [OrderGuard],
 })
 export class OrderModule {}

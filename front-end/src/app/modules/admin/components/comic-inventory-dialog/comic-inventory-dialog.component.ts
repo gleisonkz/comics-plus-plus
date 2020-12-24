@@ -4,7 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { tap } from 'rxjs/operators';
 import { NotificationService } from 'src/app/modules/shared/services/notification.service';
 import { ComicService } from '../../../../services/comic.service';
-import { ComicInventory } from '../../models/comic-inventory.model';
+import { ComicInventory } from '../../models';
 
 @Component({
   templateUrl: './comic-inventory-dialog.component.html',

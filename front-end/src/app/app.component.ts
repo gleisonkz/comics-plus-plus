@@ -58,5 +58,6 @@ export class AppComponent {
   logout(): void {
     this.authenticationService.logout();
     this.notificationService.showMessage('Logout efetuado com sucesso!');
+    this.router.navigate(['authentication', 'login']);
   }
 }

@@ -1,19 +1,32 @@
 import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NgxMaskModule } from 'ngx-mask';
 import { MaterialModule } from './../material/material.module';
+import { ApplicationErrorHandler } from './classes/application-error-handler';
 import { DropdownListComponent } from './components/dropdown-list/dropdown-list.component';
+import { ShowValidationDirective } from './directives/show-validation.directive';
 import { NotificationService } from './services/notification.service';
 
 @NgModule({
-  declarations: [DropdownListComponent],
-  imports: [CommonModule, MaterialModule, ReactiveFormsModule],
+  declarations: [DropdownListComponent, ShowValidationDirective],
+  imports: [
+    CommonModule,
+    MaterialModule,
+    ReactiveFormsModule,
+    NgxMaskModule.forRoot(),
+  ],
   exports: [
     CommonModule,
     DropdownListComponent,
     MaterialModule,
     ReactiveFormsModule,
+    ShowValidationDirective,
+    NgxMaskModule,
   ],
-  providers: [NotificationService],
+  providers: [
+    NotificationService,
+    { provide: ErrorHandler, useClass: ApplicationErrorHandler },
+  ],
 })
 export class SharedModule {}

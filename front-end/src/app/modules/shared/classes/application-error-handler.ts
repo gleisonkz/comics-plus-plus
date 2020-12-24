@@ -15,6 +15,7 @@ export class ApplicationErrorHandler extends ErrorHandler {
   }
 
   handleError(errorResponse: HttpErrorResponse | any) {
+    console.log('ApplicationErrorHandler');
     if (errorResponse instanceof HttpErrorResponse) {
       const message = errorResponse?.error;
 

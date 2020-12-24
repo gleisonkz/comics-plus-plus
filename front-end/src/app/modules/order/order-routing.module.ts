@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthorizationGuard } from 'src/app/guards/authorization.guard';
-import { OrderGuard } from 'src/app/guards/order.guard';
-import { OrderFinishedComponent } from 'src/app/modules/order/pages/order-finished/order-finished.component';
+import { OrderGuard } from 'src/app/modules/order/guards/order.guard';
+import { OrderFinishedComponent } from './pages/order-finished/order-finished.component';
 import { OrderComponent } from './pages/order/order.component';
 
 const routes: Routes = [

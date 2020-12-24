@@ -5,6 +5,7 @@
 
 mat-dialog-actions {
   @include flex-center;
+  margin-top: rem(10);
   justify-content: flex-end;
 
   button:first-of-type {

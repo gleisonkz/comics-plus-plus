@@ -5,33 +5,51 @@
     <div>
       <mat-form-field>
         <input matInput placeholder="Titulo" formControlName="title" />
+        <mat-error>
+          <span cmsShowValidation="title"></span>
+        </mat-error>
       </mat-form-field>
       <mat-form-field>
         <input
-          type="number"
+          type="text"
+          prefix="R$ "
+          mask="separator.2"
+          thousandSeparator="."
+          decimalMarker=","
           matInput
           placeholder="Preço"
           formControlName="price"
         />
+        <mat-error>
+          <span cmsShowValidation="price"></span>
+        </mat-error>
       </mat-form-field>
       <mat-form-field>
         <input
-          type="number"
+          type="text"
+          mask="9999"
           matInput
           placeholder="Ano"
           formControlName="year"
         />
+        <mat-error>
+          <span cmsShowValidation="year"></span>
+        </mat-error>
       </mat-form-field>
     </div>
 
     <div>
       <mat-form-field>
         <input
-          type="number"
+          type="text"
+          mask="9999"
           matInput
           placeholder="Nº Páginas"
           formControlName="pages"
         />
+        <mat-error>
+          <span cmsShowValidation="pages"></span>
+        </mat-error>
       </mat-form-field>
 
       <cms-dropdown-list
@@ -55,14 +73,17 @@
       ></cms-dropdown-list>
     </div>
 
-    <div style="width: 100%">
-      <mat-form-field style="width: 100%">
+    <div class="description">
+      <mat-form-field class="description__field">
         <textarea
           placeholder="Descrição"
           formControlName="description"
           matInput
           rows="7"
         ></textarea>
+        <mat-error>
+          <span cmsShowValidation="description"></span>
+        </mat-error>
       </mat-form-field>
     </div>
 
@@ -73,6 +94,9 @@
         accept="image/png,image/jpg,image/gif,image/jpeg"
       ></ngx-mat-file-input>
       <mat-icon matSuffix>folder</mat-icon>
+      <mat-error>
+        <span cmsShowValidation="image"></span>
+      </mat-error>
     </mat-form-field>
 
     <div class="preview-image-action">

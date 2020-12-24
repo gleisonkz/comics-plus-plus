@@ -31,6 +31,7 @@ cms-dropdown-list {
 .preview-image-action {
   display: flex;
   align-items: center;
+  margin-top: rem(10);
 
   p {
     margin: rem(0 5 0 0);
@@ -42,5 +43,12 @@ cms-dropdown-list {
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+}
+
+.description {
+  width: 100%;
+  &__field {
+    width: 100%;
   }
 }

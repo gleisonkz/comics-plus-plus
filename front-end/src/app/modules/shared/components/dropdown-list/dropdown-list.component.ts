@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
 import { Observable, ReplaySubject, Subject, Subscription } from 'rxjs';
 import {
   debounceTime,
@@ -113,5 +113,27 @@ export class DropdownListComponent implements OnInit {
       });
       this.filteredDataOptions$.next(previousSelectedData);
     }
+  }
+
+  getFormControlName(control: AbstractControl): string | null {
+    let group = <FormGroup>control.parent;
+
+    if (!group) {
+      return null;
+    }
+
+    let name: string;
+
+    Object.keys(group.controls).forEach((key) => {
+      let childControl = group.get(key);
+
+      if (childControl !== control) {
+        return;
+      }
+
+      name = key;
+    });
+
+    return name;
   }
 }

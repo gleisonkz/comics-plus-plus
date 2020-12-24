@@ -1,6 +1,6 @@
-@import "./sass/variables";
-@import "./sass/responsive-helpers";
-@import "./sass/mixins";
+@import "variables";
+@import "responsive-helpers";
+@import "mixins";
 
 :root {
   --lh: 1.4rem;
@@ -23,61 +23,19 @@
   box-sizing: border-box;
 }
 
-.icon {
-  margin-right: rem(10);
-}
-
-.mat-dialog-title,
-.mat-h1,
-.mat-headline,
-.mat-typography h1,
-.mat-list-item-content,
-.mat-expansion-panel-header-title,
-.mat-expansion-panel-header-description,
-.mat-expansion-indicator::after,
-.mat-select-arrow,
-.mat-tab-label .mat-tab-label-content {
-  color: $color-title-text !important;
-}
-
-.mat-h1,
-.mat-headline,
-.mat-typography h1 {
-  font: 400 rem(24) / rem(32) Roboto, "Helvetica Neue", sans-serif;
-  letter-spacing: normal;
-  margin: 0 0 rem(10);
-}
-
-.mat-h2,
-.mat-title,
-.mat-typography h2 {
-  font: 500 rem(20) / rem(32) Roboto, "Helvetica Neue", sans-serif;
-  letter-spacing: normal;
-  margin: 0 0 rem(10);
-}
-
-.mat-menu-panel {
-  background-color: var(--color-panel-bg) !important;
-}
-
-.mat-menu-item span {
-  color: $color-text;
-}
-
-body,
-html {
-  height: 100%;
-  background: #222;
-}
-
-.mat-dialog-container {
-  background-color: $color-panel-bg;
-}
-
 html,
 body {
   height: 100%;
   background-color: var(--background-color);
+}
+
+body {
+  margin: 0;
+  font-family: $font-primary;
+}
+
+.icon {
+  margin-right: rem(10);
 }
 
 ul {
@@ -95,19 +53,6 @@ b,
 strong {
   font-weight: 700;
 }
-body {
-  margin: 0;
-  font-family: $font-primary;
-}
-
-html,
-body {
-  height: 100%;
-}
-body {
-  margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-}
 
 .disabled {
   pointer-events: none;
@@ -115,131 +60,5 @@ body {
   @include button-disabled;
 }
 
-table {
-  td.mat-cell {
-    white-space: nowrap;
-    max-width: rem(200);
-
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: table-cell;
-    box-sizing: border-box;
-  }
-
-  th.mat-header-cell,
-  td.mat-cell,
-  td.mat-footer-cell {
-    padding: 0 rem(10);
-  }
-
-  th.mat-header-cell {
-    color: $color-title-text;
-  }
-
-  td.mat-cell,
-  td.mat-footer-cell {
-    color: $color-text;
-  }
-
-  th.mat-header-cell:last-of-type,
-  td.mat-cell:last-of-type,
-  td.mat-footer-cell:last-of-type {
-    text-align: end;
-  }
-}
-
-.title-group {
-  @include flex-center;
-  color: $color-title-text;
-  width: 100%;
-  margin-bottom: rem(10);
-
-  justify-content: space-between;
-
-  h1 {
-    font-size: rem(14);
-    margin: 0;
-  }
-
-  ::ng-deep.mat-button-wrapper {
-    @include flex-center;
-  }
-
-  button {
-    @include flex-center;
-
-    i {
-      margin-right: rem(5);
-    }
-  }
-
-  .title {
-    i {
-      margin-right: rem(10);
-      color: $color-title-text;
-    }
-
-    @include flex-center;
-    font-size: rem(20);
-  }
-}
-
-mat-paginator {
-  div.mat-paginator-range-actions {
-    color: $color-text;
-    @include medias($tiny-mobile, $mobile) {
-      width: 100%;
-      justify-content: space-between;
-    }
-  }
-
-  div.mat-paginator-range-label {
-    color: $color-text;
-    @include medias($tiny-mobile, $mobile) {
-      margin: 0 !important;
-    }
-  }
-
-  div.mat-paginator-page-size {
-    color: $color-text;
-  }
-}
-
-.mat-form-field-underline {
-  background-color: $color-tab-panel-border-bottom !important;
-}
-
-.mat-expansion-panel-body,
-.mat-expansion-panel-header {
-  padding: 0 !important;
-}
-
-.mat-expansion-panel,
-.mat-expansion-panel:not(.mat-expanded):not([aria-disabled="true"])
-  .mat-expansion-panel-header:hover {
-  background: transparent !important;
-}
-
-.mat-expansion-panel:not([class*="mat-elevation-z"]) {
-  box-shadow: none !important;
-}
-
-.mat-expansion-indicator {
-  margin-right: rem(2) !important ;
-}
-
-.mat-drawer-inner-container {
-  background-color: $color-panel-bg !important;
-}
-
-.mat-form-field-placeholder {
-  color: red !important;
-}
-
-.mat-focused .mat-form-field-placeholder {
-  color: red !important;
-}
-
-.mat-form-field-appearance-legacy .mat-form-field-label {
-  color: $color-form-field-placeholder;
-}
+@import "crud";
+@import "material";

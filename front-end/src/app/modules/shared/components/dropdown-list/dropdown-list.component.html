@@ -22,4 +22,7 @@
       {{ data[valueKeyObject] }}
     </mat-option>
   </mat-select>
+  <mat-error>
+    <span [cmsShowValidation]="getFormControlName(dataControl)"></span>
+  </mat-error>
 </mat-form-field>

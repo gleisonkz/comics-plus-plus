@@ -44,12 +44,16 @@
   </form>
 </div>
 
-<div class="title-group">
+<div
+  class="title-group subtitle"
+  [ngStyle]="{
+    display: loadingComplete && paginator.length ? 'table' : 'none'
+  }"
+>
   <h1 class="mat-h1">
     <i class="fa fa-list-alt" aria-hidden="true"></i>
     Lista de Itens
   </h1>
-  <mat-divider fxFlex="1 0"></mat-divider>
 </div>
 
 <div class="container">
@@ -72,7 +76,6 @@
     [ngStyle]="{
       display: loadingComplete && paginator.length ? 'table' : 'none'
     }"
-    style="display: none !important"
   >
     <ng-container matColumnDef="ComicInventoryID">
       <th mat-header-cell *matHeaderCellDef>ID</th>

@@ -43,33 +43,6 @@
   }
 }
 
-.title-group {
-  @include flex-center;
-
-  justify-content: space-between;
-
-  ::ng-deep.mat-button-wrapper {
-    @include flex-center;
-  }
-
-  button {
-    @include flex-center;
-
-    i {
-      margin-right: rem(5);
-    }
-  }
-
-  .title {
-    i {
-      margin-right: rem(10);
-    }
-
-    @include flex-center;
-    font-size: rem(20);
-  }
-}
-
 mat-form-field {
   margin-right: rem(20);
 

@@ -6,8 +6,6 @@ using ComicStore.Service.Interfaces;
 using ComicStore.Shared.Class;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,7 +14,7 @@ namespace ComicStore.Application.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ComicController : ControllerBase
+    public class ComicController : ComicStoreBaseController
     {
         private readonly IComicService svcComic;
 
@@ -133,16 +131,7 @@ namespace ComicStore.Application.Controllers
 
                 var result = comics.ToList();
 
-                Response.Headers.Add(
-                    "X-Pagination",
-                     JsonConvert.SerializeObject(comics.GetPaginatorMetadata(), new JsonSerializerSettings
-                     {
-                         ContractResolver = new DefaultContractResolver
-                         {
-                             NamingStrategy = new CamelCaseNamingStrategy()
-                         }
-                     })
-                     );
+                AddPaginationHeader(comics);
 
                 return Ok(result);
             }
@@ -221,16 +210,7 @@ namespace ComicStore.Application.Controllers
 
                 var result = comicsInventory.ToList();
 
-                Response.Headers.Add(
-                    "X-Pagination",
-                     JsonConvert.SerializeObject(comicsInventory.GetPaginatorMetadata(), new JsonSerializerSettings
-                     {
-                         ContractResolver = new DefaultContractResolver
-                         {
-                             NamingStrategy = new CamelCaseNamingStrategy()
-                         }
-                     })
-                     );
+                AddPaginationHeader(comicsInventory);
 
                 return Ok(result);
             }

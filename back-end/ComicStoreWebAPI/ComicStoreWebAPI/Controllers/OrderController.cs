@@ -7,7 +7,7 @@ namespace ComicStore.Application.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class OrderController : ControllerBase
+    public class OrderController : ComicStoreBaseController
     {
         private readonly IOrderService orderService;
 

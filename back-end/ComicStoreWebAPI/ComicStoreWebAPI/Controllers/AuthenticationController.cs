@@ -1,7 +1,6 @@
 ﻿using ComicStore.Application.Classes;
 using ComicStore.Application.DTO;
 using ComicStore.Service.Interfaces;
-using ComicStore.Service.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -12,7 +11,7 @@ namespace ComicStore.Application.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AuthenticationController : ControllerBase
+    public class AuthenticationController : ComicStoreBaseController
     {
         private readonly SignInManager<IdentityUser> signInManager;
         private readonly UserManager<IdentityUser> userManager;

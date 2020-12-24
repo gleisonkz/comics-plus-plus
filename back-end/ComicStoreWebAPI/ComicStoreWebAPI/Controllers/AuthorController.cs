@@ -4,8 +4,6 @@ using ComicStore.Service.Classes;
 using ComicStore.Service.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 using System;
 using System.Linq;
 
@@ -13,7 +11,7 @@ namespace ComicStore.Application.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AuthorController : ControllerBase
+    public class AuthorController : ComicStoreBaseController
     {
         private readonly IAuthorService svcAuthor;
 
@@ -22,7 +20,7 @@ namespace ComicStore.Application.Controllers
             this.svcAuthor = svcAuthor;
         }
 
-        [HttpGet]        
+        [HttpGet]
         [Authorize(Roles = "Admin")]
         [Route("paginator")]
         public IActionResult GetPaginatedAuthors([FromQuery] AuthorFilter filter)
@@ -37,16 +35,7 @@ namespace ComicStore.Application.Controllers
 
             var result = authors.ToList();
 
-            Response.Headers.Add(
-                "X-Pagination",
-                 JsonConvert.SerializeObject(authors.GetPaginatorMetadata(), new JsonSerializerSettings
-                 {
-                     ContractResolver = new DefaultContractResolver
-                     {
-                         NamingStrategy = new CamelCaseNamingStrategy()
-                     }
-                 })
-                 );
+            AddPaginationHeader(authors);
 
             return Ok(result);
         }

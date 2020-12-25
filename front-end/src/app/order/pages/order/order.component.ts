@@ -2,14 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CartItem } from '@core/models/cart-item.model';
-import {
-  CustomerService,
-  OrderService,
-  ShoppingCartService
-} from '@core/services';
+import { ShoppingCartService } from '@core/services';
 import { PaymentMethod } from '@order/enums/payment-method.enum';
 import { OrderItem } from '@order/models/order-item.model';
 import { Order } from '@order/models/order.model';
+import { CustomerService, OrderService } from '@order/services';
 import cep from 'cep-promise';
 import { Observable, Subscription } from 'rxjs';
 

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { AuthorizationService } from './authorization.service';
+import { AuthorizationService } from '@core/services';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class CustomerService {
   constructor(private authorizationService: AuthorizationService) {}

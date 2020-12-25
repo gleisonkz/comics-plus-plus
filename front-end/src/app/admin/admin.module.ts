@@ -13,6 +13,7 @@ import {
   InventoryCrudComponent
 } from '@admin/pages';
 import { AdminComponent } from '@admin/pages/admin/admin.component';
+import { GenreService } from '@admin/services';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
@@ -27,10 +28,10 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTableModule } from '@angular/material/table';
-import { GenreService } from '@core/services';
 import { SharedModule } from '@shared/shared.module';
 import { MaterialFileInputModule } from 'ngx-material-file-input';
 import { AdminRoutingModule } from './admin-routing.module';
+import { AuthorService } from './services/author.service';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,6 @@ import { AdminRoutingModule } from './admin-routing.module';
     MatButtonModule,
     MaterialFileInputModule
   ],
-  providers: [GenreService]
+  providers: [GenreService, AuthorService]
 })
 export class AdminModule {}

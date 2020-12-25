@@ -5,9 +5,7 @@ import { environment } from 'environments/environment';
 import { Observable } from 'rxjs';
 import { delay } from 'rxjs/operators';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class AuthorService {
   constructor(private http: HttpClient) {}
 

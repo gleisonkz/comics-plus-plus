@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ComicShopItem } from '@core/models/comic-shop-item.model';
-import { ShoppingCartService } from '@core/services';
-import { FileUploadService } from '../../services/file-upload.service';
+import { FileUploadService, ShoppingCartService } from '@core/services';
 
 @Component({
   selector: 'cms-comic',

@@ -1,8 +1,9 @@
 import { Genre } from '@admin/models';
+import { GenreService } from '@admin/services';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { GenreService, NotificationService } from '@core/services';
+import { NotificationService } from '@core/services';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 

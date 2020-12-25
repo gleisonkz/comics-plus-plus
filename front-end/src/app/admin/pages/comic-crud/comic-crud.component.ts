@@ -5,17 +5,13 @@ import {
 } from '@admin/components';
 import { pageSizeOptions } from '@admin/constants/paginator-options';
 import { Comic, ComicList, Filter } from '@admin/models';
+import { AuthorService, GenreService } from '@admin/services';
 import { MatPaginatorService } from '@admin/services/mat-paginator.service';
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
-import {
-  AuthorService,
-  ComicService,
-  GenreService,
-  NotificationService
-} from '@core/services';
+import { ComicService, NotificationService } from '@core/services';
 import { finalize } from 'rxjs/operators';
 
 @Component({

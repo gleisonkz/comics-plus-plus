@@ -1,15 +1,11 @@
 import { Comic } from '@admin/models';
+import { AuthorService, GenreService } from '@admin/services';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { ComicImage } from '@core/models/comic-image.model';
-import {
-  AuthorService,
-  ComicService,
-  GenreService,
-  NotificationService
-} from '@core/services';
+import { ComicService, NotificationService } from '@core/services';
 import { FileInput } from 'ngx-material-file-input';
 import { Observable, Subject, Subscription } from 'rxjs';
 import { tap } from 'rxjs/operators';

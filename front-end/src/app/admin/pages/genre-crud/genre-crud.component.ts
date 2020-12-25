@@ -5,6 +5,7 @@ import {
 } from '@admin/components';
 import { pageSizeOptions } from '@admin/constants/paginator-options';
 import { Filter, Genre } from '@admin/models';
+import { GenreService } from '@admin/services';
 import { MatPaginatorService } from '@admin/services/mat-paginator.service';
 import {
   AfterViewInit,
@@ -16,7 +17,7 @@ import {
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
-import { GenreService, NotificationService } from '@core/services';
+import { NotificationService } from '@core/services';
 import { finalize } from 'rxjs/operators';
 
 @Component({

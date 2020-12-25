@@ -1,5 +1,5 @@
-import { PaymentMethod } from '../enums/payment-method.enum';
-import { OrderItem } from './order-item.model';
+import { PaymentMethod } from '@order/enums/payment-method.enum';
+import { OrderItem } from '@order/models/order-item.model';
 
 export interface Order {
   orderID: number;

@@ -2,17 +2,30 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatBadgeModule } from '@angular/material/badge';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatListModule } from '@angular/material/list';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatTabsModule } from '@angular/material/tabs';
 import { RouterModule } from '@angular/router';
-import { MaterialModule } from '../material/material.module';
-import { ComicComponent } from './components/comic/comic.component';
-import { HeaderComponent } from './components/header/header.component';
-import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
-import { ToggleThemeComponent } from './components/toggle-theme/toggle-theme.component';
-import { AboutComponent } from './pages/about/about.component';
-import { ComicDetailComponent } from './pages/comic-detail/comic-detail.component';
-import { ComicsComponent } from './pages/comics/comics.component';
-import { HomeComponent } from './pages/home/home.component';
-import { NotFoundComponent } from './pages/not-found/not-found.component';
+import {
+  ComicComponent,
+  HeaderComponent,
+  ShoppingCartComponent,
+  ToggleThemeComponent
+} from './components';
+import {
+  AboutComponent,
+  ComicDetailComponent,
+  ComicsComponent,
+  HomeComponent,
+  NotFoundComponent
+} from './pages';
 
 @NgModule({
   declarations: [
@@ -30,10 +43,21 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
     CommonModule,
     HttpClientModule,
     RouterModule,
-    MaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatSidenavModule,
+    MatListModule,
+    MatTabsModule,
+    MatIconModule,
+    MatBadgeModule,
+    MatMenuModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatButtonModule,
+    MatSnackBarModule
   ],
   exports: [
+    MatListModule,
+    MatSidenavModule,
     ComicComponent,
     HeaderComponent,
     ShoppingCartComponent,
@@ -42,8 +66,7 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
     HomeComponent,
     ComicsComponent,
     ComicDetailComponent,
-    AboutComponent,
-    MaterialModule
+    AboutComponent
   ]
 })
 export class CoreModule {}

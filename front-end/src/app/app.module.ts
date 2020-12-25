@@ -17,14 +17,12 @@ import { CoreModule } from './core/core.module';
     AppRoutingModule,
     BrowserAnimationsModule,
     CoreModule,
-
     FlexLayoutModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter
       }
-    }),
-    CoreModule
+    })
   ],
   providers: [
     {

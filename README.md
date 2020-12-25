@@ -94,6 +94,7 @@ Technologies, design, patterns and packages that I used to develop this applicat
           |-- [+] enums
           |-- [+] guards
           |-- [+] models
+          |-- [+] services
           |-- [+] pages
           |-- order-routing.module.ts
           |-- order.module.ts

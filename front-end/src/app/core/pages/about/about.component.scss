@@ -1,0 +1,36 @@
+@import "variables";
+@import "mixins";
+@import "functions";
+@import "media";
+
+:host {
+  display: flex;
+  justify-content: center;
+  flex: 1;
+  width: 100%;
+  max-width: $global-max-width;
+  padding: rem(20 40);
+
+  @include medias($tiny-mobile, $mobile, $small-tablet, $tablet) {
+    padding: rem(10);
+  }
+}
+
+.about {
+  @include medias($tiny-mobile, $mobile, $small-tablet, $tablet) {
+    padding-left: rem(20);
+  }
+
+  &__title {
+    color: $color-panel-text;
+  }
+
+  &__text {
+    margin-top: rem(20);
+    color: $color-panel-text;
+  }
+
+  &__link {
+    color: $color-link;
+  }
+}

@@ -1,17 +1,14 @@
 import { Component, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { Router, RouterOutlet } from '@angular/router';
+import { AuthorizationService } from '@core/services';
+import { AuthenticationService } from '@core/services/authentication.service';
 import { Subscription } from 'rxjs';
-import { AuthenticationService } from './modules/authentication/services/authentication.service';
-import { fadeAnimation } from './modules/shared/animations/fade.animations';
-import { AuthorizationService } from './services/authorization.service';
-import { NotificationService } from './services/notification.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
-  animations: [fadeAnimation],
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
   title = 'comics-plus-plus';
@@ -30,7 +27,6 @@ export class AppComponent {
   constructor(
     private authorizationService: AuthorizationService,
     private authenticationService: AuthenticationService,
-    private notificationService: NotificationService,
     private router: Router
   ) {}
 

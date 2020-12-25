@@ -1,65 +1,45 @@
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { JwtModule } from '@auth0/angular-jwt';
+import { JwtInterceptor, JwtModule } from '@auth0/angular-jwt';
+import { QueryParamsInterceptor } from '@core/interceptors/query-params.interceptor';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ComicComponent } from './components/comic/comic.component';
-import { HeaderComponent } from './components/header/header.component';
-import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
-import { ToggleThemeComponent } from './components/toggle-theme/toggle-theme.component';
-import { QueryParamsInterceptor } from './interceptors/query-params.interceptor';
-import { JwtInterceptor } from './modules/authentication/interceptors/jwt.interceptor';
-import { MaterialModule } from './modules/material/material.module';
-import { AboutComponent } from './pages/about/about.component';
-import { ComicDetailComponent } from './pages/comic-detail/comic-detail.component';
-import { ComicsComponent } from './pages/comics/comics.component';
-import { HomeComponent } from './pages/home/home.component';
-import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { CoreModule } from './core/core.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent,
-    HeaderComponent,
-    ToggleThemeComponent,
-    ComicsComponent,
-    AboutComponent,
-    ComicComponent,
-    ComicDetailComponent,
-    ShoppingCartComponent,
-    NotFoundComponent,
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    HttpClientModule,
+    CoreModule,
     ReactiveFormsModule,
-    MaterialModule,
+
     FlexLayoutModule,
     JwtModule.forRoot({
       config: {
-        tokenGetter: tokenGetter,
-      },
+        tokenGetter: tokenGetter
+      }
     }),
+    CoreModule
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: QueryParamsInterceptor,
-      multi: true,
+      multi: true
     },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: JwtInterceptor,
-      multi: true,
-    },
+      multi: true
+    }
   ],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}
 

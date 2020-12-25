@@ -1,0 +1,7 @@
+@import "media";
+
+mat-form-field {
+  @include medias($tiny-mobile, $mobile) {
+    width: 100%;
+  }
+}

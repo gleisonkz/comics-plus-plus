@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AboutComponent } from './pages/about/about.component';
-import { ComicDetailComponent } from './pages/comic-detail/comic-detail.component';
-import { ComicsComponent } from './pages/comics/comics.component';
-import { HomeComponent } from './pages/home/home.component';
-import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { AboutComponent } from '@core/pages/about/about.component';
+import { ComicDetailComponent } from '@core/pages/comic-detail/comic-detail.component';
+import { ComicsComponent } from '@core/pages/comics/comics.component';
+import { HomeComponent } from '@core/pages/home/home.component';
+import { NotFoundComponent } from '@core/pages/not-found/not-found.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -13,26 +13,22 @@ const routes: Routes = [
   { path: 'sobre', component: AboutComponent },
   {
     path: 'order',
-    loadChildren: () =>
-      import('./modules/order/order.module').then((m) => m.OrderModule),
+    loadChildren: () => import('@order/order.module').then((m) => m.OrderModule)
   },
   {
     path: 'admin',
-    loadChildren: () =>
-      import('./modules/admin/admin.module').then((m) => m.AdminModule),
+    loadChildren: () => import('@admin/admin.module').then((m) => m.AdminModule)
   },
   {
     path: 'authentication',
     loadChildren: () =>
-      import('./modules/authentication/authentication.module').then(
-        (m) => m.AuthenticationModule
-      ),
+      import('@auth/authentication.module').then((m) => m.AuthenticationModule)
   },
-  { path: '**', component: NotFoundComponent },
+  { path: '**', component: NotFoundComponent }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
 export class AppRoutingModule {}

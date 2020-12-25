@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
+import { CartItem } from '@core/models/cart-item.model';
+import { ComicShopItem } from '@core/models/comic-shop-item.model';
+import { NotificationService } from '@core/services';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { ComicShopItem } from '../models/comic-shop-item.model';
-import { CartItem } from './../models/cart-item.model';
-import { NotificationService } from './notification.service';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class ShoppingCartService {
   constructor(private notificationService: NotificationService) {}
@@ -29,15 +29,15 @@ export class ShoppingCartService {
           this.notificationService.showMessage(
             'Não há itens disponíveis para está quantidade'
           );
-        },
+        }
       },
       {
         expect: () => true,
         action: () => {
           item.quantityUp(quantity);
           this.itemsSource$.next([...this.itemsSource$.value]);
-        },
-      },
+        }
+      }
     ];
 
     const currentExpect = expectations.find((c) => c.expect());
@@ -64,23 +64,23 @@ export class ShoppingCartService {
           this.notificationService.showMessage(
             'Não há itens disponíveis para está quantidade'
           );
-        },
+        }
       },
       {
         expect: () => foundItem !== undefined,
         action: () => {
           this.quantityUp(foundItem, quantity);
           this.itemsSource$.next(this.itemsSource$.value);
-        },
+        }
       },
       {
         expect: () => true,
         action: () =>
           this.itemsSource$.next([
             ...this.itemsSource$.value,
-            new CartItem(item, quantity),
-          ]),
-      },
+            new CartItem(item, quantity)
+          ])
+      }
     ];
     const currentExpect = expectations.find((c) => c.expect());
     currentExpect.action();

@@ -1,10 +1,10 @@
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { JwtInterceptor, JwtModule } from '@auth0/angular-jwt';
+import { JwtInterceptor } from '@auth/interceptors/jwt.interceptor';
+import { JwtModule } from '@auth0/angular-jwt';
 import { QueryParamsInterceptor } from '@core/interceptors/query-params.interceptor';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,7 +17,6 @@ import { CoreModule } from './core/core.module';
     AppRoutingModule,
     BrowserAnimationsModule,
     CoreModule,
-    ReactiveFormsModule,
 
     FlexLayoutModule,
     JwtModule.forRoot({

@@ -1,20 +1,22 @@
+import { Comic } from '@admin/models';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { ComicImage } from '@core/models/comic-image.model';
+import {
+  AuthorService,
+  ComicService,
+  GenreService,
+  NotificationService
+} from '@core/services';
 import { FileInput } from 'ngx-material-file-input';
 import { Observable, Subject, Subscription } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { ComicImage } from 'src/app/models/comic-image.model';
-import { Comic } from 'src/app/modules/admin/models/comic.model';
-import { AuthorService } from 'src/app/services/author.service';
-import { ComicService } from 'src/app/services/comic.service';
-import { GenreService } from 'src/app/services/genre.service';
-import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   templateUrl: './comic-dialog.component.html',
-  styleUrls: ['./comic-dialog.component.scss'],
+  styleUrls: ['./comic-dialog.component.scss']
 })
 export class ComicDialogComponent implements OnInit {
   form: FormGroup;
@@ -41,17 +43,17 @@ export class ComicDialogComponent implements OnInit {
       comicID: new FormControl(this.data?.comicID || 0),
       title: new FormControl(this.data?.title || '', [Validators.required]),
       description: new FormControl(this.data?.description || '', [
-        Validators.required,
+        Validators.required
       ]),
       price: new FormControl(this.data?.price || '', [Validators.required]),
       year: new FormControl(this.data?.year || '', [
         Validators.required,
-        Validators.minLength(4),
+        Validators.minLength(4)
       ]),
       pages: new FormControl(this.data?.pages || '', [Validators.required]),
       authors: new FormControl([], [Validators.required]),
       genres: new FormControl([], [Validators.required]),
-      image: new FormControl(this.data?.image || '', [Validators.required]),
+      image: new FormControl(this.data?.image || '', [Validators.required])
     });
 
     this.subscribeToPreviewImageControl();
@@ -103,7 +105,7 @@ export class ComicDialogComponent implements OnInit {
 
           base64toBlob(image.base64, 'image').then((c) => {
             const file = new File([c], `${image.name}.${image.extension}`, {
-              type: `image/${image.extension}`,
+              type: `image/${image.extension}`
             });
             const fileInput = new FileInput([file]);
             this.form.controls.image.setValue(fileInput);
@@ -123,11 +125,11 @@ export class ComicDialogComponent implements OnInit {
             comic$: this.comicService.putComic(
               this.data.comicID,
               this.form.value
-            ),
+            )
           }
         : {
             operation: 'criado',
-            comic$: this.comicService.postComic(comic),
+            comic$: this.comicService.postComic(comic)
           };
 
     saveObj.comic$
@@ -156,7 +158,7 @@ export class ComicDialogComponent implements OnInit {
         const comicImage: ComicImage = {
           base64: base64,
           extension: fileExtension,
-          name: fileName,
+          name: fileName
         };
         publisher.next(comicImage);
       };

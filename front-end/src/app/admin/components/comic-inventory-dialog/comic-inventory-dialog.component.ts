@@ -1,14 +1,13 @@
+import { ComicInventory } from '@admin/models';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ComicService, NotificationService } from '@core/services';
 import { tap } from 'rxjs/operators';
-import { NotificationService } from 'src/app/services/notification.service';
-import { ComicService } from '../../../../services/comic.service';
-import { ComicInventory } from '../../models';
 
 @Component({
   templateUrl: './comic-inventory-dialog.component.html',
-  styleUrls: ['./comic-inventory-dialog.component.scss'],
+  styleUrls: ['./comic-inventory-dialog.component.scss']
 })
 export class ComicInventoryDialogComponent implements OnInit {
   form: FormGroup;
@@ -23,7 +22,7 @@ export class ComicInventoryDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = new FormGroup({
-      quantity: new FormControl(this.data.quantity, [Validators.required]),
+      quantity: new FormControl(this.data.quantity, [Validators.required])
     });
   }
 

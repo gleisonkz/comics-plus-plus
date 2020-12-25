@@ -1,12 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ComicShopItem } from 'src/app/models/comic-shop-item.model';
-import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
+import { ComicShopItem } from '@core/models/comic-shop-item.model';
+import { ShoppingCartService } from '@core/services';
 import { FileUploadService } from '../../services/file-upload.service';
 
 @Component({
   selector: 'cms-comic',
   templateUrl: './comic.component.html',
-  styleUrls: ['./comic.component.scss'],
+  styleUrls: ['./comic.component.scss']
 })
 export class ComicComponent implements OnInit {
   @Input() comic: ComicShopItem;

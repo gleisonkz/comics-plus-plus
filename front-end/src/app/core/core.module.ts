@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { MaterialModule } from '../material/material.module';
 import { ComicComponent } from './components/comic/comic.component';
@@ -23,10 +24,15 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
     HomeComponent,
     ComicsComponent,
     ComicDetailComponent,
-    AboutComponent,
-    MaterialModule
+    AboutComponent
   ],
-  imports: [CommonModule, HttpClientModule, RouterModule],
+  imports: [
+    CommonModule,
+    HttpClientModule,
+    RouterModule,
+    MaterialModule,
+    ReactiveFormsModule
+  ],
   exports: [
     ComicComponent,
     HeaderComponent,

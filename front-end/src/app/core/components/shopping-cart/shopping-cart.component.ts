@@ -1,13 +1,13 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatMenuTrigger } from '@angular/material/menu';
+import { CartItem } from '@core/models/cart-item.model';
 import { Observable, Subscription } from 'rxjs';
-import { CartItem } from 'src/app/models/cart-item.model';
 import { ShoppingCartService } from '../../services/shopping-cart.service';
 
 @Component({
   selector: 'cms-shopping-cart',
   templateUrl: './shopping-cart.component.html',
-  styleUrls: ['./shopping-cart.component.scss'],
+  styleUrls: ['./shopping-cart.component.scss']
 })
 export class ShoppingCartComponent implements OnInit, OnDestroy {
   itemState = 'ready';

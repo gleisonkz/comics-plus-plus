@@ -1,15 +1,14 @@
+import { Genre } from '@admin/models';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { GenreService, NotificationService } from '@core/services';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { Genre } from 'src/app/modules/admin/models/genre.model';
-import { GenreService } from 'src/app/services/genre.service';
-import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   templateUrl: './genre-dialog.component.html',
-  styleUrls: ['./genre-dialog.component.scss'],
+  styleUrls: ['./genre-dialog.component.scss']
 })
 export class GenreDialogComponent implements OnInit {
   form: FormGroup;
@@ -26,8 +25,8 @@ export class GenreDialogComponent implements OnInit {
     this.form = new FormGroup({
       description: new FormControl(this.data?.description || '', [
         Validators.required,
-        Validators.minLength(3),
-      ]),
+        Validators.minLength(3)
+      ])
     });
   }
 
@@ -39,11 +38,11 @@ export class GenreDialogComponent implements OnInit {
             genre$: this.genreService.putGenre(
               this.data.genreID,
               this.form.value
-            ),
+            )
           }
         : {
             operation: 'criado',
-            genre$: this.genreService.postGenre(this.form.value),
+            genre$: this.genreService.postGenre(this.form.value)
           };
 
     saveObj.genre$

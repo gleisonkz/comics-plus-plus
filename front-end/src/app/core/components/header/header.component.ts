@@ -1,12 +1,12 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthorizationService } from 'src/app/services/authorization.service';
-import { AuthenticationService } from '../../modules/authentication/services/authentication.service';
+import { AuthorizationService } from '@core/services';
+import { AuthenticationService } from '@core/services/authentication.service';
 
 @Component({
   selector: 'cms-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss'],
+  styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
   @Output() openSide = new EventEmitter<boolean>(false);

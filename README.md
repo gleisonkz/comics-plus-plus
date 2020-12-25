@@ -65,16 +65,19 @@ Technologies, design, patterns and packages that I used to develop this applicat
 ## Folder Structure
 
 - Front-end
-  |-- app
-  |-- [+] components
-  |-- [+] pages
-  |-- [+] guards
-  |-- [+] interceptors
-  |-- [+] services
-  |-- [+] models  
-  |-- modules
 
-      |-- admin --Lazy Load Module Example
+  |-- app
+
+      |-- 🎯 core
+          |-- [+] components
+          |-- [+] pages
+          |-- [+] guards
+          |-- [+] models
+          |-- [+] services
+          |-- admin.module.ts
+          |-- admin.routes.ts
+
+      |-- 👨‍💼 admin (lazy 🦥)
           |-- [+] components
           |-- [+] models
           |-- [+] services
@@ -82,24 +85,33 @@ Technologies, design, patterns and packages that I used to develop this applicat
           |-- admin.module.ts
           |-- admin.routes.ts
 
-      |-- authentication
+      |-- 📦 order (lazy 🦥)
+          |-- [+] components
+          |-- [+] models
+          |-- [+] services
+          |-- [+] pages
+          |-- admin.module.ts
+          |-- admin.routes.ts
+
+      |-- 🔑 authentication (lazy 🦥)
           |-- [+] models
           |-- [+] services
           |-- [+] pages
           |-- authentication.module.ts
           |-- authentication.routes.ts
 
-      |-- shared
+      |-- 🤝 shared
           |-- [+] animations
           |-- [+] classes
           |-- [+] components
           |-- [+] enums
           |-- shared.module.ts
 
-  |-- app.module.ts
-  |-- app.component.ts
+- Modules Diagram
+  ![modules-diagram](./front-end/.github/modules-diagram.png)
 
 - Back-end
+
   |-- Solution ComicStoreWebAPI
 
       |-- 1 - Application
@@ -141,9 +153,11 @@ Technologies, design, patterns and packages that I used to develop this applicat
 
 ## ✨ Main Features
 
-- Toggle Theme
+- Toggle Theme Preference
 - JTW Bearer Authentication
+- Role-based Access Control
 - CRUD operations
-- Pagination
+- Server Side Pagination
 - Generic Dropdown Component with server side search filter
-- ...
+- Inventory Management
+- Swagger Specification

@@ -4,19 +4,26 @@ This application is comics web store. it's possible to create, edit, update and 
 
 ## 🤖 Technologies
 
-Technologies, Design and Patterns that I used to develop this application.
+Technologies, design, patterns and packages that I used to develop this application.
 
 - Front-end
 
   - [Angular 10](https://angular.io/)
     - [Angular Material 10.2.7](https://material.angular.io/)
-    - [Angular Flex Layout](https://github.com/angular/flex-layout/wiki/fxLayout-API)
+    - [Angular Flex-Layout 11.0.0](https://www.npmjs.com/package/@angular/flex-layout)
+    - [@auth0/angular-jwt](https://www.npmjs.com/package/@auth0/angular-jwt)
     - [RxJS 6.5](https://rxjs-dev.firebaseapp.com/guide/overview)
   - [SASS](https://sass-lang.com/)
     - [Flexbox](https://www.w3schools.com/css/css3_flexbox.asp)
     - [Grid Layout](https://www.w3schools.com/css/css_grid.asp)
     - [BEM Methodology](http://getbem.com/naming/)
   - [TypeScript 3.9](https://www.typescriptlang.org/)
+  - NGX Packages
+    - [Ngx Mask 11.1.4](https://www.npmjs.com/package/ngx-mask)
+    - [Ngx Mat Select Search 3.1.4](https://www.npmjs.com/package/ngx-mat-select-search)
+    - [Ngx Material File Input 2.1.1](https://www.npmjs.com/package/ngx-material-file-input)
+  - Other Packages
+    - [Cep Promise 4.0.3 ](https://www.npmjs.com/package/cep-promise)
 
 - Back-end
 
@@ -39,12 +46,13 @@ Technologies, Design and Patterns that I used to develop this application.
   - Development Approach
     - DDD - Domain Drive Design
     - SOLID Principles
-    - API Layers:
-      - Application
-      - Domain
-      - Services
-      - Infrastructure
-  - Patterns Applied
+    - Application Layers:
+      - 1 - Application
+      - 2 - Domain
+      - 3 - Services
+      - 4 - Infrastructure
+      - 5 - Shared
+  - Patterns and Resources Applied
     - Repository
     - Generic Repository
     - Generic Pagination
@@ -56,41 +64,80 @@ Technologies, Design and Patterns that I used to develop this application.
 
 ## Folder Structure
 
-|-- app
-|-- [+] components
-|-- [+] pages
-|-- [+] guards
-|-- [+] interceptors
-|-- [+] services
-|-- [+] mocks
-|-- [+] models  
-|-- modules
+- Front-end
+  |-- app
+  |-- [+] components
+  |-- [+] pages
+  |-- [+] guards
+  |-- [+] interceptors
+  |-- [+] services
+  |-- [+] models  
+  |-- modules
 
-    |-- admin --Lazy Load Module Example
-        |-- [+] components
-        |-- [+] models
-        |-- [+] services
-        |-- [+] pages
-        |-- admin.module.ts
-        |-- admin.routes.ts
+      |-- admin --Lazy Load Module Example
+          |-- [+] components
+          |-- [+] models
+          |-- [+] services
+          |-- [+] pages
+          |-- admin.module.ts
+          |-- admin.routes.ts
 
-    |-- authentication
-        |-- [+] models
-        |-- [+] services
-        |-- [+] pages
-        |-- authentication.module.ts
-        |-- authentication.routes.ts
+      |-- authentication
+          |-- [+] models
+          |-- [+] services
+          |-- [+] pages
+          |-- authentication.module.ts
+          |-- authentication.routes.ts
 
-    |-- shared
-        |-- [+] animations
-        |-- [+] classes
-        |-- [+] components
-        |-- [+] enums
-        |-- [+] services
-        |-- shared.module.ts
+      |-- shared
+          |-- [+] animations
+          |-- [+] classes
+          |-- [+] components
+          |-- [+] enums
+          |-- shared.module.ts
 
-|-- app.module.ts
-|-- app.component.ts
+  |-- app.module.ts
+  |-- app.component.ts
+
+- Back-end
+  |-- Solution ComicStoreWebAPI
+
+      |-- 1 - Application
+          |-- [+] Properties
+          |-- [+] Classes
+          |-- [+] Controllers
+          |-- [+] DTO
+          |-- [+] Filters
+          |-- Program.cs
+          |-- Startup.cs
+
+      |-- 2 - Domain
+          |-- [+] Enums
+          |-- [+] Interfaces
+          |-- [+] POCO
+
+      |-- 3 - Service
+          |-- [+] Classes
+          |-- [+] Interfaces
+          |-- [+] Services
+
+      |-- 4 - Infrastructure
+
+        |-- BaseRepository
+          |-- [+] Interfaces
+
+        |-- EFRepository
+          |-- [+] Configurations
+          |-- [+] Context
+          |-- [+] Migrations
+          |-- [+] Repository
+
+        |-- Security
+          |-- [+] Context
+          |-- [+] Migrations
+
+      |-- 5 - Shared
+          |-- [+] classes
 
 ## ✨ Main Features
 

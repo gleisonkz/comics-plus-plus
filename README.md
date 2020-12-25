@@ -69,36 +69,41 @@ Technologies, design, patterns and packages that I used to develop this applicat
   |-- app
 
       |-- 🎯 core
+          |-- [+] classes
           |-- [+] components
-          |-- [+] pages
+          |-- [+] enums
           |-- [+] guards
+          |-- [+] interceptors
           |-- [+] models
+          |-- [+] pages
           |-- [+] services
-          |-- admin.module.ts
-          |-- admin.routes.ts
+          |-- core.module.ts
 
       |-- 👨‍💼 admin (lazy 🦥)
+          |-- [+] classes
           |-- [+] components
+          |-- [+] constants
           |-- [+] models
           |-- [+] services
           |-- [+] pages
+          |-- admin-routing.module.ts
           |-- admin.module.ts
-          |-- admin.routes.ts
 
       |-- 📦 order (lazy 🦥)
           |-- [+] components
+          |-- [+] enums
+          |-- [+] guards
           |-- [+] models
-          |-- [+] services
           |-- [+] pages
-          |-- admin.module.ts
-          |-- admin.routes.ts
+          |-- order-routing.module.ts
+          |-- order.module.ts
 
       |-- 🔑 authentication (lazy 🦥)
+          |-- [+] interceptors
           |-- [+] models
-          |-- [+] services
           |-- [+] pages
+          |-- authentication-routing.module.ts
           |-- authentication.module.ts
-          |-- authentication.routes.ts
 
       |-- 🤝 shared
           |-- [+] animations
@@ -106,6 +111,12 @@ Technologies, design, patterns and packages that I used to develop this applicat
           |-- [+] components
           |-- [+] enums
           |-- shared.module.ts
+
+  |-- app-routing.module.ts
+  |-- app.component.html
+  |-- app.component.scss
+  |-- app.component.ts
+  |-- app.module.ts
 
 - Modules Diagram
   ![modules-diagram](./front-end/.github/modules-diagram.png)

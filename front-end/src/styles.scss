@@ -54,10 +54,5 @@ strong {
   font-weight: 700;
 }
 
-.disabled {
-  pointer-events: none;
-  cursor: default;
-}
-
 @import "crud";
 @import "material";

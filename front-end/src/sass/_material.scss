@@ -191,6 +191,7 @@ mat-error {
 .mat-mini-fab.mat-button-disabled.mat-button-disabled {
   background: $color-button-disabled-bg;
   color: $color-button-disabled-text;
+  cursor: not-allowed;
 }
 
 .mat-badge-content {

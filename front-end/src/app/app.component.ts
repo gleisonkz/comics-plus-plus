@@ -50,4 +50,12 @@ export class AppComponent {
   logout(): void {
     this.authenticationService.logout();
   }
+
+  prepareRoute(outlet: RouterOutlet) {
+    return (
+      outlet &&
+      outlet.activatedRouteData &&
+      outlet.activatedRouteData['animation']
+    );
+  }
 }

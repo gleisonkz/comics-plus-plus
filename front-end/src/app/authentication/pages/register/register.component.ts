@@ -50,7 +50,7 @@ export class RegisterComponent implements OnInit {
 
   register(user: RegisterUser) {
     if (this.form.invalid) return;
-    this.authenticationService.postRegisterUser(user).subscribe((c) => {
+    this.authenticationService.postRegisterUser(user).subscribe(() => {
       this.router.navigate(['authentication/register/done']);
     });
   }

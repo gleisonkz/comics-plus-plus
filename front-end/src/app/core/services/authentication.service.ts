@@ -6,6 +6,7 @@ import { NotificationService } from '@core/services';
 import { environment } from 'environments/environment';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { Token } from '../../authentication/models/token.model';
 
 @Injectable({
   providedIn: 'root'
@@ -17,19 +18,19 @@ export class AuthenticationService {
     private notificationService: NotificationService
   ) {}
 
-  postRegisterUser(user: RegisterUser): Observable<RegisterUser> {
-    return this.http.post<RegisterUser>(
-      `${environment.apiURL}/authentication/register`,
-      user
-    );
-  }
-  postLoginUser(user: LoginUser): Observable<LoginUser> {
+  postRegisterUser(user: RegisterUser): Observable<Token> {
     return this.http
-      .post<LoginUser>(`${environment.apiURL}/authentication/login`, user)
+      .post<Token>(`${environment.apiURL}/authentication/register`, user)
+      .pipe(tap((token) => this.setSession(token)));
+  }
+  postLoginUser(user: LoginUser): Observable<Token> {
+    return this.http
+      .post<Token>(`${environment.apiURL}/authentication/login`, user)
       .pipe(tap((response) => this.setSession(response)));
   }
 
-  private setSession(authResult) {
+  private setSession(authResult: Token) {
+    debugger;
     const token = authResult.token;
     localStorage.setItem('token', token);
   }

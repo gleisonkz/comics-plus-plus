@@ -43,6 +43,7 @@ namespace ComicStore.Application.Controllers
                 using (TransactionScope transaction = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
                 {
                     IdentityUser user = registerUser;
+                    string token = "";
 
                     var resultUser = await userManager.CreateAsync(user, registerUser.Password);
                     if (!resultUser.Succeeded) return BadRequest(resultUser.Errors);
@@ -53,8 +54,14 @@ namespace ComicStore.Application.Controllers
 
                     customerService.CreateCustomer(user.Id);
                     customerService.Commit();
+
+                    var signInResult = await signInManager.PasswordSignInAsync(user.Email, registerUser.Password, false, true);
+                    if (signInResult.Succeeded)
+                    {
+                        token = await authHelper.GenerateJwtToken(user.Email);
+                    }
                     transaction.Complete();
-                    return Ok();
+                    return Ok(new { Token = token });
                 };
             }
             catch (Exception ex)

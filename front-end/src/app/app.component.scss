@@ -25,6 +25,19 @@
     background-color: var(--color-background);
   }
 
+  main {
+    margin-top: $header-size;
+    width: 100%;
+    height: 100%;
+    max-width: $global-max-width;
+    padding: rem(20 40);
+    position: relative;
+
+    @include medias($tiny-mobile, $mobile, $small-tablet, $tablet) {
+      padding: rem(10);
+    }
+  }
+
   // afeta todos os itens dentro da outlet
   ::ng-deep router-outlet ~ * {
     margin-top: $header-size;
@@ -32,9 +45,19 @@
     height: 100%;
     max-width: $global-max-width;
     padding: rem(20 40);
+    animation: fade 1s ease-in-out;
 
     @include medias($tiny-mobile, $mobile, $small-tablet, $tablet) {
       padding: rem(10);
+    }
+  }
+
+  @keyframes fade {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
     }
   }
 }

@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { DecodedToken } from '../../authentication/models/decoded-token';
+import { AccessStatus } from '../enums/access-status.enum';
 import { Role } from '../enums/role.enum';
 
 @Injectable({
@@ -34,25 +36,29 @@ export class AuthorizationService {
     return milliseconds < new Date().getTime();
   }
 
-  getDecodeToken() {
+  getDecodeToken(): DecodedToken {
     const token = localStorage.getItem('token');
-    const decodeToken = this.jwtHelperService.decodeToken(token);
-    return decodeToken;
+    const decodedToken: DecodedToken = this.jwtHelperService.decodeToken(token);
+    return decodedToken;
   }
 
   private allowedRolesIsEmpty(allowedRoles: string[]) {
     return allowedRoles == null || allowedRoles.length === 0;
   }
 
-  isAuthorized(allowedRoles: string[]): boolean {
-    if (this.allowedRolesIsEmpty(allowedRoles)) return true;
+  isAuthorized(allowedRoles: string[]): AccessStatus {
+    if (this.allowedRolesIsEmpty(allowedRoles)) return AccessStatus.Granted;
 
     const decodedToken = this.getDecodeToken();
 
     if (!this.isLoggedIn()) {
-      return false;
+      return AccessStatus.NotLogged;
     }
 
-    return allowedRoles.includes(decodedToken['role']);
+    const hasAllowedRole = allowedRoles.includes(decodedToken['role'])
+      ? AccessStatus.Granted
+      : AccessStatus.Denied;
+
+    return hasAllowedRole;
   }
 }

@@ -4,13 +4,14 @@ import {
   CanActivate,
   CanActivateChild,
   Router,
-  RouterStateSnapshot,
+  RouterStateSnapshot
 } from '@angular/router';
 import { AuthorizationService, NotificationService } from '@core/services';
 import { Observable } from 'rxjs';
+import { AccessStatus } from '../enums/access-status.enum';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class AuthorizationGuard implements CanActivate, CanActivateChild {
   constructor(
@@ -24,28 +25,35 @@ export class AuthorizationGuard implements CanActivate, CanActivateChild {
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
     const allowedRoles = next.data.allowedRoles;
-    const isAuthorized = this.authorizationService.isAuthorized(allowedRoles);
-
-    if (!isAuthorized) {
-      this.router.navigate(['/authentication/login']);
-      this.notificationService.showMessage(
-        'é necessário estar logado para acessar essa rota'
-      );
-    }
-
-    return isAuthorized;
+    return this.isAuthorized(allowedRoles);
   }
   canActivateChild(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
     const allowedRoles = next.data.allowedRoles;
-    const isAuthorized = this.authorizationService.isAuthorized(allowedRoles);
+    return this.isAuthorized(allowedRoles);
+  }
 
-    if (!isAuthorized) {
-      this.router.navigate(['/']);
+  private isAuthorized(allowedRoles: string[]): boolean {
+    const userAccessStatus: AccessStatus = this.authorizationService.isAuthorized(
+      allowedRoles
+    );
+
+    if (userAccessStatus === AccessStatus.Denied) {
+      this.router.navigate(['/authentication/login']);
+      this.notificationService.showMessage(
+        'O seu usuário não possui autorização para acessar está rota'
+      );
+      return false;
+    } else if (userAccessStatus === AccessStatus.NotLogged) {
+      this.router.navigate(['/authentication/login']);
+      this.notificationService.showMessage(
+        'É necessário estar logado para acessar está rota'
+      );
+      return false;
     }
 
-    return isAuthorized;
+    return true;
   }
 }

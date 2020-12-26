@@ -1,7 +1,14 @@
-import { FormControl, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormControl,
+  ValidationErrors,
+  Validators
+} from '@angular/forms';
 
 export class CustomValidators extends Validators {
-  static minOneLowerCaseCharacter(control: FormControl) {
+  static minOneLowerCaseCharacter(
+    control: FormControl
+  ): ValidationErrors | null {
     if (CustomValidators.controlHasValue(control)) {
       const hasLowerCaseCharacter = /[a-z]/g.test(control.value);
 
@@ -16,7 +23,9 @@ export class CustomValidators extends Validators {
     }
   }
 
-  static minOnePascalCaseCharacter(control: FormControl) {
+  static minOnePascalCaseCharacter(
+    control: FormControl
+  ): ValidationErrors | null {
     if (CustomValidators.controlHasValue(control)) {
       const hasPascalCaseCharacter = /[A-Z]/g.test(control.value);
 
@@ -31,7 +40,7 @@ export class CustomValidators extends Validators {
     }
   }
 
-  static minOneSpecialCharacter(control: FormControl) {
+  static minOneSpecialCharacter(control: FormControl): ValidationErrors | null {
     if (CustomValidators.controlHasValue(control)) {
       const hasSpecialCharacter = /[`´!¨@#$%^&*ª°º§()_+\-=\[\]{};':"\\|,.<>\/?~]/g.test(
         control.value
@@ -46,6 +55,18 @@ export class CustomValidators extends Validators {
     } else {
       return null;
     }
+  }
+
+  static matchValues(
+    matchTo: string
+  ): (abstractControl: AbstractControl) => ValidationErrors | null {
+    return (control: AbstractControl): ValidationErrors | null => {
+      return !!control.parent &&
+        !!control.parent.value &&
+        control.value === control.parent.controls[matchTo].value
+        ? null
+        : { passwordsNotMatch: true };
+    };
   }
 
   private static controlHasValue(control: FormControl): boolean {

@@ -13,13 +13,14 @@ export class CustomErrorStateMatcher implements ErrorStateMatcher {
       (control.untouched || control.dirty || control.touched || isSubmitted)
     );
 
-    const invalidParent = !!(
-      control &&
-      control.parent &&
-      control.parent.invalid &&
-      control.parent.dirty
-    );
+    // const invalidParent = !!(
+    //   control &&
+    //   control.parent &&
+    //   control.parent.invalid &&
+    //   control.parent.dirty
+    // );
 
-    return invalidControl || invalidParent;
+    // return invalidControl || invalidParent;
+    return invalidControl;
   }
 }

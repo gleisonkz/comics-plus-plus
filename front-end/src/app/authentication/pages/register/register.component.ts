@@ -1,10 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  AbstractControl,
-  FormControl,
-  FormGroup,
-  Validators
-} from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RegisterUser } from '@auth/models';
 import { AuthenticationService } from '@core/services/authentication.service';
@@ -22,31 +17,24 @@ export class RegisterComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.form = new FormGroup(
-      {
-        email: new FormControl('', [Validators.required, Validators.email]),
-        password: new FormControl('', [
-          Validators.required,
-          Validators.minLength(8),
-          CustomValidators.minOneLowerCaseCharacter,
-          CustomValidators.minOnePascalCaseCharacter,
-          CustomValidators.minOneSpecialCharacter
-        ]),
-        passwordCheck: new FormControl('', [Validators.required])
-      },
-      { validators: RegisterComponent.matchPassword }
-    );
-  }
+    this.form = new FormGroup({
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', [
+        Validators.required,
+        Validators.minLength(8),
+        CustomValidators.minOneLowerCaseCharacter,
+        CustomValidators.minOnePascalCaseCharacter,
+        CustomValidators.minOneSpecialCharacter
+      ]),
+      passwordCheck: new FormControl('', [
+        Validators.required,
+        CustomValidators.matchValues('password')
+      ])
+    });
 
-  static matchPassword(formGroup: AbstractControl): { [key: string]: boolean } {
-    const password = formGroup.get('password');
-    const passwordCheck = formGroup.get('passwordCheck');
-
-    if (!password || !passwordCheck || password.value === passwordCheck.value) {
-      return null;
-    }
-
-    return { passwordsNotMatch: true };
+    this.form.controls.password.valueChanges.subscribe(() => {
+      this.form.controls.passwordCheck.updateValueAndValidity();
+    });
   }
 
   register(user: RegisterUser) {

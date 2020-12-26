@@ -1,4 +1,10 @@
-<button class="desktop" (click)="clickEvent.emit()" mat-button>
+<button
+  fxHide="true"
+  fxShow.gt-xs
+  class="desktop"
+  (click)="clickEvent.emit()"
+  mat-button
+>
   <i class="fas fa-plus"></i> {{ buttonText }}
 </button>
 
@@ -7,6 +13,8 @@
   (click)="clickEvent.emit()"
   mat-mini-fab
   color="primary"
+  fxHide="true"
+  fxShow.lt-sm
 >
   <mat-icon>add</mat-icon>
 </button>

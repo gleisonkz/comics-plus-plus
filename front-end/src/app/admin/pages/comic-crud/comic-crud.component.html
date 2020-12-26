@@ -157,7 +157,7 @@
     <ng-container matColumnDef="Preço">
       <th fxHide fxShow.gt-md mat-header-cell *matHeaderCellDef>Preço</th>
       <td fxHide fxShow.gt-md mat-cell *matCellDef="let element">
-        {{ element.price }}
+        R$ {{ element.price | number: "2.2" }}
       </td>
     </ng-container>
 

@@ -38,3 +38,22 @@
 .title-group.subtitle {
   margin-top: rem(20);
 }
+
+mat-form-field,
+cms-dropdown-list {
+  margin-right: rem(20);
+
+  @include medias($tiny-mobile, $mobile, $tablet, $large-tablet) {
+    width: 100%;
+  }
+}
+
+.genre-form {
+  display: flex;
+  align-items: center;
+
+  @include medias($tiny-mobile, $mobile, $tablet, $large-tablet) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

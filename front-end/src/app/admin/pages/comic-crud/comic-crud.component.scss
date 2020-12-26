@@ -2,87 +2,8 @@
 @import "variables";
 @import "mixins";
 @import "functions";
+@import "crud-base";
 
 :host {
   margin: 0 !important;
-}
-
-.spinner-container {
-  margin-top: rem(60);
-}
-
-.filter {
-  margin-top: rem(10);
-  font-size: rem(15);
-  color: $color-panel-text;
-}
-
-.genre-form {
-  display: flex;
-  align-items: center;
-
-  @include medias($tiny-mobile, $mobile) {
-    flex-direction: column;
-  }
-
-  .mat-form-field-wrapper {
-    padding: 0;
-  }
-
-  .search-button {
-    @include flex-center;
-    height: rem(29);
-    margin-bottom: rem(6);
-  }
-
-  .full-wrapper,
-  .full-wrapper button {
-    @include medias($tiny-mobile, $mobile) {
-      width: 100%;
-    }
-  }
-}
-
-mat-form-field,
-cms-dropdown-list {
-  margin-right: rem(20);
-
-  @include medias($tiny-mobile, $mobile) {
-    width: 100%;
-  }
-}
-
-table {
-  width: 100%;
-  background-color: $color-panel-bg;
-
-  th.mat-header-cell:first-of-type,
-  td.mat-cell:first-of-type,
-  td.mat-footer-cell:first-of-type {
-    padding-left: 0;
-  }
-
-  .btn {
-    @include flex-center;
-    height: rem(29);
-    display: inline-flex;
-  }
-
-  .btn + .btn {
-    margin-left: rem(10);
-  }
-}
-
-.no-data {
-  margin-top: rem(20);
-}
-
-mat-paginator {
-  background-color: $color-panel-bg;
-  align-self: flex-end;
-}
-
-.container {
-  @include flex-center(column);
-  background-color: $color-panel-bg;
 }

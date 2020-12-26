@@ -5,19 +5,16 @@
 
 button {
   display: none;
-}
 
-.desktop {
-  @include medias($small-tablet, $tablet, $large-tablet, $desktop) {
-    display: initial;
+  @include flex-center;
+
+  i {
+    margin-right: rem(5);
   }
 }
 
 .mobile {
-  display: none;
-
   @include medias($tiny-mobile, $mobile) {
-    display: initial;
     .small {
       @include flex-center;
       @include size(35);

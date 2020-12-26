@@ -7,10 +7,19 @@ export class CustomErrorStateMatcher implements ErrorStateMatcher {
     form: FormGroupDirective | NgForm | null
   ): boolean {
     const isSubmitted = form && form.submitted;
-    return !!(
+    const invalidControl = !!(
       control &&
       control.invalid &&
       (control.untouched || control.dirty || control.touched || isSubmitted)
     );
+
+    const invalidParent = !!(
+      control &&
+      control.parent &&
+      control.parent.invalid &&
+      control.parent.dirty
+    );
+
+    return invalidControl || invalidParent;
   }
 }

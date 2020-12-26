@@ -84,6 +84,7 @@
       </mat-form-field>
       <div class="comic__btn-container">
         <button
+          mat-raised-button
           (click)="
             addMultipleItemsToCart(comic, +comicForm.controls.quantity.value)
           "
@@ -95,6 +96,7 @@
         </button>
         <a [class.disabled]="!hasCartItems ? true : false">
           <button
+            mat-raised-button
             (click)="navigateToOrder()"
             [disabled]="!hasCartItems"
             class="comic__btn"

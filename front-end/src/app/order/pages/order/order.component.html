@@ -162,9 +162,14 @@
         </div>
       </div>
     </div>
-    <button [disabled]="!orderForm.valid || !hasItems" class="order-button">
+    <button
+      mat-raised-button
+      color="primary"
+      [disabled]="!orderForm.valid || !hasItems"
+      class="order-button"
+    >
       <i class="fa fa-credit-card"></i>
-      Finalizar Compra
+      Finalizar Pedido
     </button>
   </form>
 </div>

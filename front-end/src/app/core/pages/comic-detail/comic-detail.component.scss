@@ -83,7 +83,7 @@
     margin-top: rem(20);
 
     &--available {
-      color: green;
+      color: $color-success;
     }
 
     &--unavailable {

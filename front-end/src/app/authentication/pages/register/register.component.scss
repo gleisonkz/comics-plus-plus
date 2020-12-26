@@ -43,6 +43,10 @@ a {
   color: $color-link;
   font-size: rem(12);
 
+  &:hover {
+    color: $color-link-hover;
+  }
+
   span {
     display: block;
   }

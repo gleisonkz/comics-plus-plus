@@ -137,6 +137,10 @@
       &__icon {
         color: $color-danger;
         cursor: pointer;
+
+        &:hover:not(:disabled) {
+          opacity: 0.9;
+        }
       }
     }
 
@@ -190,10 +194,9 @@
       font-size: rem(13);
       @include flex-center;
       width: rem(150);
-      padding: rem(8 10);
+      // padding: rem(8 10);
       border-radius: rem(5);
       color: white;
-      @include button-pressed;
 
       &__link {
         color: white;
@@ -205,12 +208,7 @@
     }
 
     &__button:first-child {
-      background-color: $color-danger;
       margin-right: rem(5);
-    }
-
-    &__button:last-child {
-      background-color: $color-success;
     }
   }
 }

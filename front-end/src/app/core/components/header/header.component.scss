@@ -12,7 +12,7 @@
 }
 
 .header {
-  background-color: $color-primary;
+  background-color: $color-header-bg;
   height: $header-size;
   @include flex-center;
   justify-content: space-between;
@@ -75,7 +75,7 @@
 
     &__item--active .menu-list__link,
     &__item:hover .menu-list__link {
-      color: #00f7ff;
+      color: $color-header-item-hover-text;
     }
 
     &__link {

@@ -21,11 +21,18 @@
       [disabled]="!isInventoryAvailable"
       (click)="addToCart(comic)"
       class="comic__btn"
+      mat-raised-button
+      color="primary"
     >
       <i class="fas fa-shopping-cart"></i>
       Adicionar
     </button>
-    <button [routerLink]="['/quadrinhos', comic.comicID]" class="comic__btn">
+    <button
+      [routerLink]="['/quadrinhos', comic.comicID]"
+      class="comic__btn"
+      mat-raised-button
+      color="primary"
+    >
       <i class="fas fa-search"></i>
       Visualizar
     </button>

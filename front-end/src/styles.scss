@@ -57,7 +57,6 @@ strong {
 .disabled {
   pointer-events: none;
   cursor: default;
-  @include button-disabled;
 }
 
 @import "crud";

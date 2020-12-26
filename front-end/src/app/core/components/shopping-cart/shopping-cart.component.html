@@ -57,6 +57,8 @@
       </p>
       <div *ngIf="hasItems" class="cart__buttons">
         <button
+          mat-raised-button
+          color="warn"
           (click)="clearCart()"
           type="button"
           class="cart__buttons__button"
@@ -64,6 +66,8 @@
           <i class="fa fa-trash"></i> Limpar
         </button>
         <a
+          mat-raised-button
+          color="primary"
           (click)="closeMenu()"
           class="cart__buttons__button"
           [routerLink]="['/order']"

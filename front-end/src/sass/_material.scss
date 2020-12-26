@@ -128,12 +128,12 @@ mat-paginator {
 }
 
 .mat-form-field.mat-focused .mat-form-field-label {
-  color: #7dade0;
+  color: $color-primary;
 }
 
 .mat-form-field.mat-focused .mat-form-field-ripple,
 .mat-form-field.mat-focused .mat-form-field-ripple.mat-accent {
-  background: #7dade0;
+  background: $color-primary;
 }
 
 // mat-list-item hover background color
@@ -191,4 +191,97 @@ mat-error {
 .mat-mini-fab.mat-button-disabled.mat-button-disabled {
   background: $color-button-disabled-bg;
   color: $color-button-disabled-text;
+}
+
+.mat-badge-content {
+  background: $color-badge-bg;
+}
+
+.mat-icon.mat-primary {
+  color: $color-primary;
+}
+
+.mat-icon.mat-warn {
+  color: $color-danger;
+}
+
+.mat-menu-item:hover:not([disabled]),
+.mat-menu-item.cdk-program-focused:not([disabled]),
+.mat-menu-item.cdk-keyboard-focused:not([disabled]),
+.mat-menu-item-highlighted:not([disabled]) {
+  background: $color-hover-bg-menu;
+}
+
+//Button primary color
+
+.mat-flat-button.mat-primary,
+.mat-raised-button.mat-primary,
+.mat-fab.mat-primary,
+.mat-mini-fab.mat-primary {
+  background-color: $color-primary;
+
+  &:hover:not(:disabled) {
+    opacity: 0.9;
+  }
+}
+
+.mat-flat-button.mat-warn,
+.mat-raised-button.mat-warn,
+.mat-fab.mat-warn,
+.mat-mini-fab.mat-warn {
+  background-color: $color-danger;
+
+  &:hover:not(:disabled) {
+    opacity: 0.9;
+  }
+}
+
+// mat-icon
+
+.mat-form-field:not(.mat-form-field-appearance-legacy)
+  .mat-form-field-prefix
+  .mat-icon,
+.mat-form-field:not(.mat-form-field-appearance-legacy)
+  .mat-form-field-suffix
+  .mat-icon {
+  color: $color-primary;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-outline {
+  color: #888888;
+}
+
+// mat-form-field outline invalid
+.mat-form-field-appearance-outline.mat-form-field-invalid.mat-form-field-invalid
+  .mat-form-field-outline-thick {
+  color: $color-danger;
+}
+
+// mat-form-field outline label
+
+.mat-form-field-appearance-outline.mat-focused .mat-form-field-label {
+  color: $color-primary;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-label {
+  color: #888888;
+}
+
+.mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+  color: $color-primary;
+}
+
+//mat-radio color and border
+
+.mat-radio-button.mat-accent .mat-radio-inner-circle,
+.mat-radio-button.mat-accent
+  .mat-radio-ripple
+  .mat-ripple-element:not(.mat-radio-persistent-ripple),
+.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-persistent-ripple,
+.mat-radio-button.mat-accent:active .mat-radio-persistent-ripple {
+  background-color: $color-primary;
+}
+
+.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+  border-color: $color-primary;
 }

@@ -42,6 +42,10 @@
       color: $color-icon;
       margin: rem(0 5);
       cursor: pointer;
+
+      &:hover:not(:disabled) {
+        opacity: 0.9;
+      }
     }
 
     i.fa-remove,

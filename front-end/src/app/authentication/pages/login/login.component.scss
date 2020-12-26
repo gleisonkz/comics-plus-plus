@@ -33,6 +33,7 @@ mat-card-actions {
 }
 
 button {
+  @include base-button-style;
   width: rem(200);
 
   @include medias($tiny-mobile, $mobile) {
@@ -44,6 +45,10 @@ a {
   @include flex-center(column);
   color: $color-link;
   font-size: rem(12);
+
+  &:hover {
+    color: $color-link-hover;
+  }
 
   span {
     display: block;

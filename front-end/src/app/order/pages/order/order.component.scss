@@ -46,7 +46,7 @@
         bottom: 0;
         left: rem(-6);
         font-size: rem(10);
-        color: $color-success;
+        color: $color-primary;
       }
     }
 
@@ -129,6 +129,10 @@
 
         &__link {
           color: $color-link;
+
+          &:hover {
+            color: $color-link-hover;
+          }
         }
       }
     }
@@ -169,17 +173,16 @@
     }
 
     .order-button {
+      @include flex-center;
+
       i {
         margin-right: rem(10);
       }
 
-      @include base-button-style;
-      background-color: $color-success;
+      // @include base-button-style;
       font-size: rem(15);
       width: initial;
       margin: rem(10) 0 0 auto;
-
-      @include button-disabled;
     }
   }
 }

@@ -36,6 +36,7 @@
   border-radius: rem(5);
 
   user-select: none;
+  cursor: pointer;
 
   color: $color-panel-button-text;
   background-color: $color-panel-button-bg;
@@ -45,7 +46,15 @@
     margin-right: rem(5);
   }
 
-  @include button-pressed;
+  & {
+    outline: none;
+  }
+
+  &:hover:not(:disabled) {
+    opacity: 0.9;
+  }
+
+  transition: box-shadow 0.2s ease-in-out;
 }
 
 @mixin base-border-bottom() {
@@ -58,29 +67,6 @@
   font-weight: 300;
   line-height: 1.4;
   color: $color-text;
-}
-
-@mixin button-pressed() {
-  & {
-    outline: none;
-  }
-
-  &:hover {
-    opacity: 0.9;
-    cursor: pointer;
-  }
-
-  &:active {
-    transform: scale(0.98);
-  }
-}
-
-@mixin button-disabled {
-  &[disabled] {
-    cursor: not-allowed;
-    background-color: rgb(229, 229, 229) !important;
-    pointer-events: none;
-  }
 }
 
 @mixin button-bg($bg) {

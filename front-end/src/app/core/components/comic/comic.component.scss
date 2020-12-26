@@ -54,7 +54,7 @@
     font-size: rem(18);
 
     &--available {
-      color: green;
+      color: $color-success;
       animation: is-pulsing 0.45s ease-in alternate infinite 1s;
     }
 

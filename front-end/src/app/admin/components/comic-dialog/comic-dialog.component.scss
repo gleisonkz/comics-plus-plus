@@ -32,6 +32,7 @@ cms-dropdown-list {
   display: flex;
   align-items: center;
   margin-top: rem(10);
+  color: $color-text;
 
   p {
     margin: rem(0 5 0 0);
@@ -51,4 +52,12 @@ cms-dropdown-list {
   &__field {
     width: 100%;
   }
+}
+
+ngx-mat-file-input {
+  color: $color-text;
+}
+
+mat-icon {
+  color: $color-text;
 }

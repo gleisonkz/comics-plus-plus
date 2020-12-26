@@ -71,7 +71,6 @@ export class ShoppingCartService {
         action: () => {
           this.quantityUp(foundItem, quantity);
           this.itemsSource$.next(this.itemsSource$.value);
-          this.notificationService.showMessage('Item adicionado ao carrinho');
         }
       },
       {

@@ -71,15 +71,18 @@ export class ShoppingCartService {
         action: () => {
           this.quantityUp(foundItem, quantity);
           this.itemsSource$.next(this.itemsSource$.value);
+          this.notificationService.showMessage('Item adicionado ao carrinho');
         }
       },
       {
         expect: () => true,
-        action: () =>
+        action: () => {
           this.itemsSource$.next([
             ...this.itemsSource$.value,
             new CartItem(item, quantity)
-          ])
+          ]);
+          this.notificationService.showMessage('Item adicionado ao carrinho');
+        }
       }
     ];
     const currentExpect = expectations.find((c) => c.expect());
@@ -90,10 +93,12 @@ export class ShoppingCartService {
     const items = this.itemsSource$.value;
     items.splice(items.indexOf(item), 1);
     this.itemsSource$.next(items);
+    this.notificationService.showMessage('item removido do carrinho');
   }
 
   public clear() {
     this.itemsSource$.next([]);
+    this.notificationService.showMessage('itens removidos do carrinho');
   }
 
   public getTotal(): number {

@@ -120,12 +120,46 @@ mat-paginator {
   background-color: $color-panel-bg !important;
 }
 
-.mat-form-field-placeholder {
-  color: red !important;
+//mat-input color
+
+.mat-input-element,
+.mat-select-value {
+  color: $color-input-text !important;
 }
 
-.mat-focused .mat-form-field-placeholder {
-  color: red !important;
+.mat-form-field.mat-focused .mat-form-field-label {
+  color: #7dade0;
+}
+
+.mat-form-field.mat-focused .mat-form-field-ripple,
+.mat-form-field.mat-focused .mat-form-field-ripple.mat-accent {
+  background: #7dade0;
+}
+
+// mat-list-item hover background color
+.mat-list-option:hover,
+.mat-list-option:focus,
+.mat-nav-list .mat-list-item:hover,
+.mat-nav-list .mat-list-item:focus,
+.mat-action-list .mat-list-item:hover,
+.mat-action-list .mat-list-item:focus {
+  background: $color-hover-bg-menu;
+}
+
+// Label error color
+.mat-form-field.mat-form-field-invalid .mat-form-field-label {
+  color: $color-danger;
+}
+
+// Underline error color
+.mat-form-field.mat-form-field-invalid .mat-form-field-ripple,
+.mat-form-field.mat-form-field-invalid .mat-form-field-ripple.mat-accent {
+  background-color: $color-danger;
+}
+
+// Message error color
+.mat-error {
+  color: $color-danger;
 }
 
 .mat-form-field-appearance-legacy .mat-form-field-label {
@@ -136,4 +170,25 @@ mat-error {
   span {
     user-select: none;
   }
+}
+
+//button disabled
+.mat-flat-button.mat-primary.mat-button-disabled,
+.mat-flat-button.mat-accent.mat-button-disabled,
+.mat-flat-button.mat-warn.mat-button-disabled,
+.mat-flat-button.mat-button-disabled.mat-button-disabled,
+.mat-raised-button.mat-primary.mat-button-disabled,
+.mat-raised-button.mat-accent.mat-button-disabled,
+.mat-raised-button.mat-warn.mat-button-disabled,
+.mat-raised-button.mat-button-disabled.mat-button-disabled,
+.mat-fab.mat-primary.mat-button-disabled,
+.mat-fab.mat-accent.mat-button-disabled,
+.mat-fab.mat-warn.mat-button-disabled,
+.mat-fab.mat-button-disabled.mat-button-disabled,
+.mat-mini-fab.mat-primary.mat-button-disabled,
+.mat-mini-fab.mat-accent.mat-button-disabled,
+.mat-mini-fab.mat-warn.mat-button-disabled,
+.mat-mini-fab.mat-button-disabled.mat-button-disabled {
+  background: $color-button-disabled-bg;
+  color: $color-button-disabled-text;
 }

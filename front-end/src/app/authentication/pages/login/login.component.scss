@@ -14,7 +14,9 @@ mat-card {
   background-color: $color-panel-bg;
 }
 
-mat-card-title,
+mat-card-title {
+  color: $color-title-text;
+}
 mat-card-subtitle {
   color: $color-text;
 }

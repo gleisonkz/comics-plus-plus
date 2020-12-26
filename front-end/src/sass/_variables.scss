@@ -28,6 +28,10 @@ $color-tab-panel-border-top: #{"var(--color-tab-panel-border-top)"};
 
 $color-form-field-placeholder: #{"var(--color-form-field-placeholder)"};
 $color-form-field-placeholder-active: #{"var(--color-form-field-placeholder-active)"};
+$color-input-text: #{"var(--color-input-text)"};
+
+$color-button-disabled-text: #{"var(--color-button-disabled-text)"};
+$color-button-disabled-bg: #{"var(--color-button-disabled-bg)"};
 
 $color-footer-text: #{"var(--color-footer-text)"};
 $color-footer-bg: #{"var(--color-footer-bg)"};
@@ -43,6 +47,7 @@ $project-colors: (
   "background": #f3f2f7,
   "title-text": #444,
   "text": #444,
+  "input-text": black,
   "link": #6ba8c7,
   "panel-bg": white,
   "panel-text": #444,
@@ -51,18 +56,21 @@ $project-colors: (
   "tab-panel-border-bottom": rgba(0, 0, 0, 0.12),
   "tab-panel-border-top": #f5f3f3,
   "footer-bg": white,
-  "hover-bg-menu": rgba(0, 0, 0, 0.1),
+  "hover-bg-menu": rgba(0, 0, 0, 0.04),
   "danger": #dd4b39,
   "success": #008d4c,
   "icon": #3c8dbc,
+  "button-disabled-text": rgba(0, 0, 0, 0.26),
+  "button-disabled-bg": rgba(0, 0, 0, 0.12)
 );
 
 $project-colors-theme-dark: (
-  "primary": #252a41,
+  "primary": #1d1d1d,
   "form-field-placeholder": #d7d7d7,
   "form-field-placeholder-active": #6ba8c7,
-  "background": #1e202a,
+  "background": #121212,
   "text": #d3cdcd,
+  "input-text": white,
   "title-text": white,
   "link": #6ba8c7,
   "panel-bg": "var(--color-primary)",
@@ -72,10 +80,12 @@ $project-colors-theme-dark: (
   "tab-panel-border-bottom": #c3c3c3,
   "tab-panel-border-top": hsl(228deg 27% 24%),
   "footer-bg": "var(--color-primary)",
-  "hover-bg-menu": rgba(133, 130, 130, 0.1),
-  "danger": #dd4b39,
+  "hover-bg-menu": #353535,
+  "danger": #cf6679,
   "success": #008d4c,
   "icon": #3c8dbc,
+  "button-disabled-bg": #2e2d2d,
+  "button-disabled-text": rgba(255, 255, 255, 42%)
 );
 
 // ==========================================================================
@@ -100,5 +110,5 @@ $z-indexes: (
   "overlay": 300,
   "dropdown": 200,
   "default": 1,
-  "below": -1,
+  "below": -1
 );

@@ -30,7 +30,6 @@ export class AuthenticationService {
   }
 
   private setSession(authResult: Token) {
-    debugger;
     const token = authResult.token;
     localStorage.setItem('token', token);
   }

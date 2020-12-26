@@ -26,6 +26,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTableModule } from '@angular/material/table';
 import { SharedModule } from '@shared/shared.module';
@@ -63,6 +64,7 @@ import { AuthorService } from './services/author.service';
     MatIconModule,
     MatMenuModule,
     MatButtonModule,
+    MatProgressSpinnerModule,
     MaterialFileInputModule
   ],
   providers: [GenreService, AuthorService]

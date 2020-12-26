@@ -12,6 +12,9 @@
           placeholder="Email"
           formControlName="email"
         />
+        <mat-error>
+          <span cmsShowValidation="email"></span>
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field>
@@ -21,6 +24,9 @@
           placeholder="Senha"
           formControlName="password"
         />
+        <mat-error>
+          <span cmsShowValidation="password"></span>
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field>
@@ -31,6 +37,9 @@
           formControlName="passwordCheck"
           (keyup.enter)="register(form.value)"
         />
+        <mat-error>
+          <span cmsShowValidation="passwordCheck"></span>
+        </mat-error>
       </mat-form-field>
     </form>
   </mat-card-content>

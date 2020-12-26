@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { LoginUser } from '@auth/models';
 import { NotificationService } from '@core/services';
 import { AuthenticationService } from '@core/services/authentication.service';
+import { CustomValidators } from '../../../shared/classes/custom-validators';
 
 @Component({
   templateUrl: './login.component.html',
@@ -22,7 +23,10 @@ export class LoginComponent implements OnInit {
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [
         Validators.required,
-        Validators.minLength(8)
+        Validators.minLength(8),
+        CustomValidators.minOneLowerCaseCharacter,
+        CustomValidators.minOnePascalCaseCharacter,
+        CustomValidators.minOneSpecialCharacter
       ])
     });
   }

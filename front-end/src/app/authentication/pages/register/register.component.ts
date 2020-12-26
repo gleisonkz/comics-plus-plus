@@ -8,6 +8,7 @@ import {
 import { Router } from '@angular/router';
 import { RegisterUser } from '@auth/models';
 import { AuthenticationService } from '@core/services/authentication.service';
+import { CustomValidators } from '@shared/classes/custom-validators';
 
 @Component({
   templateUrl: './register.component.html',
@@ -26,12 +27,12 @@ export class RegisterComponent implements OnInit {
         email: new FormControl('', [Validators.required, Validators.email]),
         password: new FormControl('', [
           Validators.required,
-          Validators.minLength(8)
+          Validators.minLength(8),
+          CustomValidators.minOneLowerCaseCharacter,
+          CustomValidators.minOnePascalCaseCharacter,
+          CustomValidators.minOneSpecialCharacter
         ]),
-        passwordCheck: new FormControl('', [
-          Validators.required,
-          Validators.minLength(8)
-        ])
+        passwordCheck: new FormControl('', [Validators.required])
       },
       { validators: RegisterComponent.matchPassword }
     );
@@ -42,7 +43,7 @@ export class RegisterComponent implements OnInit {
     const passwordCheck = formGroup.get('passwordCheck');
 
     if (!password || !passwordCheck || password.value === passwordCheck.value) {
-      return undefined;
+      return null;
     }
 
     return { passwordsNotMatch: true };

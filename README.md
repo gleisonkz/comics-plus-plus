@@ -173,3 +173,4 @@ Technologies, design, patterns and packages that I used to develop this applicat
 - Generic Dropdown Component with server side search filter
 - Inventory Management
 - Swagger Specification
+- Custom Reactive Forms Validation Class

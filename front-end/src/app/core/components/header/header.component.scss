@@ -6,8 +6,8 @@
 :host {
   background: var(--color-primary);
   height: $header-size;
-  position: absolute;
-
+  position: fixed;
+  z-index: 10;
   width: 100%;
 }
 

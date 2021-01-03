@@ -3,7 +3,6 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'environments/environment';
 import { Observable } from 'rxjs';
-import { delay } from 'rxjs/operators';
 
 @Injectable()
 export class AuthorService {
@@ -12,13 +11,11 @@ export class AuthorService {
   getPaginatedAuthors(
     authorFilter?: Filter
   ): Observable<HttpResponse<Author[]>> {
-    return this.http
-      .get<Author[]>(`${environment.apiURL}/author/paginator`, {
-        observe: 'response',
-        responseType: 'json',
-        params: authorFilter
-      })
-      .pipe(delay(200));
+    return this.http.get<Author[]>(`${environment.apiURL}/author/paginator`, {
+      observe: 'response',
+      responseType: 'json',
+      params: authorFilter
+    });
   }
 
   getAuthorsByName(name: string) {

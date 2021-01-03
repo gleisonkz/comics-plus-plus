@@ -3,20 +3,17 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'environments/environment';
 import { Observable } from 'rxjs';
-import { delay } from 'rxjs/operators';
 
 @Injectable()
 export class GenreService {
   constructor(private http: HttpClient) {}
 
   getPaginatedGenres(genreFilter?: Filter): Observable<HttpResponse<Genre[]>> {
-    return this.http
-      .get<Genre[]>(`${environment.apiURL}/genre/paginator`, {
-        observe: 'response',
-        responseType: 'json',
-        params: genreFilter
-      })
-      .pipe(delay(200));
+    return this.http.get<Genre[]>(`${environment.apiURL}/genre/paginator`, {
+      observe: 'response',
+      responseType: 'json',
+      params: genreFilter
+    });
   }
 
   getGenresByName(description: string) {

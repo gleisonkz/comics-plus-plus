@@ -13,7 +13,6 @@ import { ComicShopItemDetail } from '@core/models/comic-shop-item-detail.model';
 import { ComicShopItem } from '@core/models/comic-shop-item.model';
 import { environment } from 'environments/environment';
 import { Observable } from 'rxjs';
-import { delay } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -54,28 +53,24 @@ export class ComicService {
   getPaginatedComics(
     comicFilter: Filter
   ): Observable<HttpResponse<ComicList[]>> {
-    return this.http
-      .get<ComicList[]>(`${environment.apiURL}/comic/paginator`, {
-        observe: 'response',
-        responseType: 'json',
-        params: comicFilter
-      })
-      .pipe(delay(200));
+    return this.http.get<ComicList[]>(`${environment.apiURL}/comic/paginator`, {
+      observe: 'response',
+      responseType: 'json',
+      params: comicFilter
+    });
   }
 
   getPaginatedComicsInventory(
     comicFilter: Filter
   ): Observable<HttpResponse<ComicInventory[]>> {
-    return this.http
-      .get<ComicInventory[]>(
-        `${environment.apiURL}/comic/inventory/paginator`,
-        {
-          observe: 'response',
-          responseType: 'json',
-          params: comicFilter
-        }
-      )
-      .pipe(delay(200));
+    return this.http.get<ComicInventory[]>(
+      `${environment.apiURL}/comic/inventory/paginator`,
+      {
+        observe: 'response',
+        responseType: 'json',
+        params: comicFilter
+      }
+    );
   }
 
   postComic(comic: Comic): Observable<Comic> {

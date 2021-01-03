@@ -26,7 +26,7 @@ $size: rem(20);
   }
 
   &__input:checked + &__switch::before {
-    background-image: url(../../../../assets/img/icons/dark-mode.svg);
+    background-image: url(/assets/img/icons/dark-mode.svg);
     transform: translateX(rem(-21));
   }
 
@@ -50,7 +50,7 @@ $size: rem(20);
       content: "";
       position: absolute;
 
-      background-image: url(../../../../assets/img/icons/light-mode.svg);
+      background-image: url(/assets/img/icons/light-mode.svg);
       background-size: $size $size;
 
       height: $size;

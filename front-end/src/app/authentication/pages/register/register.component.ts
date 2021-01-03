@@ -3,11 +3,13 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RegisterUser } from '@auth/models';
 import { AuthenticationService } from '@core/services/authentication.service';
+import { fadeInOut } from '@shared/animations/fade-in-out';
 import { CustomValidators } from '@shared/classes/custom-validators';
 
 @Component({
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  styleUrls: ['./register.component.scss'],
+  animations: [fadeInOut]
 })
 export class RegisterComponent implements OnInit {
   form: FormGroup;
@@ -17,6 +19,7 @@ export class RegisterComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    console.log('ngOnInit', this.form);
     this.form = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [
@@ -27,14 +30,16 @@ export class RegisterComponent implements OnInit {
         CustomValidators.minOneSpecialCharacter
       ]),
       passwordCheck: new FormControl('', [
-        Validators.required,
-        CustomValidators.matchValues('password')
+        Validators.required
+        // CustomValidators.matchValues('password')
       ])
     });
 
     this.form.controls.password.valueChanges.subscribe(() => {
       this.form.controls.passwordCheck.updateValueAndValidity();
     });
+
+    console.log('form', this.form);
   }
 
   register(user: RegisterUser) {

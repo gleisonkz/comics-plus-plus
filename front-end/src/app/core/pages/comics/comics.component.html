@@ -1,5 +1,5 @@
 <section class="comics">
-  <section class="comics__list">
+  <section [@listStagger]="comics?.length" class="comics__list">
     <div *ngFor="let comic of comics">
       <cms-comic [comic]="comic"></cms-comic>
     </div>

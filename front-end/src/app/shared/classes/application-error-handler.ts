@@ -27,10 +27,9 @@ export class ApplicationErrorHandler extends ErrorHandler {
             break;
           case HttpStatusCode.UNAUTHORIZED:
             this.notificationService.showMessage(
-              message || 'Não autorizado.',
+              message || 'Não autenticado.',
               ''
             );
-            break;
             break;
           case HttpStatusCode.FORBIDDEN:
             this.notificationService.showMessage(

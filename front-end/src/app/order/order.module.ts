@@ -9,6 +9,8 @@ import { OrderGuard } from '@order/guards/order.guard';
 import { OrderRoutingModule } from '@order/order-routing.module';
 import { OrderComponent, OrderFinishedComponent } from '@order/pages';
 import { SharedModule } from '@shared/shared.module';
+import { CustomerService } from './services/customer.service';
+import { OrderService } from './services/order.service';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,6 @@ import { SharedModule } from '@shared/shared.module';
     MatInputModule,
     MatIconModule
   ],
-  providers: [OrderGuard]
+  providers: [OrderGuard, OrderService, CustomerService]
 })
 export class OrderModule {}

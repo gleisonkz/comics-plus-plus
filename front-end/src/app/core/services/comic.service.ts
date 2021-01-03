@@ -11,14 +11,17 @@ import { Injectable } from '@angular/core';
 import { ComicImage } from '@core/models/comic-image.model';
 import { ComicShopItemDetail } from '@core/models/comic-shop-item-detail.model';
 import { ComicShopItem } from '@core/models/comic-shop-item.model';
+import { BaseService } from '@core/services';
 import { environment } from 'environments/environment';
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ComicService {
-  constructor(private http: HttpClient) {}
+export class ComicService extends BaseService {
+  constructor(protected http: HttpClient) {
+    super(http);
+  }
 
   getComicShopItems(): Observable<ComicShopItem[]> {
     return this.http.get<ComicShopItem[]>(
@@ -53,24 +56,13 @@ export class ComicService {
   getPaginatedComics(
     comicFilter: Filter
   ): Observable<HttpResponse<ComicList[]>> {
-    return this.http.get<ComicList[]>(`${environment.apiURL}/comic/paginator`, {
-      observe: 'response',
-      responseType: 'json',
-      params: comicFilter
-    });
+    return this.getPaginatedData('comic', comicFilter);
   }
 
   getPaginatedComicsInventory(
     comicFilter: Filter
   ): Observable<HttpResponse<ComicInventory[]>> {
-    return this.http.get<ComicInventory[]>(
-      `${environment.apiURL}/comic/inventory/paginator`,
-      {
-        observe: 'response',
-        responseType: 'json',
-        params: comicFilter
-      }
-    );
+    return this.getPaginatedData('comic/inventory', comicFilter);
   }
 
   postComic(comic: Comic): Observable<Comic> {

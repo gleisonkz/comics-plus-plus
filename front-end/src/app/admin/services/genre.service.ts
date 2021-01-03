@@ -1,19 +1,18 @@
 import { Filter, Genre } from '@admin/models';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { BaseService } from '@core/services';
 import { environment } from 'environments/environment';
 import { Observable } from 'rxjs';
 
 @Injectable()
-export class GenreService {
-  constructor(private http: HttpClient) {}
+export class GenreService extends BaseService {
+  constructor(protected http: HttpClient) {
+    super(http);
+  }
 
-  getPaginatedGenres(genreFilter?: Filter): Observable<HttpResponse<Genre[]>> {
-    return this.http.get<Genre[]>(`${environment.apiURL}/genre/paginator`, {
-      observe: 'response',
-      responseType: 'json',
-      params: genreFilter
-    });
+  getPaginatedGenres(comicFilter: Filter): Observable<HttpResponse<Genre[]>> {
+    return this.getPaginatedData('genre', comicFilter);
   }
 
   getGenresByName(description: string) {

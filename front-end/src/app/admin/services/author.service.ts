@@ -1,21 +1,18 @@
 import { Author, Filter } from '@admin/models';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { BaseService } from '@core/services';
 import { environment } from 'environments/environment';
 import { Observable } from 'rxjs';
 
 @Injectable()
-export class AuthorService {
-  constructor(private http: HttpClient) {}
+export class AuthorService extends BaseService {
+  constructor(protected http: HttpClient) {
+    super(http);
+  }
 
-  getPaginatedAuthors(
-    authorFilter?: Filter
-  ): Observable<HttpResponse<Author[]>> {
-    return this.http.get<Author[]>(`${environment.apiURL}/author/paginator`, {
-      observe: 'response',
-      responseType: 'json',
-      params: authorFilter
-    });
+  getPaginatedAuthors(comicFilter: Filter): Observable<HttpResponse<Author[]>> {
+    return this.getPaginatedData('author', comicFilter);
   }
 
   getAuthorsByName(name: string) {

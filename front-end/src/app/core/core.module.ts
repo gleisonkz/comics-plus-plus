@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -12,6 +11,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTabsModule } from '@angular/material/tabs';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import {
   ComicComponent,
@@ -40,7 +41,8 @@ import {
     AboutComponent
   ],
   imports: [
-    CommonModule,
+    BrowserModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     RouterModule,
     ReactiveFormsModule,
@@ -66,7 +68,9 @@ import {
     HomeComponent,
     ComicsComponent,
     ComicDetailComponent,
-    AboutComponent
+    AboutComponent,
+    BrowserModule,
+    BrowserAnimationsModule
   ]
 })
 export class CoreModule {}

@@ -7,22 +7,32 @@ import { pageSizeOptions } from '@admin/constants/paginator-options';
 import { Comic, ComicList, Filter } from '@admin/models';
 import { AuthorService, GenreService } from '@admin/services';
 import { MatPaginatorService } from '@admin/services/mat-paginator.service';
-import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  HostBinding,
+  OnInit,
+  ViewChild
+} from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { ComicService, NotificationService } from '@core/services';
+import { listStagger } from '@shared/animations/list-stagger';
 import { finalize } from 'rxjs/operators';
+import { fadeInOut } from '../../../shared/animations/fade-in-out';
 
 @Component({
   selector: 'cms-comic-crud',
   templateUrl: './comic-crud.component.html',
-  styleUrls: ['./comic-crud.component.scss']
+  styleUrls: ['./comic-crud.component.scss'],
+  animations: [fadeInOut, listStagger]
 })
 export class ComicCrudComponent implements OnInit {
   pageSizeOption: number[] = pageSizeOptions;
   loadingComplete: boolean = false;
   form: FormGroup;
+  @HostBinding('@fadeInOut')
   dataSource: CustomDataSource<ComicList>;
   @ViewChild(MatPaginator)
   paginator: MatPaginator;

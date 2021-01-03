@@ -13,5 +13,5 @@ export const fadeInOut = trigger('fadeInOut', [
       opacity: 0
     })
   ),
-  transition('void <=> *', animate(1000))
+  transition(':enter', animate(1000))
 ]);

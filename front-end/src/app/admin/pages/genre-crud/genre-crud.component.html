@@ -118,8 +118,16 @@
       </td>
     </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    <tr
+      [@listStagger]="paginator?.length"
+      mat-header-row
+      *matHeaderRowDef="displayedColumns"
+    ></tr>
+    <tr
+      [@listStagger]="paginator?.length"
+      mat-row
+      *matRowDef="let row; columns: displayedColumns"
+    ></tr>
   </table>
 
   <mat-paginator

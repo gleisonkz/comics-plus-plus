@@ -4,11 +4,13 @@ import { Router, RouterOutlet } from '@angular/router';
 import { AuthorizationService } from '@core/services';
 import { AuthenticationService } from '@core/services/authentication.service';
 import { Subscription } from 'rxjs';
+import { routeFadeAnimation } from './shared/animations/route-fade';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  animations: [routeFadeAnimation]
 })
 export class AppComponent {
   title = 'comics-plus-plus';
@@ -52,10 +54,6 @@ export class AppComponent {
   }
 
   prepareRoute(outlet: RouterOutlet) {
-    return (
-      outlet &&
-      outlet.activatedRouteData &&
-      outlet.activatedRouteData['animation']
-    );
+    return outlet?.isActivated || '';
   }
 }

@@ -286,3 +286,16 @@ mat-error {
 .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
   border-color: $color-primary;
 }
+
+mat-expansion-panel {
+  .mat-expansion-panel-content {
+    height: 0;
+    visibility: hidden;
+  }
+  &.mat-expanded {
+    .mat-expansion-panel-content {
+      height: auto;
+      visibility: visible;
+    }
+  }
+}

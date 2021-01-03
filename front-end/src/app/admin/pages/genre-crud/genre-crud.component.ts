@@ -11,6 +11,7 @@ import {
   AfterViewInit,
   ChangeDetectorRef,
   Component,
+  HostBinding,
   OnInit,
   ViewChild
 } from '@angular/core';
@@ -18,16 +19,20 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { NotificationService } from '@core/services';
+import { fadeInOut } from '@shared/animations/fade-in-out';
+import { listStagger } from '@shared/animations/list-stagger';
 import { finalize } from 'rxjs/operators';
 
 @Component({
   templateUrl: './genre-crud.component.html',
-  styleUrls: ['./genre-crud.component.scss']
+  styleUrls: ['./genre-crud.component.scss'],
+  animations: [fadeInOut, listStagger]
 })
 export class GenreCrudComponent implements OnInit, AfterViewInit {
   loadingComplete: boolean = false;
   readonly pageSizeOption: number[] = pageSizeOptions;
   form: FormGroup;
+  @HostBinding('@fadeInOut')
   dataSource: CustomDataSource<Genre>;
   @ViewChild(MatPaginator)
   paginator: MatPaginator;

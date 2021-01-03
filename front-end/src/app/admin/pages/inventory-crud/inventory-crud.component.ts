@@ -3,21 +3,31 @@ import { ComicInventoryDialogComponent } from '@admin/components';
 import { pageSizeOptions } from '@admin/constants/paginator-options';
 import { ComicInventory, Filter } from '@admin/models';
 import { MatPaginatorService } from '@admin/services/mat-paginator.service';
-import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  HostBinding,
+  OnInit,
+  ViewChild
+} from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { ComicService, NotificationService } from '@core/services';
+import { fadeInOut } from '@shared/animations/fade-in-out';
+import { listStagger } from '@shared/animations/list-stagger';
 import { finalize } from 'rxjs/operators';
 
 @Component({
   templateUrl: './inventory-crud.component.html',
-  styleUrls: ['./inventory-crud.component.scss']
+  styleUrls: ['./inventory-crud.component.scss'],
+  animations: [fadeInOut, listStagger]
 })
 export class InventoryCrudComponent implements OnInit {
   loadingComplete: boolean = false;
   readonly pageSizeOption: number[] = pageSizeOptions;
   form: FormGroup;
+  @HostBinding('@fadeInOut')
   dataSource: CustomDataSource<ComicInventory>;
   @ViewChild(MatPaginator)
   paginator: MatPaginator;

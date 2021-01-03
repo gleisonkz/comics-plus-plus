@@ -19,7 +19,6 @@ export class RegisterComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log('ngOnInit', this.form);
     this.form = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [
@@ -38,8 +37,6 @@ export class RegisterComponent implements OnInit {
     this.form.controls.password.valueChanges.subscribe(() => {
       this.form.controls.passwordCheck.updateValueAndValidity();
     });
-
-    console.log('form', this.form);
   }
 
   register(user: RegisterUser) {

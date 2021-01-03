@@ -1,23 +1,22 @@
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { JwtInterceptor } from '@auth/interceptors/jwt.interceptor';
 import { JwtModule } from '@auth0/angular-jwt';
+import { tokenGetter } from '@core/functions/token-getter';
 import { QueryParamsInterceptor } from '@core/interceptors/query-params.interceptor';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
-    BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule,
     CoreModule,
     FlexLayoutModule,
+    SharedModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter
@@ -39,7 +38,3 @@ import { CoreModule } from './core/core.module';
   bootstrap: [AppComponent]
 })
 export class AppModule {}
-
-export function tokenGetter() {
-  return localStorage.getItem('access_token');
-}

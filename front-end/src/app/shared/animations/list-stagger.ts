@@ -22,9 +22,6 @@ export const listStagger = trigger('listStagger', [
         )
       ],
       { optional: true }
-    ),
-    query(':leave', animate('50ms', style({ opacity: 0 })), {
-      optional: true
-    })
+    )
   ])
 ]);

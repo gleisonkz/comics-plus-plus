@@ -11,7 +11,6 @@ import {
   AfterViewInit,
   ChangeDetectorRef,
   Component,
-  HostBinding,
   OnInit,
   ViewChild
 } from '@angular/core';
@@ -32,7 +31,7 @@ export class GenreCrudComponent implements OnInit, AfterViewInit {
   loadingComplete: boolean = false;
   readonly pageSizeOption: number[] = pageSizeOptions;
   form: FormGroup;
-  @HostBinding('@fadeInOut')
+
   dataSource: CustomDataSource<Genre>;
   @ViewChild(MatPaginator)
   paginator: MatPaginator;

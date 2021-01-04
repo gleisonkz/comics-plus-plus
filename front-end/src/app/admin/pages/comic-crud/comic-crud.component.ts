@@ -10,7 +10,7 @@ import { MatPaginatorService } from '@admin/services/mat-paginator.service';
 import {
   ChangeDetectorRef,
   Component,
-  HostBinding,
+  OnDestroy,
   OnInit,
   ViewChild
 } from '@angular/core';
@@ -28,11 +28,11 @@ import { fadeInOut } from '../../../shared/animations/fade-in-out';
   styleUrls: ['./comic-crud.component.scss'],
   animations: [fadeInOut, listStagger]
 })
-export class ComicCrudComponent implements OnInit {
+export class ComicCrudComponent implements OnInit, OnDestroy {
   pageSizeOption: number[] = pageSizeOptions;
   loadingComplete: boolean = false;
   form: FormGroup;
-  @HostBinding('@fadeInOut')
+
   dataSource: CustomDataSource<ComicList>;
   @ViewChild(MatPaginator)
   paginator: MatPaginator;
@@ -72,6 +72,16 @@ export class ComicCrudComponent implements OnInit {
       this.comicService.getPaginatedComics(filter)
     );
   }
+
+  ngOnDestroy(): void {
+    console.log('ngOnDestroy');
+    this.paginator.length = 0;
+    this.dataSource.loadData(undefined).subscribe((c) => {});
+    this.destroyed = true;
+    this.changeDetector.detectChanges();
+  }
+
+  destroyed = false;
 
   getAuthorByNameCallback(searchTerm: string) {
     return this.authorService.getAuthorsByName(searchTerm);
@@ -119,6 +129,12 @@ export class ComicCrudComponent implements OnInit {
         this.loadData();
       }
     });
+  }
+
+  loadData2() {
+    console.log('loadData2');
+
+    this.ngOnDestroy();
   }
 
   loadData(comic?: Comic): void {

@@ -1,3 +1,7 @@
+:host {
+  width: 100%;
+}
+
 .title-group {
   @include flex-center;
   justify-content: space-between;

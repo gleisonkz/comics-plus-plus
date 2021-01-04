@@ -7,8 +7,8 @@
   },
   "files": [
     "src/main.ts",
-    "src/polyfills.ts",
-    "./src/app/authentication/models/DecodedToken.ts"
+    "src/polyfills.ts"
+    // "src/app/authentication/models/decoded-token.model.ts"
   ],
   "include": ["src/**/*.d.ts"]
 }

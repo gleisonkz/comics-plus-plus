@@ -1,10 +1,13 @@
 import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
+import { RouterOutlet } from '@angular/router';
+import { fadeAnimation } from '@shared/animations/fade-animation';
 
 @Component({
   selector: 'cms-admin',
   templateUrl: './admin.component.html',
-  styleUrls: ['./admin.component.scss']
+  styleUrls: ['./admin.component.scss'],
+  animations: [fadeAnimation]
 })
 export class AdminComponent implements OnInit {
   opened = true;
@@ -36,5 +39,9 @@ export class AdminComponent implements OnInit {
     } else {
       return false;
     }
+  }
+
+  getRouterOutletState(outlet: RouterOutlet) {
+    return outlet && outlet.activatedRouteData && outlet.activatedRouteData;
   }
 }

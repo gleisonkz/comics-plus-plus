@@ -7,13 +7,7 @@ import { pageSizeOptions } from '@admin/constants/paginator-options';
 import { Author, Filter } from '@admin/models';
 import { AuthorService } from '@admin/services';
 import { MatPaginatorService } from '@admin/services/mat-paginator.service';
-import {
-  ChangeDetectorRef,
-  Component,
-  HostBinding,
-  OnInit,
-  ViewChild
-} from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
@@ -29,7 +23,6 @@ import { listStagger } from '../../../shared/animations/list-stagger';
 })
 export class AuthorCrudComponent implements OnInit {
   loadingComplete: boolean = false;
-  @HostBinding('@fadeInOut')
   pageSizeOption: number[] = pageSizeOptions;
   form: FormGroup;
   dataSource: CustomDataSource<Author>;

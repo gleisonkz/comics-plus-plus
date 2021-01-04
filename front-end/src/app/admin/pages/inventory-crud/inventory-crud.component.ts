@@ -3,13 +3,7 @@ import { ComicInventoryDialogComponent } from '@admin/components';
 import { pageSizeOptions } from '@admin/constants/paginator-options';
 import { ComicInventory, Filter } from '@admin/models';
 import { MatPaginatorService } from '@admin/services/mat-paginator.service';
-import {
-  ChangeDetectorRef,
-  Component,
-  HostBinding,
-  OnInit,
-  ViewChild
-} from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
@@ -27,7 +21,7 @@ export class InventoryCrudComponent implements OnInit {
   loadingComplete: boolean = false;
   readonly pageSizeOption: number[] = pageSizeOptions;
   form: FormGroup;
-  @HostBinding('@fadeInOut')
+
   dataSource: CustomDataSource<ComicInventory>;
   @ViewChild(MatPaginator)
   paginator: MatPaginator;

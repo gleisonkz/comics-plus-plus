@@ -51,6 +51,9 @@
       (openAdminSide)="adminSide.toggle()"
       (openSide)="sidenav.toggle()"
     ></cms-header>
-    <router-outlet></router-outlet>
+    <!-- <router-outlet></router-outlet> -->
+    <main [@fadeAnimation]="getRouterOutletState(o)">
+      <router-outlet #o="outlet"></router-outlet>
+    </main>
   </mat-sidenav-content>
 </mat-sidenav-container>

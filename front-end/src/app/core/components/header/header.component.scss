@@ -4,7 +4,7 @@
 @import "media";
 
 :host {
-  background: var(--color-primary);
+  background-color: $color-header-bg;
   height: $header-size;
   position: fixed;
   z-index: 10;

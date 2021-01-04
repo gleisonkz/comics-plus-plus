@@ -12,7 +12,6 @@ import { ComicImage } from '@core/models/comic-image.model';
 import { ComicShopItemDetail } from '@core/models/comic-shop-item-detail.model';
 import { ComicShopItem } from '@core/models/comic-shop-item.model';
 import { BaseService } from '@core/services';
-import { environment } from 'environments/environment';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -20,70 +19,60 @@ import { Observable } from 'rxjs';
 })
 export class ComicService extends BaseService {
   constructor(protected http: HttpClient) {
-    super(http);
+    super();
+    this.endpoint = '/comic';
   }
 
   getComicShopItems(): Observable<ComicShopItem[]> {
-    return this.http.get<ComicShopItem[]>(
-      `${environment.apiURL}/comic/shop-item`
-    );
+    return this.http.get<ComicShopItem[]>(`${this.endpoint}/shop-item`);
   }
 
   getComicShopItemDetailByID(comicID: number): Observable<ComicShopItemDetail> {
     return this.http.get<ComicShopItemDetail>(
-      `${environment.apiURL}/comic/${comicID}/shop-item`
+      `${this.endpoint}/${comicID}/shop-item`
     );
   }
 
   getComicImageByComicID(comicID: number) {
-    return this.http.get<ComicImage>(
-      `${environment.apiURL}/comic/${comicID}/image`
-    );
+    return this.http.get<ComicImage>(`${this.endpoint}/${comicID}/image`);
   }
 
   GetAuthorsByComicID(comicID: number) {
-    return this.http.get<Author[]>(
-      `${environment.apiURL}/comic/${comicID}/author`
-    );
+    return this.http.get<Author[]>(`${this.endpoint}/${comicID}/author`);
   }
 
   GetGenresByComicID(comicID: number) {
-    return this.http.get<Genre[]>(
-      `${environment.apiURL}/comic/${comicID}/genre`
-    );
+    return this.http.get<Genre[]>(`${this.endpoint}/${comicID}/genre`);
   }
 
   getPaginatedComics(
     comicFilter: Filter
   ): Observable<HttpResponse<ComicList[]>> {
-    return this.getPaginatedData('comic', comicFilter);
+    return this.getPaginatedData(this.http, comicFilter);
   }
 
   getPaginatedComicsInventory(
     comicFilter: Filter
   ): Observable<HttpResponse<ComicInventory[]>> {
-    return this.getPaginatedData('comic/inventory', comicFilter);
+    return this.getPaginatedData(this.http, comicFilter, 'inventory');
   }
 
   postComic(comic: Comic): Observable<Comic> {
-    return this.http.post<Comic>(`${environment.apiURL}/comic`, comic);
+    return this.http.post<Comic>(`${this.endpoint}`, comic);
   }
 
   putComic(comicID: number, comic: Comic): Observable<Comic> {
-    return this.http.put<Comic>(
-      `${environment.apiURL}/comic/${comicID}`,
-      comic
-    );
+    return this.http.put<Comic>(`${this.endpoint}/${comicID}`, comic);
   }
 
   putComicInventory(comic: ComicInventory): Observable<ComicInventory> {
     return this.http.put<ComicInventory>(
-      `${environment.apiURL}/comic/${comic.comicID}/inventory`,
+      `${this.endpoint}/${comic.comicID}/inventory`,
       comic.quantity
     );
   }
 
   deleteComic(comicID: number): Observable<Comic> {
-    return this.http.delete<Comic>(`${environment.apiURL}/comic/${comicID}`);
+    return this.http.delete<Comic>(`${this.endpoint}/${comicID}`);
   }
 }

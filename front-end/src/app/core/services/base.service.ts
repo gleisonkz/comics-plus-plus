@@ -8,13 +8,28 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export abstract class BaseService {
-  constructor(protected http: HttpClient) {}
+  constructor() {}
 
-  getPaginatedData<T>(
-    endpoint: string,
-    filter?: Filter
+  private _endpoint = '';
+
+  protected set endpoint(endpoint: string) {
+    this._endpoint = `${environment.apiURL}${endpoint}`;
+  }
+
+  protected get endpoint(): string {
+    return this._endpoint;
+  }
+
+  protected getPaginatedData<T>(
+    http: HttpClient,
+    filter?: Filter,
+    segment?: string
   ): Observable<HttpResponse<T[]>> {
-    return this.http.get<T[]>(`${environment.apiURL}/${endpoint}/paginator`, {
+    const endpoints = [this.endpoint, segment, 'paginator']
+      .filter((endpoint) => !!endpoint)
+      .join('/');
+
+    return http.get<T[]>(endpoints, {
       observe: 'response',
       responseType: 'json',
       params: filter

@@ -42,22 +42,22 @@
   }
 
   &__icon {
+    @include base-button-style;
     display: block;
     width: auto;
     height: auto;
     margin-right: rem(20);
     padding: 0;
     background-color: transparent;
-    @include base-button-style;
 
     i {
+      @include base-button-style;
       display: inherit;
       width: inherit;
       height: inherit;
       padding: inherit;
       background-color: inherit;
       font-size: rem(20);
-      @include base-button-style;
     }
   }
 

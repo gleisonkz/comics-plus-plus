@@ -9,6 +9,7 @@ import { Order } from '@order/models/order.model';
 import { CustomerService, OrderService } from '@order/services';
 import cep from 'cep-promise';
 import { Observable, Subscription } from 'rxjs';
+import { NotificationService } from '../../../core/services/notification.service';
 
 @Component({
   templateUrl: './order.component.html',
@@ -27,15 +28,13 @@ export class OrderComponent implements OnInit {
     private router: Router,
     private cartService: ShoppingCartService,
     private orderService: OrderService,
-    private customerService: CustomerService
+    private customerService: CustomerService,
+    private notificationService: NotificationService
   ) {}
 
   ngOnInit(): void {
     this.orderForm = new FormGroup({
-      postalCode: new FormControl('', [
-        Validators.required,
-        OrderComponent.postalCode
-      ]),
+      postalCode: new FormControl('', [Validators.required, this.postalCode]),
       line1: new FormControl('', [Validators.required]),
       number: new FormControl('', [
         Validators.required,
@@ -54,13 +53,13 @@ export class OrderComponent implements OnInit {
     this.orderItems$ = this.cartService.items$;
   }
 
-  static postalCode(postalCode: FormControl): { [key: string]: string } {
+  private hasEightDigits(value: string): boolean {
+    return /\d{8}/.test(value);
+  }
+
+  private postalCode(postalCode: FormControl): { [key: string]: string } {
     if (postalCode.value.length !== 8) {
       return { postalCodeError: 'o CEP deve conter 8 dígitos' };
-    }
-
-    if (!/\d{8}/.test(postalCode.value)) {
-      return { postalCodeError: 'CEP inválido' };
     }
 
     return undefined;
@@ -86,12 +85,16 @@ export class OrderComponent implements OnInit {
   }
 
   searchCEP(numberCEP: string) {
+    if (!numberCEP || !this.hasEightDigits(numberCEP)) return;
+
     cep(numberCEP)
       .then((cep) => {
         this.updateAddress(cep);
       })
-      .catch((err) => {
-        throw err;
+      .catch(() => {
+        this.notificationService.showMessage(
+          'CEP inválido, todos os serviços de CEP retornaram erro'
+        );
       });
   }
 

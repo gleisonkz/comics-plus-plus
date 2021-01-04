@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { DecodedToken } from '../../authentication/models/decoded-token';
+import { DecodedToken } from '../../authentication/models/decoded-token.model';
 import { AccessStatus } from '../enums/access-status.enum';
 import { Role } from '../enums/role.enum';
 

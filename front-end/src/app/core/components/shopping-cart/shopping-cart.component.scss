@@ -32,9 +32,9 @@
   &__group {
     display: flex;
     flex-direction: column;
-    height: rem(40);
     justify-content: space-around;
     align-items: center;
+    height: rem(40);
 
     &--title {
       padding: rem(0 20);
@@ -42,22 +42,22 @@
   }
 
   &__icon {
-    margin-right: rem(20);
-    @include base-button-style;
+    display: block;
     width: auto;
     height: auto;
-    display: block;
+    margin-right: rem(20);
     padding: 0;
     background-color: transparent;
+    @include base-button-style;
 
     i {
-      @include base-button-style;
+      display: inherit;
       width: inherit;
       height: inherit;
-      display: inherit;
       padding: inherit;
       background-color: inherit;
       font-size: rem(20);
+      @include base-button-style;
     }
   }
 
@@ -191,10 +191,9 @@
     margin-top: rem(20);
 
     &__button {
-      font-size: rem(13);
       @include flex-center;
+      font-size: rem(13);
       width: rem(150);
-      // padding: rem(8 10);
       border-radius: rem(5);
       color: white;
 

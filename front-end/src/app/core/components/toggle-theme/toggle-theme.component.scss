@@ -13,10 +13,8 @@ $size: rem(20);
 
 .toggle {
   position: relative;
-
   height: rem(29);
   width: rem(65);
-
   margin-right: rem(20);
 
   &__input {
@@ -32,33 +30,25 @@ $size: rem(20);
 
   &__switch {
     position: absolute;
-
     cursor: pointer;
-
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-
     height: rem(23);
     width: rem(48);
-
     border-radius: rem(34);
     border: white solid rem(0.5);
 
     &::before {
       content: "";
       position: absolute;
-
       background-image: url(/assets/img/icons/light-mode.svg);
       background-size: $size $size;
-
       height: $size;
       width: $size;
-
       right: rem(4);
       bottom: 0;
-
       transition: background-image 0.4s, transform 0.4s;
     }
   }

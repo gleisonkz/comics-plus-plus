@@ -5,9 +5,9 @@
 
 mat-card {
   padding: rem(30);
-  @include max-size(500);
   margin: 0 auto;
   background-color: $color-panel-bg;
+  @include max-size(500);
 
   ::ng-deep .mat-card-header-text {
     margin: 0;

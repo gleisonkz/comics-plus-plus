@@ -13,10 +13,8 @@
   @include flex-center;
   justify-content: space-around;
   height: rem(400);
-
   margin: 0 auto;
   padding: rem(30);
-
   color: $color-panel-text;
   background-color: $color-panel-bg;
   border-radius: rem(10);
@@ -59,9 +57,8 @@
 
   &__button {
     margin-top: rem(50);
-    @include base-button-style;
-
     font-size: rem(20);
+    @include base-button-style;
   }
 
   img {

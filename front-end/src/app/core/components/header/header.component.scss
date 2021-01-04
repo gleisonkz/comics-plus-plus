@@ -12,9 +12,9 @@
 }
 
 .header {
+  @include flex-center;
   background-color: $color-header-bg;
   height: $header-size;
-  @include flex-center;
   justify-content: space-between;
   margin: 0 auto;
   max-width: $global-max-width;
@@ -26,8 +26,8 @@
   }
 
   &__tools {
-    height: 100%;
     @include flex-center;
+    height: 100%;
     color: $color-text;
 
     .admin-side-icon {

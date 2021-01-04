@@ -4,12 +4,13 @@
 @import "functions";
 
 .rating {
+  @include flex-center;
+  flex-direction: column;
+  margin-top: rem(20);
+
   .rating-title {
     font-size: rem(21);
   }
-  margin-top: rem(20);
-  @include flex-center;
-  flex-direction: column;
 
   .rating-indicator {
     font-size: rem(25);

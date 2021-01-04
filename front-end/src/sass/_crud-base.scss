@@ -1,11 +1,10 @@
 .title-group {
   @include flex-center;
+  justify-content: space-between;
   height: rem(36);
-  color: $color-title-text;
   width: 100%;
   margin-bottom: rem(10);
-
-  justify-content: space-between;
+  color: $color-title-text;
 
   h1 {
     font-size: rem(14);
@@ -17,13 +16,13 @@
   }
 
   .title {
+    font-size: rem(20);
+    @include flex-center;
+
     i {
       margin-right: rem(10);
       color: $color-title-text;
     }
-
-    @include flex-center;
-    font-size: rem(20);
   }
 }
 
@@ -67,7 +66,6 @@
 mat-form-field,
 cms-dropdown-list {
   margin-right: rem(20);
-
   @include medias($tiny-mobile, $mobile, $tablet, $large-tablet) {
     width: 100%;
   }
@@ -84,9 +82,9 @@ table {
   }
 
   .btn {
-    @include flex-center;
-    height: rem(29);
     display: inline-flex;
+    height: rem(29);
+    @include flex-center;
   }
 
   .btn + .btn {
@@ -103,6 +101,6 @@ mat-paginator {
 }
 
 .container {
-  @include flex-center(column);
   background-color: $color-panel-bg;
+  @include flex-center(column);
 }

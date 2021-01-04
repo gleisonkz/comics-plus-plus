@@ -33,7 +33,6 @@
   }
 
   &__image {
-    @include size(100, 140);
     position: absolute;
     top: rem(-17);
     left: rem(10);
@@ -41,16 +40,14 @@
       0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06),
       0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086),
       0 50px 80px rgba(0, 0, 0, 0.12);
+    @include size(100, 140);
   }
 
   &__inventory {
     position: absolute;
-
     transform: rotate(45deg);
-
     top: rem(15);
     right: rem(5);
-
     font-size: rem(18);
 
     &--available {
@@ -102,7 +99,6 @@
 
   &__btn-container {
     display: flex;
-
     align-items: center;
     padding: rem(10 0);
 
@@ -115,10 +111,8 @@
   }
 
   &__btn {
-    @include base-button-style;
-    width: rem(90);
-    height: rem(20);
     font-size: rem(12);
+    @include base-button-style(90, 20);
 
     @include tablet {
       width: rem(80);

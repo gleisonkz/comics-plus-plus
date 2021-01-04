@@ -5,8 +5,8 @@
 
 mat-card {
   padding: rem(30);
-  @include max-size(500);
   margin: 0 auto;
+  @include max-size(500);
 
   ::ng-deep .mat-card-header-text {
     margin: 0;
@@ -33,8 +33,7 @@ mat-card-actions {
 }
 
 button {
-  @include base-button-style;
-  width: rem(200);
+  @include base-button-style(200);
 
   @include medias($tiny-mobile, $mobile) {
     width: rem(130);

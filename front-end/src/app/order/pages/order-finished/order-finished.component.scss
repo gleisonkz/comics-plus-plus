@@ -5,13 +5,13 @@
 
 :host {
   .panel {
-    @include flex-center(column);
     width: rem(700);
     padding: rem(50);
     margin: 0 auto;
     background-color: $color-panel-bg;
     border-radius: $global-radius;
     color: $color-text;
+    @include flex-center(column);
 
     @include medias($tiny-mobile, $mobile) {
       padding: rem(20);

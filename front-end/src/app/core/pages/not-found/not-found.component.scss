@@ -10,12 +10,15 @@
   padding: rem(20);
   border-radius: $global-radius;
   @include flex-center(column);
+
   &__image {
     @include size(528, 338);
   }
+
   &__title {
     color: $color-text;
   }
+
   &__text {
     margin-top: rem(20);
     color: $color-text;

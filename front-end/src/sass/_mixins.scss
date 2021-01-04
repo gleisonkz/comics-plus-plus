@@ -27,20 +27,18 @@
   max-height: rem($height);
 }
 
-@mixin base-button-style {
-  @include flex-center;
-  width: rem(180);
-  height: rem(40);
-
+@mixin base-button-style($width: 180, $height: 40) {
+  width: rem($width);
+  height: rem($height);
   padding: rem(15);
   border-radius: rem(5);
-
   user-select: none;
   cursor: pointer;
-
   color: $color-panel-button-text;
   background-color: $color-panel-button-bg;
   transition: background-color 0.2s;
+
+  @include flex-center;
 
   i {
     margin-right: rem(5);

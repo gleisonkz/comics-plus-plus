@@ -4,8 +4,8 @@
 @import "functions";
 
 .comics {
-  @include flex-center(column);
   color: $color-text;
+  @include flex-center(column);
 
   @include medias($tiny-mobile, $mobile, $small-tablet, $tablet) {
     padding: rem(0);
@@ -18,13 +18,10 @@
 
   &__list {
     display: grid;
-    width: 100%;
     grid-template-columns: repeat(auto-fit, minmax(rem(390), 1fr));
-
     grid-template-rows: auto;
-
     gap: rem(40 40);
-
+    width: 100%;
     margin: rem(20);
 
     @include medias($tiny-mobile, $mobile) {

@@ -9,13 +9,11 @@
 }
 
 .order {
+  display: flex;
+  flex-direction: column;
   margin: 0 auto;
   width: rem(1060);
   padding: rem(30 30 20 30);
-
-  display: flex;
-  flex-direction: column;
-
   background-color: $color-panel-bg;
   border-radius: $global-radius;
 
@@ -173,16 +171,14 @@
     }
 
     .order-button {
+      font-size: rem(15);
+      width: initial;
+      margin: rem(10) 0 0 auto;
       @include flex-center;
 
       i {
         margin-right: rem(10);
       }
-
-      // @include base-button-style;
-      font-size: rem(15);
-      width: initial;
-      margin: rem(10) 0 0 auto;
     }
   }
 }

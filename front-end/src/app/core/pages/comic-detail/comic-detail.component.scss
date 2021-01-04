@@ -33,6 +33,7 @@
 
   &__image {
     max-width: rem(240);
+
     @include medias($tiny-mobile, $mobile, $small-tablet) {
       max-width: rem(200);
       margin-top: rem(5);
@@ -57,15 +58,15 @@
   }
 
   &__form {
-    grid-column: 3;
-    grid-row: 1;
     display: flex;
     flex-direction: column;
     align-items: stretch;
+    grid-column: 3;
+    grid-row: 1;
     padding: rem(0 20);
-
     background-color: $color-panel-bg;
     border-radius: $global-radius;
+
     @include medias($tiny-mobile, $mobile, $small-tablet) {
       grid-column: auto;
       grid-row: auto;
@@ -104,8 +105,7 @@
   }
 
   &__btn {
-    @include base-button-style;
-    width: rem(150);
+    @include base-button-style(150);
 
     @include medias($tiny-mobile, $mobile, $small-tablet) {
       width: rem(130);

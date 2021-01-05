@@ -90,7 +90,7 @@ export class AuthorCrudComponent implements OnInit {
     });
   }
 
-  loadData(author?: Author): void {
+  loadData(): void {
     this.dataSource.loading$
       .pipe(
         finalize(() => {
@@ -107,7 +107,7 @@ export class AuthorCrudComponent implements OnInit {
         pageSize: this.paginator.pageSize,
         sortOrder: 'asc'
       },
-      author
+      this.form.value
     );
 
     this.dataSource.loadData(this.authorFilter).subscribe((pagination: any) => {

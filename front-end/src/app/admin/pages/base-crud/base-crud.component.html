@@ -16,25 +16,19 @@
 </h2>
 <mat-divider class="filter__bottom-divider"></mat-divider>
 
-<div class="inner-wrapper">
-  <form slot="filter" class="genre-form" [formGroup]="formFilter">
-    <div class="controlers-wrapper">
-      <ng-content select="[slot=filter]"></ng-content>
-    </div>
+<ng-content select="[slot=filter]"></ng-content>
 
-    <div class="full-wrapper button-wrapper">
-      <div class="button-wrapper">
-        <button
-          (click)="loadData(formFilter.value)"
-          class="search-button"
-          mat-flat-button
-          color="primary"
-        >
-          Pesquisar
-        </button>
-      </div>
-    </div>
-  </form>
+<div class="full-wrapper button-wrapper">
+  <div class="button-wrapper">
+    <button
+      (click)="loadData()"
+      class="search-button"
+      mat-flat-button
+      color="primary"
+    >
+      Pesquisar
+    </button>
+  </div>
 </div>
 
 <div>
@@ -44,24 +38,12 @@
   </h1>
 </div>
 
-<div class="container">
-  <!-- <div class="spinner-container" *ngIf="dataSource.loading$ | async">
-    <mat-spinner></mat-spinner>
-  </div> -->
+<ng-content select="[slot=body]"></ng-content>
 
-  <!-- <p
-    [ngStyle]="{
-      display: loadingComplete && !paginator.length ? 'block' : 'none'
-    }"
-    class="no-data"
-  >
-    nenhum registro encontrado.
-  </p> -->
-
-  <ng-content #tableList></ng-content>
-
-  <mat-paginator
-    [pageSizeOptions]="[5, 10, 20]"
-    showFirstLastButtons
-  ></mat-paginator>
-</div>
+<mat-paginator
+  [ngStyle]="{
+    display: paginator?.length ? 'block' : 'none'
+  }"
+  [pageSizeOptions]="[5, 10, 20]"
+  showFirstLastButtons
+></mat-paginator>

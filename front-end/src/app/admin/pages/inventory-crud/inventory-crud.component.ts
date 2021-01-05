@@ -7,7 +7,7 @@ import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
-import { ComicService, NotificationService } from '@core/services';
+import { ComicInventoryService } from '@core/services/comic-inventory.service';
 import { fadeInOut } from '@shared/animations/fade-in-out';
 import { listStagger } from '@shared/animations/list-stagger';
 import { finalize } from 'rxjs/operators';
@@ -34,9 +34,8 @@ export class InventoryCrudComponent implements OnInit {
   ];
   constructor(
     private dialogService: MatDialog,
-    private comicService: ComicService,
+    private comicInventoryService: ComicInventoryService,
     private changeDetector: ChangeDetectorRef,
-    private notificationService: NotificationService,
     private matPaginatorService: MatPaginatorService
   ) {}
 
@@ -47,7 +46,7 @@ export class InventoryCrudComponent implements OnInit {
     });
 
     this.dataSource = new CustomDataSource<ComicInventory>((filter: Filter) =>
-      this.comicService.getPaginatedComicsInventory(filter)
+      this.comicInventoryService.getPaginatedComicsInventory(filter)
     );
   }
 

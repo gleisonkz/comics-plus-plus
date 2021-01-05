@@ -1,11 +1,4 @@
-import {
-  Author,
-  Comic,
-  ComicInventory,
-  ComicList,
-  Filter,
-  Genre
-} from '@admin/models';
+import { Author, Comic, ComicList, Filter, Genre } from '@admin/models';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ComicImage } from '@core/models/comic-image.model';
@@ -51,25 +44,12 @@ export class ComicService extends BaseService {
     return this.getPaginatedData(this.http, comicFilter);
   }
 
-  getPaginatedComicsInventory(
-    comicFilter: Filter
-  ): Observable<HttpResponse<ComicInventory[]>> {
-    return this.getPaginatedData(this.http, comicFilter, 'inventory');
-  }
-
   postComic(comic: Comic): Observable<Comic> {
     return this.http.post<Comic>(`${this.endpoint}`, comic);
   }
 
   putComic(comicID: number, comic: Comic): Observable<Comic> {
     return this.http.put<Comic>(`${this.endpoint}/${comicID}`, comic);
-  }
-
-  putComicInventory(comic: ComicInventory): Observable<ComicInventory> {
-    return this.http.put<ComicInventory>(
-      `${this.endpoint}/${comic.comicID}/inventory`,
-      comic.quantity
-    );
   }
 
   deleteComic(comicID: number): Observable<Comic> {

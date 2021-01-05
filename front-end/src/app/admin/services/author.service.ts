@@ -1,32 +1,21 @@
-import { Author, Filter } from '@admin/models';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { Author } from '@admin/models';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BaseService } from '@core/services';
-import { Observable } from 'rxjs';
+import { GenericBaseService } from '@core/services';
 
 @Injectable()
-export class AuthorService extends BaseService {
+export class AuthorService extends GenericBaseService<Author> {
   constructor(protected http: HttpClient) {
-    super();
+    super(http);
     this.endpoint = '/author';
-  }
-
-  getPaginatedAuthors(comicFilter: Filter): Observable<HttpResponse<Author[]>> {
-    return this.getPaginatedData(this.http, comicFilter);
   }
 
   getAuthorsByName(name: string) {
     return this.http.get<Author[]>(`${this.endpoint}/${name}`);
   }
 
-  postAuthor(author: Author): Observable<Author> {
-    return this.http.post<Author>(this.endpoint, author);
-  }
-
-  putAuthor(authorID: number, author: Author): Observable<Author> {
-    return this.http.put<Author>(`${this.endpoint}/${authorID}`, author);
-  }
-  deleteAuthor(authorID: number): Observable<Author> {
-    return this.http.delete<Author>(`${this.endpoint}/${authorID}`);
-  }
+  getPaginatedAuthors = this.getPaginatedEntities;
+  postAuthor = this.postEntity;
+  putAuthor = this.putEntity;
+  deleteAuthor = this.deleteEntity;
 }

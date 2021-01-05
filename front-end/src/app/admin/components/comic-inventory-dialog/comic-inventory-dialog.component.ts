@@ -2,7 +2,8 @@ import { ComicInventory } from '@admin/models';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ComicService, NotificationService } from '@core/services';
+import { NotificationService } from '@core/services';
+import { ComicInventoryService } from '@core/services/comic-inventory.service';
 import { tap } from 'rxjs/operators';
 
 @Component({
@@ -15,7 +16,7 @@ export class ComicInventoryDialogComponent implements OnInit {
 
   constructor(
     private dialogRef: MatDialogRef<ComicInventoryDialogComponent>,
-    private comicService: ComicService,
+    private comicInventoryService: ComicInventoryService,
     private notificationService: NotificationService,
     @Inject(MAT_DIALOG_DATA) private data: ComicInventory
   ) {}
@@ -28,8 +29,8 @@ export class ComicInventoryDialogComponent implements OnInit {
 
   save(quantity: number) {
     this.data.quantity = +quantity;
-    this.comicService
-      .putComicInventory(this.data)
+    this.comicInventoryService
+      .putComicInventory(+this.data.comicID, this.form.value)
       .pipe(
         tap(() =>
           this.notificationService.showMessage(

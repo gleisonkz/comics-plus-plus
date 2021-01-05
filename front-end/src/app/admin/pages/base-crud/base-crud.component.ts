@@ -1,6 +1,14 @@
-import { Component, InjectionToken, Input, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-import { BaseCrud } from '../../classes/crud.interface';
+import {
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild
+} from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginatorService } from '../../services/mat-paginator.service';
 
 @Component({
   selector: 'cms-base-crud',
@@ -9,24 +17,35 @@ import { BaseCrud } from '../../classes/crud.interface';
 })
 export class BaseCrudComponent implements OnInit {
   @Input() titleName: string;
-  @Input() formFilter: FormGroup;
-  MATH = new InjectionToken<BaseCrud>('BaseCrud');
-  constructor() {}
-  // @ContentChild(CRUD , { static: true } ) crud: BaseCrud;
-  // @ContentChild(MATH, { static: true }) math: BaseCrud;
+  @Output() add = new EventEmitter();
+  @Output() load = new EventEmitter();
+  @Output() paginatorEvent = new EventEmitter();
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
+  constructor(
+    private matPaginatorService: MatPaginatorService,
+    private changeDetector: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
-    // console.log(this.crud);
+    console.log('2');
+  }
 
-    setTimeout(() => {
-      // console.log(this.crud);
-    }, 2000);
+  ngAfterViewInit(): void {
+    this.paginator.page.subscribe(() => {
+      console.log('paginatorEvent');
+
+      this.paginatorEvent.emit();
+    });
+
+    this.matPaginatorService.applyGlobalization(this.paginator);
+    this.changeDetector.detectChanges();
   }
 
   openDialog() {
-    // this.crud.openDialog();
+    this.add.emit();
   }
   loadData() {
-    // this.crud.loadData();
+    this.load.emit();
   }
 }

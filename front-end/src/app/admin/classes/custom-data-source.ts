@@ -22,6 +22,7 @@ export class CustomDataSource<T> implements DataSource<T> {
       this.callbackService(filter)
         .pipe(finalize(() => this.loadingData.next(false)))
         .subscribe((response: HttpResponse<T[]>) => {
+          console.log(response);
           const pagination = JSON.parse(response.headers.get('x-pagination'));
           publisher.next(pagination);
 

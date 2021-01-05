@@ -11,22 +11,29 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { NotificationService } from '@core/services';
+import { listStagger } from '@shared/animations/list-stagger';
 import { finalize } from 'rxjs/operators';
-import { BaseCrud } from '../../classes/crud.interface';
-import { CRUD } from './../../classes/crud.token';
+import { BaseCrudComponent } from '../base-crud/base-crud.component';
 
 @Component({
   templateUrl: './author-test.component.html',
   styleUrls: ['./author-test.component.scss'],
-  providers: [{ provide: CRUD, useExisting: AuthorTestComponent }]
+  selector: 'author-test',
+  animations: [listStagger]
 })
-export class AuthorTestComponent implements OnInit, BaseCrud {
+export class AuthorTestComponent implements OnInit {
   loadingComplete: boolean = false;
   pageSizeOption: number[] = pageSizeOptions;
+  title = 'Autores';
   form: FormGroup;
   dataSource: CustomDataSource<Author>;
-  @ViewChild(MatPaginator)
-  paginator: MatPaginator;
+
+  public get paginator(): MatPaginator {
+    return this.baseCrud.paginator;
+  }
+
+  @ViewChild(BaseCrudComponent, { static: true }) baseCrud: BaseCrudComponent;
+
   authorFilter: Filter;
   displayedColumns: string[] = ['AuthorID', 'Name', 'Ações'];
   constructor(
@@ -53,20 +60,28 @@ export class AuthorTestComponent implements OnInit, BaseCrud {
     this.authorFilter.pageSize = this.paginator.pageSize;
   }
 
-  // ngAfterViewInit(): void {
-  //   this.paginator.page.subscribe(() => {
-  //     (this.authorFilter.pageNumber = this.paginator.pageIndex + 1),
-  //       (this.authorFilter.pageSize = this.paginator.pageSize),
-  //       this.dataSource
-  //         .loadData(this.authorFilter)
-  //         .subscribe((pagination: any) => {
-  //           this.paginator.length = pagination.totalCount;
-  //         });
-  //   });
+  ngAfterViewInit(): void {
+    // this.paginator.page.subscribe(() => {
+    //   (this.authorFilter.pageNumber = this.paginator.pageIndex + 1),
+    //     (this.authorFilter.pageSize = this.paginator.pageSize),
+    //     this.dataSource
+    //       .loadData(this.authorFilter)
+    //       .subscribe((pagination: any) => {
+    //         this.paginator.length = pagination.totalCount;
+    //       });
+    // });
+    // this.matPaginatorService.applyGlobalization(this.paginator);
+    // console.log('base', this.baseCrud);
+    // this.changeDetector.detectChanges();
+  }
 
-  //   this.matPaginatorService.applyGlobalization(this.paginator);
-  //   this.changeDetector.detectChanges();
-  // }
+  refreshPaginator() {
+    this.authorFilter.pageNumber = this.paginator.pageIndex + 1;
+    this.authorFilter.pageSize = this.paginator.pageSize;
+    this.dataSource.loadData(this.authorFilter).subscribe((pagination: any) => {
+      this.paginator.length = pagination.totalCount;
+    });
+  }
 
   openDialog(author?: Author) {
     const dialogConfig = new MatDialogConfig();
@@ -89,7 +104,7 @@ export class AuthorTestComponent implements OnInit, BaseCrud {
     });
   }
 
-  loadData(author?: Author): void {
+  loadData(): void {
     this.dataSource.loading$
       .pipe(
         finalize(() => {
@@ -106,7 +121,7 @@ export class AuthorTestComponent implements OnInit, BaseCrud {
         pageSize: this.paginator.pageSize,
         sortOrder: 'asc'
       },
-      author
+      this.form.value
     );
 
     this.dataSource.loadData(this.authorFilter).subscribe((pagination: any) => {

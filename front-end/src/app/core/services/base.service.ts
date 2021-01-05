@@ -36,3 +36,24 @@ export abstract class BaseService {
     });
   }
 }
+
+export abstract class GenericBaseService<T> extends BaseService {
+  constructor(protected http: HttpClient) {
+    super();
+  }
+
+  getPaginatedEntities(filter: Filter): Observable<HttpResponse<T[]>> {
+    return this.getPaginatedData(this.http, filter);
+  }
+
+  postEntity(obj: T): Observable<T> {
+    return this.http.post<T>(this.endpoint, obj);
+  }
+
+  putEntity(id: number, author: T): Observable<T> {
+    return this.http.put<T>(`${this.endpoint}/${id}`, author);
+  }
+  deleteEntity(id: number): Observable<T> {
+    return this.http.delete<T>(`${this.endpoint}/${id}`);
+  }
+}

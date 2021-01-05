@@ -299,3 +299,13 @@ mat-expansion-panel {
     }
   }
 }
+
+mat-expansion-panel-header {
+  span.mat-content:nth-child(1) {
+    flex: 0 1 auto;
+  }
+
+  span.mat-expansion-indicator {
+    @include flex-center;
+  }
+}

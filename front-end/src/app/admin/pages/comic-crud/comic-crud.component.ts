@@ -7,13 +7,7 @@ import { pageSizeOptions } from '@admin/constants/paginator-options';
 import { Comic, ComicList, Filter } from '@admin/models';
 import { AuthorService, GenreService } from '@admin/services';
 import { MatPaginatorService } from '@admin/services/mat-paginator.service';
-import {
-  ChangeDetectorRef,
-  Component,
-  OnDestroy,
-  OnInit,
-  ViewChild
-} from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
@@ -28,7 +22,7 @@ import { fadeInOut } from '../../../shared/animations/fade-in-out';
   styleUrls: ['./comic-crud.component.scss'],
   animations: [fadeInOut, listStagger]
 })
-export class ComicCrudComponent implements OnInit, OnDestroy {
+export class ComicCrudComponent implements OnInit {
   pageSizeOption: number[] = pageSizeOptions;
   loadingComplete: boolean = false;
   form: FormGroup;
@@ -72,16 +66,6 @@ export class ComicCrudComponent implements OnInit, OnDestroy {
       this.comicService.getPaginatedComics(filter)
     );
   }
-
-  ngOnDestroy(): void {
-    console.log('ngOnDestroy');
-    this.paginator.length = 0;
-    this.dataSource.loadData(undefined).subscribe((c) => {});
-    this.destroyed = true;
-    this.changeDetector.detectChanges();
-  }
-
-  destroyed = false;
 
   getAuthorByNameCallback(searchTerm: string) {
     return this.authorService.getAuthorsByName(searchTerm);
@@ -129,12 +113,6 @@ export class ComicCrudComponent implements OnInit, OnDestroy {
         this.loadData();
       }
     });
-  }
-
-  loadData2() {
-    console.log('loadData2');
-
-    this.ngOnDestroy();
   }
 
   loadData(comic?: Comic): void {

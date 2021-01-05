@@ -12,6 +12,7 @@ import { fadeAnimation } from '@shared/animations/fade-animation';
 export class AdminComponent implements OnInit {
   opened = true;
   @ViewChild('sidenav') sidenav: MatSidenav;
+
   constructor() {}
 
   ngOnInit(): void {

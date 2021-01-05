@@ -42,6 +42,10 @@
   margin-top: rem(10);
   font-size: rem(15);
   color: $color-panel-text;
+
+  &__bottom-divider {
+    margin-bottom: rem(20);
+  }
 }
 
 .genre-form {

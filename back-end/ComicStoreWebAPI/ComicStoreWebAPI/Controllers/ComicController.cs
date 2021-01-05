@@ -260,13 +260,14 @@ namespace ComicStore.Application.Controllers
             }
         }
 
-        [HttpPut("{comicID}/inventory")]
+        [HttpPut("inventory/{comicID}")]
         [Authorize(Roles = "Admin")]
-        public IActionResult PutComicInventory(int comicID, [FromBody] int quantity)
+        public IActionResult PutComicInventory(int comicID, [FromBody] ComicInventoryDTO inventoryDTO)
+
         {
             try
             {
-                svcComic.UpdateComicInventory(comicID, quantity);
+                svcComic.UpdateComicInventory(comicID, inventoryDTO.Quantity);
                 svcComic.Commit();
                 return Ok();
             }

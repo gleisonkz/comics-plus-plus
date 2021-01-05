@@ -1,0 +1,16 @@
+<cms-base-crud [titleName]="'Autores'" [formFilter]="form">
+  <ng-container slot="filter">
+    <mat-form-field>
+      <input
+        type="number"
+        matInput
+        placeholder="ID"
+        [formControl]="form.controls.authorID"
+      />
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Nome" [formControl]="form.controls.name" />
+    </mat-form-field>
+  </ng-container>
+</cms-base-crud>

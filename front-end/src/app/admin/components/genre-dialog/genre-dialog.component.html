@@ -11,11 +11,12 @@
   </mat-dialog-content>
 
   <mat-dialog-actions>
-    <button class="mat-raised-button" (click)="close()">Fechar</button>
+    <button mat-raised-button (click)="close()">Fechar</button>
     <button
       [disabled]="form.invalid"
       [class.disabled]="form.invalid"
-      class="mat-raised-button mat-primary"
+      mat-raised-button
+      color="primary"
       (click)="save()"
     >
       Salvar

@@ -3,7 +3,13 @@
 
   <mat-dialog-content>
     <mat-form-field>
-      <input matInput placeholder="Nome" formControlName="name" />
+      <input
+        matInput
+        autofocus
+        onFocus="this.select()"
+        placeholder="Nome"
+        formControlName="name"
+      />
       <mat-error>
         <span cmsShowValidation="name"></span>
       </mat-error>

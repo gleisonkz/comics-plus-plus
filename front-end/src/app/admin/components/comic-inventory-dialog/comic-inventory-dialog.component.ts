@@ -28,7 +28,7 @@ export class ComicInventoryDialogComponent implements OnInit {
   }
 
   save() {
-    this.data.quantity = +this.form.value;
+    this.data.quantity = +this.form.value.quantity;
     this.comicInventoryService
       .putComicInventory(+this.data.comicID, this.form.value)
       .pipe(

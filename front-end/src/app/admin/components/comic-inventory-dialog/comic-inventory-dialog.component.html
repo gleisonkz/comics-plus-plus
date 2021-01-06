@@ -3,7 +3,14 @@
 
   <mat-dialog-content>
     <mat-form-field>
-      <input matInput placeholder="Quantidade" formControlName="quantity" />
+      <input
+        matInput
+        #myInput
+        placeholder="Quantidade"
+        formControlName="quantity"
+        autofocus
+        onFocus="this.select()"
+      />
       <mat-error>
         <span cmsShowValidation="quantity"></span>
       </mat-error>

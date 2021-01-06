@@ -169,7 +169,7 @@ namespace ComicStore.Service.Services
             var repoComicInventory = factoryRepository.CreateRepository<ComicInventory>();
             ComicInventory comicInventory = repoComicInventory.GetQuery()
                                                               .SingleOrDefault(c => c.ComicID == comicID);
-            comicInventory.QuantityDown(quantity);
+            comicInventory.Quantity = quantity;
             return comicInventory;
         }
     }

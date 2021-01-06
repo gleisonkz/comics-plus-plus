@@ -29,8 +29,8 @@ export class RegisterComponent implements OnInit {
         CustomValidators.minOneSpecialCharacter
       ]),
       passwordCheck: new FormControl('', [
-        Validators.required
-        // CustomValidators.matchValues('password')
+        Validators.required,
+        CustomValidators.matchValues('password')
       ])
     });
 

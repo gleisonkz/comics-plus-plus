@@ -6,7 +6,7 @@
 
   <cms-add-button
     (clickEvent)="openDialog()"
-    [buttonText]="'Nova Categoria'"
+    [buttonText]="addButtonText"
   ></cms-add-button>
 </div>
 <mat-divider></mat-divider>
@@ -31,7 +31,12 @@
   </div>
 </div>
 
-<div>
+<div
+  class="title-group subtitle"
+  [ngStyle]="{
+    display: loadingComplete && paginator?.length ? 'table' : 'none'
+  }"
+>
   <h1 class="mat-h1">
     <i class="fa fa-list-alt" aria-hidden="true"></i>
     Lista de {{ titleName }}
@@ -42,7 +47,7 @@
 
 <mat-paginator
   [ngStyle]="{
-    display: paginator?.length ? 'block' : 'none'
+    display: loadingComplete && paginator?.length ? 'block' : 'none'
   }"
   [pageSizeOptions]="[5, 10, 20]"
   showFirstLastButtons

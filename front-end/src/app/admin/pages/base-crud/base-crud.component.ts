@@ -17,6 +17,8 @@ import { MatPaginatorService } from '../../services/mat-paginator.service';
 })
 export class BaseCrudComponent implements OnInit {
   @Input() titleName: string;
+  @Input() loadingComplete = false;
+  @Input() addButtonText: string;
   @Output() add = new EventEmitter();
   @Output() load = new EventEmitter();
   @Output() paginatorEvent = new EventEmitter();

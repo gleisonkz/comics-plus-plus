@@ -56,18 +56,18 @@
   .mat-form-field-wrapper {
     padding: 0;
   }
+}
 
-  .search-button {
-    @include flex-center;
-    height: rem(29);
-    margin-bottom: rem(6);
-  }
+.search-button {
+  @include flex-center;
+  height: rem(29);
+  margin-bottom: rem(6);
+}
 
-  .full-wrapper,
-  .full-wrapper button {
-    @include medias($tiny-mobile, $mobile) {
-      width: 100%;
-    }
+.full-wrapper,
+.full-wrapper button {
+  @include medias($tiny-mobile, $mobile) {
+    width: 100%;
   }
 }
 

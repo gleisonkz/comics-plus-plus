@@ -5,8 +5,8 @@ import {
 } from '@admin/components';
 import { pageSizeOptions } from '@admin/constants/paginator-options';
 import { Author, Filter } from '@admin/models';
-import { AuthorService, MatPaginatorService } from '@admin/services';
-import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { AuthorService } from '@admin/services';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
@@ -24,7 +24,6 @@ import { BaseCrudComponent } from '../base-crud/base-crud.component';
 export class AuthorTestComponent implements OnInit {
   loadingComplete: boolean = false;
   pageSizeOption: number[] = pageSizeOptions;
-  title = 'Autores';
   form: FormGroup;
   dataSource: CustomDataSource<Author>;
 
@@ -39,9 +38,7 @@ export class AuthorTestComponent implements OnInit {
   constructor(
     private dialogService: MatDialog,
     private authorService: AuthorService,
-    private changeDetector: ChangeDetectorRef,
-    private notificationService: NotificationService,
-    private matPaginatorService: MatPaginatorService
+    private notificationService: NotificationService
   ) {}
 
   ngOnInit(): void {
@@ -58,21 +55,6 @@ export class AuthorTestComponent implements OnInit {
   defaultPaginateValues() {
     this.authorFilter.pageNumber = this.paginator.pageIndex + 1;
     this.authorFilter.pageSize = this.paginator.pageSize;
-  }
-
-  ngAfterViewInit(): void {
-    // this.paginator.page.subscribe(() => {
-    //   (this.authorFilter.pageNumber = this.paginator.pageIndex + 1),
-    //     (this.authorFilter.pageSize = this.paginator.pageSize),
-    //     this.dataSource
-    //       .loadData(this.authorFilter)
-    //       .subscribe((pagination: any) => {
-    //         this.paginator.length = pagination.totalCount;
-    //       });
-    // });
-    // this.matPaginatorService.applyGlobalization(this.paginator);
-    // console.log('base', this.baseCrud);
-    // this.changeDetector.detectChanges();
   }
 
   refreshPaginator() {

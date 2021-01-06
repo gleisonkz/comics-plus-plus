@@ -1,5 +1,7 @@
 <cms-base-crud
   titleName="Autores"
+  addButtonText="Novo Autor"
+  [loadingComplete]="loadingComplete"
   (paginatorEvent)="refreshPaginator()"
   (load)="loadData()"
   (add)="openDialog()"

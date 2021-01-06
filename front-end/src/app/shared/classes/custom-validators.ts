@@ -61,12 +61,12 @@ export class CustomValidators extends Validators {
     matchTo: string
   ): (abstractControl: AbstractControl) => ValidationErrors | null {
     return (control: AbstractControl): ValidationErrors | null => {
-      if (!control.parent)
+      if (!control.parent && control.value)
         throw new Error(
           'É necessário que o controle esteja associado a um form group'
         );
 
-      return control.value === control.parent.controls[matchTo].value
+      return control.value === control?.parent?.controls[matchTo]?.value
         ? null
         : { passwordsNotMatch: true };
     };

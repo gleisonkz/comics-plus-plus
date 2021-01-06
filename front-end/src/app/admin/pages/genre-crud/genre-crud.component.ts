@@ -6,14 +6,7 @@ import {
 import { pageSizeOptions } from '@admin/constants/paginator-options';
 import { Filter, Genre } from '@admin/models';
 import { GenreService } from '@admin/services';
-import { MatPaginatorService } from '@admin/services/mat-paginator.service';
-import {
-  AfterViewInit,
-  ChangeDetectorRef,
-  Component,
-  OnInit,
-  ViewChild
-} from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
@@ -21,28 +14,30 @@ import { NotificationService } from '@core/services';
 import { fadeInOut } from '@shared/animations/fade-in-out';
 import { listStagger } from '@shared/animations/list-stagger';
 import { finalize } from 'rxjs/operators';
+import { BaseCrudComponent } from '../base-crud/base-crud.component';
 
 @Component({
   templateUrl: './genre-crud.component.html',
   styleUrls: ['./genre-crud.component.scss'],
   animations: [fadeInOut, listStagger]
 })
-export class GenreCrudComponent implements OnInit, AfterViewInit {
+export class GenreCrudComponent implements OnInit {
   loadingComplete: boolean = false;
   readonly pageSizeOption: number[] = pageSizeOptions;
   form: FormGroup;
 
+  @ViewChild(BaseCrudComponent, { static: true }) baseCrud: BaseCrudComponent;
+  public get paginator(): MatPaginator {
+    return this.baseCrud.paginator;
+  }
+
   dataSource: CustomDataSource<Genre>;
-  @ViewChild(MatPaginator)
-  paginator: MatPaginator;
   genreFilter: Filter;
   displayedColumns: string[] = ['GenreID', 'Nome', 'Ações'];
   constructor(
     private dialogService: MatDialog,
     private genreService: GenreService,
-    private changeDetector: ChangeDetectorRef,
-    private notificationService: NotificationService,
-    private matPaginatorService: MatPaginatorService
+    private notificationService: NotificationService
   ) {}
 
   ngOnInit(): void {
@@ -61,19 +56,12 @@ export class GenreCrudComponent implements OnInit, AfterViewInit {
     this.genreFilter.pageSize = this.paginator.pageSize;
   }
 
-  ngAfterViewInit(): void {
-    this.paginator.page.subscribe(() => {
-      (this.genreFilter.pageNumber = this.paginator.pageIndex + 1),
-        (this.genreFilter.pageSize = this.paginator.pageSize),
-        this.dataSource
-          .loadData(this.genreFilter)
-          .subscribe((pagination: any) => {
-            this.paginator.length = pagination.totalCount;
-          });
+  refreshPaginator() {
+    this.genreFilter.pageNumber = this.paginator.pageIndex + 1;
+    this.genreFilter.pageSize = this.paginator.pageSize;
+    this.dataSource.loadData(this.genreFilter).subscribe((pagination: any) => {
+      this.paginator.length = pagination.totalCount;
     });
-
-    this.matPaginatorService.applyGlobalization(this.paginator);
-    this.changeDetector.detectChanges();
   }
 
   openDialog(genre?: Genre) {

@@ -32,9 +32,8 @@ import { MatTableModule } from '@angular/material/table';
 import { SharedModule } from '@shared/shared.module';
 import { MaterialFileInputModule } from 'ngx-material-file-input';
 import { AdminRoutingModule } from './admin-routing.module';
-import { AuthorService } from './services/author.service';
 import { BaseCrudComponent } from './pages/base-crud/base-crud.component';
-import { AuthorTestComponent } from './pages/author-test/author-test.component';
+import { AuthorService } from './services/author.service';
 
 @NgModule({
   declarations: [
@@ -49,8 +48,7 @@ import { AuthorTestComponent } from './pages/author-test/author-test.component';
     InventoryCrudComponent,
     ComicInventoryDialogComponent,
     AddButtonComponent,
-    BaseCrudComponent,
-    AuthorTestComponent
+    BaseCrudComponent
   ],
   imports: [
     FlexLayoutModule,

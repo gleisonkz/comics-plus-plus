@@ -6,8 +6,7 @@ import {
 import { pageSizeOptions } from '@admin/constants/paginator-options';
 import { Author, Filter } from '@admin/models';
 import { AuthorService } from '@admin/services';
-import { MatPaginatorService } from '@admin/services/mat-paginator.service';
-import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
@@ -15,6 +14,7 @@ import { NotificationService } from '@core/services';
 import { fadeInOut } from '@shared/animations/fade-in-out';
 import { finalize } from 'rxjs/operators';
 import { listStagger } from '../../../shared/animations/list-stagger';
+import { BaseCrudComponent } from '../base-crud/base-crud.component';
 
 @Component({
   templateUrl: './author-crud.component.html',
@@ -26,16 +26,19 @@ export class AuthorCrudComponent implements OnInit {
   pageSizeOption: number[] = pageSizeOptions;
   form: FormGroup;
   dataSource: CustomDataSource<Author>;
-  @ViewChild(MatPaginator)
-  paginator: MatPaginator;
+
+  public get paginator(): MatPaginator {
+    return this.baseCrud.paginator;
+  }
+
+  @ViewChild(BaseCrudComponent, { static: true }) baseCrud: BaseCrudComponent;
+
   authorFilter: Filter;
   displayedColumns: string[] = ['AuthorID', 'Name', 'Ações'];
   constructor(
     private dialogService: MatDialog,
     private authorService: AuthorService,
-    private changeDetector: ChangeDetectorRef,
-    private notificationService: NotificationService,
-    private matPaginatorService: MatPaginatorService
+    private notificationService: NotificationService
   ) {}
 
   ngOnInit(): void {
@@ -54,19 +57,12 @@ export class AuthorCrudComponent implements OnInit {
     this.authorFilter.pageSize = this.paginator.pageSize;
   }
 
-  ngAfterViewInit(): void {
-    this.paginator.page.subscribe(() => {
-      (this.authorFilter.pageNumber = this.paginator.pageIndex + 1),
-        (this.authorFilter.pageSize = this.paginator.pageSize),
-        this.dataSource
-          .loadData(this.authorFilter)
-          .subscribe((pagination: any) => {
-            this.paginator.length = pagination.totalCount;
-          });
+  refreshPaginator() {
+    this.authorFilter.pageNumber = this.paginator.pageIndex + 1;
+    this.authorFilter.pageSize = this.paginator.pageSize;
+    this.dataSource.loadData(this.authorFilter).subscribe((pagination: any) => {
+      this.paginator.length = pagination.totalCount;
     });
-
-    this.matPaginatorService.applyGlobalization(this.paginator);
-    this.changeDetector.detectChanges();
   }
 
   openDialog(author?: Author) {

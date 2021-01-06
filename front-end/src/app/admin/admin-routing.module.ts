@@ -7,7 +7,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthorizationGuard } from '@core/guards';
 import { AdminComponent } from './pages/admin/admin.component';
-import { AuthorTestComponent } from './pages/author-test/author-test.component';
 import { ComicCrudComponent } from './pages/comic-crud/comic-crud.component';
 
 const routes: Routes = [
@@ -29,11 +28,6 @@ const routes: Routes = [
       {
         path: 'author',
         component: AuthorCrudComponent,
-        data: { allowedRoles: ['Admin'] }
-      },
-      {
-        path: 'author-test',
-        component: AuthorTestComponent,
         data: { allowedRoles: ['Admin'] }
       },
       {

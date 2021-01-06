@@ -4,15 +4,17 @@ namespace ComicStore.Domain.POCO
 {
     public class ComicInventory
     {
+        private int quantity;
         public int ComicID { get; set; }
         public int Quantity
         {
-            get => Quantity;
+            get => quantity;
 
             set
             {
                 if (value < 0)
                     throw new CustomException("A quantidade não pode ser menor ou igual a 0");
+                quantity = value;
             }
         }
         public virtual Comic Comic { get; set; }

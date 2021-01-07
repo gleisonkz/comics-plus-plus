@@ -11,7 +11,10 @@
   <div (click)="$event.stopPropagation()" (keydown)="$event.stopPropagation()">
     <div class="cart" (click)="$event.stopPropagation()">
       <div *ngIf="hasItems" class="cart__content">
-        <div *ngFor="let item of items$ | async" class="cart__item">
+        <div
+          *ngFor="let item of items$; trackBy: item.id | async"
+          class="cart__item"
+        >
           <img
             [src]="item.comic.image.preview"
             alt=""

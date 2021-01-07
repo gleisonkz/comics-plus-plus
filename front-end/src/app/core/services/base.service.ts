@@ -37,23 +37,35 @@ export abstract class BaseService {
   }
 }
 
-export abstract class GenericBaseService<T> extends BaseService {
+export abstract class GenericBaseService<
+  TResource,
+  TListItem,
+  TEntity
+> extends BaseService {
   constructor(protected http: HttpClient) {
     super();
   }
 
-  getPaginatedEntities(filter: Filter): Observable<HttpResponse<T[]>> {
+  getPaginatedEntities(filter: Filter): Observable<HttpResponse<TListItem[]>> {
     return this.getPaginatedData(this.http, filter);
   }
 
-  postEntity(obj: T): Observable<T> {
-    return this.http.post<T>(this.endpoint, obj);
+  postEntity(obj: TResource): Observable<any> {
+    return this.http.post<TResource>(this.endpoint, obj);
   }
 
-  putEntity(id: number, author: T): Observable<T> {
-    return this.http.put<T>(`${this.endpoint}/${id}`, author);
+  putEntity(id: number, obj: TResource): Observable<any> {
+    return this.http.put<TResource>(`${this.endpoint}/${id}`, obj);
   }
-  deleteEntity(id: number): Observable<T> {
-    return this.http.delete<T>(`${this.endpoint}/${id}`);
+
+  getEntity(id: number): Observable<TEntity> {
+    console.log(id);
+    console.log(`${this.endpoint}/${id}`);
+
+    return this.http.get<TEntity>(`${this.endpoint}/${id}`);
+  }
+
+  deleteEntity(id: number): Observable<TEntity> {
+    return this.http.delete<TEntity>(`${this.endpoint}/${id}`);
   }
 }

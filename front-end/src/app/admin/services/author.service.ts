@@ -2,9 +2,15 @@ import { Author } from '@admin/models';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { GenericBaseService } from '@core/services';
+import { AuthorListItem } from '../models/author-list.model';
+import { AuthorResource } from '../models/author.model';
 
 @Injectable()
-export class AuthorService extends GenericBaseService<Author> {
+export class AuthorService extends GenericBaseService<
+  AuthorResource,
+  AuthorListItem,
+  Author
+> {
   constructor(protected http: HttpClient) {
     super(http);
     this.endpoint = '/author';
@@ -15,6 +21,7 @@ export class AuthorService extends GenericBaseService<Author> {
   }
 
   getPaginatedAuthors = this.getPaginatedEntities;
+  getAuthorByID = this.getEntity;
   postAuthor = this.postEntity;
   putAuthor = this.putEntity;
   deleteAuthor = this.deleteEntity;

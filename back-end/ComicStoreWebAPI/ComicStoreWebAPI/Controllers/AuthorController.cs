@@ -91,6 +91,28 @@ namespace ComicStore.Application.Controllers
             }
         }
 
+        [HttpGet("{authorID:int}")]
+        [Authorize(Roles = "Admin")]
+        public IActionResult GetAuthorByID(int authorID)
+        {
+            try
+            {
+                var author = svcAuthor.GetAuthor()
+                        .Where(c => c.AuthorID == authorID)
+                         .Select(c => new
+                         {
+                             c.AuthorID,
+                             c.Name
+                         }).Single();
+
+                return Ok(author);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Erro: {ex.Message}");
+            }
+        }
+
         [HttpGet("{name}")]
         [Authorize(Roles = "Admin")]
         public IActionResult GetAuthorsByName(string name)
@@ -111,6 +133,8 @@ namespace ComicStore.Application.Controllers
                 return BadRequest($"Erro: {ex.Message}");
             }
         }
+
+
     }
 
 

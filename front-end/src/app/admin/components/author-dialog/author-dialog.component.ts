@@ -1,4 +1,4 @@
-import { Author } from '@admin/models';
+import { Author, AuthorResource } from '@admin/models';
 import { AuthorService } from '@admin/services';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -13,22 +13,30 @@ import { tap } from 'rxjs/operators';
 })
 export class AuthorDialogComponent implements OnInit {
   form: FormGroup;
-  id: number;
+  authorID: number;
+  author: AuthorResource;
 
   constructor(
     private dialogRef: MatDialogRef<AuthorDialogComponent>,
     private authorService: AuthorService,
     private notificationService: NotificationService,
-    @Inject(MAT_DIALOG_DATA) private data: Author
+    @Inject(MAT_DIALOG_DATA) private data?: { authorID: number }
   ) {}
 
   ngOnInit(): void {
     this.form = new FormGroup({
-      name: new FormControl(this.data?.name || '', [
-        Validators.required,
-        Validators.minLength(3)
-      ])
+      name: new FormControl('', [Validators.required, Validators.minLength(3)])
     });
+    console.log(this.data);
+
+    if (this.data) {
+      this.authorService
+        .getAuthorByID(this.data.authorID)
+        .subscribe((author) => {
+          console.log(author);
+          this.form.patchValue(author);
+        });
+    }
   }
 
   save() {

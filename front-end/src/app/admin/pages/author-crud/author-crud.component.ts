@@ -14,7 +14,9 @@ import { NotificationService } from '@core/services';
 import { fadeInOut } from '@shared/animations/fade-in-out';
 import { finalize } from 'rxjs/operators';
 import { listStagger } from '../../../shared/animations/list-stagger';
+import { AuthorListItem } from '../../models/author-list.model';
 import { BaseCrudComponent } from '../base-crud/base-crud.component';
+import { createMatDialogConfig } from '../inventory-crud/inventory-crud.component';
 
 @Component({
   templateUrl: './author-crud.component.html',
@@ -25,7 +27,7 @@ export class AuthorCrudComponent implements OnInit {
   loadingComplete: boolean = false;
   pageSizeOption: number[] = pageSizeOptions;
   form: FormGroup;
-  dataSource: CustomDataSource<Author>;
+  dataSource: CustomDataSource<AuthorListItem>;
 
   public get paginator(): MatPaginator {
     return this.baseCrud.paginator;
@@ -47,7 +49,7 @@ export class AuthorCrudComponent implements OnInit {
       name: new FormControl('')
     });
 
-    this.dataSource = new CustomDataSource<Author>((filter: Filter) =>
+    this.dataSource = new CustomDataSource<AuthorListItem>((filter: Filter) =>
       this.authorService.getPaginatedAuthors(filter)
     );
   }
@@ -65,18 +67,10 @@ export class AuthorCrudComponent implements OnInit {
     });
   }
 
-  openDialog(author?: Author) {
-    const dialogConfig = new MatDialogConfig();
-
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-    dialogConfig.hasBackdrop = true;
-
-    dialogConfig.data = author;
-
+  openDialog(obj: { authorID: number }) {
     const dialogRef = this.dialogService.open(
       AuthorDialogComponent,
-      dialogConfig
+      createMatDialogConfig({ data: obj })
     );
 
     dialogRef.afterClosed().subscribe((author: Author) => {

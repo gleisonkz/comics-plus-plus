@@ -11,6 +11,7 @@ import { ComicInventoryService } from '@core/services/comic-inventory.service';
 import { fadeInOut } from '@shared/animations/fade-in-out';
 import { listStagger } from '@shared/animations/list-stagger';
 import { finalize } from 'rxjs/operators';
+import { BaseCrudComponent } from '../base-crud/base-crud.component';
 
 @Component({
   templateUrl: './inventory-crud.component.html',
@@ -22,9 +23,12 @@ export class InventoryCrudComponent implements OnInit {
   readonly pageSizeOption: number[] = pageSizeOptions;
   form: FormGroup;
 
+  @ViewChild(BaseCrudComponent, { static: true }) baseCrud: BaseCrudComponent;
+  public get paginator(): MatPaginator {
+    return this.baseCrud.paginator;
+  }
+
   dataSource: CustomDataSource<ComicInventory>;
-  @ViewChild(MatPaginator)
-  paginator: MatPaginator;
   comicInventoryFilter: Filter;
   displayedColumns: string[] = [
     'ComicInventoryID',
@@ -55,19 +59,14 @@ export class InventoryCrudComponent implements OnInit {
     this.comicInventoryFilter.pageSize = this.paginator.pageSize;
   }
 
-  ngAfterViewInit(): void {
-    this.paginator.page.subscribe(() => {
-      (this.comicInventoryFilter.pageNumber = this.paginator.pageIndex + 1),
-        (this.comicInventoryFilter.pageSize = this.paginator.pageSize),
-        this.dataSource
-          .loadData(this.comicInventoryFilter)
-          .subscribe((pagination: any) => {
-            this.paginator.length = pagination.totalCount;
-          });
-    });
-
-    this.matPaginatorService.applyGlobalization(this.paginator);
-    this.changeDetector.detectChanges();
+  refreshPaginator() {
+    this.comicInventoryFilter.pageNumber = this.paginator.pageIndex + 1;
+    this.comicInventoryFilter.pageSize = this.paginator.pageSize;
+    this.dataSource
+      .loadData(this.comicInventoryFilter)
+      .subscribe((pagination: any) => {
+        this.paginator.length = pagination.totalCount;
+      });
   }
 
   openDialog(comicInventory: ComicInventory) {

@@ -9,6 +9,7 @@
         onFocus="this.select()"
         placeholder="Nome"
         formControlName="description"
+        (keyup.enter)="save()"
       />
       <mat-error>
         <span cmsShowValidation="description"></span>

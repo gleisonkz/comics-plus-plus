@@ -70,17 +70,9 @@ export class InventoryCrudComponent implements OnInit {
   }
 
   openDialog(comicInventory: ComicInventory) {
-    const dialogConfig = new MatDialogConfig();
-
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-    dialogConfig.hasBackdrop = true;
-
-    dialogConfig.data = comicInventory;
-
     const dialogRef = this.dialogService.open(
       ComicInventoryDialogComponent,
-      dialogConfig
+      createMatDialogConfig({ data: comicInventory })
     );
 
     dialogRef.afterClosed().subscribe((comicInventory: ComicInventory) => {
@@ -117,4 +109,18 @@ export class InventoryCrudComponent implements OnInit {
         this.paginator.firstPage();
       });
   }
+}
+export function createMatDialogConfig({
+  data = null,
+  disableClose = true,
+  autoFocus = true,
+  hasBackdrop = true
+}) {
+  const dialogConfig = new MatDialogConfig();
+
+  dialogConfig.disableClose = disableClose;
+  dialogConfig.autoFocus = autoFocus;
+  dialogConfig.hasBackdrop = hasBackdrop;
+  dialogConfig.data = data;
+  return dialogConfig;
 }

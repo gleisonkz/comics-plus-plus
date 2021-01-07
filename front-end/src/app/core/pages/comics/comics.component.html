@@ -1,6 +1,6 @@
 <section class="comics">
   <section [@listStagger]="comics?.length" class="comics__list">
-    <div *ngFor="let comic of comics">
+    <div *ngFor="let comic of comics; trackBy: comic.comicID">
       <cms-comic [comic]="comic"></cms-comic>
     </div>
     <div *ngIf="comics?.length === 0">

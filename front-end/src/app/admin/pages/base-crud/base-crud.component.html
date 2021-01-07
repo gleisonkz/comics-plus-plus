@@ -5,6 +5,7 @@
   </h1>
 
   <cms-add-button
+    *ngIf="addButtonText"
     (clickEvent)="openDialog()"
     [buttonText]="addButtonText"
   ></cms-add-button>

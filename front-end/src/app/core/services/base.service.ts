@@ -59,9 +59,6 @@ export abstract class GenericBaseService<
   }
 
   getEntity(id: number): Observable<TEntity> {
-    console.log(id);
-    console.log(`${this.endpoint}/${id}`);
-
     return this.http.get<TEntity>(`${this.endpoint}/${id}`);
   }
 

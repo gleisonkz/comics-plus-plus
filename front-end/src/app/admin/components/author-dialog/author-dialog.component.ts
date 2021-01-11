@@ -27,13 +27,11 @@ export class AuthorDialogComponent implements OnInit {
     this.form = new FormGroup({
       name: new FormControl('', [Validators.required, Validators.minLength(3)])
     });
-    console.log(this.data);
 
     if (this.data) {
       this.authorService
         .getAuthorByID(this.data.authorID)
         .subscribe((author) => {
-          console.log(author);
           this.form.patchValue(author);
         });
     }

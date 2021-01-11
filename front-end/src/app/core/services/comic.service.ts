@@ -1,11 +1,11 @@
 import { Author, Comic, ComicListItem, Filter, Genre } from '@admin/models';
+import { ComicResource } from '@admin/models/comic-resource.model';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ComicImage } from '@core/models/comic-image.model';
 import { ComicShopItemDetail } from '@core/models/comic-shop-item-detail.model';
 import { ComicShopItem } from '@core/models/comic-shop-item.model';
 import { Observable } from 'rxjs';
-import { ComicResource } from '../../admin/models/comic.model';
 import { GenericBaseService } from './base.service';
 
 @Injectable({

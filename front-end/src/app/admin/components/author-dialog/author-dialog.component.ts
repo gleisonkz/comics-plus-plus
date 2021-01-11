@@ -1,4 +1,5 @@
-import { Author, AuthorResource } from '@admin/models';
+import { Author } from '@admin/models';
+import { AuthorResource } from '@admin/models/author-resource.model';
 import { AuthorService } from '@admin/services';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';

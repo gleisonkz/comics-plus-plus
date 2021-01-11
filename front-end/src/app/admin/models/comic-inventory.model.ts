@@ -3,8 +3,3 @@ export interface ComicInventory {
   title: string;
   quantity: number;
 }
-
-export interface ComicInventoryResource {
-  title: string;
-  quantity: number;
-}

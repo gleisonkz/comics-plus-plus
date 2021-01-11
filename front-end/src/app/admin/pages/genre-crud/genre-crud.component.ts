@@ -6,6 +6,7 @@ import {
 import { pageSizeOptions } from '@admin/constants/paginator-options';
 import { createMatDialogConfig } from '@admin/functions/create-mat-dialog-config';
 import { Filter, Genre } from '@admin/models';
+import { GenreListItem } from '@admin/models/genre-list.model';
 import { GenreService } from '@admin/services';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
@@ -15,7 +16,6 @@ import { NotificationService } from '@core/services';
 import { fadeInOut } from '@shared/animations/fade-in-out';
 import { listStagger } from '@shared/animations/list-stagger';
 import { finalize } from 'rxjs/operators';
-import { GenreListItem } from '../../models/genre.model';
 import { BaseCrudComponent } from '../base-crud/base-crud.component';
 
 @Component({

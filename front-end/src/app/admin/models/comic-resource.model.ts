@@ -1,9 +1,7 @@
 import { ComicImage } from '@core/models/comic-image.model';
-import { Author } from './author.model';
-import { Genre } from './genre.model';
+import { Author, Genre } from '.';
 
-export interface Comic {
-  comicID: number;
+export interface ComicResource {
   title: string;
   description: string;
   price: number;

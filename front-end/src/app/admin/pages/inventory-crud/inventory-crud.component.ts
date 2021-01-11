@@ -1,11 +1,12 @@
 import { CustomDataSource } from '@admin/classes/custom-data-source';
 import { ComicInventoryDialogComponent } from '@admin/components';
 import { pageSizeOptions } from '@admin/constants/paginator-options';
+import { createMatDialogConfig } from '@admin/functions/create-mat-dialog-config';
 import { ComicInventory, Filter } from '@admin/models';
 import { MatPaginatorService } from '@admin/services/mat-paginator.service';
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { ComicInventoryService } from '@core/services/comic-inventory.service';
 import { fadeInOut } from '@shared/animations/fade-in-out';
@@ -109,18 +110,4 @@ export class InventoryCrudComponent implements OnInit {
         this.paginator.firstPage();
       });
   }
-}
-export function createMatDialogConfig({
-  data = null,
-  disableClose = true,
-  autoFocus = true,
-  hasBackdrop = true
-}) {
-  const dialogConfig = new MatDialogConfig();
-
-  dialogConfig.disableClose = disableClose;
-  dialogConfig.autoFocus = autoFocus;
-  dialogConfig.hasBackdrop = hasBackdrop;
-  dialogConfig.data = data;
-  return dialogConfig;
 }

@@ -4,11 +4,12 @@ import {
   GenreDialogComponent
 } from '@admin/components';
 import { pageSizeOptions } from '@admin/constants/paginator-options';
+import { createMatDialogConfig } from '@admin/functions/create-mat-dialog-config';
 import { Filter, Genre } from '@admin/models';
 import { GenreService } from '@admin/services';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { NotificationService } from '@core/services';
 import { fadeInOut } from '@shared/animations/fade-in-out';
@@ -66,19 +67,10 @@ export class GenreCrudComponent implements OnInit {
   }
 
   openDialog(genre?: Genre) {
-    const dialogConfig = new MatDialogConfig();
-
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-    dialogConfig.hasBackdrop = true;
-
-    dialogConfig.data = genre;
-
     const dialogRef = this.dialogService.open(
       GenreDialogComponent,
-      dialogConfig
+      createMatDialogConfig({ data: genre })
     );
-
     dialogRef.afterClosed().subscribe((isCreatedOrUpdated: boolean) => {
       if (isCreatedOrUpdated) {
         this.loadData();
@@ -113,13 +105,13 @@ export class GenreCrudComponent implements OnInit {
   }
 
   deleteItem(item: Genre) {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.data = { id: item.genreID, description: item.description };
-
     const dialogRef = this.dialogService.open(
       ConfirmationDialogComponent,
-      dialogConfig
+      createMatDialogConfig({
+        data: { id: item.genreID, description: item.description }
+      })
     );
+
     dialogRef.afterClosed().subscribe((confirmed: boolean) => {
       if (confirmed) {
         this.genreService.deleteGenre(item.genreID).subscribe((c) => {
@@ -133,18 +125,18 @@ export class GenreCrudComponent implements OnInit {
   }
 
   deleteGenreRelationships(item: Genre) {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.data = {
-      id: item.genreID,
-      description: item.description,
-      message:
-        'Você tem certeza que deseja remover os vínculos do registro abaixo?'
-    };
-
     const dialogRef = this.dialogService.open(
       ConfirmationDialogComponent,
-      dialogConfig
+      createMatDialogConfig({
+        data: {
+          id: item.genreID,
+          description: item.description,
+          message:
+            'Você tem certeza que deseja remover os vínculos do registro abaixo?'
+        }
+      })
     );
+
     dialogRef.afterClosed().subscribe((confirmed: boolean) => {
       if (confirmed) {
         this.genreService

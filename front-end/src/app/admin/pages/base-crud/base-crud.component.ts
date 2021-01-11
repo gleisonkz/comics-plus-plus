@@ -29,14 +29,10 @@ export class BaseCrudComponent implements OnInit {
     private changeDetector: ChangeDetectorRef
   ) {}
 
-  ngOnInit(): void {
-    console.log('2');
-  }
+  ngOnInit(): void {}
 
   ngAfterViewInit(): void {
     this.paginator.page.subscribe(() => {
-      console.log('paginatorEvent');
-
       this.paginatorEvent.emit();
     });
 

@@ -69,7 +69,7 @@ export class InventoryCrudComponent implements OnInit {
       });
   }
 
-  openDialog(comicInventory: ComicInventory) {
+  openDialog(comicInventory?: ComicInventory) {
     const dialogRef = this.dialogService.open(
       ComicInventoryDialogComponent,
       createMatDialogConfig({ data: comicInventory })
@@ -99,7 +99,7 @@ export class InventoryCrudComponent implements OnInit {
         pageSize: this.paginator.pageSize,
         sortOrder: 'asc'
       },
-      comicInventory
+      this.form.value
     );
 
     this.dataSource

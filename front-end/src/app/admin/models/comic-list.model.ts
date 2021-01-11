@@ -1,4 +1,4 @@
-export interface ComicList {
+export interface ComicListItem {
   comicID: number;
   title: string;
   description: string;

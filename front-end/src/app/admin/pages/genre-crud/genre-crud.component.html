@@ -15,11 +15,17 @@
             matInput
             placeholder="ID"
             formControlName="genreID"
+            (keyup.enter)="loadData()"
           />
         </mat-form-field>
 
         <mat-form-field>
-          <input matInput placeholder="Nome" formControlName="description" />
+          <input
+            matInput
+            placeholder="Nome"
+            formControlName="description"
+            (keyup.enter)="loadData()"
+          />
         </mat-form-field>
       </div>
     </form>

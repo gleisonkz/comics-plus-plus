@@ -54,7 +54,7 @@ export class GenreDialogComponent implements OnInit {
           )
         )
       )
-      .subscribe((genre: Genre) => this.dialogRef.close(genre));
+      .subscribe(() => this.dialogRef.close(true));
   }
 
   close() {

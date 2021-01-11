@@ -13,3 +13,14 @@ export interface Comic {
   genres: Genre[];
   image: ComicImage;
 }
+
+export interface ComicResource {
+  title: string;
+  description: string;
+  price: number;
+  year: number;
+  pages: number;
+  authors: Author[];
+  genres: Genre[];
+  image: ComicImage;
+}

@@ -14,6 +14,7 @@ import { NotificationService } from '@core/services';
 import { fadeInOut } from '@shared/animations/fade-in-out';
 import { listStagger } from '@shared/animations/list-stagger';
 import { finalize } from 'rxjs/operators';
+import { GenreListItem } from '../../models/genre.model';
 import { BaseCrudComponent } from '../base-crud/base-crud.component';
 
 @Component({
@@ -31,7 +32,7 @@ export class GenreCrudComponent implements OnInit {
     return this.baseCrud.paginator;
   }
 
-  dataSource: CustomDataSource<Genre>;
+  dataSource: CustomDataSource<GenreListItem>;
   genreFilter: Filter;
   displayedColumns: string[] = ['GenreID', 'Nome', 'Ações'];
   constructor(
@@ -78,8 +79,8 @@ export class GenreCrudComponent implements OnInit {
       dialogConfig
     );
 
-    dialogRef.afterClosed().subscribe((genre: Genre) => {
-      if (genre) {
+    dialogRef.afterClosed().subscribe((isCreatedOrUpdated: boolean) => {
+      if (isCreatedOrUpdated) {
         this.loadData();
       }
     });
@@ -102,7 +103,7 @@ export class GenreCrudComponent implements OnInit {
         pageSize: this.paginator.pageSize,
         sortOrder: 'asc'
       },
-      genre
+      this.form.value
     );
 
     this.dataSource.loadData(this.genreFilter).subscribe((pagination: any) => {

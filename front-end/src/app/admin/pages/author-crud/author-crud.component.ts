@@ -67,7 +67,7 @@ export class AuthorCrudComponent implements OnInit {
     });
   }
 
-  openDialog(obj: { authorID: number }) {
+  openDialog(obj?: { authorID: number }) {
     const dialogRef = this.dialogService.open(
       AuthorDialogComponent,
       createMatDialogConfig({ data: obj })

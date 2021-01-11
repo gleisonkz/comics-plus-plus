@@ -3,8 +3,7 @@ import { ComicInventoryDialogComponent } from '@admin/components';
 import { pageSizeOptions } from '@admin/constants/paginator-options';
 import { createMatDialogConfig } from '@admin/functions/create-mat-dialog-config';
 import { ComicInventory, Filter } from '@admin/models';
-import { MatPaginatorService } from '@admin/services/mat-paginator.service';
-import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
@@ -39,9 +38,7 @@ export class InventoryCrudComponent implements OnInit {
   ];
   constructor(
     private dialogService: MatDialog,
-    private comicInventoryService: ComicInventoryService,
-    private changeDetector: ChangeDetectorRef,
-    private matPaginatorService: MatPaginatorService
+    private comicInventoryService: ComicInventoryService
   ) {}
 
   ngOnInit(): void {

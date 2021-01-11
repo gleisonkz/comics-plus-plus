@@ -9,7 +9,7 @@ import { Author, Filter } from '@admin/models';
 import { AuthorService } from '@admin/services';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { NotificationService } from '@core/services';
 import { fadeInOut } from '@shared/animations/fade-in-out';
@@ -107,13 +107,13 @@ export class AuthorCrudComponent implements OnInit {
   }
 
   deleteItem(item: Author) {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.data = { id: item.authorID, description: item.name };
-
     const dialogRef = this.dialogService.open(
       ConfirmationDialogComponent,
-      dialogConfig
+      createMatDialogConfig({
+        data: { id: item.authorID, description: item.name }
+      })
     );
+
     dialogRef.afterClosed().subscribe((confirmed: boolean) => {
       if (confirmed) {
         this.authorService.deleteAuthor(item.authorID).subscribe(() => {

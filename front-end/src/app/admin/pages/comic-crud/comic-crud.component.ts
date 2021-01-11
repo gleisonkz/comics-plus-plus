@@ -1,15 +1,13 @@
 import { CustomDataSource } from '@admin/classes/custom-data-source';
-import {
-  ComicDialogComponent,
-  ConfirmationDialogComponent
-} from '@admin/components';
+import { ComicDialogComponent } from '@admin/components';
 import { pageSizeOptions } from '@admin/constants/paginator-options';
+import { createMatDialogConfig } from '@admin/functions/create-mat-dialog-config';
 import { Comic, ComicListItem, Filter } from '@admin/models';
 import { AuthorService, GenreService } from '@admin/services';
 import { MatPaginatorService } from '@admin/services/mat-paginator.service';
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { ComicService, NotificationService } from '@core/services';
 import { listStagger } from '@shared/animations/list-stagger';
@@ -96,16 +94,11 @@ export class ComicCrudComponent implements OnInit {
   }
 
   openDialog(comic?: Comic) {
-    const dialogConfig = new MatDialogConfig<Comic>();
-
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-    dialogConfig.hasBackdrop = true;
-    dialogConfig.data = comic;
-
     const dialogRef = this.dialogService.open(
       ComicDialogComponent,
-      dialogConfig
+      createMatDialogConfig({
+        data: comic
+      })
     );
 
     dialogRef.afterClosed().subscribe((isUpdated: boolean) => {
@@ -142,13 +135,13 @@ export class ComicCrudComponent implements OnInit {
   }
 
   deleteItem(item: Comic) {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.data = { id: item.comicID, description: item.title };
-
     const dialogRef = this.dialogService.open(
-      ConfirmationDialogComponent,
-      dialogConfig
+      ComicDialogComponent,
+      createMatDialogConfig({
+        data: { id: item.comicID, description: item.title }
+      })
     );
+
     dialogRef.afterClosed().subscribe((confirmed: boolean) => {
       if (confirmed) {
         this.comicService.deleteComic(item.comicID).subscribe(() => {

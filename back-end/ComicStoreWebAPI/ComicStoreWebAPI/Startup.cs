@@ -5,6 +5,7 @@ using ComicStore.Infra.EFRepository.Context;
 using ComicStore.Infra.EFRepository.Repository;
 using ComicStore.Service.Interfaces;
 using ComicStore.Service.Services;
+using ComicStore.Shared.Classes;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -106,6 +107,8 @@ namespace ComicStoreWebAPI
             services.AddIdentity<IdentityUser, IdentityRole>()
                     .AddEntityFrameworkStores<ComicStoreIdentityDbContext>()
                     .AddDefaultTokenProviders();
+
+            DateTime test = Utils.RandomDay();
 
 
 

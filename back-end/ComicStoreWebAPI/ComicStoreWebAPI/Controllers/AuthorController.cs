@@ -30,7 +30,9 @@ namespace ComicStore.Application.Controllers
                 c => new
                 {
                     c.AuthorID,
-                    c.Name
+                    c.Name,
+                    c.BirthDate,
+                    Age = DateTime.UtcNow.Year - c.BirthDate.Year
                 });
 
             var result = authors.ToList();
@@ -98,11 +100,13 @@ namespace ComicStore.Application.Controllers
             try
             {
                 var author = svcAuthor.GetAuthor()
-                        .Where(c => c.AuthorID == authorID)
+                         .Where(c => c.AuthorID == authorID)
                          .Select(c => new
                          {
                              c.AuthorID,
-                             c.Name
+                             c.Name,
+                             c.BirthDate,
+                             c.Nationality
                          }).Single();
 
                 return Ok(author);

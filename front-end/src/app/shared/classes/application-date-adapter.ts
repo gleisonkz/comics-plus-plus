@@ -4,9 +4,11 @@ import { DateValidation } from './date-validation-helper';
 export class ApplicationDateAdapter extends NativeDateAdapter {
   format(date: Date, displayFormat: Object) {
     if (displayFormat === 'input') {
-      const day = date.getDate();
-      const month = (date.getMonth() + 1).toString();
-      const year = date.getFullYear();
+      const [day, month, year] = [
+        date.getDate(),
+        (date.getMonth() + 1).toString(),
+        date.getFullYear()
+      ];
       return `${day}/${month.padStart(2, '0')}/${year}`;
     }
     return date.toDateString();

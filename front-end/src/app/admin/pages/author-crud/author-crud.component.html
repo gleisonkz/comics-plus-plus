@@ -27,6 +27,15 @@
             (keyup.enter)="loadData()"
           />
         </mat-form-field>
+
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="Idade"
+            formControlName="age"
+            (keyup.enter)="loadData()"
+          />
+        </mat-form-field>
       </div>
     </form>
   </div>
@@ -60,6 +69,20 @@
       <ng-container matColumnDef="Name">
         <th mat-header-cell *matHeaderCellDef>Nome</th>
         <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="birthDate">
+        <th mat-header-cell *matHeaderCellDef>Nascimento</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.birthDate | date }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="age">
+        <th mat-header-cell *matHeaderCellDef>Idade</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.age }}
+        </td>
       </ng-container>
 
       <ng-container matColumnDef="Ações">

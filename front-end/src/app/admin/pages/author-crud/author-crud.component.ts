@@ -36,7 +36,13 @@ export class AuthorCrudComponent implements OnInit {
   @ViewChild(BaseCrudComponent, { static: true }) baseCrud: BaseCrudComponent;
 
   authorFilter: Filter;
-  displayedColumns: string[] = ['AuthorID', 'Name', 'Ações'];
+  displayedColumns: string[] = [
+    'AuthorID',
+    'Name',
+    'birthDate',
+    'age',
+    'Ações'
+  ];
   constructor(
     private dialogService: MatDialog,
     private authorService: AuthorService,
@@ -46,7 +52,8 @@ export class AuthorCrudComponent implements OnInit {
   ngOnInit(): void {
     this.form = new FormGroup({
       authorID: new FormControl('', [Validators.min(1)]),
-      name: new FormControl('')
+      name: new FormControl(''),
+      age: new FormControl('')
     });
 
     this.dataSource = new CustomDataSource<AuthorListItem>((filter: Filter) =>

@@ -15,6 +15,21 @@
         <span cmsShowValidation="name"></span>
       </mat-error>
     </mat-form-field>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Escolha uma data</mat-label>
+      <input
+        matInput
+        placeholder="Data de Nascimento"
+        formControlName="birthDate"
+        [max]="maxDate"
+        [matDatepicker]="picker"
+      />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error>
+        <span cmsShowValidation="birthDate"></span>
+      </mat-error>
+    </mat-form-field>
   </mat-dialog-content>
 
   <mat-dialog-actions>

@@ -16,7 +16,7 @@ export class ApplicationDateAdapter extends NativeDateAdapter {
     return this.isValidDate(value);
   }
 
-  isValidDate(dateString: string): Date | null | any {
+  isValidDate(dateString: string): Date {
     if (!DateValidation.isDatePattern(dateString)) return this.invalid();
 
     const [day, month, year] = dateString.split('/').map(Number);

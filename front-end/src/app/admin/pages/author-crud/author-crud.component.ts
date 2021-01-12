@@ -106,7 +106,6 @@ export class AuthorCrudComponent implements OnInit {
       },
       this.form.value
     );
-
     this.dataSource.loadData(this.authorFilter).subscribe((pagination: any) => {
       this.paginator.length = pagination.totalCount;
       this.paginator.firstPage();

@@ -36,3 +36,33 @@ export abstract class BaseService {
     });
   }
 }
+
+export abstract class GenericBaseService<
+  TResource,
+  TListItem,
+  TEntity
+> extends BaseService {
+  constructor(protected http: HttpClient) {
+    super();
+  }
+
+  getPaginatedEntities(filter: Filter): Observable<HttpResponse<TListItem[]>> {
+    return this.getPaginatedData(this.http, filter);
+  }
+
+  postEntity(obj: TResource): Observable<any> {
+    return this.http.post<TResource>(this.endpoint, obj);
+  }
+
+  putEntity(id: number, obj: TResource): Observable<any> {
+    return this.http.put<TResource>(`${this.endpoint}/${id}`, obj);
+  }
+
+  getEntity(id: number): Observable<TEntity> {
+    return this.http.get<TEntity>(`${this.endpoint}/${id}`);
+  }
+
+  deleteEntity(id: number): Observable<TEntity> {
+    return this.http.delete<TEntity>(`${this.endpoint}/${id}`);
+  }
+}

@@ -1,4 +1,5 @@
 ﻿using ComicStore.Domain.POCO;
+using ComicStore.Shared.Classes;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Reflection;
@@ -21,15 +22,16 @@ namespace ComicStore.Infra.EFRepository.Context
                 new Genre { GenreID = 6, Description = "Guerra" }
             };
 
+
             var authors = new List<Author>
             {
-              new Author { AuthorID = 1, Name = "John Doe" },
-              new Author { AuthorID = 2, Name = "Jane Doe" },
-              new Author { AuthorID = 3, Name = "JK Rowling" },
-              new Author { AuthorID = 4, Name = "Gail Simone" },
-              new Author { AuthorID = 5, Name = "Warren Ellis" },
-              new Author { AuthorID = 6, Name = "Jack Kirby" },
-              new Author { AuthorID = 7, Name = "Jonathan Hickman" }
+              new Author { AuthorID = 1, Name = "John Doe" , BirthDate = Utils.RandomDay(), Nationality = "Australian"},
+              new Author { AuthorID = 2, Name = "Jane Doe", BirthDate = Utils.RandomDay() , Nationality = "Dominican"},
+              new Author { AuthorID = 3, Name = "JK Rowling" , BirthDate = Utils.RandomDay(), Nationality = "English"},
+              new Author { AuthorID = 4, Name = "Gail Simone" , BirthDate = Utils.RandomDay(), Nationality = "Mexican"},
+              new Author { AuthorID = 5, Name = "Warren Ellis" , BirthDate = Utils.RandomDay(), Nationality = "French"},
+              new Author { AuthorID = 6, Name = "Jack Kirby" , BirthDate = Utils.RandomDay(), Nationality = "Indonesian"},
+              new Author { AuthorID = 7, Name = "Jonathan Hickman", BirthDate = Utils.RandomDay(), Nationality = "Indian" }
             };
 
             _ = modelBuilder.Entity<Author>().HasData(authors);

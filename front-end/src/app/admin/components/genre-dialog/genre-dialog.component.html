@@ -3,7 +3,14 @@
 
   <mat-dialog-content>
     <mat-form-field>
-      <input matInput placeholder="Nome" formControlName="description" />
+      <input
+        matInput
+        autofocus
+        onFocus="this.select()"
+        placeholder="Nome"
+        formControlName="description"
+        (keyup.enter)="save()"
+      />
       <mat-error>
         <span cmsShowValidation="description"></span>
       </mat-error>
@@ -11,11 +18,12 @@
   </mat-dialog-content>
 
   <mat-dialog-actions>
-    <button class="mat-raised-button" (click)="close()">Fechar</button>
+    <button mat-raised-button (click)="close()">Fechar</button>
     <button
       [disabled]="form.invalid"
       [class.disabled]="form.invalid"
-      class="mat-raised-button mat-primary"
+      mat-raised-button
+      color="primary"
       (click)="save()"
     >
       Salvar

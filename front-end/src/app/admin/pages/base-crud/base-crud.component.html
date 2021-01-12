@@ -1,0 +1,55 @@
+<div class="title-group">
+  <h1 class="title">
+    <i class="fa fa-tag" aria-hidden="true"></i>
+    {{ titleName }}
+  </h1>
+
+  <cms-add-button
+    *ngIf="addButtonText"
+    (clickEvent)="openDialog()"
+    [buttonText]="addButtonText"
+  ></cms-add-button>
+</div>
+<mat-divider></mat-divider>
+<h2 class="filter">
+  <i class="fas fa-filter"></i>
+  Filtros
+</h2>
+<mat-divider class="filter__bottom-divider"></mat-divider>
+
+<ng-content select="[slot=filter]"></ng-content>
+
+<div class="full-wrapper button-wrapper">
+  <div class="button-wrapper">
+    <button
+      (click)="loadData()"
+      class="search-button"
+      mat-raised-button
+      color="primary"
+    >
+      Pesquisar
+    </button>
+  </div>
+</div>
+
+<div
+  class="title-group subtitle"
+  [ngStyle]="{
+    display: loadingComplete && paginator?.length ? 'table' : 'none'
+  }"
+>
+  <h1 class="mat-h1">
+    <i class="fa fa-list-alt" aria-hidden="true"></i>
+    Lista de {{ titleName }}
+  </h1>
+</div>
+
+<ng-content select="[slot=body]"></ng-content>
+
+<mat-paginator
+  [ngStyle]="{
+    display: loadingComplete && paginator?.length ? 'block' : 'none'
+  }"
+  [pageSizeOptions]="[5, 10, 20]"
+  showFirstLastButtons
+></mat-paginator>

@@ -12,3 +12,12 @@ mat-dialog-actions {
     margin-right: rem(10);
   }
 }
+
+.mat-dialog-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.mat-form-field + .mat-form-field {
+  margin-top: rem(15);
+}

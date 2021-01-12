@@ -18,7 +18,7 @@ namespace ComicStore.Service.Services
         }
 
         public Author CreateAuthor(IAuthorDTO authorDTO)
-        {            
+        {
             var objAuthor = new Author();
             authorDTO.AssignPoco(objAuthor);
 
@@ -28,20 +28,22 @@ namespace ComicStore.Service.Services
         }
 
         public Author UpdateAuthor(IAuthorDTO authorDTO)
-        {            
+        {
             Author objAuthor = repoAuthor.GetQuery()
-                                      .Where(c => c.AuthorID == authorDTO.AuthorID)
-                                      .SingleOrDefault();
+                                         .Where(c => c.AuthorID == authorDTO.AuthorID)
+                                         .SingleOrDefault();
+
             authorDTO.AssignPoco(objAuthor);
             repoAuthor.Update(objAuthor);
             return objAuthor;
         }
 
         public Author DeleteAuthor(int authorID)
-        {            
+        {
             Author objAuthor = repoAuthor.GetQuery()
                                       .Where(c => c.AuthorID == authorID)
                                       .SingleOrDefault();
+
             repoAuthor.Delete(objAuthor);
             return objAuthor;
         }
@@ -64,7 +66,7 @@ namespace ComicStore.Service.Services
         public IQueryable<Author> GetAuthorsByName(string name)
         {
             return repoAuthor.GetQuery()
-                             .Where(c=> c.Name.Contains(name));
+                             .Where(c => c.Name.Contains(name));
         }
     }
 }

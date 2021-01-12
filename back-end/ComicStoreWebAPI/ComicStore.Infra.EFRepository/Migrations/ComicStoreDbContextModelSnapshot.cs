@@ -56,10 +56,18 @@ namespace ComicStore.Infra.EFRepository.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
+                    b.Property<DateTime>("BirthDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Nationality")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("AuthorID");
 
@@ -69,37 +77,51 @@ namespace ComicStore.Infra.EFRepository.Migrations
                         new
                         {
                             AuthorID = 1,
-                            Name = "John Doe"
+                            BirthDate = new DateTime(1997, 2, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "John Doe",
+                            Nationality = "Australian"
                         },
                         new
                         {
                             AuthorID = 2,
-                            Name = "Jane Doe"
+                            BirthDate = new DateTime(2012, 1, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Jane Doe",
+                            Nationality = "Dominican"
                         },
                         new
                         {
                             AuthorID = 3,
-                            Name = "Jim Starlin"
+                            BirthDate = new DateTime(2019, 4, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "JK Rowling",
+                            Nationality = "English"
                         },
                         new
                         {
                             AuthorID = 4,
-                            Name = "Gail Simone"
+                            BirthDate = new DateTime(1999, 5, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Gail Simone",
+                            Nationality = "Mexican"
                         },
                         new
                         {
                             AuthorID = 5,
-                            Name = "Warren Ellis"
+                            BirthDate = new DateTime(2019, 12, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Warren Ellis",
+                            Nationality = "French"
                         },
                         new
                         {
                             AuthorID = 6,
-                            Name = "Jack Kirby"
+                            BirthDate = new DateTime(2017, 11, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Jack Kirby",
+                            Nationality = "Indonesian"
                         },
                         new
                         {
                             AuthorID = 7,
-                            Name = "Jonathan Hickman"
+                            BirthDate = new DateTime(1996, 6, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Jonathan Hickman",
+                            Nationality = "Indian"
                         });
                 });
 
@@ -112,8 +134,8 @@ namespace ComicStore.Infra.EFRepository.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
+                        .HasMaxLength(800)
+                        .HasColumnType("nvarchar(800)");
 
                     b.Property<int>("Pages")
                         .HasColumnType("int");

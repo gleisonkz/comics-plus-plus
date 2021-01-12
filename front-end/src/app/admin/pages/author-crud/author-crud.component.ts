@@ -4,17 +4,19 @@ import {
   ConfirmationDialogComponent
 } from '@admin/components';
 import { pageSizeOptions } from '@admin/constants/paginator-options';
+import { createMatDialogConfig } from '@admin/functions/create-mat-dialog-config';
 import { Author, Filter } from '@admin/models';
 import { AuthorService } from '@admin/services';
-import { MatPaginatorService } from '@admin/services/mat-paginator.service';
-import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { NotificationService } from '@core/services';
 import { fadeInOut } from '@shared/animations/fade-in-out';
 import { finalize } from 'rxjs/operators';
 import { listStagger } from '../../../shared/animations/list-stagger';
+import { AuthorListItem } from '../../models/author-list.model';
+import { BaseCrudComponent } from '../base-crud/base-crud.component';
 
 @Component({
   templateUrl: './author-crud.component.html',
@@ -25,26 +27,36 @@ export class AuthorCrudComponent implements OnInit {
   loadingComplete: boolean = false;
   pageSizeOption: number[] = pageSizeOptions;
   form: FormGroup;
-  dataSource: CustomDataSource<Author>;
-  @ViewChild(MatPaginator)
-  paginator: MatPaginator;
+  dataSource: CustomDataSource<AuthorListItem>;
+
+  public get paginator(): MatPaginator {
+    return this.baseCrud.paginator;
+  }
+
+  @ViewChild(BaseCrudComponent, { static: true }) baseCrud: BaseCrudComponent;
+
   authorFilter: Filter;
-  displayedColumns: string[] = ['AuthorID', 'Name', 'Ações'];
+  displayedColumns: string[] = [
+    'AuthorID',
+    'Name',
+    'birthDate',
+    'age',
+    'Ações'
+  ];
   constructor(
     private dialogService: MatDialog,
     private authorService: AuthorService,
-    private changeDetector: ChangeDetectorRef,
-    private notificationService: NotificationService,
-    private matPaginatorService: MatPaginatorService
+    private notificationService: NotificationService
   ) {}
 
   ngOnInit(): void {
     this.form = new FormGroup({
       authorID: new FormControl('', [Validators.min(1)]),
-      name: new FormControl('')
+      name: new FormControl(''),
+      age: new FormControl('')
     });
 
-    this.dataSource = new CustomDataSource<Author>((filter: Filter) =>
+    this.dataSource = new CustomDataSource<AuthorListItem>((filter: Filter) =>
       this.authorService.getPaginatedAuthors(filter)
     );
   }
@@ -54,33 +66,18 @@ export class AuthorCrudComponent implements OnInit {
     this.authorFilter.pageSize = this.paginator.pageSize;
   }
 
-  ngAfterViewInit(): void {
-    this.paginator.page.subscribe(() => {
-      (this.authorFilter.pageNumber = this.paginator.pageIndex + 1),
-        (this.authorFilter.pageSize = this.paginator.pageSize),
-        this.dataSource
-          .loadData(this.authorFilter)
-          .subscribe((pagination: any) => {
-            this.paginator.length = pagination.totalCount;
-          });
+  refreshPaginator() {
+    this.authorFilter.pageNumber = this.paginator.pageIndex + 1;
+    this.authorFilter.pageSize = this.paginator.pageSize;
+    this.dataSource.loadData(this.authorFilter).subscribe((pagination: any) => {
+      this.paginator.length = pagination.totalCount;
     });
-
-    this.matPaginatorService.applyGlobalization(this.paginator);
-    this.changeDetector.detectChanges();
   }
 
-  openDialog(author?: Author) {
-    const dialogConfig = new MatDialogConfig();
-
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-    dialogConfig.hasBackdrop = true;
-
-    dialogConfig.data = author;
-
+  openDialog(obj?: { authorID: number }) {
     const dialogRef = this.dialogService.open(
       AuthorDialogComponent,
-      dialogConfig
+      createMatDialogConfig({ data: obj })
     );
 
     dialogRef.afterClosed().subscribe((author: Author) => {
@@ -90,7 +87,7 @@ export class AuthorCrudComponent implements OnInit {
     });
   }
 
-  loadData(author?: Author): void {
+  loadData(): void {
     this.dataSource.loading$
       .pipe(
         finalize(() => {
@@ -107,9 +104,8 @@ export class AuthorCrudComponent implements OnInit {
         pageSize: this.paginator.pageSize,
         sortOrder: 'asc'
       },
-      author
+      this.form.value
     );
-
     this.dataSource.loadData(this.authorFilter).subscribe((pagination: any) => {
       this.paginator.length = pagination.totalCount;
       this.paginator.firstPage();
@@ -117,13 +113,13 @@ export class AuthorCrudComponent implements OnInit {
   }
 
   deleteItem(item: Author) {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.data = { id: item.authorID, description: item.name };
-
     const dialogRef = this.dialogService.open(
       ConfirmationDialogComponent,
-      dialogConfig
+      createMatDialogConfig({
+        data: { id: item.authorID, description: item.name }
+      })
     );
+
     dialogRef.afterClosed().subscribe((confirmed: boolean) => {
       if (confirmed) {
         this.authorService.deleteAuthor(item.authorID).subscribe(() => {

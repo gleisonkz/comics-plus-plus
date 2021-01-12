@@ -17,6 +17,12 @@ import { GenreService } from '@admin/services';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
+import {
+  DateAdapter,
+  MatNativeDateModule,
+  MAT_DATE_FORMATS
+} from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatExpansionModule } from '@angular/material/expansion';
@@ -29,9 +35,12 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTableModule } from '@angular/material/table';
+import { ApplicationDateAdapter } from '@shared/classes/application-date-adapter';
+import { APP_DATE_FORMATS } from '@shared/constants/app-date-formats';
 import { SharedModule } from '@shared/shared.module';
 import { MaterialFileInputModule } from 'ngx-material-file-input';
 import { AdminRoutingModule } from './admin-routing.module';
+import { BaseCrudComponent } from './pages/base-crud/base-crud.component';
 import { AuthorService } from './services/author.service';
 
 @NgModule({
@@ -46,7 +55,8 @@ import { AuthorService } from './services/author.service';
     ComicDialogComponent,
     InventoryCrudComponent,
     ComicInventoryDialogComponent,
-    AddButtonComponent
+    AddButtonComponent,
+    BaseCrudComponent
   ],
   imports: [
     FlexLayoutModule,
@@ -65,8 +75,21 @@ import { AuthorService } from './services/author.service';
     MatMenuModule,
     MatButtonModule,
     MatProgressSpinnerModule,
-    MaterialFileInputModule
+    MaterialFileInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
-  providers: [GenreService, AuthorService]
+  providers: [
+    GenreService,
+    AuthorService,
+    {
+      provide: DateAdapter,
+      useClass: ApplicationDateAdapter
+    },
+    {
+      provide: MAT_DATE_FORMATS,
+      useValue: APP_DATE_FORMATS
+    }
+  ]
 })
 export class AdminModule {}

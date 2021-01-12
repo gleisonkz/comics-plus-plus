@@ -1,25 +1,23 @@
-import {
-  Author,
-  Comic,
-  ComicInventory,
-  ComicList,
-  Filter,
-  Genre
-} from '@admin/models';
+import { Author, Comic, ComicListItem, Filter, Genre } from '@admin/models';
+import { ComicResource } from '@admin/models/comic-resource.model';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ComicImage } from '@core/models/comic-image.model';
 import { ComicShopItemDetail } from '@core/models/comic-shop-item-detail.model';
 import { ComicShopItem } from '@core/models/comic-shop-item.model';
-import { BaseService } from '@core/services';
 import { Observable } from 'rxjs';
+import { GenericBaseService } from './base.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ComicService extends BaseService {
+export class ComicService extends GenericBaseService<
+  ComicResource,
+  ComicListItem,
+  Comic
+> {
   constructor(protected http: HttpClient) {
-    super();
+    super(http);
     this.endpoint = '/comic';
   }
 
@@ -47,14 +45,8 @@ export class ComicService extends BaseService {
 
   getPaginatedComics(
     comicFilter: Filter
-  ): Observable<HttpResponse<ComicList[]>> {
+  ): Observable<HttpResponse<ComicListItem[]>> {
     return this.getPaginatedData(this.http, comicFilter);
-  }
-
-  getPaginatedComicsInventory(
-    comicFilter: Filter
-  ): Observable<HttpResponse<ComicInventory[]>> {
-    return this.getPaginatedData(this.http, comicFilter, 'inventory');
   }
 
   postComic(comic: Comic): Observable<Comic> {
@@ -63,13 +55,6 @@ export class ComicService extends BaseService {
 
   putComic(comicID: number, comic: Comic): Observable<Comic> {
     return this.http.put<Comic>(`${this.endpoint}/${comicID}`, comic);
-  }
-
-  putComicInventory(comic: ComicInventory): Observable<ComicInventory> {
-    return this.http.put<ComicInventory>(
-      `${this.endpoint}/${comic.comicID}/inventory`,
-      comic.quantity
-    );
   }
 
   deleteComic(comicID: number): Observable<Comic> {

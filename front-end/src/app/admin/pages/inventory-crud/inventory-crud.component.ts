@@ -1,16 +1,17 @@
 import { CustomDataSource } from '@admin/classes/custom-data-source';
 import { ComicInventoryDialogComponent } from '@admin/components';
 import { pageSizeOptions } from '@admin/constants/paginator-options';
+import { createMatDialogConfig } from '@admin/functions/create-mat-dialog-config';
 import { ComicInventory, Filter } from '@admin/models';
-import { MatPaginatorService } from '@admin/services/mat-paginator.service';
-import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
-import { ComicService, NotificationService } from '@core/services';
+import { ComicInventoryService } from '@core/services/comic-inventory.service';
 import { fadeInOut } from '@shared/animations/fade-in-out';
 import { listStagger } from '@shared/animations/list-stagger';
 import { finalize } from 'rxjs/operators';
+import { BaseCrudComponent } from '../base-crud/base-crud.component';
 
 @Component({
   templateUrl: './inventory-crud.component.html',
@@ -22,9 +23,12 @@ export class InventoryCrudComponent implements OnInit {
   readonly pageSizeOption: number[] = pageSizeOptions;
   form: FormGroup;
 
+  @ViewChild(BaseCrudComponent, { static: true }) baseCrud: BaseCrudComponent;
+  public get paginator(): MatPaginator {
+    return this.baseCrud.paginator;
+  }
+
   dataSource: CustomDataSource<ComicInventory>;
-  @ViewChild(MatPaginator)
-  paginator: MatPaginator;
   comicInventoryFilter: Filter;
   displayedColumns: string[] = [
     'ComicInventoryID',
@@ -34,10 +38,7 @@ export class InventoryCrudComponent implements OnInit {
   ];
   constructor(
     private dialogService: MatDialog,
-    private comicService: ComicService,
-    private changeDetector: ChangeDetectorRef,
-    private notificationService: NotificationService,
-    private matPaginatorService: MatPaginatorService
+    private comicInventoryService: ComicInventoryService
   ) {}
 
   ngOnInit(): void {
@@ -47,7 +48,7 @@ export class InventoryCrudComponent implements OnInit {
     });
 
     this.dataSource = new CustomDataSource<ComicInventory>((filter: Filter) =>
-      this.comicService.getPaginatedComicsInventory(filter)
+      this.comicInventoryService.getPaginatedComicsInventory(filter)
     );
   }
 
@@ -56,33 +57,20 @@ export class InventoryCrudComponent implements OnInit {
     this.comicInventoryFilter.pageSize = this.paginator.pageSize;
   }
 
-  ngAfterViewInit(): void {
-    this.paginator.page.subscribe(() => {
-      (this.comicInventoryFilter.pageNumber = this.paginator.pageIndex + 1),
-        (this.comicInventoryFilter.pageSize = this.paginator.pageSize),
-        this.dataSource
-          .loadData(this.comicInventoryFilter)
-          .subscribe((pagination: any) => {
-            this.paginator.length = pagination.totalCount;
-          });
-    });
-
-    this.matPaginatorService.applyGlobalization(this.paginator);
-    this.changeDetector.detectChanges();
+  refreshPaginator() {
+    this.comicInventoryFilter.pageNumber = this.paginator.pageIndex + 1;
+    this.comicInventoryFilter.pageSize = this.paginator.pageSize;
+    this.dataSource
+      .loadData(this.comicInventoryFilter)
+      .subscribe((pagination: any) => {
+        this.paginator.length = pagination.totalCount;
+      });
   }
 
-  openDialog(comicInventory: ComicInventory) {
-    const dialogConfig = new MatDialogConfig();
-
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-    dialogConfig.hasBackdrop = true;
-
-    dialogConfig.data = comicInventory;
-
+  openDialog(comicInventory?: ComicInventory) {
     const dialogRef = this.dialogService.open(
       ComicInventoryDialogComponent,
-      dialogConfig
+      createMatDialogConfig({ data: comicInventory })
     );
 
     dialogRef.afterClosed().subscribe((comicInventory: ComicInventory) => {
@@ -109,7 +97,7 @@ export class InventoryCrudComponent implements OnInit {
         pageSize: this.paginator.pageSize,
         sortOrder: 'asc'
       },
-      comicInventory
+      this.form.value
     );
 
     this.dataSource

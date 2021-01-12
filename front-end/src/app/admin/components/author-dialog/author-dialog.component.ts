@@ -1,7 +1,9 @@
 import { Author } from '@admin/models';
+import { AuthorResource } from '@admin/models/author-resource.model';
 import { AuthorService } from '@admin/services';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { DateAdapter } from '@angular/material/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { NotificationService } from '@core/services';
 import { Observable } from 'rxjs';
@@ -13,22 +15,35 @@ import { tap } from 'rxjs/operators';
 })
 export class AuthorDialogComponent implements OnInit {
   form: FormGroup;
-  id: number;
+  authorID: number;
+  author: AuthorResource;
+  maxDate: Date;
 
   constructor(
     private dialogRef: MatDialogRef<AuthorDialogComponent>,
     private authorService: AuthorService,
     private notificationService: NotificationService,
-    @Inject(MAT_DIALOG_DATA) private data: Author
-  ) {}
+    private dateAdapter: DateAdapter<any>,
+    @Inject(MAT_DIALOG_DATA) private data?: { authorID: number }
+  ) {
+    const currentYear = new Date().getFullYear();
+    this.maxDate = new Date(currentYear + 1, 11, 31);
+    this.dateAdapter.setLocale('pt-br');
+  }
 
   ngOnInit(): void {
     this.form = new FormGroup({
-      name: new FormControl(this.data?.name || '', [
-        Validators.required,
-        Validators.minLength(3)
-      ])
+      name: new FormControl('', [Validators.required, Validators.minLength(3)]),
+      birthDate: new FormControl('', [Validators.required])
     });
+
+    if (this.data) {
+      this.authorService
+        .getAuthorByID(this.data.authorID)
+        .subscribe((author) => {
+          this.form.patchValue(author);
+        });
+    }
   }
 
   save() {

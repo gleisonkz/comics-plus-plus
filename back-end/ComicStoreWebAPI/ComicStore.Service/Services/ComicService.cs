@@ -147,8 +147,6 @@ namespace ComicStore.Service.Services
             image.Extension = comicDTO.Image.Extension;
             image.Name = comicDTO.Image.Name;
 
-
-
             objComic.Title = comicDTO.Title;
             objComic.Description = comicDTO.Description;
             objComic.Pages = comicDTO.Pages;

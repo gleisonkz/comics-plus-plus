@@ -93,7 +93,8 @@ mat-paginator {
   }
 }
 
-.mat-form-field-underline {
+.mat-form-field-underline,
+.mat-form-field-appearance-fill .mat-form-field-underline::before {
   background-color: $color-tab-panel-border-bottom !important;
 }
 
@@ -162,8 +163,17 @@ mat-paginator {
   color: $color-danger;
 }
 
-.mat-form-field-appearance-legacy .mat-form-field-label {
+.mat-form-field-appearance-legacy .mat-form-field-label,
+.mat-form-field-appearance-fill .mat-form-field-label {
   color: $color-form-field-placeholder;
+}
+
+.mat-form-field-infix {
+  padding-top: rem(8) !important;
+}
+
+.mat-form-field-appearance-fill .mat-form-field-flex {
+  padding: 0 !important;
 }
 
 mat-error {
@@ -198,7 +208,15 @@ mat-error {
   background: $color-badge-bg;
 }
 
-.mat-icon.mat-primary {
+.mat-icon.mat-primary,
+.mat-form-field:not(.mat-form-field-appearance-legacy)
+  .mat-form-field-prefix
+  .mat-icon-button
+  .mat-datepicker-toggle-default-icon,
+.mat-form-field:not(.mat-form-field-appearance-legacy)
+  .mat-form-field-suffix
+  .mat-icon-button
+  .mat-datepicker-toggle-default-icon {
   color: $color-primary;
 }
 

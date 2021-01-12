@@ -4,45 +4,42 @@ import {
   GenreDialogComponent
 } from '@admin/components';
 import { pageSizeOptions } from '@admin/constants/paginator-options';
+import { createMatDialogConfig } from '@admin/functions/create-mat-dialog-config';
 import { Filter, Genre } from '@admin/models';
+import { GenreListItem } from '@admin/models/genre-list.model';
 import { GenreService } from '@admin/services';
-import { MatPaginatorService } from '@admin/services/mat-paginator.service';
-import {
-  AfterViewInit,
-  ChangeDetectorRef,
-  Component,
-  OnInit,
-  ViewChild
-} from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { NotificationService } from '@core/services';
 import { fadeInOut } from '@shared/animations/fade-in-out';
 import { listStagger } from '@shared/animations/list-stagger';
 import { finalize } from 'rxjs/operators';
+import { BaseCrudComponent } from '../base-crud/base-crud.component';
 
 @Component({
   templateUrl: './genre-crud.component.html',
   styleUrls: ['./genre-crud.component.scss'],
   animations: [fadeInOut, listStagger]
 })
-export class GenreCrudComponent implements OnInit, AfterViewInit {
+export class GenreCrudComponent implements OnInit {
   loadingComplete: boolean = false;
   readonly pageSizeOption: number[] = pageSizeOptions;
   form: FormGroup;
 
-  dataSource: CustomDataSource<Genre>;
-  @ViewChild(MatPaginator)
-  paginator: MatPaginator;
+  @ViewChild(BaseCrudComponent, { static: true }) baseCrud: BaseCrudComponent;
+  public get paginator(): MatPaginator {
+    return this.baseCrud.paginator;
+  }
+
+  dataSource: CustomDataSource<GenreListItem>;
   genreFilter: Filter;
   displayedColumns: string[] = ['GenreID', 'Nome', 'Ações'];
   constructor(
     private dialogService: MatDialog,
     private genreService: GenreService,
-    private changeDetector: ChangeDetectorRef,
-    private notificationService: NotificationService,
-    private matPaginatorService: MatPaginatorService
+    private notificationService: NotificationService
   ) {}
 
   ngOnInit(): void {
@@ -61,37 +58,21 @@ export class GenreCrudComponent implements OnInit, AfterViewInit {
     this.genreFilter.pageSize = this.paginator.pageSize;
   }
 
-  ngAfterViewInit(): void {
-    this.paginator.page.subscribe(() => {
-      (this.genreFilter.pageNumber = this.paginator.pageIndex + 1),
-        (this.genreFilter.pageSize = this.paginator.pageSize),
-        this.dataSource
-          .loadData(this.genreFilter)
-          .subscribe((pagination: any) => {
-            this.paginator.length = pagination.totalCount;
-          });
+  refreshPaginator() {
+    this.genreFilter.pageNumber = this.paginator.pageIndex + 1;
+    this.genreFilter.pageSize = this.paginator.pageSize;
+    this.dataSource.loadData(this.genreFilter).subscribe((pagination: any) => {
+      this.paginator.length = pagination.totalCount;
     });
-
-    this.matPaginatorService.applyGlobalization(this.paginator);
-    this.changeDetector.detectChanges();
   }
 
   openDialog(genre?: Genre) {
-    const dialogConfig = new MatDialogConfig();
-
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-    dialogConfig.hasBackdrop = true;
-
-    dialogConfig.data = genre;
-
     const dialogRef = this.dialogService.open(
       GenreDialogComponent,
-      dialogConfig
+      createMatDialogConfig({ data: genre })
     );
-
-    dialogRef.afterClosed().subscribe((genre: Genre) => {
-      if (genre) {
+    dialogRef.afterClosed().subscribe((isCreatedOrUpdated: boolean) => {
+      if (isCreatedOrUpdated) {
         this.loadData();
       }
     });
@@ -114,7 +95,7 @@ export class GenreCrudComponent implements OnInit, AfterViewInit {
         pageSize: this.paginator.pageSize,
         sortOrder: 'asc'
       },
-      genre
+      this.form.value
     );
 
     this.dataSource.loadData(this.genreFilter).subscribe((pagination: any) => {
@@ -124,13 +105,13 @@ export class GenreCrudComponent implements OnInit, AfterViewInit {
   }
 
   deleteItem(item: Genre) {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.data = { id: item.genreID, description: item.description };
-
     const dialogRef = this.dialogService.open(
       ConfirmationDialogComponent,
-      dialogConfig
+      createMatDialogConfig({
+        data: { id: item.genreID, description: item.description }
+      })
     );
+
     dialogRef.afterClosed().subscribe((confirmed: boolean) => {
       if (confirmed) {
         this.genreService.deleteGenre(item.genreID).subscribe((c) => {
@@ -144,18 +125,18 @@ export class GenreCrudComponent implements OnInit, AfterViewInit {
   }
 
   deleteGenreRelationships(item: Genre) {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.data = {
-      id: item.genreID,
-      description: item.description,
-      message:
-        'Você tem certeza que deseja remover os vínculos do registro abaixo?'
-    };
-
     const dialogRef = this.dialogService.open(
       ConfirmationDialogComponent,
-      dialogConfig
+      createMatDialogConfig({
+        data: {
+          id: item.genreID,
+          description: item.description,
+          message:
+            'Você tem certeza que deseja remover os vínculos do registro abaixo?'
+        }
+      })
     );
+
     dialogRef.afterClosed().subscribe((confirmed: boolean) => {
       if (confirmed) {
         this.genreService

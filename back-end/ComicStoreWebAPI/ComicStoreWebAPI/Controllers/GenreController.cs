@@ -24,7 +24,7 @@ namespace ComicStore.Application.Controllers
         [HttpGet]
         [Route("paginator")]
         [Authorize(Roles = "Admin")]
-        public IActionResult GetGenre([FromQuery] GenreFilter filter)
+        public IActionResult GetPaginatedGenres([FromQuery] GenreFilter filter)
         {
             try
             {

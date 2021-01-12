@@ -30,7 +30,9 @@ namespace ComicStore.Application.Controllers
                 c => new
                 {
                     c.AuthorID,
-                    c.Name
+                    c.Name,
+                    c.BirthDate,
+                    Age = DateTime.UtcNow.Year - c.BirthDate.Year
                 });
 
             var result = authors.ToList();
@@ -91,6 +93,30 @@ namespace ComicStore.Application.Controllers
             }
         }
 
+        [HttpGet("{authorID:int}")]
+        [Authorize(Roles = "Admin")]
+        public IActionResult GetAuthorByID(int authorID)
+        {
+            try
+            {
+                var author = svcAuthor.GetAuthor()
+                         .Where(c => c.AuthorID == authorID)
+                         .Select(c => new
+                         {
+                             c.AuthorID,
+                             c.Name,
+                             c.BirthDate,
+                             c.Nationality
+                         }).Single();
+
+                return Ok(author);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Erro: {ex.Message}");
+            }
+        }
+
         [HttpGet("{name}")]
         [Authorize(Roles = "Admin")]
         public IActionResult GetAuthorsByName(string name)
@@ -111,6 +137,8 @@ namespace ComicStore.Application.Controllers
                 return BadRequest($"Erro: {ex.Message}");
             }
         }
+
+
     }
 
 

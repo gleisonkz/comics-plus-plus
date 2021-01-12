@@ -1,4 +1,5 @@
 import { NativeDateAdapter } from '@angular/material/core';
+import { DateValidation } from './date-validation-helper';
 
 export class ApplicationDateAdapter extends NativeDateAdapter {
   format(date: Date, displayFormat: Object) {
@@ -16,51 +17,13 @@ export class ApplicationDateAdapter extends NativeDateAdapter {
   }
 
   isValidDate(dateString: string): Date | null | any {
-    function isLeapYear(year: number) {
-      const divisibleBy = (operand: number) => year % operand === 0;
-      return (divisibleBy(4) && !divisibleBy(100)) || divisibleBy(400);
-    }
-
-    function isValidMonth(month: number) {
-      const isValid = month > 0 && month <= 12;
-      return isValid;
-    }
-
-    function isValidDay(day: number, month: number, year: number) {
-      const daysInMonth = [
-        31,
-        isLeapYear(year) ? 29 : 28,
-        31,
-        30,
-        31,
-        30,
-        31,
-        31,
-        30,
-        31,
-        30,
-        31
-      ];
-      const isValid = day > 0 && day <= daysInMonth[month - 1];
-      return isValid;
-    }
-
-    function isValidYear(year: number) {
-      const isValid = year > 0 && year <= new Date().getFullYear();
-      return isValid;
-    }
-
-    function isDatePattern(dateString: string) {
-      return /^\d{1,2}\/\d{1,2}\/\d{4}$/.test(dateString);
-    }
-
-    if (!isDatePattern(dateString)) return this.invalid();
+    if (!DateValidation.isDatePattern(dateString)) return this.invalid();
 
     const [day, month, year] = dateString.split('/').map(Number);
 
-    if (!isValidYear(year)) return this.invalid();
-    if (!isValidDay(day, month, year)) return this.invalid();
-    if (!isValidMonth(month)) return this.invalid();
+    if (!DateValidation.isValidYear(year)) return this.invalid();
+    if (!DateValidation.isValidDay(day, month, year)) return this.invalid();
+    if (!DateValidation.isValidMonth(month)) return this.invalid();
 
     return new Date(`${year}-${month}-${day}`);
   }

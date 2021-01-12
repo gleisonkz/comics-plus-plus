@@ -1,9 +1,9 @@
 import { Author } from '@admin/models';
+import { AuthorResource } from '@admin/models/author-resource.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { GenericBaseService } from '@core/services';
 import { AuthorListItem } from '../models/author-list.model';
-import { AuthorResource } from '../models/author.model';
 
 @Injectable()
 export class AuthorService extends GenericBaseService<

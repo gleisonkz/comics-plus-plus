@@ -2,6 +2,13 @@ import { AbstractControl } from '@angular/forms';
 
 export const ArrayValidation = [
   {
+    key: 'matDatepickerParse',
+    value: (control: AbstractControl) => {
+      const textDate: Date = control.errors.matDatepickerParse.text;
+      return `a data ${textDate} é <strong>inválida</strong>`;
+    }
+  },
+  {
     key: 'required',
     value: (control: AbstractControl) => 'campo<strong> obrigatório</strong>'
   },
@@ -49,5 +56,13 @@ export const ArrayValidation = [
   {
     key: 'specialCharacter',
     value: (control: AbstractControl) => control.errors.specialCharacter
+  },
+  {
+    key: 'matDatepickerMax',
+    value: (control: AbstractControl) => {
+      const maxDate: Date = control.errors.matDatepickerMax.max;
+      const year = maxDate.getFullYear();
+      return `ano máximo permitido ${year}`;
+    }
   }
 ];

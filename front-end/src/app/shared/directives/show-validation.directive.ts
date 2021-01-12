@@ -30,7 +30,6 @@ export class ShowValidationDirective implements AfterContentInit, OnDestroy {
   ngAfterContentInit(): void {
     const group = this.parent.control as FormGroup;
     const control = group.controls[this.controlName] as FormControl;
-
     const handleState = () => {
       const errorMessage = this.checkValidations(control);
       const errorMessageParent = this.checkValidations(group);

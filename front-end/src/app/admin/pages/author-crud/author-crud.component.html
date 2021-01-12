@@ -72,15 +72,17 @@
       </ng-container>
 
       <ng-container matColumnDef="birthDate">
-        <th mat-header-cell *matHeaderCellDef>Nascimento</th>
-        <td mat-cell *matCellDef="let element">
+        <th fxHide fxShow.gt-md mat-header-cell *matHeaderCellDef>
+          Nascimento
+        </th>
+        <td fxHide fxShow.gt-md mat-cell *matCellDef="let element">
           {{ element.birthDate | date }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="age">
-        <th mat-header-cell *matHeaderCellDef>Idade</th>
-        <td mat-cell *matCellDef="let element">
+        <th fxHide fxShow.gt-md mat-header-cell *matHeaderCellDef>Idade</th>
+        <td fxHide fxShow.gt-md mat-cell *matCellDef="let element">
           {{ element.age }}
         </td>
       </ng-container>

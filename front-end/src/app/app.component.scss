@@ -32,7 +32,8 @@
 
   ::ng-deep main {
     display: grid;
-    width: 100vw;
+    // width: 100vw;
+    width: 100%;
     max-width: $global-max-width;
   }
 

@@ -5,8 +5,7 @@ import {
 } from '@admin/components';
 import { pageSizeOptions } from '@admin/constants/paginator-options';
 import { createMatDialogConfig } from '@admin/functions/create-mat-dialog-config';
-import { Filter, Genre } from '@admin/models';
-import { GenreListItem } from '@admin/models/genre-list.model';
+import { Filter, Genre, GenreListItem } from '@admin/models';
 import { GenreService } from '@admin/services';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';

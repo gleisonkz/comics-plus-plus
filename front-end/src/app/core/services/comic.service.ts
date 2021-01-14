@@ -1,5 +1,11 @@
-import { Author, Comic, ComicListItem, Filter, Genre } from '@admin/models';
-import { ComicResource } from '@admin/models/comic-resource.model';
+import {
+  Author,
+  Comic,
+  ComicListItem,
+  ComicResource,
+  Filter,
+  Genre
+} from '@admin/models';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ComicImage } from '@core/models/comic-image.model';

@@ -2,8 +2,11 @@ import { ComicImage } from '@core/models/comic-image.model';
 import { Author } from './author.model';
 import { Genre } from './genre.model';
 
-export interface Comic {
+interface Comic extends ComicResource {
   comicID: number;
+}
+
+interface ComicResource {
   title: string;
   description: string;
   price: number;
@@ -13,3 +16,14 @@ export interface Comic {
   genres: Genre[];
   image: ComicImage;
 }
+
+interface ComicListItem {
+  comicID: number;
+  title: string;
+  description: string;
+  price: number;
+  year: number;
+  pages: number;
+}
+
+export { Comic, ComicResource, ComicListItem };

@@ -1,8 +1,10 @@
-import { ComicInventory } from '@admin/models';
-import { ComicInventoryResource } from '@admin/models/comic-inventory-resource.model';
+import {
+  ComicInventory,
+  ComicInventoryListItem,
+  ComicInventoryResource
+} from '@admin/models';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ComicInventoryListItem } from '../../admin/models/comic-inventory-list.mode';
 import { GenericBaseService } from './base.service';
 
 @Injectable({

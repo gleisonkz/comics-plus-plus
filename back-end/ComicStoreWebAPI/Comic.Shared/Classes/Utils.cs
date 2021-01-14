@@ -29,6 +29,12 @@ namespace ComicStore.Shared.Classes
             return list;
         }
 
+        public static T GetRandomElement<T>(this IList<T> sourceList)
+        {
+            var element = PickRandom(sourceList);
+            return element;
+        }
+
         public static T PickRandom<T>(IList<T> list)
         {
             T randomElement = list[random.Next(list.Count)];

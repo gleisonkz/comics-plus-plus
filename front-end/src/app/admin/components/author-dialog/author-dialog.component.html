@@ -19,8 +19,17 @@
       <mat-label>Escolha uma data</mat-label>
       <input
         matInput
+        #inputMask
         placeholder="Data de Nascimento"
         formControlName="birthDate"
+        mask="d0/M0/0000"
+      />
+      <input
+        matInput
+        fxHide="true"
+        placeholder="Data de Nascimento"
+        formControlName="birthDate"
+        (dateChange)="inputMask.value = formatDate($event.target.value)"
         [max]="maxDate"
         [matDatepicker]="picker"
       />

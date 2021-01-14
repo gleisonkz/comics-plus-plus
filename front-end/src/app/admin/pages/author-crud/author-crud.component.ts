@@ -5,7 +5,7 @@ import {
 } from '@admin/components';
 import { pageSizeOptions } from '@admin/constants/paginator-options';
 import { createMatDialogConfig } from '@admin/functions/create-mat-dialog-config';
-import { Author, Filter } from '@admin/models';
+import { Author, AuthorListItem, Filter } from '@admin/models';
 import { AuthorService } from '@admin/services';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -15,7 +15,6 @@ import { NotificationService } from '@core/services';
 import { fadeInOut } from '@shared/animations/fade-in-out';
 import { finalize } from 'rxjs/operators';
 import { listStagger } from '../../../shared/animations/list-stagger';
-import { AuthorListItem } from '../../models/author-list.model';
 import { BaseCrudComponent } from '../base-crud/base-crud.component';
 
 @Component({

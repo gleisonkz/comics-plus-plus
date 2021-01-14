@@ -1,5 +1,4 @@
-import { Author } from '@admin/models';
-import { AuthorResource } from '@admin/models/author-resource.model';
+import { Author, AuthorResource } from '@admin/models';
 import { AuthorService } from '@admin/services';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -44,6 +43,24 @@ export class AuthorDialogComponent implements OnInit {
           this.form.patchValue(author);
         });
     }
+  }
+
+  formatDate2(date: Date) {
+    const formattedDate = [
+      date.getDate(),
+      date.getMonth() + 1,
+      date.getFullYear()
+    ]
+      .map((c) => String(c).padStart(2, '0'))
+      .join('/');
+    return formattedDate;
+  }
+
+  formatDate(date: Date) {
+    const formattedDate = ['getDate', 'getMonth', 'getFullYear']
+      .map((c, i) => String(date[c]() + (i & 1)).padStart(2, '0'))
+      .join('/');
+    return formattedDate;
   }
 
   save() {

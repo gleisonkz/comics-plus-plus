@@ -19,20 +19,11 @@ export class DateValidation {
   }
 
   static isValidDay(day: number, month: number, year: number) {
-    const daysInMonth = [
-      31,
-      this.isLeapYear(year) ? 29 : 28,
-      31,
-      30,
-      31,
-      30,
-      31,
-      31,
-      30,
-      31,
-      30,
-      31
-    ];
+    const daysInMonth = Array.from(Array(12), (_, i) => i)
+      .map((c, i) => c % 2 === +(i < 7))
+      .map((c) => 30 + +!c)
+      .map((c, i) => c - +(i === 1) * (+!this.isLeapYear(year) + 1));
+
     const isValid = day > 0 && day <= daysInMonth[month - 1];
     return isValid;
   }

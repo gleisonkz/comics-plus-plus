@@ -4,14 +4,16 @@ using ComicStore.Infra.EFRepository.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ComicStore.Infra.EFRepository.Migrations
 {
     [DbContext(typeof(ComicStoreDbContext))]
-    partial class ComicStoreDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210113234523_MigrationReset")]
+    partial class MigrationReset
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -19,39 +21,32 @@ namespace ComicStore.Infra.EFRepository.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.0");
 
-            modelBuilder.Entity("ComicAuthor", b =>
+            modelBuilder.Entity("AuthorComic", b =>
                 {
-                    b.Property<int>("AuthorID")
+                    b.Property<int>("AuthorsAuthorID")
                         .HasColumnType("int");
 
-                    b.Property<int>("ComicID")
+                    b.Property<int>("ComicsComicID")
                         .HasColumnType("int");
 
-                    b.HasKey("AuthorID", "ComicID");
+                    b.HasKey("AuthorsAuthorID", "ComicsComicID");
 
-                    b.HasIndex("ComicID");
+                    b.HasIndex("ComicsComicID");
 
-                    b.ToTable("ComicAuthor");
-
-                    b.HasData(
-                        new
-                        {
-                            AuthorID = 1,
-                            ComicID = 1
-                        });
+                    b.ToTable("AuthorComic");
                 });
 
             modelBuilder.Entity("ComicGenre", b =>
                 {
-                    b.Property<int>("ComicID")
+                    b.Property<int>("ComicsComicID")
                         .HasColumnType("int");
 
-                    b.Property<int>("GenreID")
+                    b.Property<int>("GenresGenreID")
                         .HasColumnType("int");
 
-                    b.HasKey("ComicID", "GenreID");
+                    b.HasKey("ComicsComicID", "GenresGenreID");
 
-                    b.HasIndex("GenreID");
+                    b.HasIndex("GenresGenreID");
 
                     b.ToTable("ComicGenre");
                 });
@@ -84,49 +79,49 @@ namespace ComicStore.Infra.EFRepository.Migrations
                         new
                         {
                             AuthorID = 1,
-                            BirthDate = new DateTime(2015, 8, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            BirthDate = new DateTime(2019, 2, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "John Doe",
                             Nationality = "Australian"
                         },
                         new
                         {
                             AuthorID = 2,
-                            BirthDate = new DateTime(2020, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            BirthDate = new DateTime(1999, 2, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Jane Doe",
                             Nationality = "Dominican"
                         },
                         new
                         {
                             AuthorID = 3,
-                            BirthDate = new DateTime(2020, 2, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            BirthDate = new DateTime(2001, 8, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "JK Rowling",
                             Nationality = "English"
                         },
                         new
                         {
                             AuthorID = 4,
-                            BirthDate = new DateTime(2003, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            BirthDate = new DateTime(2003, 12, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Gail Simone",
                             Nationality = "Mexican"
                         },
                         new
                         {
                             AuthorID = 5,
-                            BirthDate = new DateTime(2011, 1, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            BirthDate = new DateTime(2002, 2, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Warren Ellis",
                             Nationality = "French"
                         },
                         new
                         {
                             AuthorID = 6,
-                            BirthDate = new DateTime(2015, 1, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            BirthDate = new DateTime(2012, 4, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Jack Kirby",
                             Nationality = "Indonesian"
                         },
                         new
                         {
                             AuthorID = 7,
-                            BirthDate = new DateTime(2012, 8, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            BirthDate = new DateTime(2016, 3, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Jonathan Hickman",
                             Nationality = "Indian"
                         });
@@ -170,96 +165,6 @@ namespace ComicStore.Infra.EFRepository.Migrations
                             Pages = 200,
                             Price = 50f,
                             Title = "Hulk",
-                            Year = 2012
-                        },
-                        new
-                        {
-                            ComicID = 2,
-                            Description = "American teenager Peter Parker, a poor sickly orphan, is bitten by a radioactive spider. As a result of the bite, he gains superhuman strength, speed, and agility along with the ability to cling to walls.",
-                            Pages = 99,
-                            Price = 66.99f,
-                            Title = "Spider Man",
-                            Year = 1998
-                        },
-                        new
-                        {
-                            ComicID = 3,
-                            Description = "Iron Man is a fictional superhero appearing in American comic books published by Marvel Comics. ... He uses the suit and successive versions to protect the world as Iron Man. Although at first concealing his true identity, Stark eventually publicly reveals himself to be Iron Man.",
-                            Pages = 77,
-                            Price = 45.99f,
-                            Title = "Iron Man",
-                            Year = 2002
-                        },
-                        new
-                        {
-                            ComicID = 4,
-                            Description = "Created as a female counterpart to Superman, Kara Zor-El shares his super powers and vulnerability to Kryptonite. Supergirl plays a supporting role in various DC Comics publications, including Action Comics, Superman, and several comic book series unrelated to Superman.",
-                            Pages = 85,
-                            Price = 66f,
-                            Title = "Super Girl",
-                            Year = 2005
-                        },
-                        new
-                        {
-                            ComicID = 5,
-                            Description = "Superman is a fictional superhero, who first appeared in American comic books published by DC Comics. ... He was found and adopted by farmers Jonathan and Martha Kent, who named him Clark Kent. Clark developed various superhuman abilities, such as incredible strength and impervious skin.",
-                            Pages = 67,
-                            Price = 35f,
-                            Title = "Super Man",
-                            Year = 2009
-                        },
-                        new
-                        {
-                            ComicID = 6,
-                            Description = "Green Lantern is an ongoing American comic-book series featuring the DC Comics heroes of the same name. ... When the Silver Age Green Lantern, Hal Jordan, was introduced, the character starred in a new volume of Green Lantern starting in 1960.",
-                            Pages = 105,
-                            Price = 77f,
-                            Title = "Green Lantern",
-                            Year = 2014
-                        },
-                        new
-                        {
-                            ComicID = 7,
-                            Description = "Venom is a fictional character appearing in American comic books published by Marvel Comics, commonly in association with Spider-Man. The character is a sentient alien symbiote with an amorphous, liquid-like form, who survives by bonding with a host, usually human.",
-                            Pages = 135,
-                            Price = 125f,
-                            Title = "Venom",
-                            Year = 2016
-                        },
-                        new
-                        {
-                            ComicID = 8,
-                            Description = "Captain America is the alter ego of Steve Rogers, a frail young man enhanced to the peak of human perfection by an experimental serum to aid the United States government's efforts in World War II. Near the end of the war, he was trapped in ice and survived in suspended animation until he was revived in modern times.",
-                            Pages = 136,
-                            Price = 86f,
-                            Title = "Captain America",
-                            Year = 1997
-                        },
-                        new
-                        {
-                            ComicID = 9,
-                            Description = "The character, which is based on the Norse deity of the same name, is the Asgardian god of thunder who possesses the enchanted hammer, Mjolnir, which grants him the ability to fly and manipulate weather amongst his other superhuman attributes.",
-                            Pages = 158,
-                            Price = 55.55f,
-                            Title = "Thor",
-                            Year = 2012
-                        },
-                        new
-                        {
-                            ComicID = 10,
-                            Description = "Black Panther is a fictional superhero appearing in American comic books published by Marvel Comics. ... Black Panther's real name is T'Challa, and he is depicted as the king and protector of the fictional African nation of Wakanda.",
-                            Pages = 258,
-                            Price = 85f,
-                            Title = "Black Panther",
-                            Year = 2016
-                        },
-                        new
-                        {
-                            ComicID = 11,
-                            Description = "Marvel is the name of many fictional superheroes appearing in comic books published by Marvel Comics. The character was originally conceived as a female counterpart to Captain Marvel. Like Captain Marvel, most of the bearers of the Ms.",
-                            Pages = 200,
-                            Price = 50f,
-                            Title = "Ms. Marvel",
                             Year = 2012
                         });
                 });
@@ -430,17 +335,17 @@ namespace ComicStore.Infra.EFRepository.Migrations
                     b.ToTable("OrderItem");
                 });
 
-            modelBuilder.Entity("ComicAuthor", b =>
+            modelBuilder.Entity("AuthorComic", b =>
                 {
                     b.HasOne("ComicStore.Domain.POCO.Author", null)
                         .WithMany()
-                        .HasForeignKey("AuthorID")
+                        .HasForeignKey("AuthorsAuthorID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("ComicStore.Domain.POCO.Comic", null)
                         .WithMany()
-                        .HasForeignKey("ComicID")
+                        .HasForeignKey("ComicsComicID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -449,13 +354,13 @@ namespace ComicStore.Infra.EFRepository.Migrations
                 {
                     b.HasOne("ComicStore.Domain.POCO.Comic", null)
                         .WithMany()
-                        .HasForeignKey("ComicID")
+                        .HasForeignKey("ComicsComicID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("ComicStore.Domain.POCO.Genre", null)
                         .WithMany()
-                        .HasForeignKey("GenreID")
+                        .HasForeignKey("GenresGenreID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

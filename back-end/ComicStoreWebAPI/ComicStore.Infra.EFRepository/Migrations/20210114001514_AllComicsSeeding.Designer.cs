@@ -4,14 +4,16 @@ using ComicStore.Infra.EFRepository.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ComicStore.Infra.EFRepository.Migrations
 {
     [DbContext(typeof(ComicStoreDbContext))]
-    partial class ComicStoreDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210114001514_AllComicsSeeding")]
+    partial class AllComicsSeeding
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -19,39 +21,39 @@ namespace ComicStore.Infra.EFRepository.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.0");
 
-            modelBuilder.Entity("ComicAuthor", b =>
+            modelBuilder.Entity("AuthorComic", b =>
                 {
-                    b.Property<int>("AuthorID")
+                    b.Property<int>("AuthorsAuthorID")
                         .HasColumnType("int");
 
-                    b.Property<int>("ComicID")
+                    b.Property<int>("ComicsComicID")
                         .HasColumnType("int");
 
-                    b.HasKey("AuthorID", "ComicID");
+                    b.HasKey("AuthorsAuthorID", "ComicsComicID");
 
-                    b.HasIndex("ComicID");
+                    b.HasIndex("ComicsComicID");
 
-                    b.ToTable("ComicAuthor");
+                    b.ToTable("AuthorComic");
 
                     b.HasData(
                         new
                         {
-                            AuthorID = 1,
-                            ComicID = 1
+                            AuthorsAuthorID = 1,
+                            ComicsComicID = 1
                         });
                 });
 
             modelBuilder.Entity("ComicGenre", b =>
                 {
-                    b.Property<int>("ComicID")
+                    b.Property<int>("ComicsComicID")
                         .HasColumnType("int");
 
-                    b.Property<int>("GenreID")
+                    b.Property<int>("GenresGenreID")
                         .HasColumnType("int");
 
-                    b.HasKey("ComicID", "GenreID");
+                    b.HasKey("ComicsComicID", "GenresGenreID");
 
-                    b.HasIndex("GenreID");
+                    b.HasIndex("GenresGenreID");
 
                     b.ToTable("ComicGenre");
                 });
@@ -84,49 +86,49 @@ namespace ComicStore.Infra.EFRepository.Migrations
                         new
                         {
                             AuthorID = 1,
-                            BirthDate = new DateTime(2015, 8, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            BirthDate = new DateTime(2000, 4, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "John Doe",
                             Nationality = "Australian"
                         },
                         new
                         {
                             AuthorID = 2,
-                            BirthDate = new DateTime(2020, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            BirthDate = new DateTime(2003, 7, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Jane Doe",
                             Nationality = "Dominican"
                         },
                         new
                         {
                             AuthorID = 3,
-                            BirthDate = new DateTime(2020, 2, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            BirthDate = new DateTime(2005, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "JK Rowling",
                             Nationality = "English"
                         },
                         new
                         {
                             AuthorID = 4,
-                            BirthDate = new DateTime(2003, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            BirthDate = new DateTime(2014, 12, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Gail Simone",
                             Nationality = "Mexican"
                         },
                         new
                         {
                             AuthorID = 5,
-                            BirthDate = new DateTime(2011, 1, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            BirthDate = new DateTime(2004, 12, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Warren Ellis",
                             Nationality = "French"
                         },
                         new
                         {
                             AuthorID = 6,
-                            BirthDate = new DateTime(2015, 1, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            BirthDate = new DateTime(2015, 7, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Jack Kirby",
                             Nationality = "Indonesian"
                         },
                         new
                         {
                             AuthorID = 7,
-                            BirthDate = new DateTime(2012, 8, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            BirthDate = new DateTime(2012, 1, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Jonathan Hickman",
                             Nationality = "Indian"
                         });
@@ -430,17 +432,17 @@ namespace ComicStore.Infra.EFRepository.Migrations
                     b.ToTable("OrderItem");
                 });
 
-            modelBuilder.Entity("ComicAuthor", b =>
+            modelBuilder.Entity("AuthorComic", b =>
                 {
                     b.HasOne("ComicStore.Domain.POCO.Author", null)
                         .WithMany()
-                        .HasForeignKey("AuthorID")
+                        .HasForeignKey("AuthorsAuthorID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("ComicStore.Domain.POCO.Comic", null)
                         .WithMany()
-                        .HasForeignKey("ComicID")
+                        .HasForeignKey("ComicsComicID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -449,13 +451,13 @@ namespace ComicStore.Infra.EFRepository.Migrations
                 {
                     b.HasOne("ComicStore.Domain.POCO.Comic", null)
                         .WithMany()
-                        .HasForeignKey("ComicID")
+                        .HasForeignKey("ComicsComicID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("ComicStore.Domain.POCO.Genre", null)
                         .WithMany()
-                        .HasForeignKey("GenreID")
+                        .HasForeignKey("GenresGenreID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

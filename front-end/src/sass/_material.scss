@@ -327,3 +327,8 @@ mat-expansion-panel-header {
     @include flex-center;
   }
 }
+
+.mat-tab-body.mat-tab-body-active,
+.mat-tab-body-content {
+  overflow-y: hidden !important;
+}

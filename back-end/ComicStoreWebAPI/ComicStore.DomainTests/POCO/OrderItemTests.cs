@@ -13,15 +13,15 @@ namespace ComicStore.Domain.POCO.Tests
             return this;
         }
 
-        public OrderItemBuilder WithUnitValue(decimal quantity)
+        public OrderItemBuilder WithUnitValue(decimal value)
         {
-            Subject.UnitValue = quantity;
+            Subject.UnitValue = value;
             return this;
         }
 
-        public OrderItemBuilder WithTotalValue(int quantity)
+        public OrderItemBuilder WithTotalValue(decimal value)
         {
-            Subject.TotalValue = quantity;
+            Subject.TotalValue = value;
             return this;
         }
     }
@@ -30,12 +30,43 @@ namespace ComicStore.Domain.POCO.Tests
     public class OrderItemTests
     {
         [TestMethod]
-        [Description("Should be throw an error")]
+        [Description("Should be throw an LessThanZeroException")]
         [ExpectedException(typeof(LessThanZeroException))]
-        public void NegativeQuantityDownThrowsLessThanZeroException()
+        public void NegativeQuantityDown()
         {
             OrderItemBuilder.Create()
                             .WithQuantity(-1)
+                            .Build();
+        }
+
+        [TestMethod]
+        [Description("Should be throw an LessThanZeroException")]
+        [ExpectedException(typeof(LessThanZeroException))]
+        public void NegativeUnityValue()
+        {
+            OrderItemBuilder.Create()
+                            .WithUnitValue(-1)
+                            .Build();
+        }
+
+        [TestMethod]
+        [Description("Should be throw an LessThanZeroException")]
+        [ExpectedException(typeof(LessThanZeroException))]
+        public void NegativeTotalValue()
+        {
+            OrderItemBuilder.Create()
+                            .WithTotalValue(-1)
+                            .Build();
+        }
+
+        [TestMethod]
+        [Description("TotalValue can not be less than UnitValue, should be throw an CustomException")]
+        [ExpectedException(typeof(CustomException))]
+        public void TotalValueLessThanUnitValue()
+        {
+            OrderItemBuilder.Create()
+                            .WithUnitValue(50.55M)
+                            .WithTotalValue(50.50M)
                             .Build();
         }
     }

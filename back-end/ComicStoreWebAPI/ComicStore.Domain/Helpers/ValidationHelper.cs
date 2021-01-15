@@ -14,6 +14,7 @@ namespace ComicStore.Domain.Helpers
     public class Validators<T> where T : struct
     {
         private readonly T _valueToAssign;
+        private readonly dynamic zeroValue = 0;
 
         public Validators(T valueToAssign)
         {
@@ -22,18 +23,14 @@ namespace ComicStore.Domain.Helpers
 
         public Validators<T> LessThanZero()
         {
-            if (int.TryParse(_valueToAssign.ToString(), out int result) == false)
-                throw new CustomException("É necessário que seja passado um valor do tipo inteiro");
-            if (result < 0)
+            if (_valueToAssign < zeroValue)
                 throw new LessThanZeroException("A quantidade não pode ser menor que 0");
             return this;
         }
 
         public Validators<T> EqualsZero()
         {
-            if (int.TryParse(_valueToAssign.ToString(), out int result) == false)
-                throw new CustomException("É necessário que seja passado um valor do tipo inteiro");
-            if (result == 0)
+            if (_valueToAssign == zeroValue)
                 throw new EqualZeroException();
             return this;
         }

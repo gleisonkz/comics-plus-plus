@@ -43,6 +43,8 @@ namespace ComicStore.Domain.POCO
                                              .LessThanZero()
                                              .EqualsZero()
                                              .Assign();
+                if (value < unitValue)
+                    throw new CustomException("O valor total não pode ser menor que o valor unitário");
             }
         }
         public virtual Comic Comic { get; set; }

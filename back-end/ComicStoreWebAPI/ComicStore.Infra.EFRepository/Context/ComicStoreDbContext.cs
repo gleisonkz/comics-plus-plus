@@ -44,7 +44,7 @@ namespace ComicStore.Infra.EFRepository.Context
                     Title = "Hulk",
                     Pages = 200,
                     Year = 2012,
-                    Price = 50.00f,
+                    Price = 50.00M,
                     Description = "In his comic book appearances, the character is both the Hulk, a green-skinned, hulking and muscular humanoid possessing a vast degree of physical strength, and his alter ego Dr. Robert Bruce Banner, a physically weak, socially withdrawn, and emotionally reserved physicist.",
                 },
                 new Comic {
@@ -52,7 +52,7 @@ namespace ComicStore.Infra.EFRepository.Context
                     Title = "Spider Man",
                     Pages = 99,
                     Year = 1998,
-                    Price = 66.99f,
+                    Price = 66.99M,
                     Description = "American teenager Peter Parker, a poor sickly orphan, is bitten by a radioactive spider. As a result of the bite, he gains superhuman strength, speed, and agility along with the ability to cling to walls.",
                 },
                 new Comic {
@@ -60,7 +60,7 @@ namespace ComicStore.Infra.EFRepository.Context
                     Title = "Iron Man",
                     Pages = 77,
                     Year = 2002,
-                    Price = 45.99f,
+                    Price = 45.99M,
                     Description = "Iron Man is a fictional superhero appearing in American comic books published by Marvel Comics. ... He uses the suit and successive versions to protect the world as Iron Man. Although at first concealing his true identity, Stark eventually publicly reveals himself to be Iron Man.",
                 },
                 new Comic {
@@ -68,7 +68,7 @@ namespace ComicStore.Infra.EFRepository.Context
                     Title = "Super Girl",
                     Pages = 85,
                     Year = 2005,
-                    Price = 66.00f,
+                    Price = 66.00M,
                     Description = "Created as a female counterpart to Superman, Kara Zor-El shares his super powers and vulnerability to Kryptonite. Supergirl plays a supporting role in various DC Comics publications, including Action Comics, Superman, and several comic book series unrelated to Superman.",
                 },
                 new Comic {
@@ -76,7 +76,7 @@ namespace ComicStore.Infra.EFRepository.Context
                     Title = "Green Lantern",
                     Pages = 105,
                     Year = 2014,
-                    Price = 77.00f,
+                    Price = 77.00M,
                     Description = "Green Lantern is an ongoing American comic-book series featuring the DC Comics heroes of the same name. ... When the Silver Age Green Lantern, Hal Jordan, was introduced, the character starred in a new volume of Green Lantern starting in 1960.",
                 },
                 new Comic {
@@ -84,7 +84,7 @@ namespace ComicStore.Infra.EFRepository.Context
                     Title = "Venom",
                     Pages = 135,
                     Year = 2016,
-                    Price = 125.00f,
+                    Price = 125.00M,
                     Description = "Venom is a fictional character appearing in American comic books published by Marvel Comics, commonly in association with Spider-Man. The character is a sentient alien symbiote with an amorphous, liquid-like form, who survives by bonding with a host, usually human.",
                 },
                 new Comic {
@@ -92,7 +92,7 @@ namespace ComicStore.Infra.EFRepository.Context
                     Title = "Captain America",
                     Pages = 136,
                     Year = 1997,
-                    Price = 86.00f,
+                    Price = 86.00M,
                     Description = "Captain America is the alter ego of Steve Rogers, a frail young man enhanced to the peak of human perfection by an experimental serum to aid the United States government's efforts in World War II. Near the end of the war, he was trapped in ice and survived in suspended animation until he was revived in modern times.",
                 },
                 new Comic {
@@ -100,7 +100,7 @@ namespace ComicStore.Infra.EFRepository.Context
                     Title = "Thor",
                     Pages = 158,
                     Year = 2012,
-                    Price = 55.55f,
+                    Price = 55.55M,
                     Description = "The character, which is based on the Norse deity of the same name, is the Asgardian god of thunder who possesses the enchanted hammer, Mjolnir, which grants him the ability to fly and manipulate weather amongst his other superhuman attributes.",
                 },
                 new Comic {
@@ -108,7 +108,7 @@ namespace ComicStore.Infra.EFRepository.Context
                     Title = "Black Panther",
                     Pages = 258,
                     Year = 2016,
-                    Price = 85.00f,
+                    Price = 85.00M,
                     Description = "Black Panther is a fictional superhero appearing in American comic books published by Marvel Comics. ... Black Panther's real name is T'Challa, and he is depicted as the king and protector of the fictional African nation of Wakanda.",
                 },
                 new Comic {
@@ -116,7 +116,7 @@ namespace ComicStore.Infra.EFRepository.Context
                     Title = "Ms. Marvel",
                     Pages = 200,
                     Year = 2012,
-                    Price = 50.00f,
+                    Price = 50.00M,
                     Description = "Marvel is the name of many fictional superheroes appearing in comic books published by Marvel Comics. The character was originally conceived as a female counterpart to Captain Marvel. Like Captain Marvel, most of the bearers of the Ms.",
                 },
             };

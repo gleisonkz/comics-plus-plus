@@ -10,7 +10,7 @@ namespace ComicStore.Application.Filters
         public int? ComicID { get; set; } = null;
         public string Title { get; set; }
         public string Description { get; set; }
-        public float? Price { get; set; }
+        public decimal? Price { get; set; }
         public int? Year { get; set; }
         public int? Pages { get; set; }
         public int[] Authors { get; set; }

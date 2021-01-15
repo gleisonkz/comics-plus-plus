@@ -12,6 +12,18 @@ namespace ComicStore.Domain.POCO.Tests
             Subject.Quantity = quantity;
             return this;
         }
+
+        public OrderItemBuilder WithUnitValue(decimal quantity)
+        {
+            Subject.UnitValue = quantity;
+            return this;
+        }
+
+        public OrderItemBuilder WithTotalValue(int quantity)
+        {
+            Subject.TotalValue = quantity;
+            return this;
+        }
     }
 
     [TestClass()]

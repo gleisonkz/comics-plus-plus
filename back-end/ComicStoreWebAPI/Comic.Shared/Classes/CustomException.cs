@@ -12,4 +12,14 @@ namespace ComicStore.Shared.Class
           System.Runtime.Serialization.StreamingContext context) : base(info, context)
         { }
     }
+
+    public class LessThanZeroException : CustomException
+    {
+        public LessThanZeroException(string message) : base(message) { }
+    }
+
+    public class EqualZeroException : CustomException
+    {
+        public EqualZeroException(string message = "Não é possível atribuir uma valor igual a 0") : base(message) { }
+    }
 }

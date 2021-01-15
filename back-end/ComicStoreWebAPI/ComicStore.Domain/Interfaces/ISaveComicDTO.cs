@@ -4,7 +4,7 @@
     {
         public string Title { get; set; }
         public string Description { get; set; }
-        public float Price { get; set; }
+        public decimal Price { get; set; }
         public int Year { get; set; }
         public IComicImageDTO Image { get; set; }
         public int Pages { get; set; }

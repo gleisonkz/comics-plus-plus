@@ -1,4 +1,5 @@
-﻿using ComicStore.Shared.Class;
+﻿using ComicStore.Domain.Helpers;
+using ComicStore.Shared.Class;
 
 namespace ComicStore.Domain.POCO
 {
@@ -10,12 +11,9 @@ namespace ComicStore.Domain.POCO
         {
             get => quantity;
 
-            set
-            {
-                if (value < 0)
-                    throw new CustomException("A quantidade não pode ser menor ou igual a 0");
-                quantity = value;
-            }
+            set => quantity =  ValidationHelper.SetValidation(value)
+                                               .LessThanZero()
+                                               .Assign();
         }
         public virtual Comic Comic { get; set; }
 
@@ -24,7 +22,7 @@ namespace ComicStore.Domain.POCO
 
             if (quantityDown <= 0)
             {
-                throw new CustomException("A quantidade deve ser maior do que 0");
+                throw new LessThanZeroException("A quantidade deve ser maior do que 0");
             }
 
 

@@ -1,10 +1,13 @@
-﻿using ComicStore.Shared.Class;
+﻿using ComicStore.Domain.Helpers;
+using ComicStore.Shared.Class;
 
 namespace ComicStore.Domain.POCO
 {
     public class OrderItem
     {
         private int quantity;
+        private decimal unitValue;
+        private decimal totalValue;
         public int OrderItemID { get; set; }
         public int ComicID { get; set; }
         public int OrderID { get; set; }
@@ -13,14 +16,35 @@ namespace ComicStore.Domain.POCO
             get => quantity;
 
             set
-            {
-                if (value <= 0)
-                    throw new CustomException("A quantidade não pode ser menor ou igual a 0");
-                quantity = value;
+            {                
+                quantity = ValidationHelper.SetValidation(value)
+                                               .LessThanZero()
+                                               .EqualsZero()
+                                               .Assign();
             }
         }
-        public float UnitValue { get; set; }
-        public float TotalValue { get; set; }
+
+        public decimal UnitValue
+        {
+            get { return unitValue; }
+            set { unitValue = ValidationHelper.SetValidation(value)
+                                               .LessThanZero()
+                                               .EqualsZero()
+                                               .Assign();
+            }
+        }
+
+        public decimal TotalValue
+        {
+            get { return totalValue; }
+            set
+            {
+                totalValue = ValidationHelper.SetValidation(value)
+                                             .LessThanZero()
+                                             .EqualsZero()
+                                             .Assign();
+            }
+        }
         public virtual Comic Comic { get; set; }
         public virtual Order Order { get; set; }
     }

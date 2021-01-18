@@ -1,12 +1,13 @@
-## Click Here to see in : [Portuguese](./README-pt.md)
+## Clique aqui para ver em : [Inglês](./README.md)
 
-## 📖 About the project
+## 📖 Sobre o projeto
 
-This application is comics web store. it's possible to create, edit, update and delete each book.
+Está aplicação trata-se de um e-commerce de quadrinhos, onde é possível realizar as operações básicas de um CRUD
+criar, editar, atualizar e deletar cada quadrinho.
 
-## 🤖 Technologies
+## 🤖 Tecnologias e Recursos
 
-Technologies, design, patterns and packages that I used to develop this application.
+tecnologias, padrões e pacotes que utilizei para está aplicação.
 
 - Front-end
 
@@ -45,7 +46,7 @@ Technologies, design, patterns and packages that I used to develop this applicat
     - [Microsoft.AspNetCore.Authentication.JwtBearer 3.1.10](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.JwtBearer/3.1.10?_src=template)
     - [Swashbuckle.AspNetCore 5.6.3](https://www.nuget.org/packages/Swashbuckle.AspNetCore/5.6.3?_src=template)
 
-  - Development Approach
+  - Abordagem de Desenvolvimento
     - DDD - Domain Drive Design
     - SOLID Principles
     - Application Layers:
@@ -54,7 +55,7 @@ Technologies, design, patterns and packages that I used to develop this applicat
       - 3 - Services
       - 4 - Infrastructure
       - 5 - Shared
-  - Patterns and Resources Applied
+  - Design Patterns Utilizados
     - Repository
     - Generic Repository
     - Generic Pagination
@@ -64,7 +65,7 @@ Technologies, design, patterns and packages that I used to develop this applicat
     - Command
     - Adapter
 
-## Folder Structure
+## Estrutura de Pastas
 
 - Front-end
 
@@ -121,7 +122,7 @@ Technologies, design, patterns and packages that I used to develop this applicat
   |-- app.component.ts
   |-- app.module.ts
 
-- Modules Diagram
+- Diagrama dos Módulos utilizados.
   ![modules-diagram](./front-end/.github/modules-diagram.png)
 
 - Back-end
@@ -165,14 +166,14 @@ Technologies, design, patterns and packages that I used to develop this applicat
       |-- 5 - Shared
           |-- [+] classes
 
-## ✨ Main Features
+## ✨ Features Principais
 
-- Toggle Theme Preference
-- JTW Bearer Authentication
-- Role-based Access Control
-- CRUD operations
-- Server Side Pagination
-- Generic Dropdown Component with server side search filter
-- Inventory Management
-- Swagger Specification
-- Custom Reactive Forms Validation Class
+- Alternância entre temas claro e escuro
+- Autenticação utilizando JTW Bearer
+- Controle de acesso com Roles
+- Operações básica de CRUD
+- Paginação server-side
+- Componente de Dropdown genérico com filtro de busca no servidor.
+- Controle de Estoque
+- Documentação com Swagger
+- Classe customizada para validação de Reactive Forms

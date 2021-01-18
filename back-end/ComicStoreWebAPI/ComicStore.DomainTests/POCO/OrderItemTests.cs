@@ -1,38 +1,16 @@
-﻿using ComicStore.Shared.Class;
+﻿using ComicStore.DomainTests.Patterns.Builder;
+using ComicStore.Shared.Class;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.IO;
 
 namespace ComicStore.Domain.POCO.Tests
 {
-    public class OrderItemBuilder :
-        TestBuilder<OrderItemBuilder, OrderItem>
-    {
-        public OrderItemBuilder WithQuantity(int quantity)
-        {
-            Subject.Quantity = quantity;
-            return this;
-        }
-
-        public OrderItemBuilder WithUnitValue(decimal value)
-        {
-            Subject.UnitValue = value;
-            return this;
-        }
-
-        public OrderItemBuilder WithTotalValue(decimal value)
-        {
-            Subject.TotalValue = value;
-            return this;
-        }
-    }
-
     [TestClass()]
     public class OrderItemTests
     {
         [TestMethod]
         [Description("Should be throw an LessThanZeroException")]
         [ExpectedException(typeof(LessThanZeroException))]
-        public void NegativeQuantityDown()
+        public void NegativeQuantityValue()
         {
             OrderItemBuilder.Create()
                             .WithQuantity(-1)

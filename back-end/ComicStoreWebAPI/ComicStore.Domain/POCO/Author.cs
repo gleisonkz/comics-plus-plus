@@ -6,6 +6,10 @@ namespace ComicStore.Domain.POCO
 {
     public class Author
     {
+        public Author()
+        {
+
+        }
         private DateTime birthDate;
         public int AuthorID { get; set; }
         public string Name { get; set; }
@@ -16,7 +20,7 @@ namespace ComicStore.Domain.POCO
             set
             {
                 if (value > DateTime.UtcNow)
-                    throw new CustomException("A data não pode ser maior que a data atual");
+                    throw new GreaterThanCurrentDateException();
 
                 birthDate = value;
             }

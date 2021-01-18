@@ -22,4 +22,9 @@ namespace ComicStore.Shared.Class
     {
         public EqualZeroException(string message = "Não é possível atribuir uma valor igual a 0") : base(message) { }
     }
+
+    public class GreaterThanCurrentDateException : CustomException
+    {
+        public GreaterThanCurrentDateException(string message = "A data não pode ser maior que a data atual") : base(message) { }
+    }
 }

@@ -28,6 +28,28 @@ namespace ComicStore.Domain.Helpers
             return this;
         }
 
+        public Validators<T> LessThan(dynamic valueToCompare, string errorMessage)
+        {
+            if (_valueToAssign < valueToCompare)
+                throw new CustomException(errorMessage);
+            return this;
+        }
+
+        public Validators<T> GreaterThan(dynamic valueToCompare, string errorMessage)
+        {
+            if (_valueToAssign < valueToCompare)
+                throw new CustomException(errorMessage);
+            return this;
+        }
+
+        public Validators<T> GreaterThanCurrentYear()
+        {
+            dynamic valueToCompare = DateTime.UtcNow.Year;
+            if (_valueToAssign > valueToCompare)
+                throw new GreaterThanCurrentDateException();
+            return this;
+        }
+
         public Validators<T> EqualsZero()
         {
             if (_valueToAssign == zeroValue)

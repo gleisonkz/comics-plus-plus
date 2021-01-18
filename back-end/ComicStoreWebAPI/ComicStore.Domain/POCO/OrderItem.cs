@@ -16,7 +16,7 @@ namespace ComicStore.Domain.POCO
             get => quantity;
 
             set
-            {                
+            {
                 quantity = ValidationHelper.SetValidation(value)
                                                .LessThanZero()
                                                .EqualsZero()
@@ -27,10 +27,12 @@ namespace ComicStore.Domain.POCO
         public decimal UnitValue
         {
             get { return unitValue; }
-            set { unitValue = ValidationHelper.SetValidation(value)
-                                               .LessThanZero()
-                                               .EqualsZero()
-                                               .Assign();
+            set
+            {
+                unitValue = ValidationHelper.SetValidation(value)
+                                             .LessThanZero()
+                                             .EqualsZero()
+                                             .Assign();
             }
         }
 

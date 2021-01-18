@@ -1,36 +1,9 @@
-﻿using ComicStore.Shared.Class;
+﻿using ComicStore.DomainTests.Patterns.Builder;
+using ComicStore.Shared.Class;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ComicStore.Domain.POCO.Tests
 {
-    public abstract class TestBuilder<TBuilder, TSubject>
-        where TBuilder : new()
-        where TSubject : new()
-    {
-        protected readonly TSubject Subject = new TSubject();
-        public static TBuilder Create()
-        {
-            return new TBuilder();
-        }
-
-        public TSubject Build()
-        {
-            return Subject;
-        }
-    }
-
-    public class ComicInventoryBuilder
-        : TestBuilder<ComicInventoryBuilder, ComicInventory>
-    {
-        public ComicInventoryBuilder WithQuantity(int quantity)
-        {
-            Subject.Quantity = quantity;
-            return this;
-        }
-    }
-
-
-
     [TestClass()]
     public class ComicInventoryTests
     {

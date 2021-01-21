@@ -2,11 +2,7 @@ interface Author extends AuthorResource {
   authorID: number;
 }
 
-interface AuthorListItem {
-  authorID: number;
-  name: string;
-  birthDate: Date;
-}
+type AuthorListItem = Omit<AuthorResource, 'nationality'>;
 
 interface AuthorResource {
   name: string;

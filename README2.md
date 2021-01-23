@@ -100,8 +100,6 @@ $ yarn start
 
 The following tools is used to build this project:
 
-<div align="center">
-
 |                            :globe_with_meridians: FrontEnd                             |                                                     :file_cabinet: BackEnd                                                     |
 | :------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------: |
 |                           [Angular 10](https://angular.io/)                            |                                 [.NET Core 3.1 Web API](https://dotnet.microsoft.com/download)                                 |
@@ -119,8 +117,6 @@ The following tools is used to build this project:
 |   [Ngx Mat Select Search 3.1.4](https://www.npmjs.com/package/ngx-mat-select-search)   |     [JwtBearer 3.1.10](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.JwtBearer/3.1.10?_src=template)      |
 | [Ngx Material File Input 2.1.1](https://www.npmjs.com/package/ngx-material-file-input) |           [Swashbuckle.AspNetCore 5.6.3](https://www.nuget.org/packages/Swashbuckle.AspNetCore/5.6.3?_src=template)            |
 |            [Cep Promise 4.0.3 ](https://www.npmjs.com/package/cep-promise)             |                                                                                                                                |
-
-</div>
 
 - Development Approach
   - DDD - Domain Drive Design
@@ -240,19 +236,16 @@ The following tools is used to build this project:
 
 ## :sparkles: **Features**
 
-<div align="center">
-
-- Toggle Theme Preference
-- JTW Bearer Authentication
-- Role-based Access Control
-- CRUD operations
-- Server Side Pagination
-- Generic Dropdown Component with server side search filter
-- Inventory Management
-- Swagger Specification
-- Custom Reactive Forms Validation Class
-
-</div>
+|                  Toggle Theme Preference                  |
+| :-------------------------------------------------------: |
+|                 JTW Bearer Authentication                 |
+|                 Role-based Access Control                 |
+|                      CRUD operations                      |
+|                  Server Side Pagination                   |
+| Generic Dropdown Component with server side search filter |
+|                   Inventory Management                    |
+|                   Swagger Specification                   |
+|          Custom Reactive Forms Validation Class           |
 
 ---
 

@@ -23,7 +23,7 @@
  <a href="#information_source-about">About</a> •
  <a href="#arrow_forward-run">Run</a> •
  <a href="#hammer_and_wrench-technologies">Technologies</a> •
- <a href="#✨">Features</a> •
+ <a href="#features">Features</a> •
  <a href="#boy-author">Author</a> •
  <a href="#balance_scale-license">License</a>
 </p>
@@ -192,12 +192,6 @@ The following tools is used to build this project:
           |-- [+] enums
           |-- shared.module.ts
 
-  |-- app-routing.module.ts
-  |-- app.component.html
-  |-- app.component.scss
-  |-- app.component.ts
-  |-- app.module.ts
-
 - Modules Diagram
   ![modules-diagram](./front-end/.github/modules-diagram.png)
 
@@ -244,7 +238,7 @@ The following tools is used to build this project:
 
 ---
 
-## ✨ **Features**
+## :features:✨ **Features**
 
 <div align="center">
 

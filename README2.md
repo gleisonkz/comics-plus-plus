@@ -12,7 +12,7 @@
 <p align="center"> 
   <img alt="Repository Size" src="https://img.shields.io/github/repo-size/gleisonkz/dev-readme?color=3498db&style=for-the-badge">
   <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/gleisonkz/dev-readme?color=3498db&style=for-the-badge">
-  <a href="https://github.com/rafaelfachinelli">
+  <a href="https://github.com/gleisonkz">
     <img alt="Developed by Gleison" src="https://img.shields.io/badge/Developer-Gleison-%3498db?color=3498db&style=for-the-badge">
   </a>
   <img alt="Project License" src="https://img.shields.io/github/license/gleisonkz/dev-readme?color=3498db&style=for-the-badge"/>
@@ -238,7 +238,7 @@ The following tools is used to build this project:
 
 ---
 
-## :✨: **Features**
+## ✨ **Features**
 
 <div align="center">
 

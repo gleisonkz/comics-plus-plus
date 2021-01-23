@@ -23,7 +23,7 @@
  <a href="#information_source-about">About</a> •
  <a href="#arrow_forward-run">Run</a> •
  <a href="#hammer_and_wrench-technologies">Technologies</a> •
- <a href="#✨-features">Features</a> •
+ <a href="#sparkles-features">Features</a> •
  <a href="#boy-author">Author</a> •
  <a href="#balance_scale-license">License</a>
 </p>
@@ -238,7 +238,7 @@ The following tools is used to build this project:
 
 ---
 
-## ✨ **Features**
+## :sparkles: **Features**
 
 <div align="center">
 

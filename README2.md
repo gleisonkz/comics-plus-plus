@@ -21,7 +21,6 @@
 <p align="center">
  <a href="#eye_speech_bubble-preview">Preview</a> •
  <a href="#information_source-about">About</a> •
- <a href="#memo-tasks">Tasks</a> •
  <a href="#arrow_forward-run">Run</a> •
  <a href="#hammer_and_wrench-technologies">Technologies</a> •
  <a href="#boy-author">Author</a> •
@@ -52,22 +51,6 @@
 ## :information_source: About
 
 Your description about this project.
-
----
-
-## :memo: **Tasks**
-
-<div align="center">
-<details>
-<summary>Click to View</summary>
-
-|       State        | Task                           |
-| :----------------: | :----------------------------- |
-| :heavy_check_mark: | Describe your task finished.   |
-|        :x:         | Describe your task unfinished. |
-
-</details>
-</div>
 
 ---
 
@@ -118,9 +101,10 @@ The following tools is used to build this project:
 
 <div align="center">
 
-| :globe_with_meridians: FrontEnd |     :file_cabinet: BackEnd     |
-| :-----------------------------: | :----------------------------: |
-| [Exemple](https://exemple.com)  | [Exemple](https://exemple.com) |
+|              :globe_with_meridians: FrontEnd              |                     :file_cabinet: BackEnd                     |
+| :-------------------------------------------------------: | :------------------------------------------------------------: |
+|            - [Angular 10](https://angular.io/)            | [.NET Core 3.1 Web API](https://dotnet.microsoft.com/download) |
+| - [Angular Material 10.2.7](https://material.angular.io/) |     [C#](https://docs.microsoft.com/en-us/dotnet/csharp/)      |
 
 </div>
 

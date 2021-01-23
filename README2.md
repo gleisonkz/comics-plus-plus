@@ -23,6 +23,7 @@
  <a href="#information_source-about">About</a> •
  <a href="#arrow_forward-run">Run</a> •
  <a href="#hammer_and_wrench-technologies">Technologies</a> •
+ <a href="#file_folder-folder-structure">Folder Structure</a> •
  <a href="#sparkles-features">Features</a> •
  <a href="#boy-author">Author</a> •
  <a href="#balance_scale-license">License</a>
@@ -51,7 +52,7 @@
 ---
 ## :information_source: About
 
-Your description about this project.
+This application is comics web store. it's possible to create, edit, update and delete each book.
 
 ---
 
@@ -98,7 +99,7 @@ $ yarn start
 
 ## :hammer_and_wrench: **Technologies**
 
-The following tools is used to build this project:
+Technologies, design, patterns and packages that I used to develop this application.
 
 |                            :globe_with_meridians: FrontEnd                             |                                                     :file_cabinet: BackEnd                                                     |
 | :------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------: |
@@ -137,56 +138,57 @@ The following tools is used to build this project:
   - Command
   - Adapter
 
-## Folder Structure
+## :file_folder: **Folder-Structure**
 
 - Front-end
+  | :-------------------------------------------------------: |
 
   |-- app
 
-      |-- 🎯 core
-          |-- [+] classes
-          |-- [+] components
-          |-- [+] enums
-          |-- [+] guards
-          |-- [+] interceptors
-          |-- [+] models
-          |-- [+] pages
-          |-- [+] services
-          |-- core.module.ts
+        |-- 🎯 core
+            |-- [+] classes
+            |-- [+] components
+            |-- [+] enums
+            |-- [+] guards
+            |-- [+] interceptors
+            |-- [+] models
+            |-- [+] pages
+            |-- [+] services
+            |-- core.module.ts
 
-      |-- 👨‍💼 admin (lazy 🦥)
-          |-- [+] classes
-          |-- [+] components
-          |-- [+] constants
-          |-- [+] models
-          |-- [+] services
-          |-- [+] pages
-          |-- admin-routing.module.ts
-          |-- admin.module.ts
+        |-- 👨‍💼 admin (lazy 🦥)
+            |-- [+] classes
+            |-- [+] components
+            |-- [+] constants
+            |-- [+] models
+            |-- [+] services
+            |-- [+] pages
+            |-- admin-routing.module.ts
+            |-- admin.module.ts
 
-      |-- 📦 order (lazy 🦥)
-          |-- [+] components
-          |-- [+] enums
-          |-- [+] guards
-          |-- [+] models
-          |-- [+] services
-          |-- [+] pages
-          |-- order-routing.module.ts
-          |-- order.module.ts
+        |-- 📦 order (lazy 🦥)
+            |-- [+] components
+            |-- [+] enums
+            |-- [+] guards
+            |-- [+] models
+            |-- [+] services
+            |-- [+] pages
+            |-- order-routing.module.ts
+            |-- order.module.ts
 
-      |-- 🔑 authentication (lazy 🦥)
-          |-- [+] interceptors
-          |-- [+] models
-          |-- [+] pages
-          |-- authentication-routing.module.ts
-          |-- authentication.module.ts
+        |-- 🔑 authentication (lazy 🦥)
+            |-- [+] interceptors
+            |-- [+] models
+            |-- [+] pages
+            |-- authentication-routing.module.ts
+            |-- authentication.module.ts
 
-      |-- 🤝 shared
-          |-- [+] animations
-          |-- [+] classes
-          |-- [+] components
-          |-- [+] enums
-          |-- shared.module.ts
+        |-- 🤝 shared
+            |-- [+] animations
+            |-- [+] classes
+            |-- [+] components
+            |-- [+] enums
+            |-- shared.module.ts
 
 - Modules Diagram
   ![modules-diagram](./front-end/.github/modules-diagram.png)

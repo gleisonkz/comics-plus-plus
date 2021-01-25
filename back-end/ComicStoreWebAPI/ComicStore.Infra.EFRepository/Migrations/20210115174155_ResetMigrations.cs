@@ -288,43 +288,7 @@ namespace ComicStore.Infra.EFRepository.Migrations
                     { 5, 5 }
                 });
 
-            var imagesInfo = new List<string>
-            {
-                @"Resources\hulk.jpg",
-                @"Resources\amazing-spider-man.jpg",
-                @"Resources\the-invencible-iron-man.jpg",
-                @"Resources\super-girl.jpg",
-                @"Resources\green-lantern.jpg",
-                @"Resources\venom.jpg",
-                @"Resources\captain-america.jpg",
-                @"Resources\thor.jpg",
-                @"Resources\black-panther.jpg",
-                @"Resources\ms-marvel.jpg",
-            };
-
-            var comicImages = imagesInfo.Select((path, index) =>
-                new
-                {
-                    ComicID =index + 1,
-                    Base64= File.ReadAllBytes(path),
-                    Extension= path.Split('.').Last(),
-                    Name = path.Split('.').First().Split('\\').Last()
-                }).ToList();
-
-            comicImages.ForEach(image =>
-            {
-                migrationBuilder.InsertData(
-                    table: "ComicImage",
-                    columns: new[] { "ComicID", "Base64", "Extension", "Name" },
-                    values: new object[,] { 
-                        { 
-                            image.ComicID,
-                            image.Base64, 
-                            image.Extension,
-                            image.Name 
-                        }   
-                    });
-            });
+           
 
             migrationBuilder.InsertData(
                 table: "ComicInventory",
@@ -342,6 +306,7 @@ namespace ComicStore.Infra.EFRepository.Migrations
                     { 8, 3 },
                     { 7, 1 }
                 });
+          
 
             migrationBuilder.CreateIndex(
                 name: "IX_ComicAuthor_ComicID",

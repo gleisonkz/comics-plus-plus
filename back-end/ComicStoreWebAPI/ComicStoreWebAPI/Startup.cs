@@ -17,6 +17,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -26,7 +28,7 @@ namespace ComicStoreWebAPI
     {
         public Startup(IConfiguration configuration)
         {
-            this.configuration = configuration;
+            this.configuration = configuration;            
         }
 
         public IConfiguration configuration { get; }

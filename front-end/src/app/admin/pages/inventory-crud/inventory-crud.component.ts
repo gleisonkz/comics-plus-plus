@@ -16,6 +16,7 @@ import { fadeInOut } from '@shared/animations/fade-in-out';
 import { listStagger } from '@shared/animations/list-stagger';
 import { finalize } from 'rxjs/operators';
 import { BaseCrudComponent } from '../base-crud/base-crud.component';
+import { Pagination } from './../../models/pagination.model';
 
 @Component({
   templateUrl: './inventory-crud.component.html',
@@ -69,7 +70,7 @@ export class InventoryCrudComponent implements OnInit {
     this.comicInventoryFilter.pageSize = this.paginator.pageSize;
     this.dataSource
       .loadData(this.comicInventoryFilter)
-      .subscribe((pagination: any) => {
+      .subscribe((pagination: Pagination) => {
         this.paginator.length = pagination.totalCount;
       });
   }
@@ -109,7 +110,7 @@ export class InventoryCrudComponent implements OnInit {
 
     this.dataSource
       .loadData(this.comicInventoryFilter)
-      .subscribe((pagination: any) => {
+      .subscribe((pagination: Pagination) => {
         this.paginator.length = pagination.totalCount;
         this.paginator.firstPage();
       });

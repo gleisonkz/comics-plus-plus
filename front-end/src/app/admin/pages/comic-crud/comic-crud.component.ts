@@ -13,6 +13,7 @@ import { ComicService, NotificationService } from '@core/services';
 import { listStagger } from '@shared/animations/list-stagger';
 import { finalize } from 'rxjs/operators';
 import { fadeInOut } from '../../../shared/animations/fade-in-out';
+import { Pagination } from './../../models/pagination.model';
 
 @Component({
   selector: 'cms-comic-crud',
@@ -85,7 +86,7 @@ export class ComicCrudComponent implements OnInit {
         (this.comicFilter.pageSize = this.paginator.pageSize),
         this.dataSource
           .loadData(this.comicFilter)
-          .subscribe((pagination: any) => {
+          .subscribe((pagination: Pagination) => {
             this.paginator.length = pagination.totalCount;
           });
     });
@@ -129,10 +130,12 @@ export class ComicCrudComponent implements OnInit {
       comic
     );
 
-    this.dataSource.loadData(this.comicFilter).subscribe((pagination: any) => {
-      this.paginator.length = pagination.totalCount;
-      this.paginator.firstPage();
-    });
+    this.dataSource
+      .loadData(this.comicFilter)
+      .subscribe((pagination: Pagination) => {
+        this.paginator.length = pagination.totalCount;
+        this.paginator.firstPage();
+      });
   }
 
   deleteItem(item: Comic) {

@@ -16,6 +16,7 @@ import { fadeInOut } from '@shared/animations/fade-in-out';
 import { listStagger } from '@shared/animations/list-stagger';
 import { finalize } from 'rxjs/operators';
 import { BaseCrudComponent } from '../base-crud/base-crud.component';
+import { Pagination } from './../../models/pagination.model';
 
 @Component({
   templateUrl: './genre-crud.component.html',
@@ -61,9 +62,11 @@ export class GenreCrudComponent implements OnInit {
   refreshPaginator() {
     this.genreFilter.pageNumber = this.paginator.pageIndex + 1;
     this.genreFilter.pageSize = this.paginator.pageSize;
-    this.dataSource.loadData(this.genreFilter).subscribe((pagination: any) => {
-      this.paginator.length = pagination.totalCount;
-    });
+    this.dataSource
+      .loadData(this.genreFilter)
+      .subscribe((pagination: Pagination) => {
+        this.paginator.length = pagination.totalCount;
+      });
   }
 
   openDialog(genre?: Genre) {
@@ -98,10 +101,12 @@ export class GenreCrudComponent implements OnInit {
       this.form.value
     );
 
-    this.dataSource.loadData(this.genreFilter).subscribe((pagination: any) => {
-      this.paginator.length = pagination.totalCount;
-      this.paginator.firstPage();
-    });
+    this.dataSource
+      .loadData(this.genreFilter)
+      .subscribe((pagination: Pagination) => {
+        this.paginator.length = pagination.totalCount;
+        this.paginator.firstPage();
+      });
   }
 
   deleteItem(item: Genre) {

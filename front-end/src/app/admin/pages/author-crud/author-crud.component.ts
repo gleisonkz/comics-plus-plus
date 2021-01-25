@@ -75,9 +75,11 @@ export class AuthorCrudComponent implements OnInit {
   refreshPaginator() {
     this.authorFilter.pageNumber = this.paginator.pageIndex + 1;
     this.authorFilter.pageSize = this.paginator.pageSize;
-    this.dataSource.loadData(this.authorFilter).subscribe((pagination: any) => {
-      this.paginator.length = pagination.totalCount;
-    });
+    this.dataSource
+      .loadData(this.authorFilter)
+      .subscribe((pagination: Pagination) => {
+        this.paginator.length = pagination.totalCount;
+      });
   }
 
   openDialog(obj?: { authorID: number }) {

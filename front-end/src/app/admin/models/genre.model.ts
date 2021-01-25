@@ -11,4 +11,6 @@ interface GenreListItem {
   description: string;
 }
 
-export { Genre, GenreResource, GenreListItem };
+interface GenreFilterProps extends GenreListItem {}
+
+export { Genre, GenreResource, GenreListItem, GenreFilterProps };

@@ -2,7 +2,7 @@ import { CustomDataSource } from '@admin/classes/custom-data-source';
 import { ComicDialogComponent } from '@admin/components';
 import { pageSizeOptions } from '@admin/constants/paginator-options';
 import { createMatDialogConfig } from '@admin/functions/create-mat-dialog-config';
-import { Comic, ComicListItem, Filter } from '@admin/models';
+import { Comic, ComicFilterProps, ComicListItem, Filter } from '@admin/models';
 import { AuthorService, GenreService } from '@admin/services';
 import { MatPaginatorService } from '@admin/services/mat-paginator.service';
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
@@ -25,10 +25,10 @@ export class ComicCrudComponent implements OnInit {
   loadingComplete: boolean = false;
   form: FormGroup;
 
-  dataSource: CustomDataSource<ComicListItem>;
+  dataSource: CustomDataSource<ComicListItem, ComicFilterProps>;
   @ViewChild(MatPaginator)
   paginator: MatPaginator;
-  comicFilter: Filter;
+  comicFilter: Filter<ComicFilterProps>;
   displayedColumns: string[] = [
     'ComicID',
     'Titulo',
@@ -60,8 +60,9 @@ export class ComicCrudComponent implements OnInit {
       genres: new FormControl([])
     });
 
-    this.dataSource = new CustomDataSource<ComicListItem>((filter: Filter) =>
-      this.comicService.getPaginatedComics(filter)
+    this.dataSource = new CustomDataSource<ComicListItem, ComicFilterProps>(
+      (filter: Filter<ComicFilterProps>) =>
+        this.comicService.getPaginatedComics(filter)
     );
   }
 

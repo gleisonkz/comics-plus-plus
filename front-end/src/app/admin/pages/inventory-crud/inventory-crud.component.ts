@@ -2,7 +2,11 @@ import { CustomDataSource } from '@admin/classes/custom-data-source';
 import { ComicInventoryDialogComponent } from '@admin/components';
 import { pageSizeOptions } from '@admin/constants/paginator-options';
 import { createMatDialogConfig } from '@admin/functions/create-mat-dialog-config';
-import { ComicInventory, Filter } from '@admin/models';
+import {
+  ComicInventory,
+  ComicInventoryFilterProps,
+  Filter
+} from '@admin/models';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
@@ -28,8 +32,8 @@ export class InventoryCrudComponent implements OnInit {
     return this.baseCrud.paginator;
   }
 
-  dataSource: CustomDataSource<ComicInventory>;
-  comicInventoryFilter: Filter;
+  dataSource: CustomDataSource<ComicInventory, ComicInventoryFilterProps>;
+  comicInventoryFilter: Filter<ComicInventoryFilterProps>;
   displayedColumns: string[] = [
     'ComicInventoryID',
     'Name',
@@ -47,7 +51,10 @@ export class InventoryCrudComponent implements OnInit {
       title: new FormControl('')
     });
 
-    this.dataSource = new CustomDataSource<ComicInventory>((filter: Filter) =>
+    this.dataSource = new CustomDataSource<
+      ComicInventory,
+      ComicInventoryFilterProps
+    >((filter: Filter<ComicInventoryFilterProps>) =>
       this.comicInventoryService.getPaginatedComicsInventory(filter)
     );
   }

@@ -13,4 +13,11 @@ interface ComicInventoryListItem {
   quantity: number;
 }
 
-export { ComicInventory, ComicInventoryListItem, ComicInventoryResource };
+interface ComicInventoryFilterProps extends ComicInventoryListItem {}
+
+export {
+  ComicInventory,
+  ComicInventoryListItem,
+  ComicInventoryResource,
+  ComicInventoryFilterProps
+};

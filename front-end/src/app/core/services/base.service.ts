@@ -1,5 +1,5 @@
 import { Filter } from '@admin/models';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'environments/environment';
 import { Observable } from 'rxjs';
@@ -20,19 +20,19 @@ export abstract class BaseService {
     return this._endpoint;
   }
 
-  protected getPaginatedData<T>(
+  protected getPaginatedData<TListData, TFilterProps>(
     http: HttpClient,
-    filter?: Filter,
+    filter?: TFilterProps,
     segment?: string
-  ): Observable<HttpResponse<T[]>> {
+  ): Observable<HttpResponse<TListData[]>> {
     const endpoints = [this.endpoint, segment, 'paginator']
       .filter((endpoint) => !!endpoint)
       .join('/');
 
-    return http.get<T[]>(endpoints, {
+    return http.get<TListData[]>(endpoints, {
       observe: 'response',
       responseType: 'json',
-      params: filter
+      params: filter as TFilterProps & HttpParams
     });
   }
 }
@@ -46,7 +46,9 @@ export abstract class GenericBaseService<
     super();
   }
 
-  getPaginatedEntities(filter: Filter): Observable<HttpResponse<TListItem[]>> {
+  getPaginatedEntities(
+    filter: Filter<TListItem>
+  ): Observable<HttpResponse<TListItem[]>> {
     return this.getPaginatedData(this.http, filter);
   }
 

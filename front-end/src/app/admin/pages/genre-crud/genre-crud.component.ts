@@ -5,7 +5,7 @@ import {
 } from '@admin/components';
 import { pageSizeOptions } from '@admin/constants/paginator-options';
 import { createMatDialogConfig } from '@admin/functions/create-mat-dialog-config';
-import { Filter, Genre, GenreListItem } from '@admin/models';
+import { Filter, Genre, GenreFilterProps, GenreListItem } from '@admin/models';
 import { GenreService } from '@admin/services';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
@@ -32,8 +32,8 @@ export class GenreCrudComponent implements OnInit {
     return this.baseCrud.paginator;
   }
 
-  dataSource: CustomDataSource<GenreListItem>;
-  genreFilter: Filter;
+  dataSource: CustomDataSource<GenreListItem, GenreFilterProps>;
+  genreFilter: Filter<GenreFilterProps>;
   displayedColumns: string[] = ['GenreID', 'Nome', 'Ações'];
   constructor(
     private dialogService: MatDialog,
@@ -47,8 +47,9 @@ export class GenreCrudComponent implements OnInit {
       description: new FormControl('')
     });
 
-    this.dataSource = new CustomDataSource<Genre>((filter: Filter) =>
-      this.genreService.getPaginatedGenres(filter)
+    this.dataSource = new CustomDataSource<Genre, GenreFilterProps>(
+      (filter: Filter<GenreFilterProps>) =>
+        this.genreService.getPaginatedGenres(filter)
     );
   }
 

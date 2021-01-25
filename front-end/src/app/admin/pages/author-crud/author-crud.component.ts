@@ -5,7 +5,12 @@ import {
 } from '@admin/components';
 import { pageSizeOptions } from '@admin/constants/paginator-options';
 import { createMatDialogConfig } from '@admin/functions/create-mat-dialog-config';
-import { Author, AuthorListItem, Filter } from '@admin/models';
+import {
+  Author,
+  AuthorFilterProps,
+  AuthorListItem,
+  Filter
+} from '@admin/models';
 import { AuthorService } from '@admin/services';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -16,6 +21,7 @@ import { fadeInOut } from '@shared/animations/fade-in-out';
 import { finalize } from 'rxjs/operators';
 import { listStagger } from '../../../shared/animations/list-stagger';
 import { BaseCrudComponent } from '../base-crud/base-crud.component';
+import { Pagination } from './../../models/pagination.model';
 
 @Component({
   templateUrl: './author-crud.component.html',
@@ -26,7 +32,7 @@ export class AuthorCrudComponent implements OnInit {
   loadingComplete: boolean = false;
   pageSizeOption: number[] = pageSizeOptions;
   form: FormGroup;
-  dataSource: CustomDataSource<AuthorListItem>;
+  dataSource: CustomDataSource<AuthorListItem, AuthorFilterProps>;
 
   public get paginator(): MatPaginator {
     return this.baseCrud.paginator;
@@ -34,7 +40,7 @@ export class AuthorCrudComponent implements OnInit {
 
   @ViewChild(BaseCrudComponent, { static: true }) baseCrud: BaseCrudComponent;
 
-  authorFilter: Filter;
+  authorFilter: Filter<AuthorFilterProps>;
   displayedColumns: string[] = [
     'AuthorID',
     'Name',
@@ -55,8 +61,9 @@ export class AuthorCrudComponent implements OnInit {
       age: new FormControl('')
     });
 
-    this.dataSource = new CustomDataSource<AuthorListItem>((filter: Filter) =>
-      this.authorService.getPaginatedAuthors(filter)
+    this.dataSource = new CustomDataSource<AuthorListItem, AuthorFilterProps>(
+      (filter: Filter<AuthorFilterProps>) =>
+        this.authorService.getPaginatedAuthors(filter)
     );
   }
 
@@ -105,10 +112,13 @@ export class AuthorCrudComponent implements OnInit {
       },
       this.form.value
     );
-    this.dataSource.loadData(this.authorFilter).subscribe((pagination: any) => {
-      this.paginator.length = pagination.totalCount;
-      this.paginator.firstPage();
-    });
+
+    this.dataSource
+      .loadData(this.authorFilter)
+      .subscribe((pagination: Pagination) => {
+        this.paginator.length = pagination.totalCount;
+        this.paginator.firstPage();
+      });
   }
 
   deleteItem(item: Author) {

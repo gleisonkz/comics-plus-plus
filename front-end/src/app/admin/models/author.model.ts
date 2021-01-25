@@ -10,4 +10,10 @@ interface AuthorResource {
   nationality: string;
 }
 
-export { Author, AuthorListItem, AuthorResource };
+interface AuthorFilterProps {
+  authorID: number;
+  name: string;
+  birthDate: Date;
+}
+
+export { Author, AuthorListItem, AuthorResource, AuthorFilterProps };

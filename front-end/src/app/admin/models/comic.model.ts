@@ -26,4 +26,6 @@ interface ComicListItem {
   pages: number;
 }
 
-export { Comic, ComicResource, ComicListItem };
+interface ComicFilterProps extends ComicListItem {}
+
+export { Comic, ComicResource, ComicListItem, ComicFilterProps };

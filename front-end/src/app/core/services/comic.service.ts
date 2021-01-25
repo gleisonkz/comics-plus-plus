@@ -1,6 +1,7 @@
 import {
   Author,
   Comic,
+  ComicFilterProps,
   ComicListItem,
   ComicResource,
   Filter,
@@ -50,7 +51,7 @@ export class ComicService extends GenericBaseService<
   }
 
   getPaginatedComics(
-    comicFilter: Filter
+    comicFilter: Filter<ComicFilterProps>
   ): Observable<HttpResponse<ComicListItem[]>> {
     return this.getPaginatedData(this.http, comicFilter);
   }

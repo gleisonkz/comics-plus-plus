@@ -1,4 +1,4 @@
-import { Filter, Genre } from '@admin/models';
+import { Filter, Genre, GenreFilterProps } from '@admin/models';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BaseService } from '@core/services';
@@ -11,7 +11,9 @@ export class GenreService extends BaseService {
     this.endpoint = '/genre';
   }
 
-  getPaginatedGenres(comicFilter: Filter): Observable<HttpResponse<Genre[]>> {
+  getPaginatedGenres(
+    comicFilter: Filter<GenreFilterProps>
+  ): Observable<HttpResponse<Genre[]>> {
     return this.getPaginatedData(this.http, comicFilter);
   }
 

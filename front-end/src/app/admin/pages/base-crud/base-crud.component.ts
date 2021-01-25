@@ -1,7 +1,9 @@
+import { ICustomDataSource } from '@admin/classes/custom-data-source';
 import {
   ChangeDetectorRef,
   Component,
   EventEmitter,
+  Inject,
   Input,
   OnInit,
   Output,
@@ -9,6 +11,7 @@ import {
 } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatPaginatorService } from '../../services/mat-paginator.service';
+import { CUSTOM_DATA_SOURCE } from './../comic-crud/toke';
 
 @Component({
   selector: 'cms-base-crud',
@@ -17,25 +20,22 @@ import { MatPaginatorService } from '../../services/mat-paginator.service';
 })
 export class BaseCrudComponent implements OnInit {
   @Input() titleName: string;
-  @Input() loadingComplete = false;
   @Input() addButtonText: string;
-  @Output() add = new EventEmitter();
-  @Output() load = new EventEmitter();
-  @Output() paginatorEvent = new EventEmitter();
+  @Output() add = new EventEmitter<void>();
+  @Output() load = new EventEmitter<void>();
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  readonly pageSizeOption = [5, 10, 20];
 
   constructor(
     private matPaginatorService: MatPaginatorService,
-    private changeDetector: ChangeDetectorRef
+    private changeDetector: ChangeDetectorRef,
+    @Inject(CUSTOM_DATA_SOURCE)
+    public dataSource: ICustomDataSource
   ) {}
 
   ngOnInit(): void {}
 
   ngAfterViewInit(): void {
-    this.paginator.page.subscribe(() => {
-      this.paginatorEvent.emit();
-    });
-
     this.matPaginatorService.applyGlobalization(this.paginator);
     this.changeDetector.detectChanges();
   }

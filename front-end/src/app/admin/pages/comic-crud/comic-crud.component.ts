@@ -1,34 +1,57 @@
 import { CustomDataSource } from '@admin/classes/custom-data-source';
 import { ComicDialogComponent } from '@admin/components';
-import { pageSizeOptions } from '@admin/constants/paginator-options';
 import { createMatDialogConfig } from '@admin/functions/create-mat-dialog-config';
 import { Comic, ComicFilterProps, ComicListItem, Filter } from '@admin/models';
 import { AuthorService, GenreService } from '@admin/services';
-import { MatPaginatorService } from '@admin/services/mat-paginator.service';
-import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { ComicService, NotificationService } from '@core/services';
 import { listStagger } from '@shared/animations/list-stagger';
-import { finalize } from 'rxjs/operators';
+import { delay } from 'rxjs/operators';
 import { fadeInOut } from '../../../shared/animations/fade-in-out';
+import { BaseCrudComponent } from '../base-crud/base-crud.component';
 import { Pagination } from './../../models/pagination.model';
+import { CUSTOM_DATA_SOURCE } from './toke';
+
+export interface PaginatedService<TFilterProps> {
+  getPaginatedComics(filter: Filter<TFilterProps>): any;
+}
+
+export const comicFactory = <
+  TListItem,
+  TFilterProps,
+  TService extends PaginatedService<TFilterProps>
+>(
+  service: TService
+) => {
+  return new CustomDataSource<TListItem, TFilterProps>(
+    (filter: Filter<TFilterProps>) =>
+      service.getPaginatedComics(filter).pipe(delay(200))
+  );
+};
+
+export const func = (service: ComicService) =>
+  comicFactory<ComicListItem, ComicFilterProps, ComicService>(service);
 
 @Component({
   selector: 'cms-comic-crud',
   templateUrl: './comic-crud.component.html',
   styleUrls: ['./comic-crud.component.scss'],
-  animations: [fadeInOut, listStagger]
+  animations: [fadeInOut, listStagger],
+  providers: [
+    {
+      provide: CUSTOM_DATA_SOURCE,
+      useFactory: func,
+      deps: [ComicService]
+    }
+  ]
 })
 export class ComicCrudComponent implements OnInit {
-  pageSizeOption: number[] = pageSizeOptions;
   loadingComplete: boolean = false;
   form: FormGroup;
 
-  dataSource: CustomDataSource<ComicListItem, ComicFilterProps>;
-  @ViewChild(MatPaginator)
-  paginator: MatPaginator;
   comicFilter: Filter<ComicFilterProps>;
   displayedColumns: string[] = [
     'ComicID',
@@ -39,14 +62,21 @@ export class ComicCrudComponent implements OnInit {
     'Páginas',
     'Ações'
   ];
+
+  @ViewChild(BaseCrudComponent, { static: true }) baseCrud: BaseCrudComponent;
+
+  public get paginator(): MatPaginator {
+    return this.baseCrud.paginator;
+  }
+
   constructor(
     private dialogService: MatDialog,
     private comicService: ComicService,
-    private changeDetector: ChangeDetectorRef,
     private notificationService: NotificationService,
-    private matPaginatorService: MatPaginatorService,
     private authorService: AuthorService,
-    private genreService: GenreService
+    private genreService: GenreService,
+    @Inject(CUSTOM_DATA_SOURCE)
+    public dataSource: CustomDataSource<ComicListItem, ComicFilterProps>
   ) {}
 
   ngOnInit(): void {
@@ -61,10 +91,22 @@ export class ComicCrudComponent implements OnInit {
       genres: new FormControl([])
     });
 
-    this.dataSource = new CustomDataSource<ComicListItem, ComicFilterProps>(
-      (filter: Filter<ComicFilterProps>) =>
-        this.comicService.getPaginatedComics(filter)
-    );
+    // this.dataSource = new CustomDataSource<ComicListItem, ComicFilterProps>(
+    //   (filter: Filter<ComicFilterProps>) =>
+    //     this.comicService.getPaginatedComics(filter)
+    // );
+  }
+
+  ngAfterViewInit(): void {
+    this.paginator.page.subscribe(() => {
+      this.comicFilter.pageNumber = this.paginator.pageIndex + 1;
+      this.comicFilter.pageSize = this.paginator.pageSize;
+      this.dataSource
+        .loadData(this.comicFilter)
+        .subscribe((pagination: Pagination) => {
+          this.paginator.length = pagination.totalCount;
+        });
+    });
   }
 
   getAuthorByNameCallback(searchTerm: string) {
@@ -73,26 +115,6 @@ export class ComicCrudComponent implements OnInit {
 
   getGenresByNameCallback(searchTerm: string) {
     return this.genreService.getGenresByName(searchTerm);
-  }
-
-  defaultPaginateValues() {
-    this.comicFilter.pageNumber = this.paginator.pageIndex + 1;
-    this.comicFilter.pageSize = this.paginator.pageSize;
-  }
-
-  ngAfterViewInit(): void {
-    this.paginator.page.subscribe(() => {
-      (this.comicFilter.pageNumber = this.paginator.pageIndex + 1),
-        (this.comicFilter.pageSize = this.paginator.pageSize),
-        this.dataSource
-          .loadData(this.comicFilter)
-          .subscribe((pagination: Pagination) => {
-            this.paginator.length = pagination.totalCount;
-          });
-    });
-
-    this.matPaginatorService.applyGlobalization(this.paginator);
-    this.changeDetector.detectChanges();
   }
 
   openDialog(comic?: Comic) {
@@ -110,24 +132,14 @@ export class ComicCrudComponent implements OnInit {
     });
   }
 
-  loadData(comic?: Comic): void {
-    this.dataSource.loading$
-      .pipe(
-        finalize(() => {
-          this.loadingComplete = true;
-        })
-      )
-      .subscribe((c) => {
-        this.loadingComplete = !c;
-      });
-
+  loadData(): void {
     this.comicFilter = Object.assign(
       {
         pageNumber: 1,
         pageSize: this.paginator.pageSize,
         sortOrder: 'asc'
       },
-      comic
+      this.form.value
     );
 
     this.dataSource

@@ -1,6 +1,5 @@
 import { CustomDataSource } from '@admin/classes/custom-data-source';
 import { ComicInventoryDialogComponent } from '@admin/components';
-import { pageSizeOptions } from '@admin/constants/paginator-options';
 import { createMatDialogConfig } from '@admin/functions/create-mat-dialog-config';
 import {
   ComicInventory,
@@ -25,14 +24,7 @@ import { Pagination } from './../../models/pagination.model';
 })
 export class InventoryCrudComponent implements OnInit {
   loadingComplete: boolean = false;
-  readonly pageSizeOption: number[] = pageSizeOptions;
   form: FormGroup;
-
-  @ViewChild(BaseCrudComponent, { static: true }) baseCrud: BaseCrudComponent;
-  public get paginator(): MatPaginator {
-    return this.baseCrud.paginator;
-  }
-
   dataSource: CustomDataSource<ComicInventory, ComicInventoryFilterProps>;
   comicInventoryFilter: Filter<ComicInventoryFilterProps>;
   displayedColumns: string[] = [
@@ -41,6 +33,13 @@ export class InventoryCrudComponent implements OnInit {
     'Quantity',
     'Actions'
   ];
+
+  @ViewChild(BaseCrudComponent, { static: true }) baseCrud: BaseCrudComponent;
+
+  public get paginator(): MatPaginator {
+    return this.baseCrud.paginator;
+  }
+
   constructor(
     private dialogService: MatDialog,
     private comicInventoryService: ComicInventoryService
@@ -60,19 +59,16 @@ export class InventoryCrudComponent implements OnInit {
     );
   }
 
-  defaultPaginateValues() {
-    this.comicInventoryFilter.pageNumber = this.paginator.pageIndex + 1;
-    this.comicInventoryFilter.pageSize = this.paginator.pageSize;
-  }
-
-  refreshPaginator() {
-    this.comicInventoryFilter.pageNumber = this.paginator.pageIndex + 1;
-    this.comicInventoryFilter.pageSize = this.paginator.pageSize;
-    this.dataSource
-      .loadData(this.comicInventoryFilter)
-      .subscribe((pagination: Pagination) => {
-        this.paginator.length = pagination.totalCount;
-      });
+  ngAfterViewInit(): void {
+    this.paginator.page.subscribe(() => {
+      this.comicInventoryFilter.pageNumber = this.paginator.pageIndex + 1;
+      this.comicInventoryFilter.pageSize = this.paginator.pageSize;
+      this.dataSource
+        .loadData(this.comicInventoryFilter)
+        .subscribe((pagination: Pagination) => {
+          this.paginator.length = pagination.totalCount;
+        });
+    });
   }
 
   openDialog(comicInventory?: ComicInventory) {
@@ -88,7 +84,7 @@ export class InventoryCrudComponent implements OnInit {
     });
   }
 
-  loadData(comicInventory?: ComicInventory): void {
+  loadData(): void {
     this.dataSource.loading$
       .pipe(
         finalize(() => {

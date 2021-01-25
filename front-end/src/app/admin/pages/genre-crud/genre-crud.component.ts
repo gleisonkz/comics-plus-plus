@@ -3,7 +3,6 @@ import {
   ConfirmationDialogComponent,
   GenreDialogComponent
 } from '@admin/components';
-import { pageSizeOptions } from '@admin/constants/paginator-options';
 import { createMatDialogConfig } from '@admin/functions/create-mat-dialog-config';
 import { Filter, Genre, GenreFilterProps, GenreListItem } from '@admin/models';
 import { GenreService } from '@admin/services';
@@ -25,17 +24,17 @@ import { Pagination } from './../../models/pagination.model';
 })
 export class GenreCrudComponent implements OnInit {
   loadingComplete: boolean = false;
-  readonly pageSizeOption: number[] = pageSizeOptions;
   form: FormGroup;
+  dataSource: CustomDataSource<GenreListItem, GenreFilterProps>;
+  genreFilter: Filter<GenreFilterProps>;
+  displayedColumns: string[] = ['GenreID', 'Nome', 'Ações'];
 
   @ViewChild(BaseCrudComponent, { static: true }) baseCrud: BaseCrudComponent;
+
   public get paginator(): MatPaginator {
     return this.baseCrud.paginator;
   }
 
-  dataSource: CustomDataSource<GenreListItem, GenreFilterProps>;
-  genreFilter: Filter<GenreFilterProps>;
-  displayedColumns: string[] = ['GenreID', 'Nome', 'Ações'];
   constructor(
     private dialogService: MatDialog,
     private genreService: GenreService,
@@ -54,19 +53,16 @@ export class GenreCrudComponent implements OnInit {
     );
   }
 
-  defaultPaginateValues() {
-    this.genreFilter.pageNumber = this.paginator.pageIndex + 1;
-    this.genreFilter.pageSize = this.paginator.pageSize;
-  }
-
-  refreshPaginator() {
-    this.genreFilter.pageNumber = this.paginator.pageIndex + 1;
-    this.genreFilter.pageSize = this.paginator.pageSize;
-    this.dataSource
-      .loadData(this.genreFilter)
-      .subscribe((pagination: Pagination) => {
-        this.paginator.length = pagination.totalCount;
-      });
+  ngAfterViewInit(): void {
+    this.paginator.page.subscribe(() => {
+      this.genreFilter.pageNumber = this.paginator.pageIndex + 1;
+      this.genreFilter.pageSize = this.paginator.pageSize;
+      this.dataSource
+        .loadData(this.genreFilter)
+        .subscribe((pagination: Pagination) => {
+          this.paginator.length = pagination.totalCount;
+        });
+    });
   }
 
   openDialog(genre?: Genre) {
@@ -81,7 +77,7 @@ export class GenreCrudComponent implements OnInit {
     });
   }
 
-  loadData(genre?: Genre): void {
+  loadData(): void {
     this.dataSource.loading$
       .pipe(
         finalize(() => {

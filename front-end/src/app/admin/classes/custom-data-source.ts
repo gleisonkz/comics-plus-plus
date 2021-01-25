@@ -2,14 +2,18 @@ import { Filter } from '@admin/models';
 import { CollectionViewer, DataSource } from '@angular/cdk/collections';
 import { HttpResponse } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { debounceTime, finalize } from 'rxjs/operators';
+import { finalize } from 'rxjs/operators';
 import { Pagination } from '../models/pagination.model';
 
+export interface ICustomDataSource {
+  loading$: Observable<boolean>;
+}
+
 export class CustomDataSource<TListModel, TFilterProps>
-  implements DataSource<TListModel> {
+  implements DataSource<TListModel>, ICustomDataSource {
   private sourceSubject = new BehaviorSubject<TListModel[]>([]);
   private loadingData = new BehaviorSubject<boolean>(false);
-  public loading$ = this.loadingData.asObservable().pipe(debounceTime(200));
+  public loading$ = this.loadingData.asObservable();
 
   constructor(
     private callbackService: (

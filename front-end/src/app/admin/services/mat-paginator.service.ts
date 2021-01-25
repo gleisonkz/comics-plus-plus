@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class MatPaginatorService {
   constructor() {}

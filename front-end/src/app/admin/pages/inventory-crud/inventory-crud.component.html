@@ -1,10 +1,4 @@
-<cms-base-crud
-  titleName="Estoque"
-  [loadingComplete]="loadingComplete"
-  (paginatorEvent)="refreshPaginator()"
-  (load)="loadData()"
-  (add)="openDialog()"
->
+<cms-base-crud titleName="Estoque" (load)="loadData()" (add)="openDialog()">
   <div slot="filter" class="inner-wrapper">
     <form class="genre-form" [formGroup]="form">
       <div class="controlers-wrapper">

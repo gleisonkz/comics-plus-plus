@@ -6,16 +6,16 @@
 </div>
 
 <p align="center">
-  <img alt="PROJECT NAME" src=".github/banner.svg" width="250px"/>
+  <img alt="Comics ++" src="./front-end/.github/logo.png" width="250px"/>
 </p>
 
 <p align="center"> 
-  <img alt="Repository Size" src="https://img.shields.io/github/repo-size/gleisonkz/dev-readme?color=3498db&style=for-the-badge">
-  <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/gleisonkz/dev-readme?color=3498db&style=for-the-badge">
+  <img alt="Repository Size" src="https://img.shields.io/github/repo-size/gleisonkz/comics-plus-plus?color=3498db&style=for-the-badge">
+  <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/gleisonkz/comics-plus-plus?color=3498db&style=for-the-badge">   
   <a href="https://github.com/gleisonkz">
     <img alt="Developed by Gleison" src="https://img.shields.io/badge/Developer-Gleison-%3498db?color=3498db&style=for-the-badge">
-  </a>
-  <img alt="Project License" src="https://img.shields.io/github/license/gleisonkz/dev-readme?color=3498db&style=for-the-badge"/>
+  </a>  
+  <img alt="Project License" src="https://img.shields.io/apm/l/vim-mode?style=for-the-badge"/>
 </p>
 
 <p align="center">
@@ -37,15 +37,15 @@
 
 ### :desktop_computer: Computer
 
-|                                  Desktop                                   |                                   Ultra Wide                                    |
-| :------------------------------------------------------------------------: | :-----------------------------------------------------------------------------: |
-| <kbd><img src=".github/previews/desktop_preview.jpg" alt="Desktop"/></kbd> | <kbd><img src=".github/previews/ultraWide_preview.jpg" alt="Ultra Wide"/></kbd> |
+|                                        Desktop                                         |                                         Ultra Wide                                          |
+| :------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------: |
+| <kbd><img src="./front-end/.github/previews/desktop-preview.png" alt="Desktop"/></kbd> | <kbd><img src="./front-end/.github/previews/ultraWide-preview.png" alt="Ultra Wide"/></kbd> |
 
 ### :iphone: Responsive
 
-|                                  Tablet                                  |                                  Mobile                                  |
-| :----------------------------------------------------------------------: | :----------------------------------------------------------------------: |
-| <kbd><img src=".github/previews/tablet_preview.jpg" alt="Tablet"/></kbd> | <kbd><img src=".github/previews/mobile_preview.jpg" alt="Mobile"/></kbd> |
+|                                        Tablet                                        |                                        Mobile                                        |
+| :----------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------: |
+| <kbd><img src="./front-end/.github/previews/tablet-preview.png" alt="Tablet"/></kbd> | <kbd><img src="./front-end/.github/previews/mobile-preview.png" alt="Mobile"/></kbd> |
 
 </div>
   

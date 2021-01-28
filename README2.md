@@ -37,9 +37,9 @@
 
 ### :desktop_computer: Computer
 
-|                                        Desktop                                         |                                         Ultra Wide                                          |
-| :------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------: |
-| <kbd><img src="./front-end/.github/previews/desktop-preview.png" alt="Desktop"/></kbd> | <kbd><img src="./front-end/.github/previews/ultraWide-preview.png" alt="Ultra Wide"/></kbd> |
+| Desktop  
+| :------------------------------------------------------------------------------------:
+| <kbd><img src="./front-end/.github/previews/desktop-preview.png" alt="Desktop"/></kbd>
 
 ### :iphone: Responsive
 

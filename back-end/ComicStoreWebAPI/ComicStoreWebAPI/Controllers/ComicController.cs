@@ -86,12 +86,6 @@ namespace ComicStore.Application.Controllers
                                          c.Pages,
                                          c.Year,
                                          InventoryQuantity = c.Inventory.Quantity,
-                                         Image = new ComicImageDTO
-                                         {
-                                             Name = c.Image.Name,
-                                             Extension = c.Image.Extension,
-                                             Base64 = c.Image.Base64
-                                         },
                                          Authors = c.Authors.Select(c => c.Name).ToList(),
                                          Genres = c.Genres.Select(c => c.Description).ToList()
                                      })

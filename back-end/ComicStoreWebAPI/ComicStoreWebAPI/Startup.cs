@@ -17,8 +17,6 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -39,9 +37,11 @@ namespace ComicStoreWebAPI
             services.AddControllers()
                     .AddNewtonsoftJson();
 
+            services.AddRouting(options => options.LowercaseUrls = true);
+
             _ = services.AddDbContext<ComicStoreDbContext>(options =>
                 {
-                    options.UseSqlServer(configuration["ConnectionStrings:SomeeConnection"].ToString())
+                    options.UseSqlServer(configuration["ConnectionStrings:DefaultConnection"].ToString())
                            .EnableSensitiveDataLogging()
                            .UseLazyLoadingProxies();
 
@@ -49,7 +49,7 @@ namespace ComicStoreWebAPI
 
             _ = services.AddDbContext<ComicStoreIdentityDbContext>(options =>
             {
-                options.UseSqlServer(configuration["ConnectionStrings:SomeeConnection"].ToString());
+                options.UseSqlServer(configuration["ConnectionStrings:DefaultConnection"].ToString());
             });
 
 

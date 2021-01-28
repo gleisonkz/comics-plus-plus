@@ -10,6 +10,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 
+
 namespace ComicStore.Application.Controllers
 {
     [Route("api/[controller]")]
@@ -48,22 +49,16 @@ namespace ComicStore.Application.Controllers
             try
             {
                 var comics = svcComic.GetComic()
-                                    .Select(c => new
-                                    {
-                                        c.ComicID,
-                                        c.Title,
-                                        c.Description,
-                                        c.Price,
-                                        InventoryQuantity = c.Inventory.Quantity,
-                                        Image = new ComicImageDTO
-                                        {
-                                            Name = c.Image.Name,
-                                            Extension = c.Image.Extension,
-                                            Base64 = c.Image.Base64
-                                        },
-                                        Authors = c.Authors.Select(c => c.Name).ToList(),
-                                        Genres = c.Genres.Select(c => c.Description).ToList()
-                                    })
+                                     .Select(c => new
+                                     {
+                                         c.ComicID,
+                                         c.Title,
+                                         c.Description,
+                                         c.Price,
+                                         InventoryQuantity = c.Inventory.Quantity,
+                                         Authors = c.Authors.Select(c => c.Name).ToList(),
+                                         Genres = c.Genres.Select(c => c.Description).ToList()
+                                     })
                                     .ToList();
 
                 return Ok(comics);
@@ -149,17 +144,18 @@ namespace ComicStore.Application.Controllers
 
         [HttpGet]
         [Route("{comicID}/image")]
+        [ResponseCache(Duration = 3600)]
         public IActionResult GetComicImageByComicID(int comicID)
         {
+
             var image = svcComic.GetComicImageByComicID(comicID)
                                        .Select(c => new
                                        {
-                                           c.Name,
                                            c.Base64,
                                            c.Extension
                                        }).SingleOrDefault();
 
-            return Ok(image);
+            return File(image.Base64, $"image/{image.Extension}");
         }
 
         [HttpGet]

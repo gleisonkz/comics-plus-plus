@@ -1,11 +1,11 @@
-import { ComicImage } from './comic-image.model';
+import { SafeUrl } from '@angular/platform-browser';
 
 export interface ComicShopItem {
   comicID: number;
   title: string;
   description: string;
   price: number;
-  image: ComicImage;
+  imagePreview: SafeUrl;
   inventoryQuantity: number;
   genres: string[];
   authors: string[];

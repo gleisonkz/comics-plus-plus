@@ -48,9 +48,9 @@ export class FileUploadService {
     });
   }
 
-  loadImagePreview(image: ComicImage): SafeUrl {
+  loadImagePreview(extension: string, base64: string): SafeUrl {
     return this.domSanitizer.bypassSecurityTrustUrl(
-      `data:image/${image.extension};base64,` + image.base64
+      `data:image/${extension};base64,` + base64
     );
   }
 }

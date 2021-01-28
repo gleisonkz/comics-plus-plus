@@ -48,7 +48,8 @@ export class ComicDetailComponent implements OnInit {
     this.comicService.getComicShopItemDetailByID(comicID).subscribe((comic) => {
       this.comic = comic;
       this.comic.image.preview = this.fileUploadService.loadImagePreview(
-        comic.image
+        comic.image.extension,
+        comic.image.base64
       );
     });
   }

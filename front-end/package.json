@@ -24,7 +24,7 @@
     "@angular/platform-browser-dynamic": "~11.0.5",
     "@angular/router": "~11.0.5",
     "@auth0/angular-jwt": "^5.0.2",
-    "cep-promise": "^4.0.3",
+    "cep-promise": "^4.0.4",
     "ngx-mask": "^11.1.4",
     "ngx-mat-select-search": "^3.1.4",
     "ngx-material-file-input": "^2.1.1",

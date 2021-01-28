@@ -5,11 +5,21 @@
     <i (click)="quantityUp(item)" class="fas fa-plus"></i>
   </span>
   <span class="order__item__name">{{ item.comic.title }}</span>
-  <span fxHide.lt-sm="true" class="order__item__description">{{
+  <span fxHide.xs="true" fxShow class="order__item__description">{{
     item.comic.description
   }}</span>
-  <span gdRow.lt-sm="2" gdColumn.lt-sm="2" class="order__item__price"
+  <span
+    fxHide.xs="true"
+    fxShow
+    gdRow.lt-sm="2"
+    gdColumn.lt-sm="2"
+    class="order__item__price"
     >R$ {{ item.getTotalValue() | number: "2.2" }}</span
   >
-  <i gdRow.lt-sm="1/3" (click)="removeItem(item)" class="fas fa-trash-alt"></i>
+  <i
+    gdRow.lt-sm="1/3"
+    gdColumn.xs="3"
+    (click)="removeItem(item)"
+    class="fas fa-trash-alt"
+  ></i>
 </div>

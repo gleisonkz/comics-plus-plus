@@ -5,6 +5,8 @@
   
 </div>
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/1fa15619-9ade-473e-9196-b53a0a03780c/deploy-status)](https://app.netlify.com/sites/comics-plus-plus/deploys)
+
 <p align="center">
   <img alt="Comics ++" src="./front-end/.github/logo.png" width="250px"/>
 </p>

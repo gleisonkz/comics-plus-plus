@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ComicShopItem } from '@core/models/comic-shop-item.model';
-import { ShoppingCartService } from '@core/services';
-import { environment } from './../../../../environments/environment';
+import { ComicService, ShoppingCartService } from '@core/services';
 
 @Component({
   selector: 'cms-comic',
@@ -15,10 +14,15 @@ export class ComicComponent implements OnInit {
     return this.comic.inventoryQuantity > 0;
   }
 
-  constructor(private shoppingCartService: ShoppingCartService) {}
+  constructor(
+    private shoppingCartService: ShoppingCartService,
+    private comicService: ComicService
+  ) {}
 
   ngOnInit(): void {
-    this.comic.imagePreview = `${environment.apiURL}/comic/${this.comic.comicID}/image`;
+    this.comic.imagePreview = this.comicService.getComicImageUrlByComicID(
+      this.comic.comicID
+    );
   }
 
   addToCart(comic: ComicShopItem) {

@@ -12,6 +12,7 @@ import { Injectable } from '@angular/core';
 import { ComicImage } from '@core/models/comic-image.model';
 import { ComicShopItemDetail } from '@core/models/comic-shop-item-detail.model';
 import { ComicShopItem } from '@core/models/comic-shop-item.model';
+import { environment } from 'environments/environment';
 import { Observable } from 'rxjs';
 import { GenericBaseService } from './base.service';
 
@@ -40,6 +41,10 @@ export class ComicService extends GenericBaseService<
 
   getComicImageByComicID(comicID: number) {
     return this.http.get<ComicImage>(`${this.endpoint}/${comicID}/image`);
+  }
+
+  getComicImageUrlByComicID(comicID: number): string {
+    return `${environment.apiURL}/comic/${comicID}/image`;
   }
 
   GetAuthorsByComicID(comicID: number) {

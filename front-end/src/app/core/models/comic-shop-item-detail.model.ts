@@ -1,5 +1,3 @@
-import { ComicImage } from './comic-image.model';
-
 export interface ComicShopItemDetail {
   comicID: number;
   title: string;
@@ -8,7 +6,7 @@ export interface ComicShopItemDetail {
   year: number;
   pages: number;
   inventoryQuantity: number;
-  image: ComicImage;
+  imagePreview: string;
   genres: string[];
   authors: string[];
 }

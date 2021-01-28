@@ -13,7 +13,7 @@
       <div *ngIf="hasItems" class="cart__content">
         <div *ngFor="let item of items$ | async" class="cart__item">
           <img
-            [src]="item.comic.image.preview"
+            [src]="item.comic.imagePreview"
             alt=""
             class="cart__item__image"
           />

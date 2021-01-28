@@ -4,7 +4,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ComicShopItemDetail } from '@core/models/comic-shop-item-detail.model';
 import {
   ComicService,
-  FileUploadService,
   NotificationService,
   ShoppingCartService
 } from '@core/services';
@@ -31,7 +30,6 @@ export class ComicDetailComponent implements OnInit {
     private comicService: ComicService,
     private shoppingCartService: ShoppingCartService,
     private notificationService: NotificationService,
-    private fileUploadService: FileUploadService,
     private router: Router
   ) {}
 
@@ -47,9 +45,8 @@ export class ComicDetailComponent implements OnInit {
 
     this.comicService.getComicShopItemDetailByID(comicID).subscribe((comic) => {
       this.comic = comic;
-      this.comic.image.preview = this.fileUploadService.loadImagePreview(
-        comic.image.extension,
-        comic.image.base64
+      this.comic.imagePreview = this.comicService.getComicImageUrlByComicID(
+        this.comic.comicID
       );
     });
   }
@@ -65,6 +62,7 @@ export class ComicDetailComponent implements OnInit {
   private isFormInvalid(): boolean {
     return this.comicForm.invalid;
   }
+
   navigateToOrder(): void {
     this.hasCartItems && this.router.navigate(['/order']);
   }

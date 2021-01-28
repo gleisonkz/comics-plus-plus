@@ -28,6 +28,7 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.items$ = this.shoppingCartService.items$;
+    this.items$.subscribe((c) => console.log(c));
   }
 
   ngOnDestroy(): void {

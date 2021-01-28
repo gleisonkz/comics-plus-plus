@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiURL: '',
+  apiURL: 'https://kz-comic-store.herokuapp.com/api'
 };

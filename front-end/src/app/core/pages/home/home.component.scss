@@ -19,6 +19,9 @@
   background-color: $color-panel-bg;
   border-radius: rem(10);
 
+  @include tiny-mobile {
+  }
+
   @include medias($tiny-mobile, $mobile) {
     flex-direction: column;
     margin: 0;
@@ -40,6 +43,10 @@
     align-items: center;
     justify-content: center;
     height: 100%;
+
+    @include tiny-mobile {
+      width: rem(300);
+    }
   }
 
   &__subtitle {
@@ -49,7 +56,12 @@
     width: rem(500);
     line-height: rem(25);
 
-    @include medias($tiny-mobile, $mobile) {
+    @include tiny-mobile {
+      width: 100%;
+      font-size: rem(15);
+    }
+
+    @include mobile {
       width: rem(350);
       font-size: rem(19);
     }
@@ -59,6 +71,10 @@
     margin-top: rem(50);
     font-size: rem(20);
     @include base-button-style;
+
+    @include tiny-mobile {
+      margin-top: rem(20);
+    }
   }
 
   img {

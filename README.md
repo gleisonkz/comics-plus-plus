@@ -40,6 +40,9 @@
 
 <div align="center">
 
+Deploy do front-end efetuado no [Netlify](https://www.netlify.com/) para visualizar: [Clique Aqui](https://kz-kanban-board.netlify.app/)
+Deploy da API efetuado no [Heroku](https://www.heroku.com/) para visualizar: [Clique Aqui](https://kz-comic-store.herokuapp.com/index.html)
+
 ### :desktop_computer: Computer
 
 |                                        Desktop                                        |                                        Ultra Wide                                        |

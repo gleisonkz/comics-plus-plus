@@ -16,14 +16,10 @@ export class ConfirmationDialogComponent {
     @Inject(MAT_DIALOG_DATA) private data: any,
     private dialogRef: MatDialogRef<ConfirmationDialogComponent>
   ) {
-    if (data) {
-      this.item = data;
-      this.message = data.message || this.message;
-      if (data.buttonText) {
-        this.confirmButtonText = data.buttonText.ok || this.confirmButtonText;
-        this.cancelButtonText = data.buttonText.cancel || this.cancelButtonText;
-      }
-    }
+    this.item = data;
+    this.message = data?.message || this.message;
+    this.confirmButtonText = data?.buttonText?.ok || this.confirmButtonText;
+    this.cancelButtonText = data?.buttonText?.cancel || this.cancelButtonText;
   }
 
   onConfirmClick(): void {

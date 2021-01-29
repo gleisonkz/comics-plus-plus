@@ -12,6 +12,7 @@ import { listStagger } from '@shared/animations/list-stagger';
 import { delay } from 'rxjs/operators';
 import { fadeInOut } from '../../../shared/animations/fade-in-out';
 import { BaseCrudComponent } from '../base-crud/base-crud.component';
+import { ConfirmationDialogComponent } from './../../components/confirmation-dialog/confirmation-dialog.component';
 import { Pagination } from './../../models/pagination.model';
 import { CUSTOM_DATA_SOURCE } from './toke';
 
@@ -152,7 +153,7 @@ export class ComicCrudComponent implements OnInit {
 
   deleteItem(item: Comic) {
     const dialogRef = this.dialogService.open(
-      ComicDialogComponent,
+      ConfirmationDialogComponent,
       createMatDialogConfig({
         data: { id: item.comicID, description: item.title }
       })

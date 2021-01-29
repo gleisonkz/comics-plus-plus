@@ -23,8 +23,7 @@
  <a href="#eye_speech_bubble-visualizar">Visualizar</a> •
  <a href="#information_source-sobre">Sobre</a> •
  <a href="#arrow_forward-executar">Executar</a> •
- <a href="#hammer_and_wrench-tecnologias">Tecnologias</a> •
- <a href="#file_folder-folder-estrutura">Estrutura Pastas</a> •
+ <a href="#hammer_and_wrench-tecnologias">Tecnologias</a> • 
  <a href="#sparkles-funcionalidades">Funcionalidades</a> •
  <a href="#boy-autor">Autor</a> •
  <a href="#balance_scale-licença">Licença</a>
@@ -51,7 +50,7 @@
 </div>
   
 ---
-## :information_source: About
+## :information_source: Sobre
 
 <div align="center">
 
@@ -104,11 +103,11 @@ $ ng serve --open ou ng s -o
 
 ---
 
-## :hammer_and_wrench: **Technologies**
+## :hammer_and_wrench: **Tecnologias**
 
 <div align="center">
 
-Technologies, design, patterns and packages that I used to develop this application.
+Tecnologias, abordagem, padrões e pacotes utilizados para desenvolver esta aplicação.
 
 |                            :globe_with_meridians: FrontEnd                             |                                                     :file_cabinet: BackEnd                                                     |
 | :------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------: |
@@ -149,7 +148,7 @@ Technologies, design, patterns and packages that I used to develop this applicat
   - Command
   - Adapter
 
-## :sparkles: **Features**
+## :sparkles: **Funcionalidades**
 
 |              :globe_with_meridians: FrontEnd              |                          :file_cabinet: BackEnd                          |
 | :-------------------------------------------------------: | :----------------------------------------------------------------------: |
@@ -163,7 +162,7 @@ Technologies, design, patterns and packages that I used to develop this applicat
 
 ---
 
-## :boy: **Author**
+## :boy: **Autor**
 
 <div align="center">
 
@@ -183,7 +182,7 @@ Desenvolvido com ❤️ por Gleison Almeida 👋🏽 Meus Contatos!
 
 ---
 
-## :balance_scale: **License**
+## :balance_scale: **Licença**
 
 <div align="center">
 

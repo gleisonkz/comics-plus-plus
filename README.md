@@ -122,15 +122,16 @@ Tecnologias, abordagem, padrões e pacotes utilizados para desenvolver esta apli
 |         [@auth0/angular-jwt](https://www.npmjs.com/package/@auth0/angular-jwt)         |                      [SQL Server](https://docs.microsoft.com/en-us/sql/sql-server/?view=sql-server-ver15)                      |
 |              [RxJS 6.5](https://rxjs-dev.firebaseapp.com/guide/overview)               |                                                         Nuget Packages                                                         |
 |                             [SASS](https://sass-lang.com/)                             |         [EntityFrameworkCore 5.0.0](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore/5.0.0?_src=template)          |
-|               [Flexbox](https://www.w3schools.com/css/css3_flexbox.asp)                |    [EF Core Identity Design 5.0.0](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Design/5.0.0?_src=template)    |
-|               [Grid Layout](https://www.w3schools.com/css/css_grid.asp)                |   [EF Core Identity Proxies 5.0.0](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Proxies/5.0.0?_src=template)   |
-|                      [BEM Methodology](http://getbem.com/naming/)                      |     [EF Core Identity Tools 5.0.0](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Tools/5.0.0?_src=template)     |
+|               [Flexbox](https://www.w3schools.com/css/css3_flexbox.asp)                |        [EF Core.Design 5.0.0](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Design/5.0.0?_src=template)         |
+|               [Grid Layout](https://www.w3schools.com/css/css_grid.asp)                |       [EF Core.Proxies 5.0.0](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Proxies/5.0.0?_src=template)        |
+|                      [BEM Methodology](http://getbem.com/naming/)                      |         [EF Core.Tools 5.0.0](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Tools/5.0.0?_src=template)          |
+|            [Cep Promise 4.0.4 ](https://www.npmjs.com/package/cep-promise)             |            [EF Core.SqlServer 5.0.0](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.SqlServer/5.0.0)             |
 |                   [TypeScript 3.9](https://www.typescriptlang.org/)                    | [EF Core Identity 5.0.0](https://www.nuget.org/packages/Microsoft.AspNetCore.Identity.EntityFrameworkCore/5.0.0?_src=template) |
 |                                      NGX Packages                                      |                          [Predicate Builder 1.0.0](https://www.nuget.org/packages/PredicateBuilder/)                           |
 |               [Ngx Mask 11.1.4](https://www.npmjs.com/package/ngx-mask)                |        [Newtonsoft 3.1.10](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.NewtonsoftJson/3.1.10?_src=template)        |
 |   [Ngx Mat Select Search 3.1.4](https://www.npmjs.com/package/ngx-mat-select-search)   |     [JwtBearer 3.1.10](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.JwtBearer/3.1.10?_src=template)      |
 | [Ngx Material File Input 2.1.1](https://www.npmjs.com/package/ngx-material-file-input) |           [Swashbuckle.AspNetCore 5.6.3](https://www.nuget.org/packages/Swashbuckle.AspNetCore/5.6.3?_src=template)            |
-|            [Cep Promise 4.0.3 ](https://www.npmjs.com/package/cep-promise)             |                                                                                                                                |
+|                                                                                        |                                                                                                                                |
 
 </div>
 
@@ -164,6 +165,7 @@ Tecnologias, abordagem, padrões e pacotes utilizados para desenvolver esta apli
 |   DataSource<T> customizado para paginação server side    | Conversor de Json customizado para mapear Interface para tipos concretos |
 | Generic Dropdown Component with server side search filter |                     Validação de Models customizada                      |
 |   Classe customizada para validação nos Reactive Forms    |           Contexto do Identity separado do Contexto do Domain            |
+|                                                           |                             Testes Unitários                             |
 
 ---
 

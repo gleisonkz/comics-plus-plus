@@ -1,3 +1,5 @@
+<div align="right">
+
 [![Netlify Status](https://api.netlify.com/api/v1/badges/1fa15619-9ade-473e-9196-b53a0a03780c/deploy-status)](https://app.netlify.com/sites/comics-plus-plus/deploys)
 
 <div align="right">
@@ -6,17 +8,20 @@
 
 </div>
 
+</div>
+
 <p align="center">
   <img alt="Comics ++" src="./front-end/.github/logo.png" width="250px"/>
 </p>
 
 <p align="center"> 
-  <img alt="Repository Size" src="https://img.shields.io/github/repo-size/gleisonkz/comics-plus-plus?color=3498db&style=for-the-badge">
-  <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/gleisonkz/comics-plus-plus?color=3498db&style=for-the-badge">   
+  <img alt="Repository Size" src="https://img.shields.io/github/repo-size/gleisonkz/comics-plus-plus?color=3498db&style=for-the-badge&label=Tamanho%20repositorio">
+  
+  <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/gleisonkz/comics-plus-plus?color=3498db&style=for-the-badge&label=Ultimo%20Commit">     
   <a href="https://github.com/gleisonkz">
-    <img alt="Developed by Gleison" src="https://img.shields.io/badge/Developer-Gleison-%3498db?color=3498db&style=for-the-badge">
-  </a>  
-  <img alt="Project License" src="https://img.shields.io/apm/l/vim-mode?style=for-the-badge"/>
+    <img alt="Developed by Gleison" src="https://img.shields.io/badge/Desenvolvedor-Gleison-%3498db?color=3498db&style=for-the-badge&">
+  </a>    
+  <img alt="Project License" src="https://img.shields.io/apm/l/vim-mode?style=for-the-badge&label=Licen%C3%A7a"/>
 </p>
 
 <p align="center">

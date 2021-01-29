@@ -1,11 +1,10 @@
-<div align="right">
-  
-  [![English](https://www.countryflags.io/us/flat/32.png)](README.md)
-  [![Portuguese](https://www.countryflags.io/br/flat/32.png)](README-PT.md)
-  
-</div>
-
 [![Netlify Status](https://api.netlify.com/api/v1/badges/1fa15619-9ade-473e-9196-b53a0a03780c/deploy-status)](https://app.netlify.com/sites/comics-plus-plus/deploys)
+
+<div align="right">
+
+[![English](https://www.countryflags.io/us/flat/32.png)](README.md) [![Portuguese](https://www.countryflags.io/br/flat/32.png)](README-PT.md)
+
+</div>
 
 <p align="center">
   <img alt="Comics ++" src="./front-end/.github/logo.png" width="250px"/>
@@ -21,27 +20,27 @@
 </p>
 
 <p align="center">
- <a href="#eye_speech_bubble-preview">Preview</a> •
- <a href="#information_source-about">About</a> •
- <a href="#arrow_forward-run">Run</a> •
- <a href="#hammer_and_wrench-technologies">Technologies</a> •
- <a href="#file_folder-folder-structure">Folder Structure</a> •
- <a href="#sparkles-features">Features</a> •
- <a href="#boy-author">Author</a> •
- <a href="#balance_scale-license">License</a>
+ <a href="#eye_speech_bubble-visualizar">Visualizar</a> •
+ <a href="#information_source-sobre">Sobre</a> •
+ <a href="#arrow_forward-executar">Executar</a> •
+ <a href="#hammer_and_wrench-tecnologias">Tecnologias</a> •
+ <a href="#file_folder-folder-estrutura">Estrutura Pastas</a> •
+ <a href="#sparkles-funcionalidades">Funcionalidades</a> •
+ <a href="#boy-autor">Autor</a> •
+ <a href="#balance_scale-licença">Licença</a>
 </p>
 
 ---
 
-## :eye_speech_bubble: **Preview**
+## :eye_speech_bubble: **Visualizar**
 
 <div align="center">
 
 ### :desktop_computer: Computer
 
-| Desktop  
-| :------------------------------------------------------------------------------------:
-| <kbd><img src="./front-end/.github/previews/desktop-preview.png" alt="Desktop"/></kbd>
+|                                        Desktop                                        |                                        Ultra Wide                                        |
+| :-----------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------: |
+| <kbd><img src="./front-end/.github/previews/desktop-preview.png" alt="Tablet"/></kbd> | <kbd><img src="./front-end/.github/previews/ultra-wide-preview.png" alt="Mobile"/></kbd> |
 
 ### :iphone: Responsive
 
@@ -54,52 +53,60 @@
 ---
 ## :information_source: About
 
-This application is comics web store. it's possible to create, edit, update and delete each book.
+<div align="center">
+
+E-commerce de quadrinhos desenvolvido para um teste de uma vaga como .NET full-stack, nesta aplicação é possível realizar todas as operações de CRUD para os quadrinhos, autores e categorias, controle de estoque, autenticação e autorização de recursos.
+
+</div>
 
 ---
 
-## :arrow_forward: **Run**
+## :arrow_forward: **Executar**
 
-To run the project you need to download this repository, have the Node Package Manager ([`NPM`](https://www.npmjs.com/get-npm)) or the YARN Package Manager installed ([`YARN`](https://yarnpkg.com/getting-started)).
+<div align="center">
 
-### :desktop_computer: **WEB Responsive**
+Para executar esse projeto você precisa baixar este repositório, ter o Gerenciador de Pacotes do Node ([`NPM`](https://www.npmjs.com/get-npm)) ou o Gerenciador de Pacotes YARN ([`YARN`](https://yarnpkg.com/getting-started)) instalado.
 
-Open the command prompt in the project directory, open the [`exemple/`](exemple/) folder and execute the following commands:
+Abra o prompt de comando no diretório do projeto, e execute os seguintes códigos:
 
 <details>
-  <summary><i>with <b>npm</b></i></summary>
+  <summary><i>com <b>npm</b></i></summary>
   
   ```bash
-  # Install dependencies
-  $ npm install
+  # Instalar dependências
+  $ npm install ou npm i
 
-# Start development server
+# Iniciar o servidor de desenvolvimento
 
-$ npm start
+$ ng serve --open ou ng s -o
 
 ````
 
 </details>
 
 <details>
-<summary><i>with <b>yarn</b></i></summary>
+<summary><i>com <b>yarn</b></i></summary>
 
 ```bash
-# Install dependencies
-$ yarn
+# Instalar dependências
+$ yarn install
 
-# Start development server
-$ yarn start
+# Iniciar o servidor de desenvolvimento
+$ ng serve --open ou ng s -o
 
 ````
 
 </details>
 
-> ⚠️ The development server will start on port:YOURPORT - Access <http://localhost:YOURPORT>
+> ⚠️ O servidor de desenvolvimento será iniciado na porta: 4200 - Acesse <http://localhost:4200>
+
+</div>
 
 ---
 
 ## :hammer_and_wrench: **Technologies**
+
+<div align="center">
 
 Technologies, design, patterns and packages that I used to develop this application.
 
@@ -121,6 +128,8 @@ Technologies, design, patterns and packages that I used to develop this applicat
 | [Ngx Material File Input 2.1.1](https://www.npmjs.com/package/ngx-material-file-input) |           [Swashbuckle.AspNetCore 5.6.3](https://www.nuget.org/packages/Swashbuckle.AspNetCore/5.6.3?_src=template)            |
 |            [Cep Promise 4.0.3 ](https://www.npmjs.com/package/cep-promise)             |                                                                                                                                |
 
+</div>
+
 - Development Approach
   - DDD - Domain Drive Design
   - SOLID Principles
@@ -140,116 +149,17 @@ Technologies, design, patterns and packages that I used to develop this applicat
   - Command
   - Adapter
 
-## :file_folder: **Folder-Structure**
-
-- Front-end
-  | :-------------------------------------------------------: |
-
-  |-- app
-
-        |-- 🎯 core
-            |-- [+] classes
-            |-- [+] components
-            |-- [+] enums
-            |-- [+] guards
-            |-- [+] interceptors
-            |-- [+] models
-            |-- [+] pages
-            |-- [+] services
-            |-- core.module.ts
-
-        |-- 👨‍💼 admin (lazy 🦥)
-            |-- [+] classes
-            |-- [+] components
-            |-- [+] constants
-            |-- [+] models
-            |-- [+] services
-            |-- [+] pages
-            |-- admin-routing.module.ts
-            |-- admin.module.ts
-
-        |-- 📦 order (lazy 🦥)
-            |-- [+] components
-            |-- [+] enums
-            |-- [+] guards
-            |-- [+] models
-            |-- [+] services
-            |-- [+] pages
-            |-- order-routing.module.ts
-            |-- order.module.ts
-
-        |-- 🔑 authentication (lazy 🦥)
-            |-- [+] interceptors
-            |-- [+] models
-            |-- [+] pages
-            |-- authentication-routing.module.ts
-            |-- authentication.module.ts
-
-        |-- 🤝 shared
-            |-- [+] animations
-            |-- [+] classes
-            |-- [+] components
-            |-- [+] enums
-            |-- shared.module.ts
-
-- Modules Diagram
-  ![modules-diagram](./front-end/.github/modules-diagram.png)
-
-- Back-end
-
-  |-- Solution ComicStoreWebAPI
-
-      |-- 1 - Application
-          |-- [+] Properties
-          |-- [+] Classes
-          |-- [+] Controllers
-          |-- [+] DTO
-          |-- [+] Filters
-          |-- Program.cs
-          |-- Startup.cs
-
-      |-- 2 - Domain
-          |-- [+] Enums
-          |-- [+] Interfaces
-          |-- [+] POCO
-
-      |-- 3 - Service
-          |-- [+] Classes
-          |-- [+] Interfaces
-          |-- [+] Services
-
-      |-- 4 - Infrastructure
-
-        |-- BaseRepository
-          |-- [+] Interfaces
-
-        |-- EFRepository
-          |-- [+] Configurations
-          |-- [+] Context
-          |-- [+] Migrations
-          |-- [+] Repository
-
-        |-- Security
-          |-- [+] Context
-          |-- [+] Migrations
-
-      |-- 5 - Shared
-          |-- [+] classes
-
----
-
 ## :sparkles: **Features**
 
-|                  Toggle Theme Preference                  |
-| :-------------------------------------------------------: |
-|                 JTW Bearer Authentication                 |
-|                 Role-based Access Control                 |
-|                      CRUD operations                      |
-|                  Server Side Pagination                   |
-| Generic Dropdown Component with server side search filter |
-|                   Inventory Management                    |
-|                   Swagger Specification                   |
-|          Custom Reactive Forms Validation Class           |
+|              :globe_with_meridians: FrontEnd              |                          :file_cabinet: BackEnd                          |
+| :-------------------------------------------------------: | :----------------------------------------------------------------------: |
+|              Aplicação de Temas Dark e Light              |                       Autenticação com JTW Bearer                        |
+|               Rotas com controle de acesso                |                        JTW Bearer Authentication                         |
+|             Armazenamento de imagens em cache             |                      Retorno de dados com paginação                      |
+|     Componente Genérico de busca e filtro no servidor     |                         Documentação com Swagger                         |
+|   DataSource<T> customizado para paginação server side    | Conversor de Json customizado para mapear Interface para tipos concretos |
+| Generic Dropdown Component with server side search filter |                     Validação de Models customizada                      |
+|   Classe customizada para validação nos Reactive Forms    |           Contexto do Identity separado do Contexto do Domain            |
 
 ---
 
@@ -263,7 +173,7 @@ Technologies, design, patterns and packages that I used to develop this applicat
  <sub><b>Gleison de Almeida</b></sub>
 </a>
 
-Developed with ❤️ by Gleison Almeida 👋🏽 Contact me!
+Desenvolvido com ❤️ por Gleison Almeida 👋🏽 Meus Contatos!
 
 [![Linkedin Badge](https://img.shields.io/badge/-Gleison-blue?style=flat-square&logo=Linkedin&logoColor=white)](https://www.linkedin.com/in/gleison-ribeiro-a65257119)
 [![Github Badge](https://img.shields.io/badge/-Gleison-000?style=flat-square&logo=Github&logoColor=white)](https://github.com/gleisonkz)

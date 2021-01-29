@@ -16,8 +16,8 @@ namespace ComicStore.Service.Classes
         public int TotalCount { get; private set; }
         public bool HasPrevious => CurrentPage > 1;
         public bool HasNext => CurrentPage < TotalPages;
-        private IEnumerable<TResult> items;
 
+        private IEnumerable<TResult> items;
 
         public Paginator(IEnumerable<TResult> items, int count, int pageIndex, int pageSize)
         {

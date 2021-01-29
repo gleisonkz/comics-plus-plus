@@ -168,7 +168,7 @@ Tecnologias, abordagem, padrões e pacotes utilizados para desenvolver esta apli
 |   DataSource<T> customizado para paginação server side    | Conversor de Json customizado para mapear Interface para tipos concretos |
 | Generic Dropdown Component with server side search filter |                     Validação de Models customizada                      |
 |   Classe customizada para validação nos Reactive Forms    |           Contexto do Identity separado do Contexto do Domain            |
-|                                                           |                             Testes Unitários                             |
+|               Componente de Dialog Genérico               |                             Testes Unitários                             |
 
 ---
 

@@ -11,26 +11,46 @@ import {
   Filter
 } from '@admin/models';
 import { AuthorService } from '@admin/services';
-import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  Inject,
+  OnInit,
+  ViewChild
+} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { NotificationService } from '@core/services';
 import { fadeInOut } from '@shared/animations/fade-in-out';
 import { finalize } from 'rxjs/operators';
+import { customDataSourceFactory } from '..';
 import { listStagger } from '../../../shared/animations/list-stagger';
 import { BaseCrudComponent } from '../base-crud/base-crud.component';
+import { CUSTOM_DATA_SOURCE } from '../comic-crud/toke';
 import { Pagination } from './../../models/pagination.model';
+
+export const func = (service: AuthorService) =>
+  customDataSourceFactory<AuthorListItem, AuthorFilterProps, AuthorService>(
+    service
+  );
 
 @Component({
   templateUrl: './author-crud.component.html',
   styleUrls: ['./author-crud.component.scss'],
-  animations: [fadeInOut, listStagger]
+  animations: [fadeInOut, listStagger],
+  providers: [
+    {
+      provide: CUSTOM_DATA_SOURCE,
+      useFactory: func,
+      deps: [AuthorService]
+    }
+  ]
 })
 export class AuthorCrudComponent implements OnInit {
   loadingComplete: boolean = false;
   form: FormGroup;
-  dataSource: CustomDataSource<AuthorListItem, AuthorFilterProps>;
+
   authorFilter: Filter<AuthorFilterProps>;
   displayedColumns: string[] = [
     'AuthorID',
@@ -50,7 +70,9 @@ export class AuthorCrudComponent implements OnInit {
     private dialogService: MatDialog,
     private authorService: AuthorService,
     private notificationService: NotificationService,
-    private changeDetectorRef: ChangeDetectorRef
+    private changeDetectorRef: ChangeDetectorRef,
+    @Inject(CUSTOM_DATA_SOURCE)
+    public dataSource: CustomDataSource<AuthorListItem, AuthorFilterProps>
   ) {}
 
   ngOnInit(): void {
@@ -60,10 +82,10 @@ export class AuthorCrudComponent implements OnInit {
       age: new FormControl('')
     });
 
-    this.dataSource = new CustomDataSource<AuthorListItem, AuthorFilterProps>(
-      (filter: Filter<AuthorFilterProps>) =>
-        this.authorService.getPaginatedAuthors(filter)
-    );
+    // this.dataSource = new CustomDataSource<AuthorListItem, AuthorFilterProps>(
+    //   (filter: Filter<AuthorFilterProps>) =>
+    //     this.authorService.getPaginatedAuthors(filter)
+    // );
   }
 
   ngAfterViewInit(): void {

@@ -5,28 +5,28 @@ import {
   debounceTime,
   distinctUntilChanged,
   filter,
-  takeUntil,
+  takeUntil
 } from 'rxjs/operators';
 
 @Component({
   selector: 'cms-dropdown-list',
   templateUrl: './dropdown-list.component.html',
-  styleUrls: ['./dropdown-list.component.scss'],
+  styleUrls: ['./dropdown-list.component.scss']
 })
 export class DropdownListComponent implements OnInit {
   dataList: any[] = [];
 
   isMatSelectClosing: boolean;
+  _onDestroy = new Subject<void>();
+  dataSearchControl: FormControl = new FormControl();
+  filteredDataOptions$: ReplaySubject<any[]> = new ReplaySubject<any[]>(1);
+  private subscriptions: Subscription[] = [];
 
   @Input() isNew: boolean;
   @Input() idKeyObject: string;
   @Input() valueKeyObject: string;
   @Input() placeholder: string;
-  _onDestroy = new Subject<void>();
   @Input() dataControl: FormControl;
-  dataSearchControl: FormControl = new FormControl();
-  filteredDataOptions$: ReplaySubject<any[]> = new ReplaySubject<any[]>(1);
-  private subscriptions: Subscription[] = [];
   @Input() getFilteredDataCallback: (searchTerm: string) => Observable<any[]>;
   @Input() getInitialDataCallback: () => Observable<any[]>;
 

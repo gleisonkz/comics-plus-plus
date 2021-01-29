@@ -17,10 +17,10 @@ import { Pagination } from './../../models/pagination.model';
 import { CUSTOM_DATA_SOURCE } from './toke';
 
 export interface PaginatedService<TFilterProps> {
-  getPaginatedComics(filter: Filter<TFilterProps>): any;
+  getPaginatedEntities(filter: Filter<TFilterProps>): any;
 }
 
-export const comicFactory = <
+export const customDataSourceFactory = <
   TListItem,
   TFilterProps,
   TService extends PaginatedService<TFilterProps>
@@ -29,12 +29,14 @@ export const comicFactory = <
 ) => {
   return new CustomDataSource<TListItem, TFilterProps>(
     (filter: Filter<TFilterProps>) =>
-      service.getPaginatedComics(filter).pipe(delay(200))
+      service.getPaginatedEntities(filter).pipe(delay(200))
   );
 };
 
 export const func = (service: ComicService) =>
-  comicFactory<ComicListItem, ComicFilterProps, ComicService>(service);
+  customDataSourceFactory<ComicListItem, ComicFilterProps, ComicService>(
+    service
+  );
 
 @Component({
   selector: 'cms-comic-crud',

@@ -33,7 +33,7 @@ export const customDataSourceFactory = <
   );
 };
 
-export const func = (service: ComicService) =>
+export const comicDataSourceFactory = (service: ComicService) =>
   customDataSourceFactory<ComicListItem, ComicFilterProps, ComicService>(
     service
   );
@@ -46,7 +46,7 @@ export const func = (service: ComicService) =>
   providers: [
     {
       provide: CUSTOM_DATA_SOURCE,
-      useFactory: func,
+      useFactory: comicDataSourceFactory,
       deps: [ComicService]
     }
   ]

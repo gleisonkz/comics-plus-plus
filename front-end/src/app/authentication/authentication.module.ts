@@ -11,9 +11,17 @@ import {
 } from '@auth/pages';
 import { SharedModule } from '@shared/shared.module';
 import { AuthenticationRoutingModule } from './authentication-routing.module';
+import { LoginFormComponent } from './components/login-form/login-form.component';
+import { RegisterFormComponent } from './components/register-form/register-form.component';
 
 @NgModule({
-  declarations: [LoginComponent, RegisterComponent, RegisterDoneComponent],
+  declarations: [
+    LoginComponent,
+    RegisterComponent,
+    RegisterDoneComponent,
+    RegisterFormComponent,
+    LoginFormComponent
+  ],
   imports: [
     AuthenticationRoutingModule,
     CommonModule,

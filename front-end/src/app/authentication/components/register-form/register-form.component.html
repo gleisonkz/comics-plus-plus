@@ -1,0 +1,33 @@
+<form [formGroup]="form" *ngIf="form">
+  <mat-form-field>
+    <input type="email" matInput placeholder="Email" formControlName="email" />
+    <mat-error>
+      <span cmsShowValidation="email"></span>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input
+      type="password"
+      matInput
+      placeholder="Senha"
+      formControlName="password"
+    />
+    <mat-error>
+      <span cmsShowValidation="password"></span>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input
+      type="password"
+      matInput
+      placeholder="Confirmação senha"
+      formControlName="passwordCheck"
+      (keyup.enter)="register(form.value)"
+    />
+    <mat-error>
+      <span cmsShowValidation="passwordCheck"></span>
+    </mat-error>
+  </mat-form-field>
+</form>

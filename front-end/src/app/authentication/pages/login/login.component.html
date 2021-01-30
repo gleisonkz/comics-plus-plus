@@ -7,37 +7,12 @@
     >
   </mat-card-header>
   <mat-card-content>
-    <form [formGroup]="form">
-      <mat-form-field>
-        <input
-          type="email"
-          matInput
-          placeholder="Email"
-          formControlName="email"
-        />
-        <mat-error>
-          <span cmsShowValidation="email"></span>
-        </mat-error>
-      </mat-form-field>
-
-      <mat-form-field>
-        <input
-          type="password"
-          matInput
-          placeholder="Senha"
-          formControlName="password"
-          (keyup.enter)="login(form.value)"
-        />
-        <mat-error>
-          <span cmsShowValidation="password"></span>
-        </mat-error>
-      </mat-form-field>
-    </form>
+    <login-form></login-form>
   </mat-card-content>
   <mat-card-actions>
     <button
-      (click)="login(form.value)"
-      [disabled]="form.invalid"
+      (click)="login()"
+      [disabled]="loginComponent.form.invalid"
       mat-raised-button
     >
       Login

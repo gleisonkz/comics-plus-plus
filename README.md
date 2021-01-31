@@ -21,7 +21,8 @@
   <a href="https://github.com/gleisonkz">
     <img alt="Developed by Gleison" src="https://img.shields.io/badge/Desenvolvedor-Gleison-%3498db?color=3498db&style=for-the-badge&">
   </a>    
-  <img alt="Project License" src="https://img.shields.io/apm/l/vim-mode?style=for-the-badge&label=Licen%C3%A7a"/>
+  <img alt="Project Status" src="https://img.shields.io/badge/Status-In Progress-%3498db?color=BDB76B&style=for-the-badge&">
+  <img alt="Project License" src="https://img.shields.io/apm/l/vim-mode?style=for-the-badge&label=Licen%C3%A7a&color=3498db"/>
 </p>
 
 <p align="center">
@@ -72,7 +73,9 @@ E-commerce de quadrinhos desenvolvido para um teste de uma vaga como .NET full-s
 
 <div align="center">
 
-Para executar esse projeto você precisa baixar este repositório, ter o Gerenciador de Pacotes do Node ([`NPM`](https://www.npmjs.com/get-npm)) ou o Gerenciador de Pacotes YARN ([`YARN`](https://yarnpkg.com/getting-started)) instalado.
+🌐 FrontEnd
+
+Para executar o front-end você precisa baixar este repositório, ter o Gerenciador de Pacotes do Node ([`NPM`](https://www.npmjs.com/get-npm)) ou o Gerenciador de Pacotes YARN ([`YARN`](https://yarnpkg.com/getting-started)) instalado.
 
 Abra o prompt de comando no diretório do projeto, e execute os seguintes códigos:
 
@@ -106,6 +109,32 @@ $ ng serve --open ou ng s -o
 </details>
 
 > ⚠️ O servidor de desenvolvimento será iniciado na porta: 4200 - Acesse <http://localhost:4200>
+
+</div>
+
+---
+
+<div align="center">
+
+🖥 BackEnd
+
+Para executar o back-end você precisa baixar este repositório, ter o [`Docker`](https://docs.docker.com/get-docker/) instalado.
+
+Abra o prompt de comando no diretório do projeto na pasta back-end/ComicStoreWebAPI, está é a posta onde esta localizado o Dockerfile, e execute os seguintes códigos:
+
+```bash
+# Aqui estamos criando a imagem da api
+# e nomeando como comic-store-web-api (voce pode alterar se quiser)
+$ docker build -t comic-store-web-api . --no-cache
+
+# Aqui estamos executando a api num container e
+# expondo sua porta 5000 na porta 1234(você também pode alterar se quiser)
+
+$ docker run -t -p 1234:5000 comic-store-web-api
+
+```
+
+> ⚠️ O container será iniciado na porta: 1234 - Acesse <http://localhost:1234/index>
 
 </div>
 

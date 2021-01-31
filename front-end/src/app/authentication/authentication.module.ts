@@ -5,14 +5,16 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import {
+  LoginFormComponent,
+  RegisterFormComponent
+} from '@auth/presentation/components';
+import {
   LoginComponent,
   RegisterComponent,
   RegisterDoneComponent
-} from '@auth/pages';
+} from '@auth/presentation/pages';
 import { SharedModule } from '@shared/shared.module';
 import { AuthenticationRoutingModule } from './authentication-routing.module';
-import { LoginFormComponent } from './components/login-form/login-form.component';
-import { RegisterFormComponent } from './components/register-form/register-form.component';
 
 @NgModule({
   declarations: [

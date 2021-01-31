@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoginFormComponent } from '@auth/components';
+import { LoginFormComponent } from '@auth/presentation/components';
 import { NotificationService } from '@core/services';
 import { AuthenticationService } from '@core/services/authentication.service';
 import { fadeInOut } from '@shared/animations/fade-in-out';

@@ -4,7 +4,7 @@ import {
   LoginComponent,
   RegisterComponent,
   RegisterDoneComponent
-} from '@auth/pages';
+} from '@auth/presentation/pages';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login' },

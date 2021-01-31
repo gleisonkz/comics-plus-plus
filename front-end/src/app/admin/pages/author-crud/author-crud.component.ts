@@ -30,7 +30,7 @@ import { BaseCrudComponent } from '../base-crud/base-crud.component';
 import { CUSTOM_DATA_SOURCE } from '../comic-crud/toke';
 import { Pagination } from './../../models/pagination.model';
 
-export const func = (service: AuthorService) =>
+export const authorDataSourceFactory = (service: AuthorService) =>
   customDataSourceFactory<AuthorListItem, AuthorFilterProps, AuthorService>(
     service
   );
@@ -42,7 +42,7 @@ export const func = (service: AuthorService) =>
   providers: [
     {
       provide: CUSTOM_DATA_SOURCE,
-      useFactory: func,
+      useFactory: authorDataSourceFactory,
       deps: [AuthorService]
     }
   ]

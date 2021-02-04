@@ -26,9 +26,7 @@ export class ShoppingCartService {
       {
         expect: () => item.hasItemsAvailable(quantity) === false,
         action: () => {
-          this.notificationService.showMessage(
-            'Não há itens disponíveis para está quantidade'
-          );
+          this.notificationService.showMessage('Não há itens disponíveis para está quantidade');
         }
       },
       {
@@ -50,20 +48,15 @@ export class ShoppingCartService {
   }
 
   public addItem(item: ComicShopItem, quantity: number = 1) {
-    const foundItem = this.itemsSource$.value.find(
-      (c) => c.comic.comicID === item.comicID
-    );
+    const foundItem = this.itemsSource$.value.find((c) => c.comic.comicID === item.comicID);
 
     const expectations = [
       {
         expect: () =>
           quantity > item.inventoryQuantity ||
-          (foundItem !== undefined &&
-            foundItem.hasItemsAvailable(quantity) === false),
+          (foundItem !== undefined && foundItem.hasItemsAvailable(quantity) === false),
         action: () => {
-          this.notificationService.showMessage(
-            'Não há itens disponíveis para está quantidade'
-          );
+          this.notificationService.showMessage('Não há itens disponíveis para está quantidade');
         }
       },
       {
@@ -76,10 +69,7 @@ export class ShoppingCartService {
       {
         expect: () => true,
         action: () => {
-          this.itemsSource$.next([
-            ...this.itemsSource$.value,
-            new CartItem(item, quantity)
-          ]);
+          this.itemsSource$.next([...this.itemsSource$.value, new CartItem(item, quantity)]);
           this.notificationService.showMessage('Item adicionado ao carrinho');
         }
       }
@@ -101,9 +91,6 @@ export class ShoppingCartService {
   }
 
   public getTotal(): number {
-    return this.itemsSource$.value.reduce(
-      (acc, cur) => acc + cur.getTotalValue(),
-      0
-    );
+    return this.itemsSource$.value.reduce((acc, cur) => acc + cur.getTotalValue(), 0);
   }
 }

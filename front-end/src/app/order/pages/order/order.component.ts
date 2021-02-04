@@ -7,7 +7,7 @@ import { PaymentMethod } from '@order/enums/payment-method.enum';
 import { OrderItem } from '@order/models/order-item.model';
 import { Order } from '@order/models/order.model';
 import { CustomerService, OrderService } from '@order/services';
-import cep from 'cep-promise';
+import { CEP, cep } from 'cep-promise';
 import { Observable, Subscription } from 'rxjs';
 import { NotificationService } from '../../../core/services/notification.service';
 
@@ -16,13 +16,14 @@ import { NotificationService } from '../../../core/services/notification.service
   styleUrls: ['./order.component.scss']
 })
 export class OrderComponent implements OnInit {
-  public orderForm: FormGroup;
-  public orderItems$: Observable<CartItem[]>;
   public get hasItems() {
     return this.cartService.hasItems;
   }
+
+  public orderForm: FormGroup;
+  public orderItems$: Observable<CartItem[]>;
   public deliveryCost: number = 8.0;
-  private subscriptions: Subscription[] = [];
+  private subscription: Subscription;
 
   constructor(
     private router: Router,
@@ -36,18 +37,12 @@ export class OrderComponent implements OnInit {
     this.orderForm = new FormGroup({
       postalCode: new FormControl('', [Validators.required, this.postalCode]),
       line1: new FormControl('', [Validators.required]),
-      number: new FormControl('', [
-        Validators.required,
-        Validators.maxLength(6),
-        Validators.pattern('\\d+')
-      ]),
+      number: new FormControl('', [Validators.required, Validators.maxLength(6), Validators.pattern('\\d+')]),
       line2: new FormControl(''),
       neighborhood: new FormControl('', Validators.required),
       city: new FormControl('', Validators.required),
       state: new FormControl('', [Validators.required]),
-      paymentMethodID: new FormControl(PaymentMethod.Cash, [
-        Validators.required
-      ])
+      paymentMethodID: new FormControl(PaymentMethod.Cash, [Validators.required])
     });
 
     this.orderItems$ = this.cartService.items$;
@@ -71,7 +66,7 @@ export class OrderComponent implements OnInit {
 
   getOrderItems(): OrderItem[] {
     let orderItems: OrderItem[];
-    this.subscriptions.push(
+    this.subscription.add(
       this.orderItems$.subscribe(
         (items) =>
           (orderItems = items.map((c: CartItem) => ({
@@ -84,21 +79,19 @@ export class OrderComponent implements OnInit {
     return orderItems;
   }
 
-  searchCEP(numberCEP: string) {
+  searchCEP(numberCEP: string): void {
     if (!numberCEP || !this.hasEightDigits(numberCEP)) return;
 
-    cep(numberCEP)
+    cep(numberCEP, { providers: ['correios'] })
       .then((cep) => {
         this.updateAddress(cep);
       })
       .catch(() => {
-        this.notificationService.showMessage(
-          'CEP inválido, todos os serviços de CEP retornaram erro'
-        );
+        this.notificationService.showMessage('CEP inválido, todos os serviços de CEP retornaram erro');
       });
   }
 
-  private updateAddress(cep) {
+  private updateAddress(cep: CEP): void {
     this.orderForm.controls['line1'].setValue(cep.street);
     this.orderForm.controls['state'].setValue(cep.state);
     this.orderForm.controls['neighborhood'].setValue(cep.neighborhood);

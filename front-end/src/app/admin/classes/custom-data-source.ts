@@ -9,41 +9,37 @@ export interface ICustomDataSource {
   loading$: Observable<boolean>;
 }
 
-export class CustomDataSource<TListModel, TFilterProps>
-  implements DataSource<TListModel>, ICustomDataSource {
-  private sourceSubject = new BehaviorSubject<TListModel[]>([]);
-  private loadingData = new BehaviorSubject<boolean>(false);
-  public loading$ = this.loadingData.asObservable();
+export class CustomDataSource<TListModel, TFilterProps> implements DataSource<TListModel>, ICustomDataSource {
+  private sourceSubject$$ = new BehaviorSubject<TListModel[]>([]);
+  private loadingData$$ = new BehaviorSubject<boolean>(false);
+  public loading$ = this.loadingData$$.asObservable();
 
   constructor(
-    private callbackService: (
-      filter: Filter<TFilterProps>
-    ) => Observable<HttpResponse<TListModel[]>>
+    private callbackService: (filter: Filter<TFilterProps>) => Observable<HttpResponse<TListModel[]>>
   ) {}
 
   loadData(filter: Filter<TFilterProps>) {
     return new Observable<Pagination>((publisher) => {
-      this.loadingData.next(true);
+      this.loadingData$$.next(true);
 
       this.callbackService(filter)
-        .pipe(finalize(() => this.loadingData.next(false)))
+        .pipe(finalize(() => this.loadingData$$.next(false)))
         .subscribe((response: HttpResponse<TListModel[]>) => {
-          const pagination = JSON.parse(
-            response.headers.get('x-pagination')
-          ) as Pagination;
+          const pagination = JSON.parse(response.headers.get('x-pagination')) as Pagination;
           publisher.next(pagination);
-          this.loadingData.next(false);
-          return this.sourceSubject.next(response.body);
+          publisher.complete();
+          this.loadingData$$.next(false);
+          return this.sourceSubject$$.next(response.body);
         });
     });
   }
 
   connect(_: CollectionViewer): Observable<TListModel[]> {
-    return this.sourceSubject.asObservable();
+    return this.sourceSubject$$.asObservable();
   }
 
   disconnect(_: CollectionViewer): void {
-    this.sourceSubject.complete();
-    this.loadingData.complete();
+    this.sourceSubject$$.complete();
+    this.loadingData$$.complete();
   }
 }

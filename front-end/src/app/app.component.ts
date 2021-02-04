@@ -14,7 +14,8 @@ import { fadeAnimation } from './shared/animations/fade-animation';
 })
 export class AppComponent {
   title = 'comics-plus-plus';
-  subscriptions: Subscription[] = [];
+  subscription: Subscription;
+
   @ViewChild('sidenav') public sidenav: MatSidenav;
   @ViewChild('adminSide') public adminSide: MatSidenav;
 
@@ -33,7 +34,7 @@ export class AppComponent {
   ) {}
 
   ngOnInit(): void {
-    this.subscriptions.push(
+    this.subscription.add(
       this.router.events.subscribe(() => {
         this.sidenav.close();
         this.adminSide.close();
@@ -42,7 +43,7 @@ export class AppComponent {
   }
 
   ngOnDestroy(): void {
-    this.subscriptions.forEach((c) => c.unsubscribe());
+    this.subscription.unsubscribe();
   }
 
   getRouterOutletState(outlet: RouterOutlet) {

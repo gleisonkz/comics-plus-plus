@@ -1,16 +1,5 @@
-import {
-  AfterContentInit,
-  Directive,
-  ElementRef,
-  Input,
-  OnDestroy
-} from '@angular/core';
-import {
-  AbstractControl,
-  ControlContainer,
-  FormControl,
-  FormGroup
-} from '@angular/forms';
+import { AfterContentInit, Directive, ElementRef, Input, OnDestroy } from '@angular/core';
+import { AbstractControl, ControlContainer, FormControl, FormGroup } from '@angular/forms';
 import { ArrayValidation } from '@shared/constants/array-validation';
 import { Subscription } from 'rxjs';
 
@@ -20,12 +9,9 @@ import { Subscription } from 'rxjs';
 export class ShowValidationDirective implements AfterContentInit, OnDestroy {
   @Input('cmsShowValidation') controlName: string;
 
-  private subscriptions: Subscription[] = [];
+  private subscription: Subscription;
 
-  constructor(
-    private elementRef: ElementRef,
-    private parent: ControlContainer
-  ) {}
+  constructor(private elementRef: ElementRef, private parent: ControlContainer) {}
 
   ngAfterContentInit(): void {
     const group = this.parent.control as FormGroup;
@@ -37,15 +23,12 @@ export class ShowValidationDirective implements AfterContentInit, OnDestroy {
       this.setInnerHTML(error);
     };
 
-    this.subscriptions.push(
-      control.statusChanges.subscribe(() => handleState())
-    );
-
+    this.subscription.add(control.statusChanges.subscribe(() => handleState()));
     handleState();
   }
 
   ngOnDestroy(): void {
-    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
+    this.subscription.unsubscribe();
   }
 
   private setInnerHTML(html: string) {
@@ -53,8 +36,6 @@ export class ShowValidationDirective implements AfterContentInit, OnDestroy {
   }
 
   private checkValidations(control: AbstractControl): string {
-    return (
-      ArrayValidation.find((c) => control.hasError(c.key))?.value(control) || ''
-    );
+    return ArrayValidation.find((c) => control.hasError(c.key))?.value(control) || '';
   }
 }

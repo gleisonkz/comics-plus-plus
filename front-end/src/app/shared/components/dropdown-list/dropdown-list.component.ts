@@ -1,12 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
-import { Observable, ReplaySubject, Subject, Subscription } from 'rxjs';
-import {
-  debounceTime,
-  distinctUntilChanged,
-  filter,
-  takeUntil
-} from 'rxjs/operators';
+import { Observable, ReplaySubject, Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged, filter, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'cms-dropdown-list',
@@ -20,7 +15,6 @@ export class DropdownListComponent implements OnInit {
   _onDestroy = new Subject<void>();
   dataSearchControl: FormControl = new FormControl();
   filteredDataOptions$: ReplaySubject<any[]> = new ReplaySubject<any[]>(1);
-  private subscriptions: Subscription[] = [];
 
   @Input() isNew: boolean;
   @Input() idKeyObject: string;
@@ -51,21 +45,16 @@ export class DropdownListComponent implements OnInit {
   ngOnDestroy() {
     this._onDestroy.next();
     this._onDestroy.complete();
-    this.subscriptions.forEach((c) => c.unsubscribe());
   }
 
   getData() {
     if (!this.isNew) {
-      this.subscriptions.push(
-        this.getInitialDataCallback().subscribe((responseData) => {
-          this.dataList = responseData;
+      this.getInitialDataCallback().subscribe((responseData) => {
+        this.dataList = responseData;
 
-          this.dataControl.setValue(
-            responseData.map((c) => c[this.idKeyObject])
-          );
-          this.filteredDataOptions$.next(this.dataList);
-        })
-      );
+        this.dataControl.setValue(responseData.map((c) => c[this.idKeyObject]));
+        this.filteredDataOptions$.next(this.dataList);
+      });
     }
   }
 
@@ -92,15 +81,12 @@ export class DropdownListComponent implements OnInit {
       const previousSelectedData = this.dataList.filter(
         (c) => this.dataControl.value.indexOf(c[this.idKeyObject]) !== -1
       );
-      this.dataList = [...previousSelectedData, ...dataList].reduce(
-        (acc, cur) => {
-          if (!acc.find((c) => c[this.idKeyObject] === cur[this.idKeyObject])) {
-            acc.push(cur);
-          }
-          return acc;
-        },
-        []
-      );
+      this.dataList = [...previousSelectedData, ...dataList].reduce((acc, cur) => {
+        if (!acc.find((c) => c[this.idKeyObject] === cur[this.idKeyObject])) {
+          acc.push(cur);
+        }
+        return acc;
+      }, []);
       this.filteredDataOptions$.next(this.dataList);
     });
   }

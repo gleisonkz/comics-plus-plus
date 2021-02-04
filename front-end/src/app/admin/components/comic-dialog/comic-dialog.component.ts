@@ -7,7 +7,7 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { ComicImage } from '@core/models/comic-image.model';
 import { ComicService, NotificationService } from '@core/services';
 import { FileInput } from 'ngx-material-file-input';
-import { Observable, Subject, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
 @Component({
@@ -19,8 +19,6 @@ export class ComicDialogComponent implements OnInit {
   imageDataUrl: string | ArrayBuffer | SafeUrl;
   comicImage: ComicImage;
   comic: Comic;
-  _onDestroy = new Subject<void>();
-  private subscriptions: Subscription[] = [];
 
   constructor(
     private dialogRef: MatDialogRef<ComicDialogComponent>,
@@ -38,14 +36,9 @@ export class ComicDialogComponent implements OnInit {
     this.form = new FormGroup({
       comicID: new FormControl(this.data?.comicID || 0),
       title: new FormControl(this.data?.title || '', [Validators.required]),
-      description: new FormControl(this.data?.description || '', [
-        Validators.required
-      ]),
+      description: new FormControl(this.data?.description || '', [Validators.required]),
       price: new FormControl(this.data?.price || '', [Validators.required]),
-      year: new FormControl(this.data?.year || '', [
-        Validators.required,
-        Validators.minLength(4)
-      ]),
+      year: new FormControl(this.data?.year || '', [Validators.required, Validators.minLength(4)]),
       pages: new FormControl(this.data?.pages || '', [Validators.required]),
       authors: new FormControl([], [Validators.required]),
       genres: new FormControl([], [Validators.required]),
@@ -54,12 +47,6 @@ export class ComicDialogComponent implements OnInit {
 
     this.subscribeToPreviewImageControl();
     this.loadPreviewImage();
-  }
-
-  ngOnDestroy() {
-    this._onDestroy.next();
-    this._onDestroy.complete();
-    this.subscriptions.forEach((c) => c.unsubscribe());
   }
 
   getAuthorByNameCallback(searchTerm: string) {
@@ -93,20 +80,18 @@ export class ComicDialogComponent implements OnInit {
 
   loadPreviewImage() {
     if (this.comic?.comicID > 0) {
-      this.comicService
-        .getComicImageByComicID(this.comic.comicID)
-        .subscribe((image) => {
-          const base64toBlob = (base64, type = 'application/octet-stream') =>
-            fetch(`data:${type};base64,${base64}`).then((res) => res.blob());
+      this.comicService.getComicImageByComicID(this.comic.comicID).subscribe((image) => {
+        const base64toBlob = (base64, type = 'application/octet-stream') =>
+          fetch(`data:${type};base64,${base64}`).then((res) => res.blob());
 
-          base64toBlob(image.base64, 'image').then((c) => {
-            const file = new File([c], `${image.name}.${image.extension}`, {
-              type: `image/${image.extension}`
-            });
-            const fileInput = new FileInput([file]);
-            this.form.controls.image.setValue(fileInput);
+        base64toBlob(image.base64, 'image').then((c) => {
+          const file = new File([c], `${image.name}.${image.extension}`, {
+            type: `image/${image.extension}`
           });
+          const fileInput = new FileInput([file]);
+          this.form.controls.image.setValue(fileInput);
         });
+      });
     }
   }
 
@@ -118,10 +103,7 @@ export class ComicDialogComponent implements OnInit {
       this.data?.comicID > 0
         ? {
             operation: 'atualizado',
-            comic$: this.comicService.putComic(
-              this.data.comicID,
-              this.form.value
-            )
+            comic$: this.comicService.putComic(this.data.comicID, this.form.value)
           }
         : {
             operation: 'criado',
@@ -130,11 +112,7 @@ export class ComicDialogComponent implements OnInit {
 
     saveObj.comic$
       .pipe(
-        tap(() =>
-          this.notificationService.showMessage(
-            `O registro foi ${saveObj.operation} com sucesso!`
-          )
-        )
+        tap(() => this.notificationService.showMessage(`O registro foi ${saveObj.operation} com sucesso!`))
       )
       .subscribe(() => this.dialogRef.close(true));
   }

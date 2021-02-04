@@ -1,7 +1,7 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { CartItem } from '@core/models/cart-item.model';
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 import { ShoppingCartService } from '../../services/shopping-cart.service';
 
 @Component({
@@ -9,10 +9,10 @@ import { ShoppingCartService } from '../../services/shopping-cart.service';
   templateUrl: './shopping-cart.component.html',
   styleUrls: ['./shopping-cart.component.scss']
 })
-export class ShoppingCartComponent implements OnInit, OnDestroy {
+export class ShoppingCartComponent implements OnInit {
   itemState = 'ready';
   items$: Observable<CartItem[]>;
-  subscriptions: Subscription[] = [];
+
   get hasItems(): boolean {
     return this.shoppingCartService.hasItems;
   }
@@ -28,11 +28,6 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.items$ = this.shoppingCartService.items$;
-    this.items$.subscribe((c) => console.log(c));
-  }
-
-  ngOnDestroy(): void {
-    this.subscriptions.forEach((c) => c.unsubscribe());
   }
 
   getTotal(): number {

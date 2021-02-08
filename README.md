@@ -2,6 +2,8 @@
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/1fa15619-9ade-473e-9196-b53a0a03780c/deploy-status)](https://app.netlify.com/sites/comics-plus-plus/deploys)
 
+</div>
+
 <div align="right">
 
 [![English](https://www.countryflags.io/us/flat/32.png)](README.md) [![Portuguese](https://www.countryflags.io/br/flat/32.png)](README-PT.md)
@@ -76,9 +78,13 @@ E-commerce de quadrinhos desenvolvido para um teste de uma vaga como .NET full-s
 
 <div align="center">
 
+Para executar está aplicação você precisa baixar este repositório e seguir os seguintes passos abaixo:
+
+---
+
 🌐 FrontEnd
 
-Para executar o front-end você precisa baixar este repositório, ter o Gerenciador de Pacotes do Node ([`NPM`](https://www.npmjs.com/get-npm)) ou o Gerenciador de Pacotes YARN ([`YARN`](https://yarnpkg.com/getting-started)) instalado.
+Ter o Gerenciador de Pacotes do Node ([`NPM`](https://www.npmjs.com/get-npm)) ou o Gerenciador de Pacotes YARN ([`YARN`](https://yarnpkg.com/getting-started)) instalado.
 
 Abra o prompt de comando no diretório do projeto, e execute os seguintes códigos:
 
@@ -123,7 +129,7 @@ $ ng serve --open ou ng s -o
 
 Para executar o back-end você precisa baixar este repositório, ter o [`Docker`](https://docs.docker.com/get-docker/) instalado.
 
-Abra o prompt de comando no diretório do projeto na pasta back-end/ComicStoreWebAPI, está é a posta onde esta localizado o Dockerfile, e execute os seguintes códigos:
+Abra o prompt de comando no diretório do projeto na pasta comic-plus-lus/back-end/ComicStoreWebAPI, está é a pasta onde esta localizado o Dockerfile, e execute os seguintes códigos:
 
 ```bash
 # Aqui estamos criando a imagem da api

@@ -17,7 +17,9 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System;
+using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 
 namespace ComicStoreWebAPI
@@ -26,7 +28,7 @@ namespace ComicStoreWebAPI
     {
         public Startup(IConfiguration configuration)
         {
-            this.configuration = configuration;            
+            this.configuration = configuration;
         }
 
         public IConfiguration configuration { get; }
@@ -39,10 +41,11 @@ namespace ComicStoreWebAPI
 
             services.AddRouting(options => options.LowercaseUrls = true);
 
+            services.AddHostedService<MigrationWorker>();
+
             _ = services.AddDbContext<ComicStoreDbContext>(options =>
                 {
-                    options.UseSqlServer(configuration["ConnectionStrings:DefaultConnection"].ToString())
-                           .EnableSensitiveDataLogging()
+                    options.UseSqlServer(configuration["ConnectionStrings:DefaultConnection"].ToString())                           
                            .UseLazyLoadingProxies();
 
                 });
@@ -50,9 +53,7 @@ namespace ComicStoreWebAPI
             _ = services.AddDbContext<ComicStoreIdentityDbContext>(options =>
             {
                 options.UseSqlServer(configuration["ConnectionStrings:DefaultConnection"].ToString());
-            });
-
-
+            });            
 
             services.AddSwaggerGen(c =>
             {

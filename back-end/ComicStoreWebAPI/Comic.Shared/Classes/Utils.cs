@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace ComicStore.Shared.Classes
 {
@@ -11,6 +14,27 @@ namespace ComicStore.Shared.Classes
             DateTime start = new DateTime(1995, 1, 1);
             int range = (DateTime.Today - start).Days;
             return start.AddDays(random.Next(range));
+        }
+
+        public static async Task<byte[]> GetImageBytesFromUrl(string imageUrl)
+        {
+            byte[] imageBytes;
+            using (HttpClient http = new HttpClient())
+            {
+                using (Stream stream = await http.GetStreamAsync(imageUrl))
+                {
+                    imageBytes = stream.ReadFully();
+                }
+            }
+
+            return imageBytes;
+        }
+
+        public static byte[] ReadFully(this Stream input)
+        {
+            var ms = new MemoryStream();
+            input.CopyTo(ms);
+            return ms.ToArray();
         }
 
         public static void Repeat(this int count, Action action)

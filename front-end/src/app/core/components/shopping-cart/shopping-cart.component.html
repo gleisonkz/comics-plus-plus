@@ -1,5 +1,7 @@
 <button
   [matBadge]="totalItems"
+  [matBadgeHidden]="totalItems === 0"
+  matBadgeDescription="Total Items"
   class="cart__icon"
   mat-icon-button
   [matMenuTriggerFor]="menu"
@@ -12,49 +14,29 @@
     <div class="cart" (click)="$event.stopPropagation()">
       <div *ngIf="hasItems" class="cart__content">
         <div *ngFor="let item of items$ | async" class="cart__item">
-          <img
-            [src]="item.comic.imagePreview"
-            alt=""
-            class="cart__item__image"
-          />
+          <img [src]="item.comic.imagePreview" alt="" class="cart__item__image" />
 
           <div class="cart__group cart__group--title">
             <div>
               <span class="cart__item__text">{{ item.comic.title }}</span>
             </div>
             <div>
-              <i
-                (click)="quantityDown(item)"
-                class="fas fa-minus cart__item__quantity-icon"
-              >
-              </i>
+              <i (click)="quantityDown(item)" class="fas fa-minus cart__item__quantity-icon"> </i>
               <span class="cart__item__quantity">( {{ item.quantity }}x )</span>
-              <i
-                (click)="quantityUp(item)"
-                class="fas fa-plus cart__item__quantity-icon"
-              ></i>
+              <i (click)="quantityUp(item)" class="fas fa-plus cart__item__quantity-icon"></i>
             </div>
           </div>
           <div class="cart__group">
-            <span class="cart__item__value">
-              R$ {{ item.getTotalValue() | number: "2.2" }}</span
-            >
-            <i
-              (click)="removeItem(item)"
-              class="fas fa-trash-alt cart__item__icon"
-            ></i>
+            <span class="cart__item__value"> R$ {{ item.getTotalValue() | number: "2.2" }}</span>
+            <i (click)="removeItem(item)" class="fas fa-trash-alt cart__item__icon"></i>
           </div>
         </div>
         <div class="cart__total">
           <span class="cart__total__text">Total</span>
-          <span class="cart__total__value"
-            >R$ {{ getTotal() | number: "2.2" }}</span
-          >
+          <span class="cart__total__value">R$ {{ getTotal() | number: "2.2" }}</span>
         </div>
       </div>
-      <p class="cart__empty-message" *ngIf="!hasItems">
-        Seu carrinho está vazio!
-      </p>
+      <p class="cart__empty-message" *ngIf="!hasItems">Seu carrinho está vazio!</p>
       <div *ngIf="hasItems" class="cart__buttons">
         <button
           mat-raised-button

@@ -14,7 +14,7 @@ import { fadeInOut } from '../../../shared/animations/fade-in-out';
 import { BaseCrudComponent } from '../base-crud/base-crud.component';
 import { ConfirmationDialogComponent } from './../../components/confirmation-dialog/confirmation-dialog.component';
 import { Pagination } from './../../models/pagination.model';
-import { CUSTOM_DATA_SOURCE } from './toke';
+import { CUSTOM_DATA_SOURCE } from './token';
 
 export interface PaginatedService<TFilterProps> {
   getPaginatedEntities(filter: Filter<TFilterProps>): any;
@@ -27,16 +27,13 @@ export const customDataSourceFactory = <
 >(
   service: TService
 ) => {
-  return new CustomDataSource<TListItem, TFilterProps>(
-    (filter: Filter<TFilterProps>) =>
-      service.getPaginatedEntities(filter).pipe(delay(200))
+  return new CustomDataSource<TListItem, TFilterProps>((filter: Filter<TFilterProps>) =>
+    service.getPaginatedEntities(filter).pipe(delay(200))
   );
 };
 
 export const comicDataSourceFactory = (service: ComicService) =>
-  customDataSourceFactory<ComicListItem, ComicFilterProps, ComicService>(
-    service
-  );
+  customDataSourceFactory<ComicListItem, ComicFilterProps, ComicService>(service);
 
 @Component({
   selector: 'cms-comic-crud',
@@ -56,15 +53,7 @@ export class ComicCrudComponent implements OnInit {
   form: FormGroup;
 
   comicFilter: Filter<ComicFilterProps>;
-  displayedColumns: string[] = [
-    'ComicID',
-    'Titulo',
-    'Descrição',
-    'Preço',
-    'Ano',
-    'Páginas',
-    'Ações'
-  ];
+  displayedColumns: string[] = ['ComicID', 'Titulo', 'Descrição', 'Preço', 'Ano', 'Páginas', 'Ações'];
 
   @ViewChild(BaseCrudComponent, { static: true }) baseCrud: BaseCrudComponent;
 
@@ -93,22 +82,15 @@ export class ComicCrudComponent implements OnInit {
       authors: new FormControl([]),
       genres: new FormControl([])
     });
-
-    // this.dataSource = new CustomDataSource<ComicListItem, ComicFilterProps>(
-    //   (filter: Filter<ComicFilterProps>) =>
-    //     this.comicService.getPaginatedComics(filter)
-    // );
   }
 
   ngAfterViewInit(): void {
     this.paginator.page.subscribe(() => {
       this.comicFilter.pageNumber = this.paginator.pageIndex + 1;
       this.comicFilter.pageSize = this.paginator.pageSize;
-      this.dataSource
-        .loadData(this.comicFilter)
-        .subscribe((pagination: Pagination) => {
-          this.paginator.length = pagination.totalCount;
-        });
+      this.dataSource.loadData(this.comicFilter).subscribe((pagination: Pagination) => {
+        this.paginator.length = pagination.totalCount;
+      });
     });
   }
 
@@ -145,12 +127,10 @@ export class ComicCrudComponent implements OnInit {
       this.form.value
     );
 
-    this.dataSource
-      .loadData(this.comicFilter)
-      .subscribe((pagination: Pagination) => {
-        this.paginator.length = pagination.totalCount;
-        this.paginator.firstPage();
-      });
+    this.dataSource.loadData(this.comicFilter).subscribe((pagination: Pagination) => {
+      this.paginator.length = pagination.totalCount;
+      this.paginator.firstPage();
+    });
   }
 
   deleteItem(item: Comic) {
@@ -164,9 +144,7 @@ export class ComicCrudComponent implements OnInit {
     dialogRef.afterClosed().subscribe((confirmed: boolean) => {
       if (confirmed) {
         this.comicService.deleteComic(item.comicID).subscribe(() => {
-          this.notificationService.showMessage(
-            `Você deletou o quadrinho ${item.title} ID:${item.comicID}`
-          );
+          this.notificationService.showMessage(`Você deletou o quadrinho ${item.title} ID:${item.comicID}`);
           this.loadData();
         });
       }

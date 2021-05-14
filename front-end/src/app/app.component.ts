@@ -14,7 +14,7 @@ import { fadeAnimation } from './shared/animations/fade-animation';
 })
 export class AppComponent {
   title = 'comics-plus-plus';
-  subscription: Subscription;
+  subscription = new Subscription();
 
   @ViewChild('sidenav') public sidenav: MatSidenav;
   @ViewChild('adminSide') public adminSide: MatSidenav;

@@ -1,39 +1,23 @@
 import { CustomDataSource } from '@admin/classes/custom-data-source';
-import {
-  AuthorDialogComponent,
-  ConfirmationDialogComponent
-} from '@admin/components';
+import { AuthorDialogComponent, ConfirmationDialogComponent } from '@admin/components';
 import { createMatDialogConfig } from '@admin/functions/create-mat-dialog-config';
-import {
-  Author,
-  AuthorFilterProps,
-  AuthorListItem,
-  Filter
-} from '@admin/models';
+import { Author, AuthorFilterProps, AuthorListItem, Filter } from '@admin/models';
+import { Pagination } from '@admin/models/pagination.model';
+import { BaseCrudComponent } from '@admin/pages/base-crud/base-crud.component';
+import { customDataSourceFactory } from '@admin/pages/comic-crud/comic-crud.component';
+import { CUSTOM_DATA_SOURCE } from '@admin/pages/comic-crud/token';
 import { AuthorService } from '@admin/services';
-import {
-  ChangeDetectorRef,
-  Component,
-  Inject,
-  OnInit,
-  ViewChild
-} from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { NotificationService } from '@core/services';
 import { fadeInOut } from '@shared/animations/fade-in-out';
+import { listStagger } from '@shared/animations/list-stagger';
 import { finalize } from 'rxjs/operators';
-import { customDataSourceFactory } from '..';
-import { listStagger } from '../../../shared/animations/list-stagger';
-import { BaseCrudComponent } from '../base-crud/base-crud.component';
-import { CUSTOM_DATA_SOURCE } from '../comic-crud/toke';
-import { Pagination } from './../../models/pagination.model';
 
 export const authorDataSourceFactory = (service: AuthorService) =>
-  customDataSourceFactory<AuthorListItem, AuthorFilterProps, AuthorService>(
-    service
-  );
+  customDataSourceFactory<AuthorListItem, AuthorFilterProps, AuthorService>(service);
 
 @Component({
   templateUrl: './author-crud.component.html',
@@ -52,13 +36,7 @@ export class AuthorCrudComponent implements OnInit {
   form: FormGroup;
 
   authorFilter: Filter<AuthorFilterProps>;
-  displayedColumns: string[] = [
-    'AuthorID',
-    'Name',
-    'birthDate',
-    'age',
-    'Ações'
-  ];
+  displayedColumns: string[] = ['AuthorID', 'Name', 'birthDate', 'age', 'Ações'];
 
   @ViewChild(BaseCrudComponent, { static: true }) baseCrud: BaseCrudComponent;
 
@@ -92,20 +70,15 @@ export class AuthorCrudComponent implements OnInit {
     this.paginator.page.subscribe(() => {
       this.authorFilter.pageNumber = this.paginator.pageIndex + 1;
       this.authorFilter.pageSize = this.paginator.pageSize;
-      this.dataSource
-        .loadData(this.authorFilter)
-        .subscribe((pagination: Pagination) => {
-          this.paginator.length = pagination.totalCount;
-        });
+      this.dataSource.loadData(this.authorFilter).subscribe((pagination: Pagination) => {
+        this.paginator.length = pagination.totalCount;
+      });
     });
     this.changeDetectorRef.detectChanges();
   }
 
   openDialog(obj?: { authorID: number }) {
-    const dialogRef = this.dialogService.open(
-      AuthorDialogComponent,
-      createMatDialogConfig({ data: obj })
-    );
+    const dialogRef = this.dialogService.open(AuthorDialogComponent, createMatDialogConfig({ data: obj }));
 
     dialogRef.afterClosed().subscribe((author: Author) => {
       if (author) {
@@ -134,12 +107,10 @@ export class AuthorCrudComponent implements OnInit {
       this.form.value
     );
 
-    this.dataSource
-      .loadData(this.authorFilter)
-      .subscribe((pagination: Pagination) => {
-        this.paginator.length = pagination.totalCount;
-        this.paginator.firstPage();
-      });
+    this.dataSource.loadData(this.authorFilter).subscribe((pagination: Pagination) => {
+      this.paginator.length = pagination.totalCount;
+      this.paginator.firstPage();
+    });
   }
 
   deleteItem(item: Author) {
@@ -153,9 +124,7 @@ export class AuthorCrudComponent implements OnInit {
     dialogRef.afterClosed().subscribe((confirmed: boolean) => {
       if (confirmed) {
         this.authorService.deleteAuthor(item.authorID).subscribe(() => {
-          this.notificationService.showMessage(
-            `Você deletou o autor ${item.name} ID:${item.authorID}`
-          );
+          this.notificationService.showMessage(`Você deletou o autor ${item.name} ID:${item.authorID}`);
           this.loadData();
         });
       }

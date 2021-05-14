@@ -9,7 +9,7 @@ import { Subscription } from 'rxjs';
 export class ShowValidationDirective implements AfterContentInit, OnDestroy {
   @Input('cmsShowValidation') controlName: string;
 
-  private subscription: Subscription;
+  private subscription = new Subscription();
 
   constructor(private elementRef: ElementRef, private parent: ControlContainer) {}
 

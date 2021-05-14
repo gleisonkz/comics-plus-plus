@@ -3,6 +3,7 @@
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./src",
+    "strictPropertyInitialization": false,
     "paths": {
       "@shared/*": ["app/shared/*"],
       "@core/*": ["app/core/*"],

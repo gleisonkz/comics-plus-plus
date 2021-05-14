@@ -11,7 +11,7 @@ import {
 } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatPaginatorService } from '../../services/mat-paginator.service';
-import { CUSTOM_DATA_SOURCE } from './../comic-crud/toke';
+import { CUSTOM_DATA_SOURCE } from '../comic-crud/token';
 
 @Component({
   selector: 'cms-base-crud',

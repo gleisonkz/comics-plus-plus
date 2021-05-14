@@ -1,11 +1,9 @@
 import { CustomDataSource } from '@admin/classes/custom-data-source';
 import { ComicInventoryDialogComponent } from '@admin/components';
 import { createMatDialogConfig } from '@admin/functions/create-mat-dialog-config';
-import {
-  ComicInventory,
-  ComicInventoryFilterProps,
-  Filter
-} from '@admin/models';
+import { ComicInventory, ComicInventoryFilterProps, ComicInventoryListItem, Filter } from '@admin/models';
+import { customDataSourceFactory } from '@admin/pages/comic-crud/comic-crud.component';
+import { CUSTOM_DATA_SOURCE } from '@admin/pages/comic-crud/token';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
@@ -17,22 +15,27 @@ import { finalize } from 'rxjs/operators';
 import { BaseCrudComponent } from '../base-crud/base-crud.component';
 import { Pagination } from './../../models/pagination.model';
 
+export const comicInventoryDataSourceFactory = (service: ComicInventoryService) =>
+  customDataSourceFactory<ComicInventoryListItem, ComicInventoryFilterProps, ComicInventoryService>(service);
+
 @Component({
   templateUrl: './inventory-crud.component.html',
   styleUrls: ['./inventory-crud.component.scss'],
-  animations: [fadeInOut, listStagger]
+  animations: [fadeInOut, listStagger],
+  providers: [
+    {
+      provide: CUSTOM_DATA_SOURCE,
+      useFactory: comicInventoryDataSourceFactory,
+      deps: [ComicInventoryService]
+    }
+  ]
 })
 export class InventoryCrudComponent implements OnInit {
   loadingComplete: boolean = false;
   form: FormGroup;
   dataSource: CustomDataSource<ComicInventory, ComicInventoryFilterProps>;
   comicInventoryFilter: Filter<ComicInventoryFilterProps>;
-  displayedColumns: string[] = [
-    'ComicInventoryID',
-    'Name',
-    'Quantity',
-    'Actions'
-  ];
+  displayedColumns: string[] = ['ComicInventoryID', 'Name', 'Quantity', 'Actions'];
 
   @ViewChild(BaseCrudComponent, { static: true }) baseCrud: BaseCrudComponent;
 
@@ -40,10 +43,7 @@ export class InventoryCrudComponent implements OnInit {
     return this.baseCrud.paginator;
   }
 
-  constructor(
-    private dialogService: MatDialog,
-    private comicInventoryService: ComicInventoryService
-  ) {}
+  constructor(private dialogService: MatDialog, private comicInventoryService: ComicInventoryService) {}
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -51,11 +51,9 @@ export class InventoryCrudComponent implements OnInit {
       title: new FormControl('')
     });
 
-    this.dataSource = new CustomDataSource<
-      ComicInventory,
-      ComicInventoryFilterProps
-    >((filter: Filter<ComicInventoryFilterProps>) =>
-      this.comicInventoryService.getPaginatedComicsInventory(filter)
+    this.dataSource = new CustomDataSource<ComicInventory, ComicInventoryFilterProps>(
+      (filter: Filter<ComicInventoryFilterProps>) =>
+        this.comicInventoryService.getPaginatedComicsInventory(filter)
     );
   }
 
@@ -63,11 +61,9 @@ export class InventoryCrudComponent implements OnInit {
     this.paginator.page.subscribe(() => {
       this.comicInventoryFilter.pageNumber = this.paginator.pageIndex + 1;
       this.comicInventoryFilter.pageSize = this.paginator.pageSize;
-      this.dataSource
-        .loadData(this.comicInventoryFilter)
-        .subscribe((pagination: Pagination) => {
-          this.paginator.length = pagination.totalCount;
-        });
+      this.dataSource.loadData(this.comicInventoryFilter).subscribe((pagination: Pagination) => {
+        this.paginator.length = pagination.totalCount;
+      });
     });
   }
 
@@ -104,11 +100,9 @@ export class InventoryCrudComponent implements OnInit {
       this.form.value
     );
 
-    this.dataSource
-      .loadData(this.comicInventoryFilter)
-      .subscribe((pagination: Pagination) => {
-        this.paginator.length = pagination.totalCount;
-        this.paginator.firstPage();
-      });
+    this.dataSource.loadData(this.comicInventoryFilter).subscribe((pagination: Pagination) => {
+      this.paginator.length = pagination.totalCount;
+      this.paginator.firstPage();
+    });
   }
 }

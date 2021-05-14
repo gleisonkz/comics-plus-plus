@@ -1,0 +1,42 @@
+@import "media";
+@import "variables";
+@import "mixins";
+@import "functions";
+
+:host {
+  .panel {
+    width: rem(700);
+    padding: rem(50);
+    margin: 0 auto;
+    background-color: $color-panel-bg;
+    border-radius: $global-radius;
+    color: $color-text;
+    @include flex-center(column);
+
+    @include medias($tiny-mobile, $mobile) {
+      padding: rem(20);
+      width: initial;
+    }
+
+    .title {
+      font-size: rem(40);
+
+      @include medias($tiny-mobile, $mobile) {
+        font-size: rem(25);
+      }
+    }
+    .description {
+      text-align: center;
+      margin-top: rem(20);
+      font-size: rem(21);
+
+      @include medias($tiny-mobile, $mobile) {
+        font-size: rem(16);
+      }
+    }
+
+    .info-rating {
+      margin-top: rem(10);
+    }
+  }
+}

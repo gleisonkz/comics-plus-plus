@@ -1,0 +1,57 @@
+@import "media";
+@import "variables";
+@import "mixins";
+@import "functions";
+
+:host {
+  grid-template-columns: inherit;
+  display: inherit;
+  grid-column: 1/-1;
+  padding: rem(20);
+
+  .order__item {
+    grid-template-columns: inherit;
+    display: inherit;
+    grid-column: inherit;
+    justify-content: center;
+    align-items: center;
+
+    &__quantity {
+      span {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        width: rem(20);
+        user-select: none;
+      }
+    }
+
+    &__description {
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      padding-right: rem(26);
+    }
+
+    span {
+      color: $color-text;
+    }
+
+    i {
+      color: $color-icon;
+      margin: rem(0 5);
+      cursor: pointer;
+
+      &:hover:not(:disabled) {
+        opacity: 0.9;
+      }
+    }
+
+    i.fa-remove,
+    i.fa-trash,
+    i.fa-trash-alt {
+      color: $color-danger;
+    }
+  }
+}

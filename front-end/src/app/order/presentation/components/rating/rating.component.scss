@@ -1,0 +1,23 @@
+@import "media";
+@import "variables";
+@import "mixins";
+@import "functions";
+
+.rating {
+  @include flex-center;
+  flex-direction: column;
+  margin-top: rem(20);
+
+  .rating-title {
+    font-size: rem(21);
+  }
+
+  .rating-indicator {
+    font-size: rem(25);
+    margin-top: rem(20);
+
+    i {
+      cursor: pointer;
+    }
+  }
+}

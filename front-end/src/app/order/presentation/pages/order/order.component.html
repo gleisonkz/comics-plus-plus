@@ -1,0 +1,181 @@
+<div class="order">
+  <h1 class="order__title">
+    <i class="fa fa-shopping-cart"></i>
+    Finalize sua compra
+  </h1>
+
+  <form
+    #orderFormRef
+    action=""
+    class="order__form"
+    novalidate
+    [formGroup]="orderForm"
+    (submit)="submitOrder($event, orderForm.value)"
+  >
+    <fieldset class="delivery-address">
+      <legend class="form-legend">Endereço de entrega:</legend>
+
+      <mat-form-field appearance="outline">
+        <mat-label>CEP</mat-label>
+        <input
+          type="text"
+          mask="00.000-000"
+          formControlName="postalCode"
+          matInput
+        />
+        <mat-error>
+          <span cmsShowValidation="postalCode"></span>
+        </mat-error>
+        <div matSuffix>
+          <mat-icon (click)="searchCEP(orderForm.controls.postalCode.value)"
+            >search</mat-icon
+          >
+        </div>
+        <i *ngIf="orderForm.get('postalCode').valid" class="fa fa-check">OK</i>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Rua</mat-label>
+        <input type="text" formControlName="line1" matInput />
+        <mat-error>
+          <span cmsShowValidation="line1"></span>
+        </mat-error>
+
+        <i *ngIf="orderForm.controls['line1'].valid" class="fa fa-check"> OK</i>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Número</mat-label>
+        <input
+          mask="999999"
+          type="text"
+          formControlName="number"
+          matInput
+          placeholder="123"
+        />
+        <mat-error>
+          <span cmsShowValidation="number"></span>
+        </mat-error>
+        <i *ngIf="orderForm.controls['number'].valid" class="fa fa-check">
+          OK</i
+        >
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Bairro</mat-label>
+        <input
+          type="text"
+          formControlName="neighborhood"
+          matInput
+          placeholder="123"
+        />
+        <mat-error>
+          <span cmsShowValidation="neighborhood"></span>
+        </mat-error>
+        <i *ngIf="orderForm.controls['neighborhood'].valid" class="fa fa-check">
+          OK</i
+        >
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Complemento</mat-label>
+        <input type="text" formControlName="line2" matInput />
+        <mat-error>
+          <span cmsShowValidation="line2"></span>
+        </mat-error>
+
+        <i *ngIf="orderForm.controls['line2'].valid" class="fa fa-check">OK</i>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Cidade</mat-label>
+        <input type="text" formControlName="city" matInput />
+        <mat-error>
+          <span cmsShowValidation="city"></span>
+        </mat-error>
+
+        <i *ngIf="orderForm.controls['city'].valid" class="fa fa-check">OK</i>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Estado</mat-label>
+        <input type="text" formControlName="state" matInput />
+        <mat-error>
+          <span cmsShowValidation="state"></span>
+        </mat-error>
+
+        <i *ngIf="orderForm.controls['state'].valid" class="fa fa-check">OK</i>
+      </mat-form-field>
+    </fieldset>
+    <div class="order__items">
+      <h2 class="order__items__title">Itens do Pedido</h2>
+      <div class="order__items__table" *ngIf="hasItems">
+        <div class="order__items__table__header">
+          <span class="order__items__table__header__item">Quantidade</span>
+          <span class="order__items__table__header__item">Item</span>
+          <span
+            fxHide="true"
+            fxShow.gt-md
+            class="order__items__table__header__item"
+            >Descrição</span
+          >
+          <span
+            fxHide="true"
+            fxShow.gt-md
+            class="order__items__table__header__item"
+            >Subtotal</span
+          >
+        </div>
+        <div class="order__items__table__body">
+          <cms-order-item
+            *ngFor="let item of orderItems$ | async"
+            [item]="item"
+          ></cms-order-item>
+        </div>
+      </div>
+      <p class="empty-message" *ngIf="!hasItems">
+        Seu carrinho está vazio, que tal começar dando uma olhada
+        <a class="empty-message__link" [routerLink]="['/quadrinhos']">aqui</a>
+        ?
+      </p>
+    </div>
+
+    <div class="order__form__payment-and-total">
+      <fieldset class="order__form__payment-and-total__payment-method">
+        <legend>Método de Pagamento:</legend>
+        <mat-radio-group formControlName="paymentMethodID">
+          <mat-radio-button [value]="1">Dinheiro</mat-radio-button>
+          <mat-radio-button [value]="2">Cartão de Crédito</mat-radio-button>
+          <mat-radio-button [value]="3">Boleto</mat-radio-button>
+        </mat-radio-group>
+      </fieldset>
+
+      <div class="total-order">
+        <h2 class="total-order__title">Total:</h2>
+        <div class="items-container">
+          <div class="item">
+            <span class="item__text">Items: </span>
+            <span class="item__value"
+              >R$ {{ getTotalItems() | number: "2.2" }}</span
+            >
+          </div>
+          <div class="item">
+            <span class="item__text">Total: </span>
+            <span class="item__value"
+              >R$ {{ getTotalItems() | number: "2.2" }}</span
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+    <button
+      mat-raised-button
+      color="primary"
+      [disabled]="!orderForm.valid || !hasItems"
+      class="order-button"
+    >
+      <i class="fa fa-credit-card"></i>
+      Finalizar Pedido
+    </button>
+  </form>
+</div>
